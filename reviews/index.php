@@ -49,7 +49,10 @@
             "PATH" => "/include/reviews/third_advantages.php"
         )
     );?>
+<?
+//test block
 
+?>
     <?
     $dbchops = CIBlockElement::GetList(
         array(),
