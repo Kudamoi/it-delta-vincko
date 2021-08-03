@@ -1,10 +1,33 @@
 $(document).ready(function () {
-	$(".js-modal").click(function () {
-		var thisModal = $(this).attr("data-modal-class");
-		$(thisModal).removeClass("hidden");
+
+	load_modal();
+
+	$('.js-auth-form').submit(function () {
+		var $form = $(this);
+		console.log($form.serialize());
+		console.log($form.attr("action"));
+		$.ajax({
+			url: $form.attr("action"),
+			method: 'GET',
+			data: $form.serialize(),
+			dataType: 'json',
+			success: function (res) {
+				if(res.st == true){
+					$(".error").remove();
+					location.reload();
+				}else{
+					$(".error").remove();
+					$form.find( ".popup__form-title" ).after( "<p class='error' style='grid-column: 1/3; color: red'>"+res.err+"</p>" );
+				}
+			},
+			fail: function (error) {
+
+			}
+		});
 		return false;
 	});
 
+	/*
 	function timer(parent) {
 		parent.find(".popup__wait-time").css("display", "block");
 		parent.find(".popup__wait").css("display", "block");
@@ -30,9 +53,7 @@ $(document).ready(function () {
 
 	function showBtn(selector, parent, switcher) {
 		if (selector.inputmask("isComplete")) {
-			/* $(".popup__form--phone .grey-border-button").css("display", "none");
-			 $(".popup__form--phone .popup__code").css("display", "block");
-			   */
+
 			parent.find(".popup__form--" + switcher + " .grey-border-button--unactive").removeClass("grey-border-button--unactive");
 			parent.find(".popup__form--" + switcher + " .grey-border-button").addClass("grey-border-button--active");
 			parent.find(".popup__form--" + switcher + " .grey-border-button--active").on("click", function () {
@@ -138,43 +159,7 @@ $(document).ready(function () {
 			left = 1;
 		}
 	});
-	$(".new-pass-button").on("click", function () {
-		$(".popup").addClass("hidden");
-		$(".popup--new-pass").removeClass("hidden");
-	});
-	$(".to-registration").on("click", function () {
-		$(".popup").addClass("hidden");
-		$(".popup--registration").removeClass("hidden");
-	});
-	$(".to-login").on("click", function () {
-		$(".popup").addClass("hidden");
-		$(".popup--login").removeClass("hidden");
-	});
-	$(".forget-pass").on("click", function () {
-		$(".popup").addClass("hidden");
-		$(".popup--forget").removeClass("hidden");
-	});
 
-	$('.js-auth-form').submit(function () {
 
-		var $form = $(this);
-
-		$.ajax({
-			url: '/',
-			method: 'GET',
-			data: $(this).serialize(),
-			dataType: 'json',
-			success: function (res) {
-				if(res.status == true){
-					//alert(res.status);
-				}else{
-					$(".error").remove();
-					$form.find( ".popup__form-title" ).after( "<p class='error' style='grid-column: 1/3; color: red'>"+res.error+"</p>" );
-				}
-				console.log(res);
-			},
-		});
-		return false;
-	});
-
+*/
 });

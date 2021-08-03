@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="popup__bottom">
-			<div class="blue-button to-login">
+			<div class="blue-button">
 				сохранить и войти
 			</div>
 

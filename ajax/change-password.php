@@ -4,12 +4,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.
 $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
 if ($request->isAjaxRequest()) { ?>
-	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.registration/popup/script.js"></script>
-<? } ?>
+	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.changepasswd/popup/script.js"></script>
+<? }
 
-<?php
 $APPLICATION->IncludeComponent(
-	"bitrix:system.auth.registration",
+	"bitrix:system.auth.changepasswd",
 	"popup",
 	array(
 		"REGISTER_URL"        => "/ajax/registration.php",

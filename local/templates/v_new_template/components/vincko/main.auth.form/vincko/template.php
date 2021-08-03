@@ -52,6 +52,6 @@ if ($arResult['AUTHORIZED'])
         </span>
     </div>
     <div class="link">
-        <a href="<?=$arParams['AUTH_REGISTER_URL']?>" class="js-modal" data-modal-class=".popup--login">Вход</a>
+        <a href="<?=$arParams['AUTH_REGISTER_URL']?>" class="js-modal" data-modal-class=".popup--login" data-modal="/ajax/auth.php">Вход</a>
     </div>
 </div>

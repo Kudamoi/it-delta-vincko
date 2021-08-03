@@ -1,9 +1,20 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
-<?
-dump( $APPLICATION->arAuthResult);
-$APPLICATION->IncludeComponent(
-	"bitrix:system.auth.registration",
-	"popup",
-	array('AUTH_RESULT' => $APPLICATION->arAuthResult)
-); ?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
+	<main class="container main">
+		<? // TODO нужно выяснить как должна выглядеть страница авторизации, если не в попапе создать шаблон?>
+		<? $APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			"",
+			array(
+				"AREA_FILE_SHOW"   => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE"    => "",
+				"PATH"             => "/ajax/registration.php"
+			),
+			false,
+			array(
+				"HIDE_ICONS" => "Y"
+			)
+		); ?>
+	</main>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

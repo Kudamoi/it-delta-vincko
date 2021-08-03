@@ -47,9 +47,9 @@ $Asset = Asset::getInstance();
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/site.js");?>
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/main.js");?>
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/custom.js");?>
-	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/vinco.custom.js");?>
 
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/site.js?v=14");?>
+	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/auth.js");?>
 	<? $Asset->addCss(SITE_TEMPLATE_PATH . "/css/custom.css"); ?>
 
     <?= $APPLICATION->ShowHead(); ?>
@@ -142,8 +142,8 @@ $Asset = Asset::getInstance();
 			"vincko:main.auth.form",
 			"vincko",
 			array(
-				"AUTH_FORGOT_PASSWORD_URL" => "/personal/recovery/",
-				"AUTH_REGISTER_URL"        => "/personal/private/",
+				"AUTH_FORGOT_PASSWORD_URL" => "/auth/forgot/",
+				"AUTH_REGISTER_URL"        => "/auth/",
 				"AUTH_SUCCESS_URL"         => "/personal/"
 			)
 		); ?>
