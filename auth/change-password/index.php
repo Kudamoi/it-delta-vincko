@@ -1,5 +1,5 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
 	<main class="container main">
 		<? // TODO нужно выяснить как должна выглядеть страница авторизации, если не в попапе создать шаблон?>
 		<? $APPLICATION->IncludeComponent(
@@ -15,6 +15,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
 			array(
 				"HIDE_ICONS" => "Y"
 			)
-		); ?>
+		);?>
+
 	</main>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

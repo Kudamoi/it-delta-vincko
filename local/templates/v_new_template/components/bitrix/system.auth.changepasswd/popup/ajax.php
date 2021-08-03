@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.
 $APPLICATION->RestartBuffer();
 
 header('Content-type: application/json');
-
+dump($APPLICATION->arAuthResult);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["code_submit_button"] <> '' && !$USER->IsAuthorized())
 {
 	$result = [
