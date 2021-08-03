@@ -4,6 +4,9 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
+.test-block {
+    display: block;
+}
 .how__useful .open__for-items .top-block-useful {
     display: flex;
 }
