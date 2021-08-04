@@ -11,6 +11,23 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
+
+// Получаем активные элементы из инфоблока, они будут являтся городами
+$cities = CIBlockElement::GetList(
+    array("SORT"=>"ASC"),
+    array("IBLOCK_ID" => 20, "ACTIVE" => "Y"),
+    false,
+    false,
+    array("ID", "NAME")
+);
+// Получаем текущий город из инфоблока
+$currentCity = CIBlockElement::GetList(
+    array("SORT"=>"ASC"),
+    array("IBLOCK_ID" => 20, "ACTIVE" => "Y", "ID" => $_COOKIE['selected_city']),
+    false,
+    false,
+    array("NAME")
+)->GetNext();
 ?>
 
 <div class="container rating-block">
@@ -136,7 +153,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </svg>
                         </button>
                         <div class="rating-center__search_form-input">
-                            <input type="text" placeholder="Петропавловск-Камчатский">
+                            <input type="text" placeholder="<?=$currentCity["NAME"]?>">
                         </div>
 
                 </div>
@@ -180,42 +197,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     </div>
                                 </div>
                                 <div class="searchForm__modal_bottomChek">
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Карпов и Наживкин</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Сальса Чача Классико</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Убер Пубер</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Карпов и Наживкин</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Сальса Чача Классно</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Убер Пубертаг</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Крапов</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Кремлинг</span>
-                                    </div>
-                                    <div class="searchForm__modal_item bottomChekItem">
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="itemText">Горнг</span>
-                                    </div>
+                                    <? foreach($arResult["ITEMS"] as $item): ?>
+                                        <div class="searchForm__modal_item bottomChekItem">
+                                            <input type="checkbox" class="checkbox">
+                                            <span class="itemText"><?=$item["NAME"]?></span>
+                                        </div>
+                                    <? endforeach ?>
                                 </div>
                             </div>
                         </div>
@@ -381,13 +368,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </svg>
                         </span></div>
                     <div class="rating-center__items_top-btns">
-                                <div class="pseudo__range">
-                                    <p class="text"><span
-                                                class="pseudo__range-text__select"
-                                                style="color: #93B6FF;">Любой</span></p>
-                                    <input type="range" id="pseudo__range" min="0" max="10" step="1" value="1"
-                                           class="all">
-                                </div>
+                        <div class="pseudo__range">
+                            <p class="text"><span class="pseudo__range-text__select" style="color: #93B6FF;">Любой</span></p>
+                            <input type="range" id="pseudo__range" min="0" max="10" step="1" value="1" class="all">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -498,1486 +482,500 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="rating-center__items-wrapper">
-                <div class="rating-center__item-wrapper">
-                    <div class="rating-center__item">
-                        <div class="rating-center__item_wrappers">
-                            <div class="rating-center__item_circle">
-                                <span>5</span>
-                                <svg height="40" width="40">
-                                    <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 14.5;"/>
-                                </svg>
-                            </div>
-                            <div class="rating-center__item_num">
-                                1
-                            </div>
-                            <div class="rating-center__item_name">
-                                ООО “Максимилиан Макс...
-                            </div>
-                            <div class="rating-center__item_icon">
-                                <div class="rating-center__item_icon-one">
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
+
+            <? foreach($arResult["ITEMS"] as $item): ?>
+                <?//$reviewCount[] = ?>
+                <div class="<?=($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno") ? "rating-center__items-wrapper" : ""?>">
+                    <div class="<?=($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno") ? "rating-center__item-wrapper" : ""?> <?=$item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke" ? "rating-center__item-wrapper no-approved" : ""?> <?=$item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno" && count($reviewCount) == 0 ? "rating-center__item-wrapper item-rating-hide reviews-non" : ""?> <?=$item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno" && count($reviewCount) != 0 ? "rating-center__item-wrapper item-rating-hide" : ""?>">
+                        <div class="rating-center__item">
+                            <div class="rating-center__item_wrappers">
+                                <div class="rating-center__item_circle">
+                                    <span><?=$item["PROPERTIES"]["CH_RATING_SUM"]["VALUE"]?></span>
+                                    <svg height="40" width="40">
+                                        <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 14.5;"/>
+                                    </svg>
                                 </div>
-                                <div class="rating-center__item_icon-two">
-                                    <img src="/upload/rating/icon-arrow-down.svg" alt="img">
+                                <div class="rating-center__item_num">
+                                    <?=++$i?>
+                                </div>
+                                <div class="rating-center__item_name">
+                                    <?=$item["NAME"]?>
+                                </div>
+
+                                <div class="rating-center__item_icon">
+                                    <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno"): ?>
+                                        <div class="rating-center__item_icon-one">
+                                            <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
+                                        </div>
+                                    <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno"): ?>
+                                        <div class="rating-center__item_icon-one">
+                                            <img src="/upload/rating/No-endorsements-icon_mini.svg" alt="img">
+                                        </div>
+                                    <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                        <div class="rating-center__item_icon-one">
+                                            <img src="/upload/rating/itemRating-open__left_no-approved.svg" alt="img">
+                                        </div>
+                                    <? endif ?>
+                                    <div class="rating-center__item_icon-two">
+                                        <img src="/upload/rating/icon-arrow-down.svg" alt="img">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="num"><?=$item["PROPERTIES"]["CH_RATING_SUM"]["VALUE"]?></div>
                         </div>
-                        <div class="num">5</div>
-                    </div>
-                    <div class="rating-center__item-rating">
-                        <div style="width: 100%;"></div>
-                    </div>
-                    <div class="itemRating-open">
-                        <button class="itemRating-open__closed">
-                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                        </button>
-                        <div class="itemRating-open__top">
-                            <div class="itemRating-open__left_top">
-                                <div class="itemRating-open__left_num">
-                                    <span class="num">6</span> <span>в Рейтинге</span>
-                                    <p>г.Москва</p>
-                                </div>
-                                <div class="itemRating-open__left_endorsements">
-                                    <span>Компания-партнер vincko:</span>
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                    <div class="endorsements_modal modal-mini">
-                                        <div class="modal-mini__title">
-                                            <span>Охранные услуги</span> одобренной компании
-                                        </div>
-                                        <div class="modal-mini__text">
-                                            Вы можете <span>заказать на платформе:</span> конфортно, без переплат,
-                                            скрытых платежей
-                                            за монтаж оборудования и с гарантиями <span>vincko:</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_deal">
-                                    <a href="#guarantee">Безопасная сделка</a>
-                                    <img src="/upload/rating/deal-icon.svg" alt="img">
-                                    <div class="deal_modal modal-mini">
-                                        <div class="modal-mini__title">
-                                            <span>Безопасная сделка</span> при покупке услуг охраны
-                                        </div>
-                                        <div class="modal-mini__text">
-                                            <span>vincko:</span> предоставляет дополнительные гарантии при покупке услуг
-                                            <span class="green">одобренных</span>
-                                            охранных компаний на платформе
-                                            <a href="#guarantee">Подробнее</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__left_name">
-                                ООО Собака Съела
-                            </div>
-                            <div class="itemRating-open__showRating">
-                                <div class="itemRating-open__showRating_title">
-                                    Показать рейтинг, услуги и отзывы для города:
-                                    <div class="itemRating-open__showRating_title-modal">
-                                        <img src="/upload/rating/icon-info.svg" alt="img">
-                                        <div class="modal-mini itemRating-open__showRating_title-modalShow">
-                                            <div class="modal-mini__text">
-                                                Охранная компания работает в нескольких городах:<span>Москва, Орел,
-                                                    Воркута.</span>
-                                                Рейтинг, стоимость, содержание и качество услуг
-                                                этой компании<span>могут значительно отличаться</span> в зависимости от
-                                                города
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <form class="itemRating-open__showRating_radio">
-                                    <div class="itemRating-open__showRating_radio-item">
-                                        <input type="radio" class="radio" name="radio">
-                                        <span>Москва</span>
-                                        <p>32 отзыва</p>
-                                    </div>
-                                    <div class="itemRating-open__showRating_radio-item">
-                                        <input type="radio" class="radio" name="radio">
-                                        <span>Орел</span>
-                                        <p>5 отзывов</p>
-                                    </div>
-                                    <div class="itemRating-open__showRating_radio-item">
-                                        <input type="radio" class="radio" name="radio">
-                                        <span>Воркута</span>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="rating-center__item-rating">
+                            <div style="width: <?=(100/5)*$item["PROPERTIES"]["CH_RATING_SUM"]["VALUE"]?>%;"></div>
                         </div>
-                        <div class="itemRating-open__wrapper">
-                            <div class="itemRating-open__left">
-                                <div class="itemRating-open__left_info">
-                                    <div class="info-block-one">
-                                        <div class="info-block-one__left">
-                                            <span>4,0</span>
-                                            <svg height="60" width="60">
-                                                <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
-                                            </svg>
-                                            <div class="info-block-one__left_icon">
-                                                <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                            </div>
-                                        </div>
-                                        <div class="info-block-one__right">
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Оценка по критериям <a href="#">vincko:</a>
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Безопасность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Клиентоориентированность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Комфорт
-                                            </div>
-                                        </div>
+                        <div class="itemRating-open">
+                            <button class="itemRating-open__closed">
+                                <img src="/upload/rating/closed-icon.svg" alt="img">
+                            </button>
+                            <div class="itemRating-open__top">
+                                <div class="itemRating-open__left_top">
+                                    <div class="itemRating-open__left_num">
+                                        <span class="num"><?=$i?></span> <span>в Рейтинге</span>
+                                        <p>г.<?=$currentCity["NAME"]?></p>
                                     </div>
-                                    <div class="info-block-two">
-                                        <div class="info-block-two__right">
-                                            <div class="info-block-two__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Ссылка на договор
-                                            </div>
-                                            <div class="info-block-bottom">
-                                                <div class="links-contract">
-                                                    <a class="link-item" href="">Договор №1</a>
-                                                    <a class="link-item" href="">Договор №2</a>
+
+                                    <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno"): ?>
+                                        <div class="itemRating-open__left_endorsements">
+                                            <span>Компания-партнер vincko:</span>
+                                            <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
+                                            <div class="endorsements_modal modal-mini">
+                                                <div class="modal-mini__title">
+                                                    <span>Охранные услуги</span> одобренной компании
                                                 </div>
-                                                <div class="text-descrip t-c-gray">
-                                                    Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+                                                <div class="modal-mini__text">
+                                                    Вы можете <span>заказать на платформе:</span> конфортно, без переплат,
+                                                    скрытых платежей
+                                                    за монтаж оборудования и с гарантиями <span>vincko:</span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno"): ?>
+                                        <div class="itemRating-open__left_No-endorsements">
+                                            <span>Не является партнером vincko:</span>
+                                            <img src="/upload/rating/No-endorsements-icon_mini.svg" alt="img">
+                                        </div>
+                                    <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                        <div class="itemRating-open__left_no-approved">
+                                            <span>Ассоциированный партнер vincko:</span>
+                                            <img src="/upload/rating/itemRating-open__left_no-approved.svg" alt="img">
+                                        </div>
+                                    <? endif ?>
+
+                                    <? if($item["PROPERTIES"]["SAFE_DEAL"]["VALUE"] == "Да"): ?>
+                                        <div class="itemRating-open__left_deal">
+                                            <a href="#guarantee">Безопасная сделка</a>
+                                            <img src="/upload/rating/deal-icon.svg" alt="img">
+                                            <div class="deal_modal modal-mini">
+                                                <div class="modal-mini__title">
+                                                    <span>Безопасная сделка</span> при покупке услуг охраны
+                                                </div>
+                                                <div class="modal-mini__text">
+                                                    <span>vincko:</span> предоставляет дополнительные гарантии при покупке услуг
+                                                    <span class="green">одобренных</span>
+                                                    охранных компаний на платформе
+                                                    <a href="#guarantee">Подробнее</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <? endif ?>
                                 </div>
-                                <div class="itemRating-open__tab">
-                                    <div class="tabs-wrapper links-tab">
-                                        <a class="tab tab-one tab_active" href="#">
-                                            Охрана квартиры
-                                        </a>
-                                        <a class="tab tab-two" href="#">
-                                            Охрана дома
-                                        </a>
-                                        <a class="tab tab-three" href="#">
-                                            Охрана коммерческой недвижимости
-                                        </a>
-                                    </div>
-                                    <div class="tabs-wrapper content-tab">
-                                        <div class="tabs-content content-one tabs-content_active">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
+                                <div class="itemRating-open__left_name">
+                                    <?=$item["NAME"]?>
+                                </div>
+                                <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno" || $item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                    <div class="itemRating-open__showRating">
+                                        <div class="itemRating-open__showRating_title">
+                                            Показать рейтинг, услуги и отзывы для города:
+                                            <div class="itemRating-open__showRating_title-modal">
+                                                <img src="/upload/rating/icon-info.svg" alt="img">
+                                                <div class="modal-mini itemRating-open__showRating_title-modalShow">
+                                                    <div class="modal-mini__text">
+                                                        Охранная компания работает в  <?=(count($item["PROPERTIES"]["CITY_ID"]["VALUE"]) == 1) ? "городе": "нескольких городах"?><span>
+                                                            <?
+                                                            // foreach($item["PROPERTIES"]["CITY_ID"]["VALUE"] as $city){
+                                                            //     $cityName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 20, "ACTIVE" => "Y", "ID" => $city), false, false, array("NAME"))->GetNext();
+                                                            //     echo $cityName["NAME"];
+                                                            // }
+                                                            echo $currentCity["NAME"];
+                                                            ?>.</span>
+                                                        Рейтинг, стоимость, содержание и качество услуг
+                                                        этой компании<span>могут значительно отличаться</span> в зависимости от
+                                                        города
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Стандартные<br>
-                                                    периоды обслуживания
+                                        </div>
+                                        <form class="itemRating-open__showRating_radio">
+                                            <? //foreach($item["PROPERTIES"]["CITY_ID"]["VALUE"] as $city): ?>
+                                                <?//$cityName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 20, "ACTIVE" => "Y", "ID" => $city), false, false, array("NAME"))->GetNext();?>
+                                                <div class="itemRating-open__showRating_radio-item">
+                                                    <input type="radio" class="radio" name="radio" <?=$_COOKIE["selected_city"] == $city ? "checked" : "" ?>>
+                                                    <span><?=$currentCity["NAME"]//$cityName["NAME"]?></span>
+                                                    <p><?=$reviewCount/*[$city] !== 0 ? : "0"*/?></p>
                                                 </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div class="item-text-wrapper">
-                                                        <span>3 месяца 3 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
+                                            <? //endforeach ?>
+                                        </form>
+                                    </div>
+                                <? endif ?>
+                            </div>
+                            <div class="itemRating-open__wrapper">
+                                <div class="itemRating-open__left">
+                                    <? if(($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno" || $item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke") && $item["PROPERTIES"]["STATUS"]["VALUE"] != "neodobreno" && count($reviewCount) != 0): ?>
+                                        <div class="itemRating-open__left_info">
+                                            <div class="info-block-one">
+                                                <div class="info-block-one__left">
+                                                    <span><?=$item["PROPERTIES"]["CH_RATING_SUM"]["VALUE"]?></span>
+                                                    <svg height="60" width="60">
+                                                        <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
+                                                    </svg>
+                                                    <div class="info-block-one__left_icon">
+                                                        <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
                                                     </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>6 месяцев 6 000 ₽</span> <span><span class="red">+ до 2 000 000 руб</span>страховая
-                                                            выплата</span>
+                                                </div>
+                                                <div class="info-block-one__right">
+                                                    <div class="info-block-one__right_row">
+                                                        <img src="/upload/rating/icon-info.svg" alt="img">
+                                                        Оценка по критериям <a href="#">vincko:</a>
                                                     </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>12 месяцев 12 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
+                                                    <div class="info-block-one__right_row">
+                                                        <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
+                                                            alt="img">
+                                                        <span><?=$item["PROPERTIES"]["CH_RATING_ZABOTA"]["VALUE"]?></span>
+                                                        Безопасность
+                                                    </div>
+                                                    <div class="info-block-one__right_row">
+                                                        <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
+                                                            alt="img">
+                                                        <span><?=$item["PROPERTIES"]["CH_RATING_SPASENIE"]["VALUE"]?></span>
+                                                        Клиентоориентированность
+                                                    </div>
+                                                    <div class="info-block-one__right_row">
+                                                        <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
+                                                            alt="img">
+                                                        <span><?=$item["PROPERTIES"]["CH_RATING_FINANCE"]["VALUE"]?></span>
+                                                        Комфорт
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div class="tabs-content content-two">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
+                                            <div class="info-block-two">
+                                                <div class="info-block-two__right">
+                                                    <div class="info-block-two__right_row">
+                                                        <img src="/upload/rating/icon-info.svg" alt="img">
+                                                        Ссылка на договор
                                                     </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_title">
-                                                    Решение индивидуальных задач
-                                                </div>
-                                                <div class="tabs-content__column_text">
-                                                    Мы понимаем уникальность <a href="#">частных домов,</a><br>
-                                                    потому предлагаем создать заявку и описать нам задачу. Мы<br>
-                                                    проведем
-                                                    анализ вариантов и предоставим готовое решение<br>
-                                                    для Вашего дома.
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <a href="#">Создать индивидуальную заявку</a>
+                                                    <div class="info-block-bottom">
+                                                        <div class="links-contract">
+                                                            <a class="link-item" href="">Договор №1</a>
+                                                            <a class="link-item" href="">Договор №2</a>
+                                                        </div>
+                                                        <div class="text-descrip t-c-gray">
+                                                            Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tabs-content content-three">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
+                                    <? endif ?>
+                                    <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno" || $item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                        <div class="itemRating-open__tab">
+                                            <div class="tabs-wrapper links-tab">
+                                                <a class="tab tab-one tab_active" href="#">
+                                                    Охрана квартиры
+                                                </a>
+                                                <a class="tab tab-two" href="#">
+                                                    Охрана дома
+                                                </a>
+                                                <a class="tab tab-three" href="#">
+                                                    Охрана коммерческой недвижимости
+                                                </a>
                                             </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_title">
-                                                    Решение индивидуальных задач
+                                            <div class="tabs-wrapper content-tab">
+                                                <div class="tabs-content content-one tabs-content_active">
+                                                    <div class="tabs-content__column">
+                                                        <div class="tabs-content__column_title">
+                                                            Услуги
+                                                        </div>
+                                                        <div class="tabs-content__column_lists">
+                                                            <? foreach($item["PROPERTIES"]["CH_SERVICES"]["VALUE"] as $service): ?>
+                                                                <?$serviceName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 21, "ACTIVE" => "Y", "ID" => $service), false, false, array("NAME"))->fetch();?>
+                                                                <div>
+                                                                    <span><?=$serviceName["NAME"]?></span>
+                                                                </div>
+                                                            <? endforeach ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tabs-content__column">
+                                                        <div class="tabs-content__column_title">
+                                                            Стандартные<br>
+                                                            периоды обслуживания
+                                                        </div>
+                                                        <div class="tabs-content__column_lists">
+                                                            <div class="item-text-wrapper">
+                                                                <span>3 месяца 3 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
+                                                                    бесплатно</span>
+                                                            </div>
+                                                            <div class="item-text-wrapper">
+                                                                <span>6 месяцев 6 000 ₽</span> <span><span class="red">+ до 2 000 000 руб</span>страховая
+                                                                    выплата</span>
+                                                            </div>
+                                                            <div class="item-text-wrapper">
+                                                                <span>12 месяцев 12 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
+                                                                    бесплатно</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <div class="tabs-content__column_text">
-                                                    Мы понимаем уникальность <a href="#">коммерческих объектов,</a><br>
-                                                    потому предлагаем создать заявку и описать нам задачу. Мы<br>
-                                                    проведем
-                                                    анализ вариантов и предоставим готовое решение<br>
-                                                    для Вашей коммерческой недвижимости.
+                                                <div class="tabs-content content-two">
+                                                    <div class="tabs-content__column">
+                                                        <div class="tabs-content__column_title">
+                                                            Услуги
+                                                        </div>
+                                                        <div class="tabs-content__column_lists">
+                                                            <? foreach($item["PROPERTIES"]["CH_SERVICES"]["VALUE"] as $service): ?>
+                                                                <?$serviceName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 21, "ACTIVE" => "Y", "ID" => $service), false, false, array("NAME"))->fetch();?>
+                                                                <div>
+                                                                    <span><?=$serviceName["NAME"]?></span>
+                                                                </div>
+                                                            <? endforeach ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tabs-content__column border-none">
+                                                        <div class="tabs-content__column_title">
+                                                            Решение индивидуальных задач
+                                                        </div>
+                                                        <div class="tabs-content__column_text">
+                                                            Мы понимаем уникальность <a href="#">частных домов,</a><br>
+                                                            потому предлагаем создать заявку и описать нам задачу. Мы<br>
+                                                            проведем
+                                                            анализ вариантов и предоставим готовое решение<br>
+                                                            для Вашего дома.
+                                                        </div>
+                                                        <div class="tabs-content__column_lists">
+                                                            <div>
+                                                                <a href="#">Создать индивидуальную заявку</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <a href="#">Создать индивидуальную заявку</a>
+                                                <div class="tabs-content content-three">
+                                                    <div class="tabs-content__column">
+                                                        <div class="tabs-content__column_title">
+                                                            Услуги
+                                                        </div>
+                                                        <div class="tabs-content__column_lists">
+                                                            <? foreach($item["PROPERTIES"]["CH_SERVICES"]["VALUE"] as $service): ?>
+                                                                <?$serviceName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 21, "ACTIVE" => "Y", "ID" => $service), false, false, array("NAME"))->fetch();?>
+                                                                <div>
+                                                                    <span><?=$serviceName["NAME"]?></span>
+                                                                </div>
+                                                            <? endforeach ?>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tabs-content__column border-none">
+                                                        <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno"): ?>
+                                                            <div class="tabs-content__column_title">
+                                                            Решение индивидуальных задач
+                                                            </div>
+                                                            <div class="tabs-content__column_text">
+                                                                Мы понимаем уникальность <a href="#">коммерческих объектов,</a><br>
+                                                                потому предлагаем создать заявку и описать нам задачу. Мы<br>
+                                                                проведем
+                                                                анализ вариантов и предоставим готовое решение<br>
+                                                                для Вашей коммерческой недвижимости.
+                                                            </div>
+                                                            <div class="tabs-content__column_lists">
+                                                                <div>
+                                                                    <a href="#">Создать индивидуальную заявку</a>
+                                                                </div>
+                                                            </div>
+                                                        <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                                            <div class="tabs-content__column_text">
+                                                                <div>
+                                                                    Можно ли заказать охранные услуги этой компании на платформе?
+                                                                </div>
+                                                                <div>
+                                                                    На платформе <span>vincko:</span> можно заказать охранные услуги
+                                                                    только
+                                                                </div>
+                                                                <div>
+                                                                    одобренной компании
+                                                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
+                                                                </div>
+                                                                <div>
+                                                                    Мы можем оповестить Вас, когда услуги этой охранной компании
+                                                                    станет возможным заказывать на <span>vincko:</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tabs-content__column_lists test">
+                                                                <div class="act-nohide">
+                                                                    <span>Оповестить меня о возможности заказать услуги этой
+                                                                        компании</span>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <span>Мы оповестим Вас</span>
+                                                                </div>
+                                                            </div>
+                                                        <? endif ?>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_bottom">
-                                    <div class="itemRating-open__left_bottom-mobilLinks">
-                                        <a href="#">Читать все <span>32</span> отзыва</a>
-                                        <span class="closed-card">Закрыть карточку</span>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-btns">
-                                        <a href="#" class="itemRating-open__left_bottom-btn">
-                                            к компании
-                                        </a>
-                                        <a href="#" class="itemRating-open__left_bottom-btn">
-                                            Заказать услуги
-                                        </a>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-text">
-                                        Производители, с оборудованием которых работает компания:
-                                        <div>
-                                            <span>Livicom</span><span>C.nord</span><span>AJAX</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__right">
-                                <div class="itemRating-open__right_top">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
-                                </div>
-                                <div class="itemRating-open__right_wrapper">
-                                    <div class="swiper-container mySwiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
+                                    
+                                        <div class="itemRating-open__left_bottom">
+                                            <div class="itemRating-open__left_bottom-mobilLinks">
+                                                <a href="#">Читать все <span>32</span> отзыва</a>
+                                                <span class="closed-card">Закрыть карточку</span>
                                             </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
+                                            <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "odobreno"): ?>
+                                                <div class="itemRating-open__left_bottom-btns">
+                                                    <a href="#" class="itemRating-open__left_bottom-btn">
+                                                        к компании
+                                                    </a>
+                                                    <a href="#" class="itemRating-open__left_bottom-btn">
+                                                        Заказать услуги
+                                                    </a>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
+                                            <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "naproverke"): ?>
+                                                <div class="itemRating-open__left_bottom-btns">
+                                                    <a href="#" class="itemRating-open__left_bottom-btn">
+                                                        подробнее
+                                                    </a>
+                                                </div>
+                                            <? endif ?>
+                                            <div class="itemRating-open__left_bottom-text">
+                                                Производители, с оборудованием которых работает компания:
+                                                <div>
+                                                    <? foreach($item["PROPERTIES"]["MANUFACTURERS"]["VALUE"] as $manufacturer): ?>
+                                                        <?$manufacturerName = CIBlockElement::GetList(array("SORT"=>"ASC"), array("IBLOCK_ID" => 18, "ACTIVE" => "Y", "ID" => $manufacturer), false, false, array("NAME"))->fetch();?>
+                                                        <span><?=$manufacturerName["NAME"]?></span>
+                                                    <? endforeach ?>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
+                                    <? endif ?>
+
+                                    <? if($item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno" && count($reviewCount) != 0): ?>
+                                        <div class="itemRating-open__left_text">
+                                            <div class="itemRating-open__left_text-top">
+                                                <span>О компании есть отзывы на платформе, но Не является партнером vincko:</span><a
+                                                        href="#">vincko:</a>
+                                            </div>
+                                            <div class="itemRating-open__left_text-bottom">
+                                                Для вас мы постарались найти оценки и отзывы о компании и в сторонних
+                                                источниках,<br>
+                                                но этого оказалось недостаточно, чтобы распространить <a
+                                                        href="#guarantee">гарантии
+                                                    vincko:</a> на услуги этой компании.
+                                            </div>
+                                            <div class="itemRating-open__left_text-mobilLinks">
+                                                <a href="#">Читать все <span>32</span> отзыва</a>
+                                                <span class="closed-card">Закрыть карточку</span>
+                                            </div>
+                                        </div>
+                                    <? elseif($item["PROPERTIES"]["STATUS"]["VALUE"] == "neodobreno" && count($reviewCount) == 0): ?>
+                                        <div class="itemRating-open__left_text">
+                                            <div class="itemRating-open__left_text-top">
+                                                <span>О компании нет отзывов на платформе, Не является партнером vincko:</span><a
+                                                        href="#">vincko:</a>
+                                            </div>
+                                            <div class="itemRating-open__left_text-bottom">
+                                                Для вас мы постарались найти оценки и отзывы о компании и в сторонних
+                                                источниках,<br>
+                                                но этого оказалось недостаточно, чтобы распространить <a
+                                                        href="#guarantee">гарантии
+                                                    vincko:</a> на услуги этой компании.
+                                            </div>
+                                            <div class="itemRating-open__left_text-mobiltext">
+                                                Вы можете
+                                                стать первым!
+                                            </div>
+                                            <a class="itemRating-open__left_text-btn" href="#">Оставить свой отзыв</a>
+                                        </div>
+                                    <? endif ?>
                                 </div>
-                                <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
-                                    <div class="itemRating-open__right_bottom-text">
-                                        <span>источник</span>
-                                        <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rating-center__item-wrapper item-rating-hide">
-                    <div class="rating-center__item">
-                        <div class="rating-center__item_wrappers">
-                            <div class="rating-center__item_circle">
-                                <span>4</span>
-                                <svg height="40" width="40">
-                                    <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 45;"/>
-                                </svg>
-                            </div>
-                            <div class="rating-center__item_num">
-                                4
-                            </div>
-                            <div class="rating-center__item_name">
-                                Пупсень & Вупсень
-                            </div>
-                            <div class="rating-center__item_icon">
-                                <div class="rating-center__item_icon-one">
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                </div>
-                                <div class="rating-center__item_icon-two">
-                                    <img src="/upload/rating/icon-arrow-down.svg" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="num">
-                            4,1
-                        </div>
-                    </div>
-                    <div class="rating-center__item-rating">
-                        <div style="width: 41%;"></div>
-                    </div>
-                    <div class="itemRating-open">
-                        <button class="itemRating-open__closed">
-                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                        </button>
-                        <div class="itemRating-open__top">
-                            <div class="itemRating-open__left_top">
-                                <div class="itemRating-open__left_num">
-                                    <span class="num">6</span> <span>в Рейтинге</span>
-                                    <p>г.Москва</p>
-                                </div>
-                                <div class="itemRating-open__left_No-endorsements">
-                                    <span>Не является партнером vincko:</span>
-                                    <img src="/upload/rating/No-endorsements-icon_mini.svg" alt="img">
-                                </div>
-                            </div>
-                            <div class="itemRating-open__left_name">
-                                ООО Собака Съела
-                            </div>
-                        </div>
-                        <div class="itemRating-open__wrapper">
-                            <div class="itemRating-open__left">
-                                <div class="itemRating-open__left_info">
-                                    <div class="info-block-one">
-                                        <div class="info-block-one__left">
-                                            <span>4,0</span>
-                                            <svg height="60" width="60">
-                                                <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
-                                            </svg>
-                                            <div class="info-block-one__left_icon">
+                                
+                                <? if(count($reviewCount) != 0): ?>
+                                    <div class="itemRating-open__right">
+                                        <div class="itemRating-open__right_top">
+                                            <a href="#">Читать все <span><?=$reviewCount?></span> отзыва</a>
+                                        </div>
+                                        <div class="itemRating-open__right_wrapper">
+                                            <div class="swiper-container mySwiper">
+                                                <div class="swiper-wrapper">
+                                                    <? foreach($reviewBlock as $review): ?>
+                                                        <div class="swiper-slide">
+                                                            <div class="itemRating-open__review">
+                                                                <div class="itemRating-open__review_top">
+                                                                    <div class="itemRating-open__review_top-icon">
+                                                                        <img src="/upload/rating/itemRating-open__review_top-icon.svg"
+                                                                            alt="img">
+                                                                    </div>
+                                                                    <div class="itemRating-open__review_top-text">
+                                                                        <span class="name"><?=CUser::GetByID($review["~PROPERTY_R_USER_ID_VALUE"])->Fetch()["NAME"]." ".CUser::GetByID($review["~PROPERTY_R_USER_ID_VALUE"])->Fetch()["LAST_NAME"]?></span>
+                                                                        <span class="city">Ростов-на-Дону</span>
+                                                                        <span class="buyer">покупатель</span>
+                                                                        <img src="/upload/rating/icon-info.svg" alt="img">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="itemRating-open__review_bottom">
+                                                                    <span>Комментарий пользователя:</span>
+                                                                    <?=$review["~PROPERTY_R_COMMENT_VALUE"]["TEXT"]?>
+                                                                    <button>Читать далее</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <? endforeach ?>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+                                        <div class="itemRating-open__right_bottom">
+                                            <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
+                                            <div class="itemRating-open__right_bottom-text">
+                                                <span>источник</span>
                                                 <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
                                             </div>
                                         </div>
-                                        <div class="info-block-one__right">
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Оценка по критериям <a href="#">vincko:</a>
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Безопасность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Клиентоориентированность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Комфорт
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="info-block-two">
-                                        <div class="info-block-two__right">
-                                            <div class="info-block-two__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Ссылка на договор
-                                            </div>
-                                            <div class="info-block-bottom">
-                                                <div class="links-contract">
-                                                    <a class="link-item" href="">Договор №1</a>
-                                                    <a class="link-item" href="">Договор №2</a>
-                                                </div>
-                                                <div class="text-descrip t-c-gray">
-                                                    Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_text">
-                                    <div class="itemRating-open__left_text-top">
-                                        <span>О компании есть отзывы на платформе, но Не является партнером vincko:</span><a
-                                                href="#">vincko:</a>
-                                    </div>
-                                    <div class="itemRating-open__left_text-bottom">
-                                        Для вас мы постарались найти оценки и отзывы о компании и в сторонних
-                                        источниках,<br>
-                                        но этого оказалось недостаточно, чтобы распространить <a
-                                                href="#guarantee">гарантии
-                                            vincko:</a> на услуги этой компании.
-                                    </div>
-                                    <div class="itemRating-open__left_text-mobilLinks">
-                                        <a href="#">Читать все <span>32</span> отзыва</a>
-                                        <span class="closed-card">Закрыть карточку</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__right">
-                                <div class="itemRating-open__right_top">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
-                                </div>
-                                <div class="itemRating-open__right_wrapper">
-                                    <div class="swiper-container mySwiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
+                                <? elseif(count($reviewCount) == 0): ?>
+                                    <div class="itemRating-open__right">
+                                        <div class="itemRating-open__right_wrapper">
+                                            <div class="swiper-container mySwiper">
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide">
+                                                        <div class="itemRating-open__review">
+                                                            <div class="itemRating-open__review_bottom">
+                                                                <span>К сожалению, отзывов о компании нет.</span>
+                                                            </div>
                                                         </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="itemRating-open__right_bottom">
+                                            <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
+                                            <div class="itemRating-open__right_bottom-text">
+                                                Вы можете
+                                                стать первым!
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
-                                    <div class="itemRating-open__right_bottom-text">
-                                        <span>источник</span>
-                                        <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                    </div>
-                                </div>
+                                <? endif ?>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="rating-center__item-wrapper">
-                    <div class="rating-center__item">
-                        <div class="rating-center__item_wrappers">
-                            <div class="rating-center__item_circle">
-                                <span>4,0</span>
-                                <svg height="40" width="40">
-                                    <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 79;"/>
-                                </svg>
-                            </div>
-                            <div class="rating-center__item_num">
-                                6
-                            </div>
-                            <div class="rating-center__item_name" id="rating-center__item_name">
-                                ООО Собака Съела
-                            </div>
-                            <div class="rating-center__item_icon">
-                                <div class="rating-center__item_icon-one">
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                </div>
-                                <div class="rating-center__item_icon-two">
-                                    <img src="/upload/rating/icon-arrow-down.svg" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="num">
-                            4,0
-                        </div>
-                    </div>
-                    <div class="rating-center__item-rating">
-                        <div style="width: 40%;"></div>
-                    </div>
-                    <div class="itemRating-open">
-                        <button class="itemRating-open__closed">
-                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                        </button>
-                        <div class="itemRating-open__top">
-                            <div class="itemRating-open__left_top">
-                                <div class="itemRating-open__left_num">
-                                    <span class="num">6</span> <span>в Рейтинге</span>
-                                    <p>г.Москва</p>
-                                </div>
-                                <div class="itemRating-open__left_endorsements">
-                                    <span>Компания-партнер vincko:</span>
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                    <div class="endorsements_modal modal-mini">
-                                        <div class="modal-mini__title">
-                                            <span>Охранные услуги</span> одобренной компании
-                                        </div>
-                                        <div class="modal-mini__text">
-                                            Вы можете <span>заказать на платформе:</span> конфортно, без переплат,
-                                            скрытых платежей
-                                            за монтаж оборудования и с гарантиями <span>vincko:</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_deal">
-                                    <a href="#guarantee">Безопасная сделка</a>
-                                    <img src="/upload/rating/deal-icon.svg" alt="img">
-                                    <div class="deal_modal modal-mini">
-                                        <div class="modal-mini__title">
-                                            <span>Безопасная сделка</span> при покупке услуг охраны
-                                        </div>
-                                        <div class="modal-mini__text">
-                                            <span>vincko:</span> предоставляет дополнительные гарантии при покупке услуг
-                                            <span class="green">одобренных</span>
-                                            охранных компаний на платформе
-                                            <a href="#">Подробнее</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__left_name">
-                                ООО Собака Съела
-                            </div>
-                            <div class="itemRating-open__showRating">
-                                <div class="itemRating-open__showRating_title">
-                                    Показать рейтинг, услуги и отзывы для города: <span>г.Москва</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="itemRating-open__wrapper">
-                            <div class="itemRating-open__left">
-                                <div class="itemRating-open__left_info">
-                                    <div class="info-block-one">
-                                        <div class="info-block-one__left">
-                                            <span>4,0</span>
-                                            <svg height="60" width="60">
-                                                <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
-                                            </svg>
-                                            <div class="info-block-one__left_icon">
-                                                <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                            </div>
-                                        </div>
-                                        <div class="info-block-one__right">
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Оценка по критериям <a href="#">vincko:</a>
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Безопасность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Клиентоориентированность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Комфорт
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-block-two">
-                                        <div class="info-block-two__right">
-                                            <div class="info-block-two__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Ссылка на договор
-                                            </div>
-                                            <div class="info-block-bottom">
-                                                <div class="links-contract">
-                                                    <a class="link-item" href="">Договор №1</a>
-                                                    <a class="link-item" href="">Договор №2</a>
-                                                </div>
-                                                <div class="text-descrip t-c-gray">
-                                                    Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__tab">
-                                    <div class="tabs-wrapper links-tab">
-                                        <a class="tab tab-one tab_active" href="#">
-                                            Охрана квартиры
-                                        </a>
-                                        <a class="tab tab-two" href="#">
-                                            Охрана дома
-                                        </a>
-                                        <a class="tab tab-three" href="#">
-                                            Охрана коммерческой недвижимости
-                                        </a>
-                                    </div>
-                                    <div class="tabs-wrapper content-tab">
-                                        <div class="tabs-content content-one tabs-content_active">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Стандартные<br>
-                                                    периоды обслуживания
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div class="item-text-wrapper">
-                                                        <span>3 месяца 3 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
-                                                    </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>6 месяцев 6 000 ₽</span> <span><span class="red">+ до 2 000 000 руб</span>страховая
-                                                            выплата</span>
-                                                    </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>12 месяцев 12 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tabs-content content-two">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_title">
-                                                    Решение индивидуальных задач
-                                                </div>
-                                                <div class="tabs-content__column_text">
-                                                    Мы понимаем уникальность <a href="#">частных домов,</a><br>
-                                                    потому предлагаем создать заявку и описать нам задачу. Мы<br>
-                                                    проведем
-                                                    анализ вариантов и предоставим готовое решение<br>
-                                                    для Вашего дома.
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <a href="#">Создать индивидуальную заявку</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tabs-content content-three">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_title">
-                                                    Решение индивидуальных задач
-                                                </div>
-                                                <div class="tabs-content__column_text">
-                                                    Мы понимаем уникальность <a href="#">коммерческих объектов,</a><br>
-                                                    потому предлагаем создать заявку и описать нам задачу. Мы<br>
-                                                    проведем
-                                                    анализ вариантов и предоставим готовое решение<br>
-                                                    для Вашей коммерческой недвижимости.
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <a href="#">Создать индивидуальную заявку</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_bottom">
-                                    <div class="itemRating-open__left_bottom-mobilLinks">
-                                        <a href="#">Читать все <span>32</span> отзыва</a>
-                                        <span class="closed-card">Закрыть карточку</span>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-btns">
-                                        <a href="#" class="itemRating-open__left_bottom-btn">
-                                            к компании
-                                        </a>
-                                        <a href="#" class="itemRating-open__left_bottom-btn">
-                                            Заказать услуги
-                                        </a>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-text">
-                                        Производители, с оборудованием которых работает компания:
-                                        <div>
-                                            <span>Livicom</span><span>C.nord</span><span>AJAX</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__right">
-                                <div class="itemRating-open__right_top">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
-                                </div>
-                                <div class="itemRating-open__right_wrapper">
-                                    <div class="swiper-container mySwiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
-                                    <div class="itemRating-open__right_bottom-text">
-                                        <span>источник</span>
-                                        <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rating-center__item-wrapper item-rating-hide reviews-non">
-                    <div class="rating-center__item">
-                        <div class="rating-center__item_wrappers">
-                            <div class="rating-center__item_circle">
-                                <span>4,1</span>
-                                <svg height="40" width="40">
-                                    <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 40;"/>
-                                </svg>
-                            </div>
-                            <div class="rating-center__item_num">
-                                9
-                            </div>
-                            <div class="rating-center__item_name">
-                                Пупсень & Вупсень
-                            </div>
-                            <div class="rating-center__item_icon">
-                                <div class="rating-center__item_icon-one">
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                </div>
-                                <div class="rating-center__item_icon-two">
-                                    <img src="/upload/rating/icon-arrow-down.svg" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="num">
-                            4,1
-                        </div>
-                    </div>
-                    <div class="rating-center__item-rating">
-                        <div style="width: 41%;"></div>
-                    </div>
-                    <div class="itemRating-open">
-                        <button class="itemRating-open__closed">
-                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                        </button>
-                        <div class="itemRating-open__top">
-                            <div class="itemRating-open__left_top">
-                                <div class="itemRating-open__left_num">
-                                    <span class="num">6</span> <span>в Рейтинге</span>
-                                    <p>г.Москва</p>
-                                </div>
-                                <div class="itemRating-open__left_No-endorsements">
-                                    <span>Не является партнером vincko:</span>
-                                    <img src="/upload/rating/No-endorsements-icon_mini.svg" alt="img">
-                                </div>
-                            </div>
-                            <div class="itemRating-open__left_name">
-                                ООО Собака Съела
-                            </div>
-                        </div>
-                        <div class="itemRating-open__wrapper">
-                            <div class="itemRating-open__left">
-                                <div class="itemRating-open__left_text">
-                                    <div class="itemRating-open__left_text-top">
-                                        <span>О компании нет отзывов на платформе, Не является партнером vincko:</span><a
-                                                href="#">vincko:</a>
-                                    </div>
-                                    <div class="itemRating-open__left_text-bottom">
-                                        Для вас мы постарались найти оценки и отзывы о компании и в сторонних
-                                        источниках,<br>
-                                        но этого оказалось недостаточно, чтобы распространить <a
-                                                href="#guarantee">гарантии
-                                            vincko:</a> на услуги этой компании.
-                                    </div>
-                                    <div class="itemRating-open__left_text-mobiltext">
-                                        Вы можете
-                                        стать первым!
-                                    </div>
-                                    <a class="itemRating-open__left_text-btn" href="#">Оставить свой отзыв</a>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__right">
-                                <div class="itemRating-open__right_wrapper">
-                                    <div class="swiper-container mySwiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>К сожалению, отзывов о компании нет.</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
-                                    <div class="itemRating-open__right_bottom-text">
-                                        Вы можете
-                                        стать первым!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rating-center__item-wrapper no-approved">
-                    <div class="rating-center__item">
-                        <div class="rating-center__item_wrappers">
-                            <div class="rating-center__item_circle">
-                                <span>3,3</span>
-                                <svg height="40" width="40">
-                                    <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 29;"/>
-                                </svg>
-                            </div>
-                            <div class="rating-center__item_num">
-                                10
-                            </div>
-                            <div class="rating-center__item_name" id="rating-center__item_name">
-                                ИП Блондинка и Большая Ко
-                            </div>
-                            <div class="rating-center__item_icon">
-                                <div class="rating-center__item_icon-one">
-                                    <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                </div>
-                                <div class="rating-center__item_icon-two">
-                                    <img src="/upload/rating/icon-arrow-down.svg" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="num">
-                            3,3
-                        </div>
-                    </div>
-                    <div class="rating-center__item-rating">
-                        <div style="width: 33%;"></div>
-                    </div>
-                    <div class="itemRating-open">
-                        <button class="itemRating-open__closed">
-                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                        </button>
-                        <div class="itemRating-open__top">
-                            <div class="itemRating-open__left_top">
-                                <div class="itemRating-open__left_num">
-                                    <span class="num">6</span> <span>в Рейтинге</span>
-                                    <p>г.Москва</p>
-                                </div>
-                                <div class="itemRating-open__left_no-approved">
-                                    <span>Ассоциированный партнер vincko:</span>
-                                    <img src="/upload/rating/itemRating-open__left_no-approved.svg" alt="img">
-                                </div>
-                            </div>
-                            <div class="itemRating-open__left_name">
-                                ООО Собака Съела
-                            </div>
-                            <div class="itemRating-open__showRating">
-                                <div class="itemRating-open__showRating_title">
-                                    Показать рейтинг, услуги и отзывы для города: <span>г.Москва</span>
-                                    <img src="/upload/rating/icon-info.svg" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="itemRating-open__wrapper">
-                            <div class="itemRating-open__left">
-                                <div class="itemRating-open__left_info">
-                                    <div class="info-block-one">
-                                        <div class="info-block-one__left">
-                                            <span>4,0</span>
-                                            <svg height="60" width="60">
-                                                <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
-                                            </svg>
-                                            <div class="info-block-one__left_icon">
-                                                <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                            </div>
-                                        </div>
-                                        <div class="info-block-one__right">
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Оценка по критериям <a href="#">vincko:</a>
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Безопасность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Клиентоориентированность
-                                            </div>
-                                            <div class="info-block-one__right_row">
-                                                <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
-                                                     alt="img">
-                                                <span>10</span>
-                                                Комфорт
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-block-two">
-                                        <div class="info-block-two__right">
-                                            <div class="info-block-two__right_row">
-                                                <img src="/upload/rating/icon-info.svg" alt="img">
-                                                Ссылка на договор
-                                            </div>
-                                            <div class="info-block-bottom">
-                                                <div class="links-contract">
-                                                    <a class="link-item" href="">Договор №1</a>
-                                                    <a class="link-item" href="">Договор №2</a>
-                                                </div>
-                                                <div class="text-descrip t-c-gray">
-                                                    Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__tab">
-                                    <div class="tabs-wrapper links-tab">
-                                        <a class="tab tab-one tab_active" href="#">
-                                            Охрана квартиры
-                                        </a>
-                                        <a class="tab tab-two" href="#">
-                                            Охрана дома
-                                        </a>
-                                        <a class="tab tab-three" href="#">
-                                            Охрана коммерческой недвижимости
-                                        </a>
-                                    </div>
-                                    <div class="tabs-wrapper content-tab">
-                                        <div class="tabs-content content-one tabs-content_active">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Стандартные<br>
-                                                    периоды обслуживания
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div class="item-text-wrapper">
-                                                        <span>3 месяца 3 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
-                                                    </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>6 месяцев 6 000 ₽</span> <span><span class="red">+ до 2 000 000 руб</span>страховая
-                                                            выплата</span>
-                                                    </div>
-                                                    <div class="item-text-wrapper">
-                                                        <span>12 месяцев 12 000 ₽</span> <span><span class="red">+ 1-3 мес.</span>обслуживания
-                                                            бесплатно</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tabs-content content-two">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_text">
-                                                    <div>
-                                                        Можно ли заказать охранные услуги этой компании на платформе?
-                                                    </div>
-                                                    <div>
-                                                        На платформе <span>vincko:</span> можно заказать охранные услуги
-                                                        только
-                                                    </div>
-                                                    <div>
-                                                        одобренной компании
-                                                        <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
-                                                    </div>
-                                                    <div>
-                                                        Мы можем оповестить Вас, когда услуги этой охранной компании
-                                                        станет возможным заказывать на <span>vincko:</span>
-                                                    </div>
-                                                </div>
-                                                <div class="tabs-content__column_lists test">
-                                                    <div class="act-nohide">
-                                                        <span>Оповестить меня о возможности заказать услуги этой
-                                                            компании</span>
-                                                    </div>
-                                                    <div class="hide">
-                                                        <span>Мы оповестим Вас</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tabs-content content-three">
-                                            <div class="tabs-content__column">
-                                                <div class="tabs-content__column_title">
-                                                    Услуги
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <span>Мобильная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Мониторинг</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Пожарная охрана</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Физическая охрана</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabs-content__column border-none">
-                                                <div class="tabs-content__column_title">
-                                                    Решение индивидуальных задач
-                                                </div>
-                                                <div class="tabs-content__column_text">
-                                                    Мы понимаем уникальность <a href="#">коммерческих объектов,</a><br>
-                                                    потому предлагаем создать заявку и описать нам задачу. Мы<br>
-                                                    проведем
-                                                    анализ вариантов и предоставим готовое решение<br>
-                                                    для Вашей коммерческой недвижимости.
-                                                </div>
-                                                <div class="tabs-content__column_lists">
-                                                    <div>
-                                                        <a href="#">Создать индивидуальную заявку</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="itemRating-open__left_bottom">
-                                    <div class="itemRating-open__left_bottom-mobilLinks">
-                                        <a href="#">Читать все <span>32</span> отзыва</a>
-                                        <span class="closed-card">Закрыть карточку</span>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-btns">
-                                        <a href="#" class="itemRating-open__left_bottom-btn">
-                                            подробнее
-                                        </a>
-                                    </div>
-                                    <div class="itemRating-open__left_bottom-text">
-                                        Производители, с оборудованием которых работает компания:
-                                        <div>
-                                            <span>Livicom</span><span>C.nord</span><span>AJAX</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="itemRating-open__right">
-                                <div class="itemRating-open__right_top">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
-                                </div>
-                                <div class="itemRating-open__right_wrapper">
-                                    <div class="swiper-container mySwiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="itemRating-open__review">
-                                                    <div class="itemRating-open__review_top">
-                                                        <div class="itemRating-open__review_top-icon">
-                                                            <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                                 alt="img">
-                                                        </div>
-                                                        <div class="itemRating-open__review_top-text">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
-                                                        </div>
-                                                    </div>
-                                                    <div class="itemRating-open__review_bottom">
-                                                        <span>Комментарий пользователя:</span>
-                                                        Lorem Ipsum является стандартной "рыбой" для текстов на латинице
-                                                        с
-                                                        начала XVI века. В то время некий безымянный печатник
-                                                        создал большую коллекцию размеров и форм шрифтов, используя
-                                                        Lorem
-                                                        Ipsum для распечатки образц...
-                                                        <button>Читать далее</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="#">Оставить свой отзыв</a>
-                                    <div class="itemRating-open__right_bottom-text">
-                                        <span>источник</span>
-                                        <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <?unset($reviewCount)?>
+                <? endforeach ?>
+            
+            
             <div class="rating-center__items_bottom">
                 <a href="#rating-center" class="rating-center__items_bottom-btnTop">
                     Подняться к фильтрам
@@ -1987,13 +985,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         <img src="/upload/rating/pagin-arrow-left.svg" alt="img">
                     </a>
                     <div class="rating-center__items_bottom-links">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a class="active" href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
+                        <?=$arResult["PAGINATION"]?>
                     </div>
                     <a href="#" class="rating-center__items_bottom-arrow">
                         <img src="/upload/rating/pagin-arrow-right.svg" alt="img">
@@ -2003,3 +995,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         </div>
     </div>
 </div>
+
+<?
+// echo "<pre>";
+// print_r($arResult);
+// echo "</pre>";
+?>

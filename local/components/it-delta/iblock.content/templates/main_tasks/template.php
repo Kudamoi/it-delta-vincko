@@ -19,22 +19,22 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             вы хотите решить с <span>vincko:</span></h2>
         <div class="what__task_items what__task-js">
 
-            <? foreach($arResult["ITEMS"] as $item): ?>
-            <div class="what__task_item">
-                <a href="">
-                    <div class="what__task_item-top">
-                        <picture>
-                            <source type="image/webp" srcset="<?=$item['PREVIEW_PICTURE']['SRC']?>">
-                            <source type="image/png" srcset="<?=$item['PREVIEW_PICTURE']['SRC']?>">
-                            <img src="<?=$item['PREVIEW_PICTURE']['SRC']?>" alt="img" loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="what__task_item-center">
-                        <h3><?=$item['NAME'];?></h3>
-                        <p><?=$item['PREVIEW_TEXT'];?></p>
-                    </div>
-                </a>
-            </div>
+            <? foreach($arResult["ITEMS"] as $elementCount => $item): ?>
+                <div class="what__task_item">
+                    <a href="packages/?task=<?=$item["ID"]?>&company=">
+                        <div class="what__task_item-top">
+                            <picture>
+                                <source type="image/webp" srcset="<?=$item['PREVIEW_PICTURE']['SRC']?>">
+                                <source type="image/png" srcset="<?=$item['PREVIEW_PICTURE']['SRC']?>">
+                                <img src="<?=$item['PREVIEW_PICTURE']['SRC']?>" alt="img" loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="what__task_item-center">
+                            <h3><?=$item['NAME'];?></h3>
+                            <p><?=$item['PREVIEW_TEXT'];?></p>
+                        </div>
+                    </a>
+                </div>
             <? endforeach; ?>
         </div>
     </div>

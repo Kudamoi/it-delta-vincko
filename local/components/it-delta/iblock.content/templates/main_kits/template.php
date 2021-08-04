@@ -83,8 +83,8 @@ $cities = CIBlockElement::GetList(
                             </ul>
                         </div>
                         <picture>
-                            <source type="image/svg" srcset="<?=SITE_TEMPLATE_PATH?>/img/ready-des/pic.svg">
-                            <img src="<?=SITE_TEMPLATE_PATH?>/img/ready-des/pic.svg" alt="img" loading="lazy">
+                            <source type="image/svg" srcset="/upload/images/equipment/podarok.svg">
+                            <img src="/upload/images/equipment/podarok.svg" alt="img" loading="lazy">
                         </picture>
                     </div>
                 </div>
