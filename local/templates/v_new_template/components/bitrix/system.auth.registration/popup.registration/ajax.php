@@ -4,7 +4,7 @@ $APPLICATION->RestartBuffer();
 
 header('Content-type: application/json');
 
-echo json_encode($APPLICATION->arAuthResult);
+echo Vincko\Auth::registration($request, $APPLICATION->arAuthResult);
 
 /*
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["code_submit_button"] <> '' && !$USER->IsAuthorized())

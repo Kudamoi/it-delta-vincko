@@ -17,19 +17,15 @@ function timer(parent) {
 		}
 	}, 1000);
 }
-function regShowBtn (){
+function regShowBtn (regNumber){
 	let parent = $(".popup--registration");
-
-	console.log(parent.find(".text-field").inputmask("isComplete") );
-	console.log(regNumber);
-	console.log($("#agree")[0].checked);
-
 	let texts = 1;
 	parent.find(".text-field").each(function(index){
 		if (!$(this).inputmask("isComplete")){
 			texts = 0
 		}
 	});
+
 	if (texts == 1 && regNumber == 1 && $("#agree")[0].checked){
 		parent.find(".btn-registration").removeClass("btn-registration--unactive");
 	}
@@ -41,16 +37,16 @@ function regShowBtn (){
 }
 
 function showBtn(selector, parent, switcher ) {
+
 	if (selector.inputmask("isComplete")){
+
 		parent.find((".popup__form--"+switcher+" .grey-border-button--unactive")).removeClass("grey-border-button--unactive");
 		parent.find((".popup__form--"+switcher+" .grey-border-button")).addClass("grey-border-button--active");
 
 		parent.find((".popup__form-mod--"+switcher+" .send-message-btn")).removeAttr("disabled");
-
 		parent.find((".popup__form-mod--"+switcher+" .send-message-btn")).on("click", function(){
 
 			if(parent.find(".info-popup--unknown").length>0){
-
 			} else{
 				sendCodeFunc(parent, switcher);
 			}
@@ -77,11 +73,15 @@ function sendCodeFunc(parent, switcher){
 	timer(parent1);
 }
 function viewPopap(){
+
 	let popupers = $(".popup");
+	var regNumber = 0;
 	popupers.each(function(index){
 		$("input").keyup(function(){
 			if(parent.hasClass("popup--registration")){
-				regShowBtn();
+
+				regShowBtn(regNumber);
+
 			}
 		});
 
@@ -156,13 +156,14 @@ function viewPopap(){
 
 			}
 		})
+
 		parent1.find(".popup__send-code").on("click", function(){
 
 			if(parent.hasClass("popup--registration")){
 				regNumber = 1;
-				regShowBtn();
-			}
+				regShowBtn(regNumber);
 
+			}
 			parent1.find(".popup__send-code, .popup__code,  .popup__wait-repeat").css("display", "none");
 
 			parent1.find(".popup__wait").css("opacity", "0")
@@ -176,7 +177,8 @@ function viewPopap(){
 
 			if(parent.hasClass("popup--registration")){
 				regNumber = 1;
-				regShowBtn();
+				regShowBtn(regNumber);
+
 			}
 
 			parent2.find(".popup__send-code, .popup__code,  .popup__wait-repeat").css("display", "none");

@@ -1,5 +1,9 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+
 use Bitrix\Main\Localization\Loc;
+
+$password = Vincko\Auth::generatePassword();
+
 ?>
 
 <div class="popup popup--registration">
@@ -15,23 +19,29 @@ use Bitrix\Main\Localization\Loc;
 				</svg>
 			</div>
 			<div class="popup__title black">
-				<?= Loc::getMessage("REG_MEET")  ?>
+				<?= Loc::getMessage("REG_MEET") ?>
 			</div>
 
 			<div class="popup__text">
-				<?= Loc::getMessage("REG_BODY_TEXT_0")  ?>
+				<?= Loc::getMessage("REG_BODY_TEXT_0") ?>
 			</div>
 
 			<p class="popup__text grey">
-				<?= Loc::getMessage("REG_BODY_TEXT_1")  ?>
+				<?= Loc::getMessage("REG_BODY_TEXT_1") ?>
 			</p>
 		</div>
-		<div class="popup__main">
 
-			<form class="popup__form popup__dub-form" method="post" action="<?= $arResult["AUTH_URL"] ?>" name="bform"
-				  enctype="multipart/form-data">
-				<input type="hidden" name="AUTH_FORM" value="Y"/>
-				<input type="hidden" name="TYPE" value="REGISTRATION"/>
+
+		<form class="popup__form popup__dub-form js-registration-form" method="post"
+			  action="<?= $arResult["AUTH_URL"] ?>" name="bform"
+			  enctype="multipart/form-data">
+			<input type="hidden" name="AUTH_FORM" value="Y"/>
+			<input type="hidden" name="TYPE" value="REGISTRATION"/>
+			<input type="hidden" name="USER_PASSWORD" value="<?= $password ?>">
+			<input type="hidden" name="USER_CONFIRM_PASSWORD" value="<?= $password ?>">
+			<input type="hidden" name="USER_PHONE_NUMBER" value="">
+			<input type="hidden" name="AJAX" value="1">
+			<div class="popup__main">
 				<div class="popup__form popup__form--name">
 
 					<div class="popup__form-title">
@@ -46,11 +56,11 @@ use Bitrix\Main\Localization\Loc;
 
 								</div>
 								<div class="info-popup-2__text">
-									<?= Loc::getMessage("REG_NAME_TEXT")  ?>
+									<?= Loc::getMessage("REG_NAME_TEXT") ?>
 								</div>
 							</div>
 						</div>
-						<?= Loc::getMessage("REG_NAME")  ?>
+						<?= Loc::getMessage("REG_NAME") ?>
 					</div>
 					<div class="inputs-wrapper">
 						<input type="text" name="USER_NAME" value="<?= $arResult["USER_NAME"] ?>" placeholder="Имя"
@@ -61,11 +71,11 @@ use Bitrix\Main\Localization\Loc;
 					</div>
 
 					<p class="popup__text grey">
-						<?= Loc::getMessage("REG_BODY_TEXT_2")  ?>
+						<?= Loc::getMessage("REG_BODY_TEXT_2") ?>
 					</p>
 				</div>
 
-				<div class="popup__form popup__form--phone">
+				<div class="popup__form popup__form--phone popup__form-mod--phone">
 					<div class="popup__form-title">
 						<div class="info-popup-2">
 							<div class="info-popup-2__wrapper">
@@ -78,65 +88,68 @@ use Bitrix\Main\Localization\Loc;
 
 								</div>
 								<div class="info-popup-2__text">
-									<?= Loc::getMessage("REG_NUMBER_TEXT_1")  ?>
+									<?= Loc::getMessage("REG_NUMBER_TEXT_1") ?>
 									<br><br>
 									<div class="popup__ps">
-										<?= Loc::getMessage("REG_NUMBER_TEXT_2")  ?>
+										<?= Loc::getMessage("REG_NUMBER_TEXT_2") ?>
 
 									</div>
 								</div>
 							</div>
 						</div>
-						<?= Loc::getMessage("REG_NUMBER_TITLE")  ?>
+						<?= Loc::getMessage("REG_NUMBER_TITLE") ?>
 					</div>
 
 
 					<!-- unknown -->
 
 					<div class="phone-wrapper" data-field="PHONE">
-						<input type="tel" placeholder="<?= Loc::getMessage("REG_NUMBER")  ?>" name="USER_PHONE_NUMBER"
-							   value="<?= $arResult["USER_PHONE_NUMBER"] ?>" class="phone-inputbx-auth-input"/>
+						<input type="tel" placeholder="<?= Loc::getMessage("REG_NUMBER") ?>" name="USER_LOGIN"
+							   autocomplete="off"
+							   value="" class="phone-input"/>
 					</div>
 
 
 					<div class="popup__wait">
 						<div class="popup__wait-time">
-							<?= Loc::getMessage("REG_RE_TIME")  ?>
+							<?= Loc::getMessage("REG_RE_TIME") ?>
 							<span class="popup__wait-num">
-                                 <?=$arParams["TIMEOUT"]?>
+                                 <?= $arParams["TIMEOUT"] ?>
                             </span>
-							<?= Loc::getMessage("REG_TIME_UNIT")  ?>
+							<?= Loc::getMessage("REG_TIME_UNIT") ?>
 						</div>
 						<div class="popup__wait-repeat">
-							<?= Loc::getMessage("REG_RE")  ?>
+							<?= Loc::getMessage("REG_RE") ?>
 						</div>
 					</div>
 
 
-					<div class="grey-border-button grey-border-button--unactive js-sms">
-						<?= Loc::getMessage("REG_SMS")  ?>
-					</div>
+					<button name="code_submit_button"
+							class="grey-border-button grey-border-button--unactive send-message-btn" value="1" disabled>
+						<?= Loc::getMessage("REG_SMS") ?>
+					</button>
 
 					<div class="popup__phone-error popup__phone-error-incorrect">
-						<?= Loc::getMessage("REG_CODE")  ?>
+						<?= Loc::getMessage("REG_CODE") ?>
 					</div>
 
 
 					<div class="popup__phone-error popup__phone-error-time">
-						<?= Loc::getMessage("REG_TIME")  ?>
+						<?= Loc::getMessage("REG_TIME") ?>
 					</div>
 
 
-					<input type="text" name="SMS_CODE" placeholder="Код из SMS" class="popup__code">
+					<input type="text" name="SMS_CODE" placeholder="Код из SMS" class="popup__code" disabled
+						   autocomplete="off">
 
-					<div class="popup__send-code blue-button">
+					<button class="popup__send-code blue-button" name="code_check_submit_button" value="1">
 						<svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd"
 								  d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z"
 								  fill="white"/>
 						</svg>
 
-					</div>
+					</button>
 
 					<div class="popup__success">
 						<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,12 +160,12 @@ use Bitrix\Main\Localization\Loc;
 								  stroke="white" stroke-width="2"/>
 						</svg>
 
-						<?= Loc::getMessage("REG_SUCCESS")  ?>
+						<?= Loc::getMessage("REG_SUCCESS") ?>
 
 					</div>
 				</div>
 
-				<input type="checkbox" id="agree">
+				<input type="checkbox" name="USER_AGREEMENT" id="agree">
 				<label class="remember-me" for="agree">
                         <span class="box">
                             <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
@@ -162,20 +175,19 @@ use Bitrix\Main\Localization\Loc;
                             </svg>
 
                         </span>
-					<?= Loc::getMessage("REG_AGREEMENT")  ?>
+					<?= Loc::getMessage("REG_AGREEMENT") ?>
 				</label>
-
-			</form>
-		</div>
-
-		<div class="popup__bottom">
-			<div class="blue-button btn-registration btn-registration--unactive">
-				<?= Loc::getMessage("REG_BTN_REG")  ?>
 			</div>
+			<div class="popup__bottom">
+				<button class="blue-button btn-registration btn-registration--unactive" name="Register" disabled>
+					<?= Loc::getMessage("REG_BTN_REG") ?>
+				</button>
 
-			<div class="text-button js-modal" data-modal-class=".popup--login" data-modal="<?=$arParams["AUTH_URL"]?>">
-				<?= Loc::getMessage("REG_BTN_AUTH")  ?>
+				<div class="text-button js-modal" data-modal-class=".popup--login"
+					 data-modal="<?= $arParams["AUTH_URL"] ?>">
+					<?= Loc::getMessage("REG_BTN_AUTH") ?>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

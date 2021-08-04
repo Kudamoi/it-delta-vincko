@@ -8,6 +8,18 @@ if ($request->isAjaxRequest()) { ?>
 <? } ?>
 <?php
 $APPLICATION->IncludeComponent(
+	"bitrix:system.auth.confirmation",
+	"",
+	array(
+		"REGISTER_URL" => "/ajax/profile-registration.php",
+		"FORGOT_URL"   => "/ajax/profile-forgot.php",
+		"PROFILE_URL"  => "/personal/",
+		"SHOW_ERRORS"  => "Y",
+		"TIMEOUT"      => "20",
+		"AUTH_URL"     => "/ajax/profile-auth.php",
+	)
+); ?><?php
+$APPLICATION->IncludeComponent(
 	"bitrix:system.auth.registration",
 	"",
 	array(
