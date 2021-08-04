@@ -7,13 +7,12 @@ use Bitrix\Main\Context,
     Bitrix\Sale\Delivery,
     Bitrix\Sale\PaySystem;
 
-define('LOG_FILENAME', $_SERVER["DOCUMENT_ROOT"]. "/log.txt");
 
 global $USER;
 
 Bitrix\Main\Loader::includeModule("sale");
 Bitrix\Main\Loader::includeModule("catalog");
-
+//получает свойство по коду
 function getPropertyByCode($propertyCollection, $code)  {
     foreach ($propertyCollection as $property)
     {
@@ -21,6 +20,7 @@ function getPropertyByCode($propertyCollection, $code)  {
             return $property;
     }
 }
+//фильтрует данные
 function clean($value = "") {
     $value = trim($value);
     $value = stripslashes($value);
@@ -29,20 +29,182 @@ function clean($value = "") {
 
     return $value;
 }
+//фильтрует данные в массиве
+function cleanArr($arr) {
+
+    foreach ($arr as &$item)
+    {
+        $item = clean($item);
+    }
+
+    return $arr;
+}
+//json ответ
+function jsonResponse(array $result)
+{
+    $response = new \Bitrix\Main\Engine\Response\Json($result);
+    $response->send();
+}
+
 
 
 $request = Context::getCurrent()->getRequest();
 
-if ($request->isPost()) {
+if ($request->isPost() && $request->isAjaxRequest()) {
 
+
+    $errors = [];
     $errorsValidate = [];
 
+    $arProductsIds = [];
+    if(!isset($request['orderItemsIds']))
+    {
+        return false;
+    } else
+    {
+        if(empty($request['orderItemsIds']))
+        {
+            return false;
+        }
+             else {
 
-    if ($_SERVER['REMOTE_ADDR'] == '46.147.123.63') {
+                 foreach ($request['orderItemsIds'] as $itemId)
+                 {
+                     $arProductsIds[] = intval($itemId);
+                 }
+        }
+
+    }
+    //Данные страхового полиса
+    if(isset($request['policyContactInfo']))
+    {
+        //Общая информация для оформления полиса
+        $arPolicyContactInfo = cleanArr($request->getPost('policyContactInfo'));
+
+        if(empty($arPolicyContactInfo['sex']))
+            $errors[] = 'Не выбран пол';
+        if(empty($arPolicyContactInfo['surname']))
+            $errorsValidate[] = 'policyContactInfo[surname]';
+        if(empty($arPolicyContactInfo['name']))
+            $errorsValidate[] = 'policyContactInfo[name]';
+        if(empty($arPolicyContactInfo['date']))
+            $errorsValidate[] = 'policyContactInfo[date]';
+        if(empty($arPolicyContactInfo['place']))
+            $errorsValidate[] = 'policyContactInfo[place]';
+        if(empty($arPolicyContactInfo['email']))
+            $errorsValidate[] = 'policyContactInfo[email]';
+        elseif (!preg_match('/^\w{2,}@\w{2,}\.\w{2,4}$/', $arPolicyContactInfo['email']))
+            $errorsValidate[] = 'policyContactInfo[email]';
+        if(empty($arPolicyContactInfo['phone']))
+            $errorsValidate[] = 'policyContactInfo[phone]';
+        elseif (!preg_match('/^\+7\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/', $arPolicyContactInfo['phone']))
+            $errorsValidate[] = 'policyContactInfo[phone]';
+
+        //Паспортные данные
+        $arPassportData = cleanArr($request->getPost('passportData'));
+
+        if(empty($arPassportData['number']))
+            $errorsValidate[] = 'passportData[number]';
+        if(empty($arPassportData['date']))
+            $errorsValidate[] = 'passportData[date]';
+        if(empty($arPassportData['whom']))
+            $errorsValidate[] = 'passportData[whom]';
+        if(empty($arPassportData['code']))
+            $errorsValidate[] = 'passportData[code]';
+
+        //Адрес регистрации
+        $arAddressRegistration = cleanArr($request->getPost('addressRegistration'));
+
+        if(empty($arAddressRegistration['city']))
+            $errorsValidate[] = 'addressRegistration[city]';
+        if(empty($arAddressRegistration['street']))
+            $errorsValidate[] = 'addressRegistration[street]';
+        if(empty($arAddressRegistration['house']))
+            $errorsValidate[] = 'addressRegistration[house]';
+        if(empty($arAddressRegistration['date']))
+            $errorsValidate[] = 'addressRegistration[date]';
+
+        //Если адрес фактического проживания и регистрации не совпадают
+        if(!isset($request['same'])) {
+            //Адрес фактического проживания
+            $arAddressResidense = cleanArr($request->getPost('addressResidense'));
+
+            if(empty($arAddressResidense['city']))
+                $errorsValidate[] = 'addressResidense[city]';
+            if(empty($arAddressResidense['street']))
+                $errorsValidate[] = 'addressResidense[street]';
+            if(empty($arAddressResidense['house']))
+                $errorsValidate[] = 'addressResidense[house]';
+            if(empty($arAddressResidense['date']))
+                $errorsValidate[] = 'addressResidense[date]';
+        }
+        //Адрес квартиры, для которой вы оформляете страховку "Укажите другой адрес"
+        if(intval($request->getPost('address-installment'))==1)
+        {
+            $arPolicyOtherAddress = cleanArr($request->getPost('policyOtherAddress'));
+
+            if(empty($arPolicyOtherAddress['city']))
+                $errorsValidate[] = 'policyOtherAddress[city]';
+            if(empty($arPolicyOtherAddress['street']))
+                $errorsValidate[] = 'policyOtherAddress[street]';
+            if(empty($arPolicyOtherAddress['house']))
+                $errorsValidate[] = 'policyOtherAddress[house]';
+            if(empty($arPolicyOtherAddress['date']))
+                $errorsValidate[] = 'policyOtherAddress[date]';
+        }
+
+    }
+    //Данные контактного лица
+    if(isset($request['contactData']))
+    {
+        if(!isset($request['same-name'])) {
+            $arContactData = cleanArr($request->getPost('contactData'));
+
+            if(empty($arContactData['surname']))
+                $errorsValidate[] = 'contactData[surname]';
+            if(empty($arContactData['name']))
+                $errorsValidate[] = 'contactData[name]';
+            if(empty($arContactData['email']))
+                $errorsValidate[] = 'contactData[email]';
+            elseif (!preg_match('/^\w{2,}@\w{2,}\.\w{2,4}$/', $arContactData['email']))
+                $errorsValidate[] = 'contactData[email]';
+            if(empty($arContactData['phone']))
+                $errorsValidate[] = 'contactData[phone]';
+            elseif (!preg_match('/^\+7\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/', $arContactData['phone']))
+                $errorsValidate[] = 'contactData[phone]';
+        }
+        //Адрес доставки
+        if(intval($request->getPost('delivery-address-installment'))==1)
+        {
+            $arDeliveryOtherAddress = cleanArr($request->getPost('deliveryOtherAddress'));
+
+            if(empty($arDeliveryOtherAddress['city']))
+                $errorsValidate[] = 'deliveryOtherAddress[city]';
+            if(empty($arDeliveryOtherAddress['street']))
+                $errorsValidate[] = 'deliveryOtherAddress[street]';
+            if(empty($arDeliveryOtherAddress['house']))
+                $errorsValidate[] = 'deliveryOtherAddress[house]';
+
+            //комментарий к заказу
+            $orderComment = clean($request->getPost('orderComment'));
+            //дата установки
+            $dateInstall = clean($request->getPost('date-install'));
+        }
+    }
+
+    if(!empty($errorsValidate)) {
+        jsonResponse([
+            'msg' => $errorsValidate,
+            'type' => 'error'
+        ]);
+        return false;
+    }
+
+    if ($_SERVER['REMOTE_ADDR'] == '46.147.123.63' || $_SERVER['REMOTE_ADDR'] == '178.76.225.235') {
         echo '<pre>';
         print_r($request);
         echo '</pre>';
-        die();
+        //die();
     }
 
     $siteId = Context::getCurrent()->getSite();
@@ -54,7 +216,7 @@ if ($request->isPost()) {
     $order->setPersonTypeId(3);
     $order->setField('CURRENCY', $currencyCode);
 
-    $arProductsIds = $request['orderItemsIds'];
+
     $products = [];
     foreach ($arProductsIds as $arProductsId)
     {
@@ -92,7 +254,7 @@ if ($request->isPost()) {
         $item->setQuantity($basketItem->getQuantity());
     }
 
-    $paymentId = $request['payment-method'];
+    $paymentId = intval($request['payment-method']);
     $paymentCollection = $order->getPaymentCollection();
     $payment = $paymentCollection->createItem(
         Bitrix\Sale\PaySystem\Manager::getObjectById($paymentId)
@@ -101,36 +263,63 @@ if ($request->isPost()) {
     $payment->setField("CURRENCY", $order->getCurrency());
 
     // Устанавливаем свойства
+
     $propertyCollection = $order->getPropertyCollection();
-    $arProps = $request['orderProps'];
-    foreach ($arProps as $code => $value)
-    {
-        $arProperty = getPropertyByCode($propertyCollection, $code);
-        $arProperty->setValue($value);
+
+    $policyContactInfo = 'Общая информация для оформления полиса: ' .'Пол '. $arPolicyContactInfo['sex'] . ' Фамилия: ' . $arPolicyContactInfo['surname'] . ' Имя '.
+        $arPolicyContactInfo['name'] . ' Отчество'.$arPolicyContactInfo['patronomic']. ' Дата рождения: '. $arPolicyContactInfo['date']. ' Место рождения: '. $arPolicyContactInfo['place'] . ' E-mail'
+        .$arPolicyContactInfo['email'] .' Телефон' .$arPolicyContactInfo['phone'];
+
+    $passportData = 'Паспортные данные: Серия и номер паспорта: ' . $arPassportData['number'] . ' Дата выдачи: ' . $arPassportData['date'] . ' Кем выдан '.
+        $arPassportData['whom'] . ' Код подразделения: '. $arPassportData['code']. ' ИНН: '. $arPassportData['inn'];
+
+    $addressRegistration = 'Адрес регистрации: Город/населенный пункт: ' . $arAddressRegistration['city'] . ' Улица: ' . $arAddressRegistration['street'] . ' Дом '.
+     $request['house'] . ' Корпус: '. $arAddressRegistration['housing']. ' Квартира: '. $arAddressRegistration['flat'] . ' Дата регистрации'
+        .$arAddressRegistration['date'] . 'Индекс' .$arAddressRegistration['index'];
+
+    $addressResidense = ' Адрес фактического проживания: Город/населенный пункт: ' . $arAddressResidense['city'] . ' Улица: ' . $arAddressResidense['street'] . ' Дом '.
+        $arAddressResidense['house'] . ' Корпус: '. $arAddressResidense['housing']. ' Квартира: '. $arAddressResidense['flat'] . ' Дата регистрации'
+        .$arAddressResidense['date'] . ' Индекс' .$arAddressResidense['index'];
+
+    $policyOtherAddress = ' Адрес квартиры(другой адрес): Город/населенный пункт: ' . $arPolicyOtherAddress['city'] . ' Улица: ' . $arPolicyOtherAddress['street'] . ' Дом '.
+        $arPolicyOtherAddress['house'] . ' Корпус: '. $arPolicyOtherAddress['housing']. ' Квартира: '. $arPolicyOtherAddress['flat'] . ' Дата регистрации'
+        .$arPolicyOtherAddress['date'] . ' Индекс' .$arPolicyOtherAddress['index'];
+
+    $deliveryOtherAddress = ' Адрес достаки(другой адрес): Город/населенный пункт: ' . $arDeliveryOtherAddress['city'] . ' Улица: ' . $arDeliveryOtherAddress['street'] . ' Дом '.
+        $arDeliveryOtherAddress['house'] . ' Корпус: '. $arDeliveryOtherAddress['housing']. ' Квартира: '. $arDeliveryOtherAddress['flat'] . ' Дата регистрации'
+        .$arDeliveryOtherAddress['date'] . ' Индекс' .$arDeliveryOtherAddress['index'];
+
+    $property = getPropertyByCode($propertyCollection, 'ADDRESS');
+    $property->setValue($deliveryOtherAddress);
+
+    if(!isset($request['same-name'])) {
+        $propertyFIO = $arContactData['surname'] . ' ' . $arContactData['name'] . ' ' . $arContactData['patronomic'];
+        $propertyEmail = $arContactData['email'];
+        $propertyPhone = $arContactData['phone'];
     }
-    $arPropertyAddress = $request['street'] .', '. $request['house'] . ', '. $request['housing'] . ', ' . $request['flat'];
-    $arProperty = getPropertyByCode($propertyCollection, 'ADDRESS');
-    $arProperty->setValue($arPropertyAddress);
+    else
+    {
+        $propertyFIO = $arPolicyContactInfo['surname'] .' '. $arPolicyContactInfo['name'] . ' '. $arPolicyContactInfo['patronomic'];
+        $propertyEmail = $arPolicyContactInfo['email'];
+        $propertyPhone = $arPolicyContactInfo['phone'];
+    }
 
-    $arPropertyFIO = $request['surname'] .' '. $request['name'] . ' '. $request['patronomic'];
-    $arProperty = getPropertyByCode($propertyCollection, 'FIO');
-    $arProperty->setValue($arPropertyFIO);
+    $property = getPropertyByCode($propertyCollection, 'FIO');
+    $property->setValue($propertyFIO);
 
-    $passportData = 'Паспортные данные: Серия и номер паспорта: ' . $request['number'] . ' Дата выдачи: ' . $request['date'] . ' Кем выдан '.
-        $request['whom'] . ' Код подразделения: '. $request['code']. ' Дата рождения: '. $request['birthday'] . ' Место рождения'
-        .$request['place'];
+    $property = getPropertyByCode($propertyCollection, 'EMAIL');
+    $property->setValue($propertyEmail);
 
-    $registrationAddress = 'Адрес регистрации: Город/населенный пункт: ' . $request['city1'] . ' Улица: ' . $request['street1'] . ' Дом '.
-     $request['house1'] . ' Корпус: '. $request['housing1']. ' Квартира: '. $request['flat1'] . ' Дата регистрации'
-        .$request['date1'] . 'Индекс' .$request['index1'];
+    $property = getPropertyByCode($propertyCollection, 'PHONE');
+    $property->setValue($propertyPhone);
 
-    $residenseAddress = ' Адрес фактического проживания: Город/населенный пункт: ' . $request['city2'] . ' Улица: ' . $request['street2'] . ' Дом '.
-        $request['house2'] . ' Корпус: '. $request['housing2']. ' Квартира: '. $request['flat2'] . ' Дата регистрации'
-        .$request['date2'] . ' Индекс' .$request['index2'];
+    $orderComment = ' Комментарий к заказу: '.$orderComment;
+    $dateInstall = ' Дата и время монтажа оборудования: '.$dateInstall;
 
-    $comment = $passportData . $registrationAddress . $residenseAddress;
+    $comment = $passportData .' '. $addressRegistration .' '. $addressResidense .' '. $policyOtherAddress
+        .' '. $deliveryOtherAddress .' '. $orderComment .' '. $dateInstall;
     $order->setField('USER_DESCRIPTION', $comment); // Устанавливаем поля комментария покупателя
-    AddMessage2Log(123,'comment');
+
     // Сохраняем
     $order->doFinalAction(true);
     $result = $order->save();
@@ -139,6 +328,11 @@ if ($request->isPost()) {
     {
 //        $session = \Bitrix\Main\Application::getInstance()->getSession();
 //        $orderItems = $session->remove('orderItems');
-        LocalRedirect("/order/?ORDER_ID=" . $orderId);
+        jsonResponse([
+            'url' => '/order/?ORDER_ID=' . $orderId,
+            'type' => 'ok'
+        ]);
+
+        //LocalRedirect("/order/?ORDER_ID=" . $orderId);
     }
 }
