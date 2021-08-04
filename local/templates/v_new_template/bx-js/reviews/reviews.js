@@ -33,7 +33,7 @@ jQuery(document).ready(function ($) {
   // open__form
 
   var $hiddenForm = $(".reviews__form-top--hidden");
-  $(".pseudo__search,.pseudo__range,.text-js").on("click", function () {
+  $(".pseudo__search,.pseudo__range,.text-js").mousedown(function () {
     $(".reviews__form-top").addClass("active");
     $hiddenForm.addClass("active");
     $(".text-js").addClass("active");
@@ -181,9 +181,9 @@ jQuery(document).ready(function ($) {
       $range.removeClass();
       $range.addClass("green");
     } else {
-      $text.html("Все");
+      $text.html("Любой");
       $text.css({
-        color: "#000000"
+        color: "#93B6FF"
       });
       $range.removeClass();
       $range.addClass("all");

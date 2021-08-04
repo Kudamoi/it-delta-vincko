@@ -1,5 +1,12 @@
 $(document).ready(function () {
-$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
+	$("#b-add-order").click(
+		function(){
+			sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
+			return false;
+		}
+	);
+
+	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 $("#ajax_form_callback_btn").on('click',function(){
 		$.ajax({
                 url: '/ajax/callback_reg.php',
@@ -194,22 +201,64 @@ $("#ajax_form_callback_btn").on('click',function(){
 		$(".popup--forget").removeClass("hidden");
 	});
 
-	$('form').submit(function(){
-		$.ajax({
-			type: "POST",
-			url: $(this).attr('action'),
-			data: $(this).serialize()+'&ajax_key=Y',
-			dataType: "json",
-			success: function(data)
-			{
-				if (data.type == 'error') {
-					alert(data.message);
-				} else {
-					alert('Вы авторизовались!');
-				}
-			}
-		});
+	// $('form').submit(function(){
+	// 	$.ajax({
+	// 		type: "POST",
+	// 		url: $(this).attr('action'),
+	// 		data: $(this).serialize()+'&ajax_key=Y',
+	// 		dataType: "json",
+	// 		success: function(data)
+	// 		{
+	// 			if (data.type == 'error') {
+	// 				alert(data.message);
+	// 			} else {
+	// 				alert('Вы авторизовались!');
+	// 			}
+	// 		}
+	// 	});
+	//
+	// });
+	/* Article FructCode.com */
 
+
+
+
+});
+//функция оформления заказа
+function sendAjaxForm(result_form, ajax_form, url) {
+
+		$error = $("#"+ajax_form).find(".form__required"),
+		top1 = $("#"+ajax_form).position().top,
+		class_name = "error";
+
+	$('.js-check-valid-field').removeClass(class_name);
+
+	$.ajax({
+		url:     url, //url страницы
+		type:     "POST", //метод отправки
+		dataType: "html", //формат данных
+		data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+		success: function(response) { //Данные отправлены успешно
+			response = $.parseJSON(response);
+			if(response.type=='error')
+			{
+
+					$('html').scrollTop(top1);
+					$error.show();
+					$.each(response.msg, function (i, value) {
+						$('input[name="'+value+'"]').addClass('error');
+					});
+
+
+				//$('#b-form-order-ajax-errors').html("<style>.messages{margin-bottom: 20px;}</style><span style='color: red;font-size: 1.2em;'>" + response.msg + "</span>");
+			} else
+			if (response.type=='ok') {
+				window.location.href = response.url;
+			}
+		},
+		error: function(response) { // Данные не отправлены
+			$('#b-form-order-ajax-errors').html('Ошибка. Данные не отправлены.');
+		}
 	});
-})
+}
 

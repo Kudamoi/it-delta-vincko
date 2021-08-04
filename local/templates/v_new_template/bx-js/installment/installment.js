@@ -23,7 +23,7 @@ $(document).ready(function () {
 
   var forms = document.getElementsByClassName('form');
   var btns = $('.close-btn');
-  var btnns = $('.form__bottom button');
+  var btnns = $('.form__button-open-next');
 
   for (var i = 0; i < btns.length; i++) {
     closeOpenBlockBtn(btns[i], forms[i]);

@@ -6,9 +6,9 @@ $request = Application::getInstance()->getContext()->getRequest();
 
 if ($request->isPost()) {
 
-    $items = json_decode($request->getPost('items'));
+    $data = json_decode($request->getPost('data'));
     $session = \Bitrix\Main\Application::getInstance()->getSession();
-    $session->set('orderItems', $items);
+    $session->set('orderData', $data);
 
     LocalRedirect("/order/");
 
