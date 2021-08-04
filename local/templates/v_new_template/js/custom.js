@@ -242,7 +242,7 @@ function sendAjaxForm(result_form, ajax_form, url) {
 			response = $.parseJSON(response);
 			if(response.type=='error')
 			{
-	
+
 					$('html').scrollTop(top1);
 					$error.show();
 					$.each(response.msg, function (i, value) {
