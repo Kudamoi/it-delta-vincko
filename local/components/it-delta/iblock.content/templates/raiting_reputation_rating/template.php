@@ -997,7 +997,7 @@ $currentCity = CIBlockElement::GetList(
 </div>
 
 <?
-echo "<pre>";
-print_r($arResult);
-echo "</pre>";
+// echo "<pre>";
+// print_r($arResult);
+// echo "</pre>";
 ?>

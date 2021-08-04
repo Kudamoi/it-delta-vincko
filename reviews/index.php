@@ -49,10 +49,7 @@
             "PATH" => "/include/reviews/third_advantages.php"
         )
     );?>
-<?
-//test block
 
-?>
     <?
     $dbchops = CIBlockElement::GetList(
         array(),
@@ -63,8 +60,6 @@
     );
     
     while($chop = $dbchops->GetNext()){
-        echo $chop["ID"];
-        echo "<br>";
         $dbreview = CIBlockElement::GetList(
             array(),
             array("IBLOCK_ID" => 16, "ACTIVE" => "Y", "PROPERTY_R_CHOP" => $chop["ID"]),
@@ -77,23 +72,22 @@
             $arrReviews[] = $review["ID"];
         }
     }
-    
-    $raitingFilter = array(
+    $reviewsFilter = array(
         "ID" => $arrReviews
     );
 
     $APPLICATION->IncludeComponent(
         "it-delta:iblock.content",
-        "raiting_raiting",
+        "reviews_raiting",
         Array(
             "ACTIVE_DATE" => "N",
             "ADD_CACHE_STRING" => "",
             "CACHE_TIME" => "0",
             "CACHE_TYPE" => "A",
-            "FILTER_NAME" => "arrFilter1",
+            "FILTER_NAME" => "reviewsFilter",
             "IBLOCK_ID" => "16",
             "IBLOCK_TYPE" => "reviews",
-            "PAGE_ELEMENT_COUNT" => "10",
+            "PAGE_ELEMENT_COUNT" => "16",
             "RAND_ELEMENTS" => "N",
             "SORT_BY1" => "SORT",
             "SORT_BY2" => "SORT",
