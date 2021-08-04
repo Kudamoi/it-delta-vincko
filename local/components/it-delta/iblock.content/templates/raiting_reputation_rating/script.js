@@ -7,12 +7,15 @@ $(document).ready(function () {
         if (!$('.rating-help-window[style="display: block;"]').is(e.target) &&
             $('.rating-help-window[style="display: block;"]').has(e.target).length === 0) {
             $('.rating-help-window[style="display: block;"]').fadeOut();
+            $('.rating-check-window').removeClass('svg-active');
         }
     });
-    $('.icon-open-info-block').on('click', function () {
+    $('.icon-open-info-block').on('mouseover', function () {
         $(this).closest('.rating-check-window').find('.rating-help-window').fadeIn();
+        $(this).closest('.rating-check-window').addClass('svg-active');
     })
     $('.rating-help-window-close').on('click', function () {
+        $(this).closest('.rating-check-window').removeClass('svg-active');
         $(this.parentNode).fadeOut();
     })
     $('.searchForm__modal_input input').keyup(function(){
@@ -37,4 +40,23 @@ $(document).ready(function () {
         $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
     } )
+})
+
+$(document).ready(function () {
+    $('.rating-center__items-wrapper .rating-center__item-wrapper').each(function () {
+        $(this).find('.line-panel-percent').animate({
+            width: Number.parseFloat($(this).find('.rating-center__item > .num').html().replace(/,/, '.'))*100/5+'%'
+        }, 800);
+    });
+    $('.rating-center__items-wrapper .rating-center__item-wrapper .rating-center__item_circle').each(function () {
+        $(this).find('svg circle').animate({
+            'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.'))*15/10+'em'
+        }, 800);
+    });
+   $('.rating-center__items-wrapper .rating-center__item-wrapper .info-block-one .info-block-one__left').each(function () {
+    $(this).find('svg circle').animate({
+        'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.'))*16/10+'em'
+    }, 800);
+});
+
 })

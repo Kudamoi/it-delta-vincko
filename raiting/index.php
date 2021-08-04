@@ -74,6 +74,25 @@
     )
 );?>
 <?$APPLICATION->IncludeComponent(
+	"it-delta:iblock.content",
+	"rating_guarantee",
+	Array(
+		"ACTIVE_DATE" => "N",
+		"ADD_CACHE_STRING" => "",
+		"CACHE_TIME" => "0",
+		"CACHE_TYPE" => "A",
+		"FILTER_NAME" => "arrFilter1",
+		"IBLOCK_ID" => "48",
+		"IBLOCK_TYPE" => "Articles",
+		"PAGE_ELEMENT_COUNT" => "10",
+		"RAND_ELEMENTS" => "N",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "DESC",
+		"SORT_ORDER2" => "ASC"
+	)
+);?>
+<?$APPLICATION->IncludeComponent(
     "it-delta:iblock.content",
     "rating_open_for_yourself",
     Array(
@@ -113,35 +132,17 @@
     )
 );?>
 
-<?$APPLICATION->IncludeComponent(
-    "it-delta:iblock.content",
-    "rating_guarantee",
-    Array(
-        "ACTIVE_DATE" => "N",
-        "ADD_CACHE_STRING" => "",
-        "CACHE_TIME" => "0",
-        "CACHE_TYPE" => "A",
-        "FILTER_NAME" => "arrFilter1",
-        "IBLOCK_ID" => "48",
-        "IBLOCK_TYPE" => "Articles",
-        "PAGE_ELEMENT_COUNT" => "10",
-        "RAND_ELEMENTS" => "N",
-        "SORT_BY1" => "ACTIVE_FROM",
-        "SORT_BY2" => "SORT",
-        "SORT_ORDER1" => "DESC",
-        "SORT_ORDER2" => "ASC"
-    )
-);?>
+
 
 <?$APPLICATION->IncludeComponent(
-    "bitrix:main.include",
-    "",
-    Array(
-        "AREA_FILE_SHOW" => "file",
-        "AREA_FILE_SUFFIX" => "inc",
-        "EDIT_TEMPLATE" => "",
-        "PATH" => "/include/questions.php"
-    )
+	"bitrix:main.include",
+	"",
+	Array(
+		"AREA_FILE_SHOW" => "file",
+		"AREA_FILE_SUFFIX" => "inc",
+		"EDIT_TEMPLATE" => "",
+		"PATH" => "/include/callback.php"
+	)
 );?>
 
 

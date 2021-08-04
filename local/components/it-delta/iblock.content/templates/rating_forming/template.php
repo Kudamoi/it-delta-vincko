@@ -60,7 +60,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     дает исчерпывающее представление об охранной организации.
                 </div>
                 <div class="formation__left_bottomBtn">
-                    <a href="#">
+                    <a href="/reviews/">
                         Оставить отзыв
                     </a>
                     <a href="#rating-center">
@@ -69,8 +69,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 </div>
             </div>
             <div class="formation__right">
-                <div class="hideBlock"></div>
-                <div class="hideBlock hideBlockTwo"></div>
                 <?$i=0;foreach ($arResult as $item):$i++;?>
                 <div class="formation__right_slide slide-<?if($i==1): echo "one formation__right_slide-active"; elseif($i==2): echo 'two'; elseif($i==3): echo 'three'; else: echo 'other'; endif;?>">
                     <div class="formation__right_arrows">
@@ -103,11 +101,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     </div>
                     <div class="formation__right_questions">
                         <?$first = true;foreach ($item['ITEMS'] as $sItem):?>
-                        <div class="formation__right_questionItem toggle__item">
-                            <div class="formation__right_questionItem-title toggle__item_title">
+                        <div class="formation__right_questionItem toggle__item<?=$first?' toggle__item_active':''?>">
+                            <div class="formation__right_questionItem-title toggle__item_title<?=$first?' toggle__item_title-active':''?>">
                                 <?=$sItem['NAME']?>
                             </div>
-                            <div class="formation__right_questionItem-descr toggle__item_descr">
+                            <div class="formation__right_questionItem-descr toggle__item_descr" <?=$first?'style="display:block;"':''?>">
                                 <?=$sItem['PREVIEW_TEXT']?>
                             </div>
                         </div>
