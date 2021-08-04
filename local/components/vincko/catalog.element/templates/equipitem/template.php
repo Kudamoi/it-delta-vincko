@@ -1411,11 +1411,15 @@ $currentSubscriptionFeeMonthsCount = $arResult['ALL_LIST_COMPANY_CITY'][$current
 
 foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $company)
 {
-    if($key==$company['ITEMS'][$currentPolicyIndex]['PARENT_ID'])
+    foreach ($company['ITEMS'] as $policy)
     {
-        $secure_company_name = $company['NAME'];
-        break;
+        if($policy['ID']==$currentPolicyIndex)
+        {
+            $policy_name = $policy['NAME'];
+            break;
+        }
     }
+
 }
 
 $data = [
@@ -1437,6 +1441,7 @@ $data = [
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(3, 4)) ? 'а' : 'ев') . ' обслуживания',
             'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'months_count' => $currentSubscriptionFeeMonthsCount,
             'gift' => '1 мес. в подарок',
             'active' => true,
             'sum' => $subscriptionFeePrice,
@@ -1447,7 +1452,7 @@ $data = [
             'title' => 'Страховая выплата',
             'name1' => 'при наступлении страхового случая',
             'name2' => $currentPolicyMaxPrice . ' руб',
-            'company_name' => $secure_company_name,
+            'policy_name' => $policy_name,
             'gift' => 'подарок',
             'active' => true,
             'sum' => $policyPrice,

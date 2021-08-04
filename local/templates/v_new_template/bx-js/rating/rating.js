@@ -186,8 +186,8 @@ jQuery(document).ready(function () {
     }
   });
   $(document).mouseup(function (e) {
-    var div = $(".itemRating-open");
-    var div2 = $(".rating-center__item-wrapper");
+    var div = $(".rating-center .itemRating-open");
+    var div2 = $(".rating-center .rating-center__item-wrapper");
 
     if (!div.is(e.target) && div.has(e.target).length === 0) {
       $(div).removeClass('show');
