@@ -4,6 +4,9 @@ $APPLICATION->RestartBuffer();
 
 header('Content-type: application/json');
 
+echo json_encode($APPLICATION->arAuthResult);
+
+/*
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["code_submit_button"] <> '' && !$USER->IsAuthorized())
 {
 	$result = [
@@ -51,9 +54,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["code_submit_button"] <> '
 						</div>*/
 
 
-
-if (!empty($APPLICATION->arAuthResult)) {
-	//echo json_encode($APPLICATION->arAuthResult);
-}
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
+	require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
 ?>

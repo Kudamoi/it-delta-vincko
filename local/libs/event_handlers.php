@@ -24,9 +24,9 @@ if (!function_exists('returnResultCache')) {
     }
 }
 
-AddEventHandler("main", "OnBeforeUserRegister", array("RegisterHandler", "OnBeforeUserRegisterHandler"));
+//AddEventHandler("main", "OnBeforeUserRegister", array("RegisterHandler", "OnBeforeUserRegisterHandler"));
 //AddEventHandler("main", "OnAfterUserRegister", array("RegisterHandler", "OnAfterUserRegisterHandler"));
-AddEventHandler("main", "OnBeforeUserChangePassword", array("RegisterHandler", "OnBeforeUserChangePasswordHandler"));
+//AddEventHandler("main", "OnBeforeUserChangePassword", array("RegisterHandler", "OnBeforeUserChangePasswordHandler"));
 AddEventHandler("main", "OnAfterUserUpdate", array("RegisterHandler", "OnAfterUserUpdateHandler"));
 
 
