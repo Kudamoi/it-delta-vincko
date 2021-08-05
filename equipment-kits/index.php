@@ -34,6 +34,8 @@ if(!empty($packages))
         "SORT_ORDER2" => "ASC"
     )
 );
+}else{
+    require("../404.php");
 }
 ?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

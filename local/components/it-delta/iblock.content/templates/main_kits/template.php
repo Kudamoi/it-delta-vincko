@@ -77,7 +77,7 @@ $cities = CIBlockElement::GetList(
                             <h5>В подарок:</h5>
                             <ul>
                                 <li>
-                                    <? foreach ($item['PROPERTY_CO_PRESENTS_REF_VALUE'] as $present): ?>
+                                    <? foreach ($item['PRESENTS'] as $present): ?>
                                         <li><span>&#10003;</span> <?=$present?></li>
                                     <? endforeach; ?>
                             </ul>
