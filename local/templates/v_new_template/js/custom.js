@@ -19,6 +19,20 @@ $(document).ready(function () {
 			}
 		});
 	});
+	$("#b-packageitem-current").on('click', '.js-refresh-packageitem-data-ajax', function () {
+		let slug = $(this).data("slug");
+		const pageUrl = '/packages/';
+		history.pushState(null, null, pageUrl+slug+'/');
+		$.ajax({
+			url: "/ajax/packageitem.php",
+			type: "POST",
+			dataType: "html",
+			data: {'ELEMENT_CODE':slug},
+			success: function (data) {
+				$('#b-packageitem-current').html(data)
+			}
+		});
+	});
 
 
 

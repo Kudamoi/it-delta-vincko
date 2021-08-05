@@ -49,10 +49,11 @@ $params = array(
     'COOKIE'=>$_COOKIE
 );
 
+//найдем все готовые решения в текущем городе
 $packages = MainService::getPackagesIds($params);
-
-if(!$packages)
-    $arResult['HIDE_BASKET_BLOCK'] = true;
+//если текущего готового решения нет в массиве доступных
+if(!in_array($arResult['ID'],$packages))
+    \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
 
 //получаем группу готового решения
 $parentPackageGroupId = $arResult['IBLOCK_SECTION_ID'];
@@ -85,7 +86,7 @@ if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
 //получаем все готовые решения из группы
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId,"=ID"=>$packages, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
     false,
     false,
     array("ID","*","PROPERTY_CO_CLASS_REF", "PROPERTY_P_COMPLECT")
@@ -132,7 +133,7 @@ while ($arFields = $res->Fetch()) {
 
 $params = array(
     'IBLOCK_ID' => $companyCityAndSubscriptionFeeIblockId,
-    'PACKAGE_ID' => $arResult['COMPLECT_PARENT_PACKAGE']['ID'],
+    'PACKAGE_ID' => $arResult['ID'],
     'COMPANY_CITY_IBLOCK_ID' => $companyCityIblockId,
     'COOKIE' => $_COOKIE
 );
