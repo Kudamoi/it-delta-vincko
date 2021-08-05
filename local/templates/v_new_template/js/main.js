@@ -1432,9 +1432,10 @@
           }, function () {
             $('.endorsements_modal').fadeOut();
           });
-          $('.itemRating-open__left_deal').hover(function () {
+          $('body').on('mouseover', '.itemRating-open__left_deal', function (){
             $('.deal_modal').fadeIn();
-          }, function () {
+          })
+          $('body').on('mouseout', '.itemRating-open__left_deal', function (){
             $('.deal_modal').fadeOut();
           });
           $('.itemRating-open__showRating_title-modal').hover(function () {
@@ -2592,7 +2593,7 @@
           $('.solutions-card__icon-plus').on('click', function () {
             $(this).parents('.solutions-card').removeClass('hide');
           });
-          $('.select').on('click', '.select__head', function () {
+          $('body').on('click', '.select__head', function () {
             if ($(this).hasClass('open')) {
               $(this).removeClass('open');
               $(this).next().fadeOut();
