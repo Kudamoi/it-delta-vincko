@@ -498,7 +498,6 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
             </section>
 
         </div>
-        <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
             <div id="solutions__center" class="solutions__center">
                 <div class="container rating-center">
                     <div class="solutions__center_title">
@@ -1199,21 +1198,9 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                     </div>
                 </div>
             </div>
-        <? else: ?>
-            <div id="solutions__center" class="solutions__center">
-                <div class="container rating-center">
-                    <div class="solutions__center_title">
-                        В текущем городе данный комплект недоступен
-                    </div>
-                </div>
-            </div>
-        <? endif; ?>
     </div>
-    <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
         <div id="b-vincko-basket-component"></div>
-    <? endif; ?>
     </div>
-    <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
         <div class="container">
             <section class="subscribe" id="subscribe">
                 <div class="subscribe__head">
@@ -1321,7 +1308,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
 
             </section>
         </div>
-    <? endif; ?>
+
     <div class="container">
 
         <?$APPLICATION->IncludeComponent(

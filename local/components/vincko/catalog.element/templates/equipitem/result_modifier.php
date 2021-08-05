@@ -49,10 +49,11 @@ $params = array(
     'COOKIE'=>$_COOKIE
 );
 
+//найдем все готовые решения в текущем городе
 $packages = MainService::getPackagesIds($params);
-
+//если нет
 if(!$packages)
-    $arResult['HIDE_BASKET_BLOCK'] = true;
+    \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
 //получаем готовое решение, которое содержит текущий комплект в выбранном городе
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
