@@ -1,0 +1,13 @@
+.sms_code,.auth-login{ position: relative;}
+.js-modal{cursor:pointer}
+.auth-form .popup__form-title, .auth-login{
+    margin-bottom: 8px;
+}
+.auth-form .popup__form-title{
+    margin-bottom: 16px;
+}
+.pass-wrapper .info-popup{
+    left: 4px!important;
+    width: 18px;
+}
+.unknown ::placeholder{color: #ff5252}

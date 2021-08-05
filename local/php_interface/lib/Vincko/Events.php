@@ -141,7 +141,6 @@ class Events
 		}
 	}
 
-
 	// событие оплаты заказа
 	public static function OnSaleOrderPaid($order)
 	{
@@ -154,4 +153,18 @@ class Events
 
 	}
 
+	// событие при изменении пароля
+	public static function OnBeforeUserChangePassword(&$arFields){
+
+		if ($GLOBALS["USER"]->isAuthorized()){
+
+			if($_REQUEST["NEW_PASSWORD"] == $_REQUEST["NEW_PASSWORD_CONFIRM"] && isset($_REQUEST["PASSWORD"])){
+				$checkOldPassword = \Vincko\Auth::checkPassword($_REQUEST);
+				if (!$checkOldPassword) {
+die();
+				}
+			}
+
+		}
+	}
 }

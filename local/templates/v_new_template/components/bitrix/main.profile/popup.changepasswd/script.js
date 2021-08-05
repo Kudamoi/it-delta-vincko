@@ -4,21 +4,24 @@ $(document).ready(function () {
 
 	$('.js-changepasswd-form').submit(function () {
 
-		var $form = $(this);
-		console.log($form.attr("action"));
+		var $form = $(this),
+			$btn = $(document.activeElement),
+			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
+			action = $form.attr("action");
+
+		console.log(action);
 		console.log($form.serialize());
 		$.ajax({
-			url: $form.attr("action"),
+			url: action,
 			method: 'POST',
-			data: $form.serialize(),
+			data: $form.serialize() + "&" + btnSerialize,
 			dataType: 'json',
 			success: function (res) {
-				alert(2);
 				console.log(res);
 
 			},
-			fail: function (error) {
-				alert(3);
+			error: function (error) {
+				console.log(error);
 			}
 		});
 		return false;

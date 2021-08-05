@@ -1,5 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+
 use Bitrix\Main\Localization\Loc;
+
 ?>
 <div class="popup popup--login">
 	<div class="popup__wall"></div>
@@ -20,7 +22,8 @@ use Bitrix\Main\Localization\Loc;
 				<?= Loc::getMessage("AUTH_SIGN_OR_REGISTER") ?>
 			</div>
 		</div>
-		<form name="system_auth_form<?= $arResult["RND"] ?>" class="js-auth-form" method="post" target="_top" action="<?=$arParams["AUTH_URL"]?>">
+		<form name="system_auth_form<?= $arResult["RND"] ?>" class="auth-form js-auth-form" method="post" target="_top"
+			  action="<?= $arParams["AUTH_URL"] ?>">
 			<? if ($arResult["BACKURL"] <> ''): ?>
 				<input type="hidden" name="backurl" value="<?= $arResult["BACKURL"] ?>"/>
 			<? endif ?>
@@ -33,9 +36,31 @@ use Bitrix\Main\Localization\Loc;
 					<div class="popup__form-title">
 						<?= Loc::getMessage("AUTH_DATA") ?>
 					</div>
-					<input type="tel" name="USER_LOGIN" class="phone-input" placeholder="<?= Loc::getMessage("AUTH_PHONE") ?>"/>
+				</div>
+
+				<div class="auth-login">
+					<div class="popup__form">
+						<input type="tel" name="USER_LOGIN" class="phone-input"
+							   placeholder="<?= Loc::getMessage("AUTH_PHONE") ?>" autocomplete="off"/>
+						<div class="info-popup info-popup--unknown" data-field="USER_LOGIN">
+							<div class="info-popup__wrapper">
+								<div class="info-popup__sign">
+									<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+										 xmlns="http://www.w3.org/2000/svg">
+										<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
+											  fill="#FF3232"/>
+									</svg>
+								</div>
+								<div class="info-popup__text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="popup__form">
 					<div class="pass-wrapper">
-						<input type="password" name="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>" class="pass-input"/>
+						<input type="password" name="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>"
+							   class="pass-input" autocomplete="off"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
 								 xmlns="http://www.w3.org/2000/svg">
@@ -47,8 +72,9 @@ use Bitrix\Main\Localization\Loc;
 						</div>
 					</div>
 
-					<div class="forget-pass js-modal" data-modal-class=".popup--forget" data-modal="<?=$arParams["FORGOT_URL"]?>">
-						<?= Loc::getMessage("AUTH_FORGET")  ?>
+					<div class="forget-pass js-modal" data-modal-class=".popup--forget"
+						 data-modal="<?= $arParams["FORGOT_URL"] ?>">
+						<?= Loc::getMessage("AUTH_FORGET") ?>
 					</div>
 					<? if ($arResult["STORE_PASSWORD"] == "Y"): ?>
 						<input type="checkbox" id="remember-me" name="USER_REMEMBER" value="Y"/>
@@ -61,21 +87,25 @@ use Bitrix\Main\Localization\Loc;
                             </svg>
 
                         </span>
-							<?= Loc::getMessage("AUTH_REMEMBER")  ?>
+							<?= Loc::getMessage("AUTH_REMEMBER") ?>
 						</label>
 					<? endif ?>
+
 				</div>
 			</div>
 
-			<div class="popup__bottom">
-				<button class="blue-button" name="Login" value="1">
-					<?= GetMessage("AUTH_LOGIN_BUTTON") ?>
-				</button>
 
-				<div class="text-button js-modal" data-modal-class=".popup--registration" data-modal="<?=$arParams["REGISTER_URL"]?>">
-					<?= GetMessage("AUTH_REGISTER") ?>
-				</div>
-			</div>
-		</form>
+
+	<div class="popup__bottom">
+		<button class="blue-button blue-button--unactive" name="Login" value="1">
+			<?= GetMessage("AUTH_LOGIN_BUTTON") ?>
+		</button>
+
+		<div class="text-button js-modal" data-modal-class=".popup--registration"
+			 data-modal="<?= $arParams["REGISTER_URL"] ?>">
+			<?= GetMessage("AUTH_REGISTER") ?>
+		</div>
 	</div>
+	</form>
+</div>
 </div>

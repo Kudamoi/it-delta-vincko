@@ -72,7 +72,25 @@ function sendCodeFunc(parent, switcher){
 
 	timer(parent1);
 }
+function eye(){
+	var open = 0;
+	$(".pass__eye").on("click", function(){
+		var $input = $(this).parent();
+		alert();
+	if(open==0){
+		$input.attr("type", "text");
+		open = 1;
+	}else{
+		$input.attr("type", "password");
+		open = 0
+	}
+});
+}
 function viewPopap(){
+	$(".pass-input").inputmask({
+		regex: "[1-9A-Za-z!@$%^&*()_+-]{8,}",
+		showMaskOnHover: false,
+	});
 
 	let popupers = $(".popup");
 	var regNumber = 0;
