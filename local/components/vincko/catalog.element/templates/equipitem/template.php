@@ -1276,8 +1276,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
 
                             </div>
 
-                            <button class="blue-button to-card-btn">добавить в заказ</a></button>
-                            <button class="button button-ordered to-card-btn">Исключить</button>
+                            <button id="b-add-subscribe-price" data-subscribe-price="600" class="blue-button to-card-btn">добавить в заказ</a></button>
+                            <button id="b-del-subscribe-price" data-subscribe-price="0" class="button button-ordered to-card-btn">Исключить</button>
 
                         </div>
                     </div>
@@ -1453,7 +1453,8 @@ $data = [
         ],
     ],
     'sum' => $totalPrice,
-    'old_sum' => $totalDiscountPrice
+    'old_sum' => $totalDiscountPrice,
+    'subscribe_sum' => 0
 ];
 
 ?>
@@ -1476,6 +1477,16 @@ $data = [
                     data.old_sum += e.old_sum;
                 }
             })
+            if(data.subscribe_sum>0)
+            {
+                data.sum+=data.subscribe_sum;
+                data.old_sum+=data.subscribe_sum;
+            } else {
+                data.sum-=data.subscribe_sum;
+                data.old_sum-=data.subscribe_sum;
+            }
+
+
             itd_basket.$set(data);
         }
 
@@ -1487,6 +1498,16 @@ $data = [
                 return e;
             });
         }
+
+        //subscribe
+        $("#b-add-subscribe-price").on('click', (e) => {
+            data.subscribe_sum = $("#b-add-subscribe-price").data("subscribe-price");
+            updateBasket(data);
+        })
+        $("#b-del-subscribe-price").on('click', (e) => {
+            data.subscribe_sum = $("#b-del-subscribe-price").data("subscribe-price");;
+            updateBasket(data);
+        })
 
         //complect
         $("#closed-card-eq").on('click', (e) => {
