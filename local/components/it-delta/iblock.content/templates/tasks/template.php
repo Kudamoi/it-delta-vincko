@@ -83,7 +83,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="item__content">
                             <p>При заказе услуг этой компании действует гарантия <span class="blue">vincko:</span> <a
-                                        href="">Безопасная сделка</a></p>
+                                        href="/raiting#guarantee">Безопасная сделка</a></p>
                         </div>
                     </div>
                 </div>
