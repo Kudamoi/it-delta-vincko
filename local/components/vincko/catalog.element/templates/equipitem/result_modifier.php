@@ -44,20 +44,11 @@ if (!function_exists('getPricesInfoByProductId')) {
     }
 }
 
-$params = array(
-    'IBLOCK_ID'=>9,
-    'COOKIE'=>$_COOKIE
-);
 
-//найдем все готовые решения в текущем городе
-$packages = MainService::getPackagesIds($params);
-//если нет
-if(!$packages)
-    \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
 //получаем готовое решение, которое содержит текущий комплект в выбранном городе
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, $arParams['PACKAGES_FILTER_NAME'],"=PROPERTY_P_COMPLECT" => $arResult['ID']),
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId,"=PROPERTY_P_COMPLECT" => $arResult['ID']),
     false,
     false,
     array("ID", "*", "PROPERTY_CO_CLASS_REF", "PROPERTY_P_COMPLECT", "IBLOCK_SECTION_ID","PROPERTY_P_COMPLECT_WITH",
@@ -68,6 +59,18 @@ while ($arFields = $res->Fetch()) {
     $arResult['COMPLECT_PARENT_PACKAGE'] = $arFields;
     $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE'] = CFile::ResizeImageGet($arFields['PREVIEW_PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
+
+$params = array(
+    'IBLOCK_ID'=>9,
+    'COOKIE'=>$_COOKIE
+);
+
+//найдем все готовые решения в текущем городе
+$packages = MainService::getPackagesIds($params);
+//если текущего готового решения нет в массиве доступных
+if(!in_array($arResult['COMPLECT_PARENT_PACKAGE']['ID'],$packages))
+    \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
+
 //получаем группу готового решения
 $parentPackageGroupId = $arResult['COMPLECT_PARENT_PACKAGE']['IBLOCK_SECTION_ID'];
 $res = CIBlockSection::GetByID($parentPackageGroupId);
