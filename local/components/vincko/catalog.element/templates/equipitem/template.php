@@ -1,5 +1,5 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/main.js");
+$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/equipitem.js");
 //$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/custom.js");
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/basket.js");
 if ($_GET['itd'] == 'y') {
