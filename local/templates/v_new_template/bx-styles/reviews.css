@@ -1611,7 +1611,9 @@
 .reviews__item__footer--left .icon {
   margin-left: 4px;
   margin-right: 8px;
-  width: 13px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   cursor: pointer
 }
 .reviews__item__footer--left .result {
