@@ -1,5 +1,5 @@
 <?
-define("PROD", true);
+define("PROD", false);
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Vincko - первый федеральный маркетплейс охраны");
