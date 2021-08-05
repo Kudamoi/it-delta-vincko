@@ -517,6 +517,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <div class="solutions-card__substrate_top-title">
                                         Оборудование
                                     </div>
+                                    <?if(!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_COMPLECT_WITH_VALUE']):?>
                                     <div id="closed-card-eq" class="closed-card">
 
                                         <div class="closed-card__icon">
@@ -524,6 +525,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                  alt="img">
                                         </div>
                                     </div>
+                                    <?endif;?>
                                 </div>
                                 <div class="solutions-card__center ">
                                     <div class="solutions-card__top">
@@ -732,6 +734,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__substrate_top-title">
                                     Охранные услуги
                                 </div>
+                                <?if(!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_ABONENTPLATA_WITH_VALUE']):?>
                                 <div id="closed-card-company" class="closed-card">
 
                                     <div class="closed-card__icon">
@@ -739,6 +742,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                              alt="img">
                                     </div>
                                 </div>
+                                <?endif;?>
                             </div>
                             <div class="solutions-card__center">
                                 <div class="solutions-card__top">
@@ -961,13 +965,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__substrate_top-title">
                                     Страхование
                                 </div>
+                                <?if(!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_STRAHOVKA_WITH_VALUE']):?>
                                 <div id="closed-card-ins" class="closed-card">
-
                                     <div class="closed-card__icon">
                                         <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/closed-icon.svg"
                                              alt="img">
                                     </div>
                                 </div>
+                                <?endif;?>
                             </div>
                             <div class="solutions-card__center  products__item">
                                 <div class="solutions-card__top">
