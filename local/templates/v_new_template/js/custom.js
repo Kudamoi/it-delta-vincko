@@ -5,6 +5,22 @@ $(document).ready(function () {
 			return false;
 		}
 	);
+	$("#b-equipitem-current").on('click', '.js-refresh-equipitem-data-ajax', function () {
+		let slug = $(this).data("slug");
+		const pageUrl = '/equipment-kits/';
+		history.pushState(null, null, pageUrl+slug+'/');
+		$.ajax({
+			url: "/ajax/equipitem.php",
+			type: "POST",
+			dataType: "html",
+			data: {'ELEMENT_CODE':slug},
+			success: function (data) {
+				$('#b-equipitem-current').html(data)
+			}
+		});
+	});
+
+
 
 	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 $("#ajax_form_callback_btn").on('click',function(){

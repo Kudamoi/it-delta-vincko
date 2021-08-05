@@ -1,5 +1,6 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/equipitem.js");
+$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/main.js");
+//$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/custom.js");
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/basket.js");
 if ($_GET['itd'] == 'y') {
     echo '<pre>';
@@ -171,8 +172,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 <div class="solutions-card__circles">
                     <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
                     <?if(!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])):?>
-                        <div onclick="location.href='/equipment-kits/<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>/'"
-                             class="solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
+                        <div data-slug="<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>" class="js-refresh-equipitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
                             <div class="solutions-card__circles_item-icon">
                                 <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
                             </div>
@@ -589,8 +589,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     } ?>
                                                                     <div class="select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
-                                                                            <span onclick="location.href='/equipment-kits/<?= $item['CODE'] ?>/#solutions__center'"
-                                                                                  class="policy-title">Комплект“<span
+                                                                            <span data-slug="<?= $item['CODE'] ?>" class="js-refresh-equipitem-data-ajax policy-title">Комплект“<span
                                                                                         class="p"><?= $item['NAME'] ?></span>”</span>
                                                                             <span class="opacity"><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб</span>
                                                                         </div>
@@ -649,21 +648,20 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="solutions-card__circles">
-                                    <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
-                                        <?if(!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])):?>
-                                            <div onclick="location.href='/equipment-kits/<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>/#solutions__center'"
-                                                 class="solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
-                                                <div class="solutions-card__circles_item-icon">
-                                                    <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
+                                    <div class="solutions-card__circles">
+                                        <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
+                                            <?if(!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])):?>
+                                                <div data-slug="<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>" class="js-refresh-equipitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
+                                                    <div class="solutions-card__circles_item-icon">
+                                                        <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
+                                                    </div>
+                                                    <div class="solutions-card__circles_item-text">
+                                                        <?= $class['NAME'] ?>
+                                                    </div>
                                                 </div>
-                                                <div class="solutions-card__circles_item-text">
-                                                    <?= $class['NAME'] ?>
-                                                </div>
-                                            </div>
-                                        <?endif;?>
-                                    <? endforeach; ?>
-                                </div>
+                                            <?endif;?>
+                                        <? endforeach; ?>
+                                    </div>
                                 <div class="solutions-card__info">
                                     <? if (!empty($arResult["DISPLAY_PROPERTIES"]["CO_CHARACTERISTICS_REF"]["LINK_ELEMENT_VALUE"])): ?>
                                         <? foreach ($arResult["DISPLAY_PROPERTIES"]["CO_CHARACTERISTICS_REF"]["LINK_ELEMENT_VALUE"] as $k => $val): ?>
@@ -821,8 +819,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <? $currentSubcriptionFeeIndex = isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? $_COOKIE['selected_subscription_fee_id'] : array_key_last($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']); ?>
                                     <div class="solutions-card__contract_wrapper">
                                         <? foreach ($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'] as $key => $item): ?>
-                                            <div onclick="BX.setCookie('selected_subscription_fee_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
-                                                 class="contract__item <?= isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? (intval($item['ID']) === intval($_COOKIE['selected_subscription_fee_id']) ? 'active' : 'no-active') : (intval($item['PROPERTY_APTP_MESYAC_VALUE']) === 12 ? 'active' : 'no-active') ?>">
+                                            <div data-slug="<?=$arResult['CODE']?>" onclick="BX.setCookie('selected_subscription_fee_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
+                                                 class="js-refresh-equipitem-data-ajax contract__item <?= isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? (intval($item['ID']) === intval($_COOKIE['selected_subscription_fee_id']) ? 'active' : 'no-active') : (intval($item['PROPERTY_APTP_MESYAC_VALUE']) === 12 ? 'active' : 'no-active') ?>">
                                                 <div class="contract__item_top">
                                                     <div class="contract__item_title">
                                                         На <?= $item['PROPERTY_APTP_MESYAC_VALUE'] ?>
@@ -1049,8 +1047,11 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                             </div>
                                                             <? foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item): ?>
                                                                 <? foreach ($item['ITEMS'] as $key => $el): ?>
-                                                                    <div onclick="BX.setCookie('selected_policy_id',<?= $el['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
-                                                                         class="select__list-item_policy">
+                                                                    <? if ($key == $currentPolicyIndex) {
+                                                                        continue;
+                                                                    } ?>
+                                                                    <div data-slug="<?= $arResult['CODE'] ?>" onclick="BX.setCookie('selected_policy_id',<?= $el['ID'] ?>, {expires: 86400, path: '/'});"
+                                                                         class="js-refresh-equipitem-data-ajax select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
                                                                 <span class="policy-title">
                                                                     Полис “ <span class="p"><?= $el['NAME'] ?></span> ”
