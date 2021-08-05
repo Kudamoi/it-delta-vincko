@@ -1,4 +1,6 @@
 <?
+define("PROD", true);
+
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Vincko - первый федеральный маркетплейс охраны");
 $APPLICATION->SetPageProperty("keywords", "охранные предприятия, оборудование для охраны дома и офиса");
