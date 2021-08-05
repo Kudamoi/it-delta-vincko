@@ -76,7 +76,7 @@ while ($arFields = $res->Fetch()) {
 //получаем все готовые решения из группы
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId,"=ID"=>$packages, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
     false,
     false,
     array("ID", "PROPERTY_CO_CLASS_REF", "PROPERTY_P_COMPLECT")
