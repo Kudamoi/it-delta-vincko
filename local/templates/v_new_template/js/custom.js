@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+
+$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
+
 	$("#b-add-order").click(
 		function(){
 			sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
@@ -37,6 +41,7 @@ $(document).ready(function () {
 
 
 	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
+
 $("#ajax_form_callback_btn").on('click',function(){
 		$.ajax({
                 url: '/ajax/callback_reg.php',
@@ -231,6 +236,7 @@ $("#ajax_form_callback_btn").on('click',function(){
 		$(".popup--forget").removeClass("hidden");
 	});
 
+
 	// $('form').submit(function(){
 	// 	$.ajax({
 	// 		type: "POST",
@@ -291,4 +297,5 @@ function sendAjaxForm(result_form, ajax_form, url) {
 		}
 	});
 }
+
 

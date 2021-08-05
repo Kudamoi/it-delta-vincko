@@ -53,7 +53,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         психологическое давление
                     </span>
                     <div class="guarantee__text_bottom-link">
-                        <a href="#">Читать отзывы людей, столкнувшихся с этой ситуаций</a>
+                        <a href="/reviews/">Читать отзывы людей, столкнувшихся с этой ситуаций</a>
                     </div>
                 </div>
             </div>
@@ -141,10 +141,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 <button class="questions__text-show questions__text-show_two">Развернуть</button>
             </div>
             <div class="questions__btns">
-                <a href="#">
+                <a href="#back_call">
                     Заказать звонок
                 </a>
-                <a href="#">
+                <a href="#back_call">
                     Сменить компанию
                 </a>
             </div>

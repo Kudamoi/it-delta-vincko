@@ -17,7 +17,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 //echo '</pre>';
 ?>
 
-<section class="open__for">
+<section class="open__for open__for__yourself">
     <div class="container">
         <h2>Откройте для себя <span>vincko:</span></h2>
         <ul class="open__for-items">
