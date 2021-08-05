@@ -1339,7 +1339,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
     </div>
     <?$i=0;?>
     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
-        <div class="slide-modal" data-slider-info="<?= $i ?>">
+        <div class="slide-modal " data-slider-info="<?= $i ?>">
             <div class="modal-box">
                 <div class="title"><?= $ec["NAME"] ?></div>
                 <div class="close" data-close="<?= $i ?>">
@@ -1348,8 +1348,9 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <img src="<?= SITE_TEMPLATE_PATH ?>/img/cartochka/close-modal.svg" alt="close-modal">
                     </picture>
                 </div>
+                
+                
                 <div class="modal-slider">
-
                     <? // additional photos
                     if (count($ec["EQUIPMENT_PICTURES"]) > 0):?>
                         <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
@@ -1359,6 +1360,34 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
+                    <picture>
+                        <source srcset="../img/cartochka/modal-slide.png">
+                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
+                    </picture>
                 </div>
                 <div class="modal-bottom">
                     <? if (count($ec["EQUIPMENT_PICTURES"]) > 0): ?>
