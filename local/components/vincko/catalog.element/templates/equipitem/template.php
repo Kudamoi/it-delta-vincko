@@ -571,7 +571,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                 <div class="select__list-item_policy">
                                                                     <div class="select__list-item_policy-top">
                                                                         <span class="font-weight policy-title">
-                                                                            Комплект “ <span class="font-weight"><?= $arResult['NAME'] ?></span> ”
+                                                                            <?= $arResult['NAME'] ?>
                                                                         </span>
                                                                         <span>
                                                                             <?= $arResult['PRICES']['BASE']['DISCOUNT_VALUE'] ?> руб
@@ -591,8 +591,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
                                                                             <span onclick="location.href='/equipment-kits/<?= $item['CODE'] ?>/#solutions__center'"
-                                                                                  class="policy-title">
-                                                                                  Комплект “<span class="p"><?= $item['NAME'] ?></span>”
+                                                                                  class=" grey policy-title">
+                                                                                  <?= $item['NAME'] ?>
                                                                             </span>
                                                                             <span class="opacity"><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб</span>
                                                                         </div>
@@ -1360,34 +1360,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
-                    <picture>
-                        <source srcset="../img/cartochka/modal-slide.png">
-                        <img src="../img/cartochka/modal-slide.png" alt="modal-slide">
-                    </picture>
+                   
                 </div>
                 <div class="modal-bottom">
                     <? if (count($ec["EQUIPMENT_PICTURES"]) > 0): ?>
