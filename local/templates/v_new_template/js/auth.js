@@ -68,7 +68,7 @@ function sendCodeFunc(parent, switcher){
 	let parent1 = parent.find(".popup__form--"+switcher);
 
 	const input1 = parent1.find("."+switcher+"-input");
-	input1.prop('readOnly', true);
+	//input1.prop('readOnly', true);
 
 	timer(parent1);
 }
@@ -212,8 +212,12 @@ function viewPopap(){
 function load_modal() {
 
 
-	$(".js-modal").on("click", (function () {
-		var $new_modal, ajax_url;
+	$(".js-modal").on("click", (function (event) {
+		var $new_modal,
+			ajax_url,
+		pthis = $("this");
+		$(".js-modal").removeClass("js-event");
+		$(this).addClass("js-event");
 		if ($(this).hasClass("js-modal-change-password")) {
 			$new_modal = $(".popup--new-pass");
 			ajax_url = "/ajax/profile-change-password.php";
@@ -241,7 +245,7 @@ function load_modal() {
 				method: 'POST',
 				dataType: 'html',
 				success: function (html) {
-					$(".popup").addClass("hidden")
+					$(".popup").addClass("hidden");
 					$("footer").before(html);
 					viewPopap();
 				}
@@ -253,6 +257,7 @@ function load_modal() {
 
 }
 function ajaxError($form, message, field = ""){
+
 	$form.find(".error").remove();
 	$form.find(".unknown").removeClass("unknown");
 	$form.find(".info-popup__text").empty();
@@ -260,6 +265,8 @@ function ajaxError($form, message, field = ""){
 		var $errorBlock = $form.find('[data-field="' + field + '"]');
 		var $parent = $errorBlock.parent();
 		$parent.addClass("unknown");
+		alert($parent.attr("class"));
+		alert($errorBlock.attr("class"));
 		$form.find('[name="' + field + '"]').show();
 		if (field == "USER_PASSWORD"){
 			$form.find('[name="' + field + '"]')
@@ -272,8 +279,20 @@ function ajaxError($form, message, field = ""){
 		$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + message + "</p>");
 	}
 }
-function initialPopap($form){
-	$form.find(".js-btn-disabled").attr("disabled").addClass();
+
+function btnActive($form){
+	$form.find(".js-btn-disabled")
+		.removeAttr("disabled")
+		.removeClass("blue-button--unactive")
+		.addClass("blue-button--active");
+
+}
+
+function btnUnActive($form){
+	$form.find(".js-btn-disabled")
+		.attr("disabled","disabled")
+		.removeClass("blue-button--active")
+		.addClass("blue-button--unactive");
 }
 
 $(document).ready(function () {

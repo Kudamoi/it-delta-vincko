@@ -2,17 +2,32 @@ $(document).ready(function () {
 
 	load_modal();
 
-	$("[name='USER_CHECKWORD_EMAIL'], [name='USER_CHECKWORD_SMS']").change(function () {
-		var $form = $(this).parents("form"),
-			code = $(this).val();
-		$form.find("[name='USER_CHECKWORD']").val(code);
-		if (code.replace("_", "").length == 6) {
-			$form.find(".popup--new-pass").show()
-			$form.find("[type='password']").removeAttr("disabled");
+	$("[name='USER_CHECKWORD_EMAIL'], [name='USER_CHECKWORD_SMS']").keyup(function(){
+		var $form = $(this).parents("form");
+		if ($(this).inputmask("isComplete")) {
+			$(this).parent().find(".popup__send-code").css("display", "grid");
+		}else {
+			$(this).find(".popup__send-code").css("display", "none");
 		}
+		$form.find("[name='USER_CHECKWORD']").val($(this).val());
+
 	});
 
-	$("[name='USER_PHONE_NUMBER']").change(function () {
+	$(".popup__send-code").click(function(){
+		var $form = $(this).parents("form");
+		$form.find(".popup--new-pass").show()
+		$form.find("[type='password']").removeAttr("disabled");
+		$form.find(".popup__send-code, .popup__code,  .popup__wait-repeat").show();
+		$form.find(".popup__wait").css("opacity", "1")
+		$form.find(".popup__wait-time").css("display", "none")
+		$form.find(".popup__success").css("display", "none");
+		$form.find(".popup--forget .popup__bottom .blue-button").removeClass("blue-button--active");
+		$form.find(".popup--forget .popup__bottom .blue-button").addClass("blue-button--unactive");
+
+		return false;
+	});
+
+	$("[name='USER_PHONE_NUMBER']").keyup(function () {
 		var $form = $(this).parents("form");
 		$form.find("[name='USER_LOGIN']").val($(this).val());
 	});
@@ -39,16 +54,7 @@ console.log($form.serialize() + "&" + btnSerialize);
 			success: function (res) {
 				console.log(res);
 				if (res.TYPE == 'ERROR') {
-					if(res.FIELD >''){
-						var $errorBlock = $('[data-field="' + res.FIELD + '"]');
-						var $parent = $errorBlock.parent();
-						$(".info-popup__text").empty();
-						$parent.addClass("unknown");
-						$errorBlock.find('.info-popup__text').text(res.MESSAGE);
-					}else{
-						$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>"+res.MESSAGE+"</p>");
-					}
-
+					ajaxError($form, res.MESSAGE, res.FIELD);
 				} else {
 					$(".error").remove();
 					$(".unknown").removeClass("unknown");
@@ -77,7 +83,7 @@ console.log($form.serialize() + "&" + btnSerialize);
 		$form.attr("action", formActionChange);
 		$form.find("[name='TYPE']").val("SEND_PWD");
 
-		$("[name='USER_LOGIN'],[name='USER_EMAIL'],[name='USER_PHONE_NUMBER']").val("").prop('readOnly', false);
+		//$("[name='USER_LOGIN'],[name='USER_EMAIL'],[name='USER_PHONE_NUMBER']").val("").prop('readOnly', false);
 		$("[name='USER_CHECKWORD_SMS'],[name='USER_CHECKWORD_EMAIL'],[name='USER_CHECKWORD']").val("").hide();
 		$("[name='USER_PASSWORD'],[name='USER_CONFIRM_PASSWORD']").val("");
 		$(".send-message-btn").show();
@@ -87,8 +93,8 @@ console.log($form.serialize() + "&" + btnSerialize);
 			$(".popup__switch-item-left").removeClass("popup__switch-item--active");
 			$(".popup__switch-item-right").addClass("popup__switch-item--active");
 			$(".popup__form--phone").css("display", "none");
+			//$form.find("[name='USER_LOGIN']").removeAttr("disabled");
 
-			$form.find("[name='USER_LOGIN']").attr("disabled","disabled");
 
 			if (window.innerWidth > 780) {
 				$(".popup__form--mail").css("display", "grid");
@@ -98,12 +104,12 @@ console.log($form.serialize() + "&" + btnSerialize);
 
 			left = 0;
 		} else {
+			//$form.find("[name='USER_LOGIN']").attr("disabled","disabled");
 			$(this).removeClass("popup__switch--right");
 			$(".popup__switch-item-left").addClass("popup__switch-item--active");
 			$(".popup__switch-item-right").removeClass("popup__switch-item--active");
 			$(".popup__form--mail").css("display", "none");
 
-			$form.find("[name='USER_LOGIN']").removeAttr("disabled");
 
 			if (window.innerWidth > 780) {
 				$(".popup__form--phone").css("display", "grid");

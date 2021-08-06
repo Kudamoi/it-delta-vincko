@@ -65,6 +65,15 @@ class Auth
 		$sms->setLanguage('ru');
 		$sms->send();
 	}
+// функция проверяетна соответсвие введеного пароля с текущим
+	public
+	static function checkPassword($request)
+	{
+		$userData = \CUser::GetByID($request['ID'])->Fetch();
+		$checkOldPassword = \Bitrix\Main\Security\Password::equals($userData['PASSWORD'], $_REQUEST['PASSWORD']);
+		return $checkOldPassword;
+	}
+
 
 	// функция генерирует ошибки при заполнении формы регистрации, включает пользователя
 	public static function registration($request, $arAuthResult)
@@ -100,14 +109,6 @@ class Auth
 		return json_encode($arAuthResult);
 	}
 
-// функция проверяетна соответсвие введеного пароля с текущим
-	public
-	static function checkPassword($request)
-	{
-		$userData = \CUser::GetByID($request['ID'])->Fetch();
-		$checkOldPassword = \Bitrix\Main\Security\Password::equals($userData['PASSWORD'], $_REQUEST['PASSWORD']);
-		return $checkOldPassword;
-	}
 
 // функция генерирует ошибки при изменении пароля зарегистрированного пользователя
 	public
@@ -174,4 +175,44 @@ class Auth
 
 		return json_encode($result);
 	}
+
+	// функция генерирует ошибки при изменении пароля зарегистрированного пользователя
+	public
+	static function forgot($request, $arAuthResult)
+	{
+		if ($arAuthResult["TYPE"] == "ERROR") {
+			if(!empty($request["USER_EMAIL"]) || !empty($request["USER_LOGIN"])) {
+				//проверяем существует ли пользователь
+				if(!empty($_REQUEST["USER_EMAIL"])){
+					$field = ["EMAIL" => $_REQUEST["USER_EMAIL"]];
+				}else{
+					$field = ["LOGIN"=> $_REQUEST["USER_LOGIN"]];
+				}
+
+				if ($arUsers =  self::getUser($field)) {
+					if(!empty($request["USER_CHECKWORD_SMS"]) || !empty($request["USER_CHECKWORD_SMS"])) {
+						$arAuthResult["FIELD"] = ($request["USER_CHECKWORD_SMS"] ? "USER_CHECKWORD_SMS" : "USER_CHECKWORD_EMAIL");
+						$arAuthResult["MESSAGE"] = "Неверный проверочный код";
+					}elseif($request["USER_PASSWORD"]!=$request["USER_CONFIRM_PASSWORD"]){
+						$arAuthResult["FIELD"] = "USER_CONFIRM_PASSWORD";
+						$arAuthResult["MESSAGE"] = "Проли не совпадают";
+					}
+				}else{
+					if (!empty($request["USER_EMAIL"])) {
+						$arAuthResult["FIELD"] = "USER_EMAIL";
+						$arAuthResult["MESSAGE"] = "Данный e-mail не зарегистрирован на сайте";
+					} elseif (!empty($request["USER_LOGIN"])) {
+						$arAuthResult["FIELD"] = "USER_LOGIN";
+						$arAuthResult["MESSAGE"] = "Данный номер не зарегистрирован на сайте";
+					}
+				}
+			}
+		}else{
+			$arAuthResult["MESSAGE"] = "";
+			$arAuthResult["EVENT"]   = "AUTH";
+		}
+
+		return json_encode($arAuthResult);
+	}
+
 }

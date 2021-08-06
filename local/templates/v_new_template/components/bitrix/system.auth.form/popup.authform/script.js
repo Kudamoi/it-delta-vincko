@@ -24,11 +24,9 @@ $(document).ready(function () {
 			$btn = $(document.activeElement),
 			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
 			action = $form.attr("action");
-		initialPopap($form);
 		console.log($form.attr("action"));
 		console.log($form.serialize());
 		console.log(btnSerialize);
-
 
 	$.ajax({
 			url: action,
@@ -59,7 +57,18 @@ $(document).ready(function () {
 				} else {
 					$(".unknown").removeClass("unknown");
 					$(".info-popup").remove();
-					location.reload();
+					var $domClick = $("body").find(".js-event");
+					if($domClick.length > 0){
+						if ($domClick.attr('value') > ''){
+							$domClick.parents("form").submit();
+						}else{
+							//document.location.href = $domClick.attr("href");
+							location.reload();
+						}
+					}else{
+						location.reload();
+					}
+
 				}
 			},
 			error: function (error) {

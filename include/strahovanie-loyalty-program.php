@@ -37,7 +37,7 @@
 				<a href="">все преимущества</a> <b>может каждый</b>
 			</div>
 
-			<a class="blue-button products__get_bonuses">Хочу бонусы</a>
+			<a class="blue-button products__get_bonuses js-bonuce">Хочу бонусы</a>
 			<div class="products__footer-info">
 				Это действительно выгодно, убедитесь в этом сами, с помощью <a class="products__normal-font" href="">калькулятора</a>.
 			</div>

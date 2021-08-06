@@ -100,24 +100,26 @@ use Bitrix\Main\Localization\Loc;
 							value="1">
 						<?= Loc::getMessage("FORGOT_SMS") ?>
 					</button>
+					<div class="sms_code">
+						<input type="text"
+							   name="USER_CHECKWORD_SMS"
+							   value="<?= $arResult["USER_CHECKWORD"] ?>"
+							   autocomplete="off"
+							   placeholder="<?= Loc::getMessage("FORGOT_SMS_CODE") ?>"
+							   class="popup__code"
 
-					<input type="text"
-						   name="USER_CHECKWORD_SMS"
-						   value="<?= $arResult["USER_CHECKWORD"] ?>"
-						   autocomplete="off"
-						   placeholder="<?= Loc::getMessage("FORGOT_SMS_CODE") ?>"
-						   class="popup__code"
-						   disabled/>
-					<div class="info-popup info-popup--unknown" data-field="USER_CHECKWORD_SMS">
-						<div class="info-popup__wrapper">
-							<div class="info-popup__sign">
-								<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-									 xmlns="http://www.w3.org/2000/svg">
-									<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
-										  fill="#FF3232"/>
-								</svg>
-							</div>
-							<div class="info-popup__text">
+							   disabled/>
+						<div class="info-popup info-popup--unknown" data-field="USER_CHECKWORD_SMS">
+							<div class="info-popup__wrapper">
+								<div class="info-popup__sign">
+									<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+										 xmlns="http://www.w3.org/2000/svg">
+										<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
+											  fill="#FF3232"/>
+									</svg>
+								</div>
+								<div class="info-popup__text">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -137,7 +139,15 @@ use Bitrix\Main\Localization\Loc;
 						<?= Loc::getMessage("FORGOT_SUCCESS") ?>
 
 					</div>*/ ?>
+					<div class="popup__send-code blue-button">
+						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+							 xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								  d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z"
+								  fill="white"/>
+						</svg>
 
+					</div>
 				</div>
 
 				<div class="popup__form popup__form--mail popup__form-mod--mail">
@@ -172,7 +182,7 @@ use Bitrix\Main\Localization\Loc;
 							value="1">
 						<?= Loc::getMessage("FORGOT_POST") ?>
 					</button>
-
+					<div class="sms_code">
 					<input
 							type="text"
 							name="USER_CHECKWORD_EMAIL"
@@ -194,7 +204,7 @@ use Bitrix\Main\Localization\Loc;
 							</div>
 						</div>
 					</div>
-
+					</div>
 					<? /*	<div class="popup__send-code blue-button">
 						<svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z" fill="white"/>
@@ -212,7 +222,15 @@ use Bitrix\Main\Localization\Loc;
 
 					</div>
 					*/ ?>
+					<div class="popup__send-code blue-button">
+						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
+							 xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								  d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z"
+								  fill="white"/>
+						</svg>
 
+					</div>
 				</div>
 				<div class="popup--new-pass" style="display:none"><br/>
 					<div class="popup__form">

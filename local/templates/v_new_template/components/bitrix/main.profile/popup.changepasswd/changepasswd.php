@@ -36,7 +36,6 @@ use Bitrix\Main\Localization\Loc;
 				<input type="hidden" name="lang" value="<?= LANG ?>"/>
 				<input type="hidden" name="ID" value="<?= $arResult["ID"] ?>"/>
 				<input type="hidden" name="LOGIN" value="<?=$arResult["arUser"]["LOGIN"]?>"/>
-				<input type="hidden" name="PHONE_NUMBER" value="<?=$arResult["arUser"]["PHONE_NUMBER"]?>"/>
 				<input type="hidden" name="AJAX" value="1"/>
 
 				<div class="popup__form">

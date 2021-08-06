@@ -3,7 +3,7 @@
 		<div class="tabs__head">
 			<h2>
 				<span class="red">Скоро</span> Вы можете купить полис
-				и многое другое <span class="blue">за бонусы</span>
+				и многое другое <span class="blue js-bonuce">за бонусы</span>
 			</h2>
 
 			<div class="tabs__head-bonuses">
