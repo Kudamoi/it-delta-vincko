@@ -1,40 +1,68 @@
 $(document).ready(function () {
 	load_modal();
+	$("[name='USER_LOGIN']").attr("disabled");
 
+	$("[name='USER_LOGIN'],[name='USER_PASSWORD']").keyup(function(){
+		if ($(this).inputmask("isComplete")) {
+			$(this).attr("data-complete", 1);
+		}else {
+			$(this).attr("data-complete", 0);
+		}
+		if($("[name='USER_LOGIN']").attr("data-complete") == 1 && $("[name='USER_PASSWORD']").attr("data-complete") == 1){
+			$("[name='Login']").removeClass("blue-button--unactive");
+			$("[name='USER_LOGIN']").removeAttr("disabled");
 
+		}else{
+			$("[name='Login']").addClass("blue-button--unactive");
+			$("[name='USER_LOGIN']").attr("disabled");
+
+		}
+	});
 	$('.js-auth-form').submit(function () {
-		var $form = $(this);
+		var $form = $(this),
+			$btn = $(document.activeElement),
+			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
+			action = $form.attr("action");
+		console.log($form.attr("action"));
+		console.log($form.serialize());
+		console.log(btnSerialize);
 
-		$.ajax({
-			url: $form.attr("action"),
+
+	$.ajax({
+			url: action,
 			method: 'POST',
-			data: $form.serialize(),
+			data: $form.serialize() + "&" + btnSerialize,
 			dataType: 'json',
 			success: function (res) {
-				if (res.TYPE == 'OK') {
+				console.log(res);
+				if (res.TYPE == 'ERROR') {
+					$(".error").remove();
+					$(".unknown").removeClass("unknown");
+					$(".info-popup__text").empty();
+					if (res.FIELD > '') {
+						var $errorBlock = $('[data-field="' + res.FIELD + '"]');
+						var $parent = $errorBlock.parent();
+						$parent.addClass("unknown");
+						$('[name="' + res.FIELD + '"]').show();
+						if (res.FIELD == "USER_PASSWORD"){
+							$('[name="' + res.FIELD + '"]')
+								.attr("type","text").val("").attr("placeholder",res.MESSAGE)
+								.parent().addClass("unknown");
+						}else {
+							$errorBlock.find('.info-popup__text').text(res.MESSAGE);
+						}
+					} else {
+						$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + res.MESSAGE + "</p>");
+					}
+				} else {
+					$(".unknown").removeClass("unknown");
 					$(".info-popup").remove();
 					location.reload();
-				} else {
-					$(".info-popup").remove();
-					$('input[name="' + res.FIELD + '"]').after('<div class="info-popup info-popup--unknown">'
-						+ '<div class="info-popup__wrapper">'
-						+ '<div class="info-popup__sign">'
-						+ '	<svg width="18" height="18" viewBox="0 0 18 18" fill="none"'
-						+ '		 xmlns="http://www.w3.org/2000/svg">'
-						+ '		<path'
-						+ '			d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"'
-						+ '				fill="#FF3232"/>'
-						+ '		</svg>'
-						+ '	</div>'
-						+ '	<div class="info-popup__text">'
-						+ res.MESSAGE
-						+ '</div>'
-						+ '	</div>'
-						+ '</div>');
-					}
+				}
 			},
 			error: function (error) {
-				location.reload();
+				console.log(error);
+				//location.reload();
 			}
 		});
 		return false;

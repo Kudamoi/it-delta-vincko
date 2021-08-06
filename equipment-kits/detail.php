@@ -2,8 +2,8 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Комплекты оборудования");
 ?>
-
-<?$APPLICATION->IncludeComponent(
+<div id="b-equipitem-current">
+    <?$APPLICATION->IncludeComponent(
         "vincko:catalog.element",
         "equipitem",
         array(
@@ -115,7 +115,7 @@ $APPLICATION->SetTitle("Комплекты оборудования");
             "USE_RATIO_IN_RANGES" => "N",
             "USE_VOTE_RATING" => "N"
         )
-    );
+    );?>
+</div>
 
-?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

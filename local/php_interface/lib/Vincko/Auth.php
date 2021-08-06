@@ -40,7 +40,7 @@ class Auth
 
 
 // функция проверяет высланный код на валидность
-	protected static function signedCheck($request)
+	public static function signedCheck($request)
 	{
 		$result = false;
 
@@ -67,36 +67,119 @@ class Auth
 	}
 
 	// функция генерирует ошибки при заполнении формы регистрации, включает пользователя
-	public
-	static function registration($request, $arAuthResult)
+	public static function registration($request, $arAuthResult)
 	{
 		// проверяем существует ли пользователь
 		$arUser = self::getUser($request);
-		// если в возвращаемом результате есть ошибка
-		if ($arAuthResult["TYPE"] == "ERROR") {
-
-			if (!$arUser) {
-				$arAuthResult["FIELD"] = "USER_LOGIN";
-				$arAuthResult["MESSEGE"] = "Пользователь существует";
+		if ($request["Register"] == 1) {
+			if (!empty($request["USER_AGREEMENT"]) && !empty($arUser)) {
+				if ($arUser["ACTIVE"] != "Y") {
+					$password = self::generatePassword();
+					self::sendSmsPassword($arUser, $password);
+					$user = new \CUser;
+					$user->Update($arUser["ID"],
+						[
+							"ACTIVE"           => "Y",
+							"PASSWORD"         => $password,
+							"CONFIRM_PASSWORD" => $password
+						]);
+					$arAuthResult["ERROR"] = "OK";
+					$arAuthResult["MESSAGE"] = "На ваш номер было выслано смс с паролем";
+				}
 			}
 		} else {
-
-			if ($request["Register"] == 1) {
-				$signedCheck = self::signedCheck($request);
-				if ($signedCheck && !empty($request["USER_AGREEMENT"]) && $arUser) {
-					if($arUser["ACTIVE"]!="Y") {
-						$password = self::generatePassword();
-						self::sendSmsPassword($arUser, $password);
-						\CUser::Update($arUser["ID"],
-							[
-								"ACTIVE"           => "Y",
-								"PASSWORD"         => $password,
-								"CONFIRM_PASSWORD" => $password
-							]);
-					}
+			// если в возвращаемом результате есть ошибка
+			if ($arAuthResult["TYPE"] == "ERROR") {
+				if ($arUser) {
+					$arAuthResult["FIELD"] = "USER_LOGIN";
+					$arAuthResult["MESSAGE"] = "Пользователь с таким номером существует";
 				}
 			}
 		}
-		return json_encode($request);
+
+		return json_encode($arAuthResult);
+	}
+
+// функция проверяетна соответсвие введеного пароля с текущим
+	public
+	static function checkPassword($request)
+	{
+		$userData = \CUser::GetByID($request['ID'])->Fetch();
+		$checkOldPassword = \Bitrix\Main\Security\Password::equals($userData['PASSWORD'], $_REQUEST['PASSWORD']);
+		return $checkOldPassword;
+	}
+
+// функция генерирует ошибки при изменении пароля зарегистрированного пользователя
+	public
+	static function changepasswd($request)
+	{
+		$result = [
+			"TYPE" => "ERROR"
+		];
+		// проверяем авторизован ли пользователь
+		if ($GLOBALS["USER"]->isAuthorized()) {
+			// проверяем старый пароль
+			$checkOldPassword = self::checkPassword($request);
+			if ($checkOldPassword) {
+				if ($request["NEW_PASSWORD"] != $request["NEW_PASSWORD_CONFIRM"]) {
+					$result = [
+						"TYPE"    => "ERROR",
+						"MESSAGE" => "Пароль отличается от введенного в предыдущем поле",
+						"FIELD"   => "NEW_PASSWORD_CONFIRM"
+					];
+				} else {
+					$result = [
+						"TYPE"    => "OK",
+						"MESSAGE" => "Пароль успешно изменен",
+					];
+				}
+			} else {
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Текущий пароль не подходит",
+					"FIELD"   => "PASSWORD"
+				];
+			}
+
+		} else {
+			$result = [
+				"TYPE"    => "ERROR",
+				"MESSAGE" => "Пользователь не авторизован",
+				"EVENT"   => "FORGOT"
+			];
+		}
+		return json_encode($result);
+	}
+
+	// функция генерирует ошибки авторизации пользователя
+	public
+	static function authh($request)
+	{
+
+	$return = $GLOBALS["USER"]->Login(strip_tags($request['USER_LOGIN']),strip_tags($request['USER_PASSWORD']),($request['USER_REMEMBER'] == "Y" ? $request['USER_REMEMBER'] : "N"));
+
+		if (empty($return['MESSAGE'])) {
+			$result = [
+				"TYPE" => "OK",
+			];
+		} else {
+			$rsUser = \CUser::GetByLogin(strip_tags($request['USER_LOGIN']));
+			if ($arUser = $rsUser->Fetch()) {
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Неверный пароль",
+					"FIELD"   => "USER_PASSWORD"
+				];
+			} else {
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Пользователь с текущем номером не существует",
+					"FIELD"   => "USER_LOGIN"
+				];
+			}
+		}
+
+
+		return json_encode($result);
 	}
 }

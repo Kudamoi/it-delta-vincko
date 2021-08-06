@@ -10,7 +10,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 				"AREA_FILE_SHOW"   => "file",
 				"AREA_FILE_SUFFIX" => "inc",
 				"EDIT_TEMPLATE"    => "",
-				"PATH"             => "/ajax/profile-auth.php"
+				"PATH"             => "/ajax/auth.php"
 			),
 			false,
 			array(

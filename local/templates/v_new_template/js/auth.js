@@ -72,7 +72,25 @@ function sendCodeFunc(parent, switcher){
 
 	timer(parent1);
 }
+function eye(){
+	var open = 0;
+	$(".pass__eye").on("click", function(){
+		var $input = $(this).parent();
+		alert();
+	if(open==0){
+		$input.attr("type", "text");
+		open = 1;
+	}else{
+		$input.attr("type", "password");
+		open = 0
+	}
+});
+}
 function viewPopap(){
+	$(".pass-input").inputmask({
+		regex: "[1-9A-Za-z!@$%^&*()_+-]{8,}",
+		showMaskOnHover: false,
+	});
 
 	let popupers = $(".popup");
 	var regNumber = 0;
@@ -209,6 +227,16 @@ function load_modal() {
 
 
 	$(".js-modal").on("click", (function () {
+		var $new_modal_class, ajax_url;
+		if ($(this).hassClass("js-modal-change-password")) {
+			$new_modal_class = $(".popup--new-pass");
+		}
+		if ($(this).hassClass("js-modal-auth")) {
+			$new_modal_class = $(".popup--new-pass");
+		}
+		if ($(this).hassClass("js-modal-forgot")) { $new_modal_class = ".popup--new-pass";}
+		if ($(this).hassClass("js-modal-registration")) { $new_modal_class = ".popup--new-pass";}
+
 		var $new_modal = $($(this).attr("data-modal-class"));
 		if ($new_modal.length > 0) {
 			$(".popup").addClass("hidden");

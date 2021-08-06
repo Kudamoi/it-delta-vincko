@@ -13,7 +13,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 ?>
 
 <main class="container complect-obor">
@@ -126,12 +125,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                                             </div>
                                         </div>
-                                        <? if (!empty($item['PROPERTY_CO_PRESENTS_REF_VALUE'])): ?>
+                                        <? if (!empty($item['PRESENTS'])): ?>
                                             <div class="predloj__present">
                                                 <div class="present__text">
                                                     <div class="h5">В подарок:</div>
                                                     <ul>
-                                                        <? foreach ($item['PROPERTY_CO_PRESENTS_REF_VALUE'] as $present): ?>
+                                                        <? foreach ($item['PRESENTS'] as $present): ?>
                                                             <li><span>&#10003;</span> <?= $present ?></li>
                                                         <? endforeach; ?>
                                                     </ul>
@@ -298,4 +297,3 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
     </section>
 </main>
-

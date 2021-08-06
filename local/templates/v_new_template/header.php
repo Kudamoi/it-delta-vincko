@@ -50,6 +50,7 @@ $Asset = Asset::getInstance();
 
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/site.js?v=14");?>
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/auth.js");?>
+	<? $Asset->addCss(SITE_TEMPLATE_PATH."/css/auth.css");?>
 	<? $Asset->addCss(SITE_TEMPLATE_PATH . "/css/custom.css"); ?>
 
     <?= $APPLICATION->ShowHead(); ?>

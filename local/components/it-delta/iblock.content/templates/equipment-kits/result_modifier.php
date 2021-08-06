@@ -65,6 +65,7 @@ foreach ($arSections as $key => $arSection) {
         if (is_array($item))
             $equipmentKitsIds = array_merge($equipmentKitsIds, $item);
         foreach ($arItem['PROPERTIES']['P_COMPLECT']['VALUE'] as $complect):
+            $presents[$complect] = $arItem["PROPERTIES"]["P_BONUSES"]["VALUE"];
             $arConnect[$complect] = $arrClass[$arItem['PROPERTIES']['CO_CLASS_REF']['VALUE']];
         endforeach;
     }
@@ -94,6 +95,7 @@ if (!empty($arDiscounts) && $arDiscounts[0]['TYPE'] == 0) {
 
     $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] != null ? $arrComplect[] = $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] : '';
     $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE'] != null ? $arCharacteristic = array_merge($arCharacteristic, $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE']) : '';
+    $equipmentKitsRes = array_merge($equipmentKitsRes, ["PRESENTS" => $presents[$equipmentKitsRes["ID"]]]);
 
     $arEquipmentKits[$equipmentKitsRes['ID']] = $equipmentKitsRes;
 }

@@ -224,6 +224,18 @@ p a {
   color: #000!important;
   transition: .3s ease-in-out
 }
+.blue {
+  color: #005dff!important
+}
+.grey {
+  color: #818181!important
+}
+.red {
+  color: #ff5252!important
+}
+.underline {
+  text-decoration: underline
+}
 .blue-border-button:hover {
   color: #fff!important;
   background: #005dff!important;

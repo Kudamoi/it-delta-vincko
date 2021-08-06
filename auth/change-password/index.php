@@ -1,5 +1,5 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
 	<main class="container main">
 		<? // TODO нужно выяснить как должна выглядеть страница авторизации, если не в попапе создать шаблон?>
 		<? $APPLICATION->IncludeComponent(
@@ -9,13 +9,12 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
 				"AREA_FILE_SHOW"   => "file",
 				"AREA_FILE_SUFFIX" => "inc",
 				"EDIT_TEMPLATE"    => "",
-				"PATH"             => "/ajax/profile-change-password.php"
+				"PATH"             => "/ajax/change-password.php"
 			),
 			false,
 			array(
 				"HIDE_ICONS" => "Y"
 			)
-		);?>
-
+		); ?>
 	</main>
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
