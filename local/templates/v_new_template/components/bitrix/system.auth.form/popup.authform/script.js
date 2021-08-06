@@ -19,10 +19,12 @@ $(document).ready(function () {
 		}
 	});
 	$('.js-auth-form').submit(function () {
+
 		var $form = $(this),
 			$btn = $(document.activeElement),
 			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
 			action = $form.attr("action");
+		initialPopap($form);
 		console.log($form.attr("action"));
 		console.log($form.serialize());
 		console.log(btnSerialize);
