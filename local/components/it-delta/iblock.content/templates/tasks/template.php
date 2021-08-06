@@ -50,59 +50,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="item__content">
                             <p>Услуги компании <a class="item__content-company-not">
-                                <!-- <div class="rating-center__search_form"> -->
-                                    <!-- <button class="rating-center__search_form-btn">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M21 21L16.7501 16.7425L21 21ZM19.1053 11.0526C19.1053 13.1883 18.2569 15.2365 16.7467 16.7467C15.2365 18.2569 13.1883 19.1053 11.0526 19.1053C8.91694 19.1053 6.86872 18.2569 5.35856 16.7467C3.8484 15.2365 3 13.1883 3 11.0526C3 8.91694 3.8484 6.86872 5.35856 5.35856C6.86872 3.8484 8.91694 3 11.0526 3C13.1883 3 15.2365 3.8484 16.7467 5.35856C18.2569 6.86872 19.1053 8.91694 19.1053 11.0526V11.0526Z"
-                                                stroke="#93B6FF" stroke-width="2" stroke-linecap="round"/>
-                                        </svg>
-
-                                    </button> -->
                                     <select name="solutions__bottom_column-select" class="solutions__bottom_column-select">
-                                    <div class="rating-center__search_form-select">
-                                        <input type="text" placeholder="Найти компанию">
-                                    </div>
-                                    <div class="searchForm__modal">
-                                        <div class="searchForm__modal_closed">
-                                            <img src="/upload/rating/closed-icon.svg" alt="img">
-                                        </div> 
-                                        <div class="searchForm__modal_input">
-                                            <input type="text" id="filterCity" placeholder="Поиск по названию">
-                                            <button>
-                                                <img src="/upload/rating/search-icon.svg" alt="img">
-                                            </button>
-                                        </div>
-                                        <div class="searchForm__modal_wrapper">
-                                            <div class="searchForm__modal_topChek active">
-                                                <div class="searchForm__modal_item topChekItem">
-                                                    <input type="checkbox" class="checkbox">
-                                                    <span class="itemText"></span>
-                                                </div>
-                                            </div>
-                                            <div class="searchForm__modal_centerChek">
-                                                <div class="searchForm__modal_item">
-                                                    <input type="checkbox" class="checkbox">
-                                                    <span class="itemText">Дефенд Уикенд</span>
-                                                </div>
-                                            </div>
-                                            <div class="searchForm__modal_bottomChek">
-                                                <?foreach ($arResult['COMPANIES'] as $company):?>
-                                                    <div class="searchForm__modal_item bottomChekItem">
-                                                        <!-- <input type="checkbox" class="checkbox" <?//=isset($_GET['company']) && $_GET['company'] == $company['ID']? 'selected' : '';?> value="<?//=$company['ID']?>">
-                                                        <span class="itemText"><?//=$company['NAME']?></span> -->
+                                        <div class="rating-center__search_form">
+                                            <div class="searchForm__modal">
+                                                <div class="searchForm__modal_wrapper">
+                                                    <?foreach ($arResult['COMPANIES'] as $company):?>
                                                         <option <?=isset($_GET['company']) && $_GET['company'] == $company['ID']? 'selected' : '';?> value="<?=$company['ID']?>"><?=$company['NAME']?></option>
-                                                    </div>
-                                                <?endforeach;?>
+                                                    <?endforeach;?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </select>
-                                <!-- </div> -->
-                                    <!-- <select name="solutions__bottom_column-select" class="solutions__bottom_column-select">
-                                        <?//foreach ($arResult['COMPANIES'] as $company):?>
-                                            <option <?//=isset($_GET['company']) && $_GET['company'] == $company['ID']? 'selected' : '';?> value="<?//=$company['ID']?>"><?//=$company['NAME']?></option>
-                                        <?//endforeach;?>
-                                    </select> -->
                                 </a>
                                 в городе <a style="cursor: text" class="item__content-city"><?= $arResult['CURRENT_CITY']['NAME'] ?></a></p>
 
