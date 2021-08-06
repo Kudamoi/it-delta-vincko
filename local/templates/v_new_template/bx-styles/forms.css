@@ -14,6 +14,21 @@
 .form .org {
   margin: 10px 0 10px 40px!important
 }
+.form__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between
+}
+.form__title-blue {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+  color: #005dff
+}
+.form__title span.form__title-step {
+  color: #000
+}
 .form .blue-button {
   text-transform: none
 }
@@ -55,6 +70,7 @@
 }
 .form input[type=radio] + label {
   display: inline-block;
+  margin-right: 8px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -65,6 +81,12 @@
 }
 .form input[type=radio]:checked + label + label {
   color: #005dff
+}
+.form .radio-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px
 }
 .form input[type=text] {
   position: relative;
@@ -188,6 +210,12 @@
   transition: .3s ease-in-out;
   opacity: 1;
   height: 280px
+}
+.form__section__content.address-installment #other:not(:checked) ~ .address-installment-other > * {
+  transition: .3s ease-in-out;
+  max-height: 0;
+  padding: 0;
+  margin: 0
 }
 .form__section__content.name input:nth-child(1),
 .form__section__content.name input:nth-child(2),
@@ -370,6 +398,10 @@
 }
 .forms .form {
   position: relative
+}
+.forms .def-close .form__title > span {
+  color: #000;
+  opacity: .3
 }
 .forms .def-close .form__bottom,
 .forms .def-close .form__content {

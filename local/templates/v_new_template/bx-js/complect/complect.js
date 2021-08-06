@@ -134,8 +134,8 @@ if (!document.querySelector('.complect__slider')) {} else {
   closeOpenBlock('.slider__under-block-2', '.close-btn-2'); // modal
 
   $('.modal-slider').slick({
-    prevArrow: '<div class="modal-arrow arrow-prev-mini arrow-mini"><img src="../img/cartochka/modal-prev.svg"></div>',
-    nextArrow: '<div class="modal-arrow arrow-next-mini arrow-mini"><img src="../img/cartochka/modal-next.svg"></div>'
+    prevArrow: '<div class="modal-arrow arrow-prev-mini arrow-mini"><img src="/upload/images/arrows/modal-prev.svg"></div>',
+    nextArrow: '<div class="modal-arrow arrow-next-mini arrow-mini"><img src="/upload/images/arrows/modal-next.svg"></div>'
   });
   var slide = document.querySelectorAll('.modal-slider .slick-slide'),
       slideBottom = document.querySelectorAll('.modal-bottom .item'),
@@ -145,23 +145,40 @@ if (!document.querySelector('.complect__slider')) {} else {
       modalClose = modal.querySelector('.close');
   modalTrigger.forEach(function (item) {
     item.addEventListener('click', function () {
-      modal.classList.add('active');
+      var modWindow = $('.slide-modal[data-slider-info=' + $(this).attr("data-key") + ']');
+      $(modWindow).addClass('active');
+      var dataModal = $('.slide-modal.active .modal-slider .slick-current').attr('data-modal-slide');
+      $('.slide-modal.active .modal-bottom .item').removeClass('active');
+      $('.slide-modal.active .modal-bottom .item').eq(dataModal - 1).addClass('active');
+      console.log($('.slide-modal.active .modal-bottom .item:eq(' + dataModal + ')'));
     });
   });
-  modalClose.addEventListener('click', function () {
-    modal.classList.remove('active');
+  $('.close').on('click', function () {
+    var closeWindow = $('.slide-modal[data-slider-info=' + $(this).attr('data-close') + ']');
+    $(closeWindow).removeClass('active');
+    $('.modal-slider .slick-active').removeClass('slick-active');
   });
   document.addEventListener('click', function (e) {
     if (e.target == modal && modal.classList.contains('active')) {
       modal.classList.remove('active');
     }
   });
-  slide.forEach(function (item, i) {
-    item.setAttribute('data-modal-slide', i);
+  $('.modal-slider').each(function () {
+    $(this).find('.slick-slide').each(function (index) {
+      $(this).attr('data-modal-slide', index);
+    });
   });
-  slideBottom.forEach(function (item, i) {
-    item.setAttribute('data-modal-slide', i + 1);
-  });
+  $('.modal-bottom').each(function () {
+    $(this).find('.item').each(function (index) {
+      $(this).attr('data-modal-slide', index + 1);
+    });
+  }); //  slide.forEach(function (item, i) {
+  //    item.setAttribute('data-modal-slide', i);
+  //  });
+  //  slideBottom.forEach(function (item, i) {
+  //    item.setAttribute('data-modal-slide', i + 1);
+  //  });
+
   modalArrow.forEach(function (btn) {
     btn.addEventListener('click', function () {
       slide.forEach(function (slide) {

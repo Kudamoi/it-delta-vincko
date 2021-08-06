@@ -21,7 +21,7 @@ $(document).ready(function () {
   for (var i = 0; i < dates.length; i++) {
     dates[i].setAttribute("max", today);
 
-    if (browser_name() === "Chrome") {
+    if (browser_name() === "Chrome" && !dates[i].classList.contains("date-install")) {
       dates[i].onmouseover = function () {
         this.type = 'date';
       };
@@ -65,13 +65,23 @@ $(document).ready(function () {
     showMaskOnHover: false,
     positionCaretOnClick: "radixFocus"
   });
+  $('.email-field').inputmask("email", {
+    showMaskOnHover: false,
+    positionCaretOnClick: "radixFocus"
+  });
   $('#phone-field').inputmask("+7(999) 999-9999", {
+    showMaskOnHover: false
+  });
+  $('.phone-field').inputmask("+7(999) 999-9999", {
     showMaskOnHover: false
   });
   $('#passport').inputmask("99 99 999999", {
     showMaskOnHover: false
   });
   $('#code').inputmask("999-999", {
+    showMaskOnHover: false
+  });
+  $('#inn').inputmask("9999 9999 9999", {
     showMaskOnHover: false
   });
   $('.index-field').inputmask("999999", {

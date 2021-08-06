@@ -1,5 +1,6 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/equipitem.js");
+//$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/custom.js");
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/basket.js");
 if ($_GET['itd'] == 'y') {
     echo '<pre>';
@@ -162,7 +163,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
             <div class="top-slider-bg ">
                 <picture>
                     <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
-                    <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
+                    <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>"
+                         alt="<?= $arResult['NAME'] ?>">
                 </picture>
             </div>
         </div>
@@ -170,17 +172,17 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
             <div class="complect__slider-wrapper">
                 <div class="solutions-card__circles">
                     <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
-                    <?if(!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])):?>
-                        <div onclick="location.href='/equipment-kits/<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>/#solutions__center'"
-                             class="solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
-                            <div class="solutions-card__circles_item-icon">
-                                <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
+                        <? if (!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])): ?>
+                            <div data-slug="<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>"
+                                 class="js-refresh-equipitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
+                                <div class="solutions-card__circles_item-icon">
+                                    <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
+                                </div>
+                                <div class="solutions-card__circles_item-text">
+                                    <?= $class['NAME'] ?>
+                                </div>
                             </div>
-                            <div class="solutions-card__circles_item-text">
-                                <?= $class['NAME'] ?>
-                            </div>
-                        </div>
-                        <?endif;?>
+                        <? endif; ?>
                     <? endforeach; ?>
 
 
@@ -242,7 +244,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions__bottom_column-title">
                                     Всего
                                 </div>
-                                <? if ((int)($arResult["PRICES"]["BASE"]["PRINT_DISCOUNT_VALUE"]) != (int)($arResult["PRICES"]["BASE"]["PRINT_VALUE"])): ?>
+                                <? if (intval($arResult["PRICES"]["BASE"]["DISCOUNT_VALUE"]) != intval($arResult["PRICES"]["BASE"]["VALUE"])): ?>
                                     <div class="solutions__bottom_column-oldprice">
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_VALUE"] ?>
                                     </div>
@@ -398,7 +400,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 </div>
                 <div class="h5 complect__slider-datchiki-title">Датчики, входящие в комплект:</div>
                 <div class="slick-slider-datchiki">
-                    <?$i=0;?>
+                    <? $i = 0; ?>
                     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
                         <div class="slide">
                             <div class="slide-box">
@@ -434,7 +436,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </ul>
                             </div>
                         </div>
-                    <?$i++;?>
+                        <? $i++; ?>
                     <? endforeach; ?>
                 </div>
                 <div class="slider__under">
@@ -443,34 +445,34 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <div class="slider__under-block-1-first">
                             <div class="title">Преимущества датчика</div>
                             <div class="line"></div>
-                            <?$i=0;?>
+                            <? $i = 0; ?>
                             <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
                                 <div class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>">
                                     <?= $ec['SENSOR_ADVANTAGES']['TEXT'] ?>
                                 </div>
-                            <?$i++;?>
+                                <? $i++; ?>
                             <? endforeach; ?>
                         </div>
                         <div class="slider__under-block-1-second">
                             <div class="title">Принцип работы</div>
                             <div class="line"></div>
-                            <?$i=0;?>
+                            <? $i = 0; ?>
                             <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
                                 <div class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>">
                                     <?= $ec['PRINCIPLE_OF_OPERATION']['TEXT'] ?>
                                 </div>
-                                <?$i++;?>
+                                <? $i++; ?>
                             <? endforeach; ?>
                         </div>
                         <div class="slider__under-block-1-three">
                             <div class="title">Особенности</div>
                             <div class="line"></div>
-                            <?$i=0;?>
+                            <? $i = 0; ?>
                             <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
                                 <div class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>">
                                     <?= $ec['FEATURES_OF_THE']['TEXT'] ?>
                                 </div>
-                                <?$i++;?>
+                                <? $i++; ?>
                             <? endforeach; ?>
                         </div>
                         <div class="close-btn">Развернуть</div>
@@ -478,18 +480,20 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                     <div class="slider__under-block-2 close" id="tech">
                         <div class="title">Технические характеристики датчика</div>
                         <ul class="b-dnone">
-                            <?$i=0;?>
+                            <? $i = 0; ?>
                             <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
-                            <? foreach ($ec["TECH_CHARACTERISTICS"] as $index => $techChar): ?>
-                            <li class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>" data-slider-info="<?= $i ?>"><span class="slider__under-2-title"><?=$techChar['EQ_CHAR_TYPE']?></span>
+                                <? foreach ($ec["TECH_CHARACTERISTICS"] as $index => $techChar): ?>
+                                    <li class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>"
+                                        data-slider-info="<?= $i ?>"><span
+                                                class="slider__under-2-title"><?= $techChar['EQ_CHAR_TYPE'] ?></span>
 
-                                    <span class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>">
-                                        <?=$techChar['EQ_CHAR_VALUE']?>
+                                        <span class="info <?= $i == 0 ? 'vis' : '' ?>" data-slider-info="<?= $i ?>">
+                                        <?= $techChar['EQ_CHAR_VALUE'] ?>
                                     </span>
-                            </li>
+                                    </li>
 
                                 <? endforeach; ?>
-                                <?$i++;?>
+                                <? $i++; ?>
                             <? endforeach; ?>
                         </ul>
                         <div class="close-btn-2">Развернуть</div>
@@ -498,26 +502,26 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
             </section>
 
         </div>
-        <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
-            <div id="solutions__center" class="solutions__center">
-                <div class="container rating-center">
-                    <div class="solutions__center_title">
-                        Вы можете купить комплект в рамках готового решения <br>
-                        <span><?= $arResult['PACKAGE_GROUP']['NAME'] ?></span>
-                    </div>
-                    <div class="solutions__center_wrapper">
-                        <!--no-subscribe no-circles  -->
-                        <div class="solutions-card card-one no-subscribe ">
-                            <div id="eq-plus" class="solutions-card__icon-plus">
-                                <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/solutions-card__icon-plus.svg"
-                                     alt="img">
-                                <p>Оборудование</p>
-                            </div>
-                            <div class="solutions-card__substrate">
-                                <div class="solutions-card__substrate_top">
-                                    <div class="solutions-card__substrate_top-title">
-                                        Оборудование
-                                    </div>
+        <div id="solutions__center" class="solutions__center">
+            <div class="container rating-center">
+                <div class="solutions__center_title">
+                    Вы можете купить комплект в рамках готового решения <br>
+                    <span><?= $arResult['PACKAGE_GROUP']['NAME'] ?></span>
+                </div>
+                <div class="solutions__center_wrapper">
+                    <!--no-subscribe no-circles  -->
+                    <div class="solutions-card card-one no-subscribe ">
+                        <div id="eq-plus" class="solutions-card__icon-plus">
+                            <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/solutions-card__icon-plus.svg"
+                                 alt="img">
+                            <p>Оборудование</p>
+                        </div>
+                        <div class="solutions-card__substrate">
+                            <div class="solutions-card__substrate_top">
+                                <div class="solutions-card__substrate_top-title">
+                                    Оборудование
+                                </div>
+                                <? if (!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_COMPLECT_WITH_VALUE']): ?>
                                     <div id="closed-card-eq" class="closed-card">
 
                                         <div class="closed-card__icon">
@@ -525,38 +529,39 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                  alt="img">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="solutions-card__center ">
-                                    <div class="solutions-card__top">
-                                        <div class="solutions-card__top_img">
-                                            <img src="<?= $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src'] ?>"
-                                                 alt="img">
-                                        </div>
-                                        <div class="solutions-card__top_text">
-                                            <div class="h4 solutions-card__top_text-title"><?= $arResult['NAME'] ?></div>
-                                            <div class="solutions-card__top_text-subtitle">
-                                                <div class="solutions-card__subscribe">
-                                                    <a href="#subscribe" class="solutions-card__subscribe-in">Подписка
-                                                        включена
-                                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M9.00033 0.666748C4.40033 0.666748 0.666992 4.40008 0.666992 9.00008C0.666992 13.6001 4.40033 17.3334 9.00033 17.3334C13.6003 17.3334 17.3337 13.6001 17.3337 9.00008C17.3337 4.40008 13.6003 0.666748 9.00033 0.666748ZM9.75866 14.1251C9.70042 14.1822 9.62671 14.2209 9.54665 14.2365C9.4666 14.2521 9.38372 14.2439 9.30831 14.2128C9.23289 14.1818 9.16824 14.1293 9.12239 14.0618C9.07653 13.9944 9.05147 13.915 9.05033 13.8334V13.1667H9.00033C7.93366 13.1667 6.86699 12.7584 6.05033 11.9501C5.48452 11.3829 5.09403 10.6647 4.92556 9.88151C4.75709 9.09827 4.81776 8.28308 5.10033 7.53341C5.25866 7.10841 5.81699 7.00008 6.13366 7.32508C6.31699 7.50841 6.35866 7.77508 6.27533 8.00842C5.89199 9.04175 6.10866 10.2417 6.94199 11.0751C7.52533 11.6584 8.29199 11.9334 9.05866 11.9167V11.1334C9.05866 10.7584 9.50866 10.5751 9.76699 10.8417L11.117 12.1917C11.2837 12.3584 11.2837 12.6167 11.117 12.7834L9.75866 14.1251ZM11.867 10.6834C11.7809 10.5948 11.7218 10.4834 11.6967 10.3624C11.6716 10.2413 11.6815 10.1157 11.7253 10.0001C12.1087 8.96675 11.892 7.76675 11.0587 6.93342C10.4753 6.35008 9.70866 6.06675 8.95033 6.08342V6.86675C8.95033 7.24175 8.50033 7.42508 8.24199 7.15841L6.88366 5.81675C6.71699 5.65008 6.71699 5.39175 6.88366 5.22508L8.23366 3.87508C8.2919 3.81798 8.36561 3.77923 8.44567 3.76363C8.52572 3.74803 8.6086 3.75626 8.68401 3.78732C8.75943 3.81837 8.82407 3.87088 8.86993 3.93833C8.91579 4.00577 8.94085 4.0852 8.94199 4.16675V4.84175C10.0253 4.82508 11.117 5.21675 11.942 6.05008C12.5078 6.61727 12.8983 7.33542 13.0668 8.11865C13.2352 8.90189 13.1746 9.71708 12.892 10.4667C12.7337 10.9001 12.1837 11.0084 11.867 10.6834Z"
-                                                                  fill="#3CBA54"/>
-                                                        </svg>
-                                                    </a>
+                                <? endif; ?>
+                            </div>
+                            <div class="solutions-card__center ">
+                                <div class="solutions-card__top">
+                                    <div class="solutions-card__top_img">
+                                        <img src="<?= $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src'] ?>"
+                                             alt="<?= $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['NAME'] ?>">
+                                    </div>
+                                    <div class="solutions-card__top_text">
+                                        <div class="h4 solutions-card__top_text-title"><?= $arResult['NAME'] ?></div>
+                                        <div class="solutions-card__top_text-subtitle">
+                                            <div class="solutions-card__subscribe">
+                                                <a href="#subscribe" class="solutions-card__subscribe-in">Подписка
+                                                    включена
+                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.00033 0.666748C4.40033 0.666748 0.666992 4.40008 0.666992 9.00008C0.666992 13.6001 4.40033 17.3334 9.00033 17.3334C13.6003 17.3334 17.3337 13.6001 17.3337 9.00008C17.3337 4.40008 13.6003 0.666748 9.00033 0.666748ZM9.75866 14.1251C9.70042 14.1822 9.62671 14.2209 9.54665 14.2365C9.4666 14.2521 9.38372 14.2439 9.30831 14.2128C9.23289 14.1818 9.16824 14.1293 9.12239 14.0618C9.07653 13.9944 9.05147 13.915 9.05033 13.8334V13.1667H9.00033C7.93366 13.1667 6.86699 12.7584 6.05033 11.9501C5.48452 11.3829 5.09403 10.6647 4.92556 9.88151C4.75709 9.09827 4.81776 8.28308 5.10033 7.53341C5.25866 7.10841 5.81699 7.00008 6.13366 7.32508C6.31699 7.50841 6.35866 7.77508 6.27533 8.00842C5.89199 9.04175 6.10866 10.2417 6.94199 11.0751C7.52533 11.6584 8.29199 11.9334 9.05866 11.9167V11.1334C9.05866 10.7584 9.50866 10.5751 9.76699 10.8417L11.117 12.1917C11.2837 12.3584 11.2837 12.6167 11.117 12.7834L9.75866 14.1251ZM11.867 10.6834C11.7809 10.5948 11.7218 10.4834 11.6967 10.3624C11.6716 10.2413 11.6815 10.1157 11.7253 10.0001C12.1087 8.96675 11.892 7.76675 11.0587 6.93342C10.4753 6.35008 9.70866 6.06675 8.95033 6.08342V6.86675C8.95033 7.24175 8.50033 7.42508 8.24199 7.15841L6.88366 5.81675C6.71699 5.65008 6.71699 5.39175 6.88366 5.22508L8.23366 3.87508C8.2919 3.81798 8.36561 3.77923 8.44567 3.76363C8.52572 3.74803 8.6086 3.75626 8.68401 3.78732C8.75943 3.81837 8.82407 3.87088 8.86993 3.93833C8.91579 4.00577 8.94085 4.0852 8.94199 4.16675V4.84175C10.0253 4.82508 11.117 5.21675 11.942 6.05008C12.5078 6.61727 12.8983 7.33542 13.0668 8.11865C13.2352 8.90189 13.1746 9.71708 12.892 10.4667C12.7337 10.9001 12.1837 11.0084 11.867 10.6834Z"
+                                                              fill="#3CBA54"/>
+                                                    </svg>
+                                                </a>
 
-                                                    <a href="#subscribe" class="solutions-card__subscribe-out">
-                                                        Подписка исключена
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8.728 12.92C8.67209 12.9748 8.60133 13.012 8.52447 13.027C8.44762 13.042 8.36806 13.0341 8.29566 13.0043C8.22326 12.9744 8.1612 12.924 8.11718 12.8593C8.07315 12.7945 8.0491 12.7183 8.048 12.64V12H8C6.976 12 5.952 11.608 5.168 10.832C4.62482 10.2875 4.24996 9.59808 4.08823 8.84617C3.92649 8.09426 3.98474 7.31168 4.256 6.592C4.408 6.184 4.944 6.08 5.248 6.392C5.424 6.568 5.464 6.824 5.384 7.048C5.016 8.04 5.224 9.192 6.024 9.992C6.584 10.552 7.32 10.816 8.056 10.8V10.048C8.056 9.688 8.488 9.512 8.736 9.768L10.032 11.064C10.192 11.224 10.192 11.472 10.032 11.632L8.728 12.92ZM10.752 9.616C10.6693 9.5309 10.6126 9.42399 10.5885 9.3078C10.5644 9.19161 10.574 9.07096 10.616 8.96C10.984 7.968 10.776 6.816 9.976 6.016C9.416 5.456 8.68 5.184 7.952 5.2V5.952C7.952 6.312 7.52 6.488 7.272 6.232L5.968 4.944C5.808 4.784 5.808 4.536 5.968 4.376L7.264 3.08C7.31991 3.02518 7.39068 2.98798 7.46753 2.973C7.54438 2.95803 7.62394 2.96594 7.69634 2.99575C7.76874 3.02556 7.8308 3.07596 7.87482 3.14071C7.91885 3.20546 7.9429 3.28171 7.944 3.36V4.008C8.984 3.992 10.032 4.368 10.824 5.168C11.3672 5.7125 11.742 6.40192 11.9038 7.15383C12.0655 7.90574 12.0073 8.68832 11.736 9.408C11.584 9.824 11.056 9.928 10.752 9.616Z"
-                                                                  fill="#FF5252"/>
-                                                        </svg>
-                                                    </a>
+                                                <a href="#subscribe" class="solutions-card__subscribe-out">
+                                                    Подписка исключена
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8.728 12.92C8.67209 12.9748 8.60133 13.012 8.52447 13.027C8.44762 13.042 8.36806 13.0341 8.29566 13.0043C8.22326 12.9744 8.1612 12.924 8.11718 12.8593C8.07315 12.7945 8.0491 12.7183 8.048 12.64V12H8C6.976 12 5.952 11.608 5.168 10.832C4.62482 10.2875 4.24996 9.59808 4.08823 8.84617C3.92649 8.09426 3.98474 7.31168 4.256 6.592C4.408 6.184 4.944 6.08 5.248 6.392C5.424 6.568 5.464 6.824 5.384 7.048C5.016 8.04 5.224 9.192 6.024 9.992C6.584 10.552 7.32 10.816 8.056 10.8V10.048C8.056 9.688 8.488 9.512 8.736 9.768L10.032 11.064C10.192 11.224 10.192 11.472 10.032 11.632L8.728 12.92ZM10.752 9.616C10.6693 9.5309 10.6126 9.42399 10.5885 9.3078C10.5644 9.19161 10.574 9.07096 10.616 8.96C10.984 7.968 10.776 6.816 9.976 6.016C9.416 5.456 8.68 5.184 7.952 5.2V5.952C7.952 6.312 7.52 6.488 7.272 6.232L5.968 4.944C5.808 4.784 5.808 4.536 5.968 4.376L7.264 3.08C7.31991 3.02518 7.39068 2.98798 7.46753 2.973C7.54438 2.95803 7.62394 2.96594 7.69634 2.99575C7.76874 3.02556 7.8308 3.07596 7.87482 3.14071C7.91885 3.20546 7.9429 3.28171 7.944 3.36V4.008C8.984 3.992 10.032 4.368 10.824 5.168C11.3672 5.7125 11.742 6.40192 11.9038 7.15383C12.0655 7.90574 12.0073 8.68832 11.736 9.408C11.584 9.824 11.056 9.928 10.752 9.616Z"
+                                                              fill="#FF5252"/>
+                                                    </svg>
+                                                </a>
 
 
-                                                </div>
-                                                <? if (count($arResult['ALL_LIST_COMPLECTS_IN_PACKAGE']) > 1): ?>
+                                            </div>
+                                            <? if (count($arResult['ALL_LIST_COMPLECTS_IN_PACKAGE']) > 1): ?>
                                                 <div class="select">
                                                     <form action="#">
                                                         <input class="select__input" type="hidden"
@@ -589,8 +594,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     } ?>
                                                                     <div class="select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
-                                                                            <span onclick="location.href='/equipment-kits/<?= $item['CODE'] ?>/#solutions__center'"
-                                                                                  class="policy-title">Комплект“<span
+                                                                            <span data-slug="<?= $item['CODE'] ?>"
+                                                                                  class="js-refresh-equipitem-data-ajax policy-title">Комплект“<span
                                                                                         class="p"><?= $item['NAME'] ?></span>”</span>
                                                                             <span class="opacity"><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб</span>
                                                                         </div>
@@ -598,15 +603,16 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                 <? endforeach; ?>
 
                                                             </div>
+                                                        </div>
                                                     </form>
                                                 </div>
-                                            </div>
+
 
                                             <? endif; ?>
                                         </div>
-
-
                                     </div>
+
+
                                 </div>
                                 <div class="solutions-card__subtitle">
                                     Выберите Вариант
@@ -649,9 +655,9 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <div class="solutions-card__circles">
                                     <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
-                                        <?if(!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])):?>
-                                            <div onclick="location.href='/equipment-kits/<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>/#solutions__center'"
-                                                 class="solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
+                                        <? if (!empty($arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key])): ?>
+                                            <div data-slug="<?= $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$key]['SLUG'] ?>"
+                                                 class="js-refresh-equipitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
                                                 <div class="solutions-card__circles_item-icon">
                                                     <img src="<?= $class['ICON']['src'] ?>" alt="<?= $class['NAME'] ?>">
                                                 </div>
@@ -659,7 +665,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                     <?= $class['NAME'] ?>
                                                 </div>
                                             </div>
-                                        <?endif;?>
+                                        <? endif; ?>
                                     <? endforeach; ?>
                                 </div>
                                 <div class="solutions-card__info">
@@ -733,13 +739,15 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__substrate_top-title">
                                     Охранные услуги
                                 </div>
-                                <div id="closed-card-company" class="closed-card">
+                                <? if (!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_ABONENTPLATA_WITH_VALUE']): ?>
+                                    <div id="closed-card-company" class="closed-card">
 
-                                    <div class="closed-card__icon">
-                                        <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/closed-icon.svg"
-                                             alt="img">
+                                        <div class="closed-card__icon">
+                                            <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/closed-icon.svg"
+                                                 alt="img">
+                                        </div>
                                     </div>
-                                </div>
+                                <? endif; ?>
                             </div>
                             <div class="solutions-card__center">
                                 <div class="solutions-card__top">
@@ -773,64 +781,40 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                 <form action="#">
                                                     <input class="select__input" type="hidden"
                                                            name="solutions-card__top-select">
-                                                    <div class="select__head">Выбрать другую компанию</div>
-                                                    <div class="select__list" style="display: none;">
-                                                        <div class="select__input-search">
-                                                            <div class="select__input-search_icon">
-                                                                <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/search-icon.svg"
-                                                                     alt="img">
-                                                            </div>
-                                                            <input type="text" placeholder="Поиск" name="search">
-                                                        </div>
-                                                        <div class="select__list-item">
-                                                            <!-- Топ-3 -->
-                                                            <div class="select__list-item_title">Топ-3</div>
-                                                            <div class="select__item">
-                                                                <div class="select__item_text color-black">
-                                                                    ООО “Беркут Дефенд Ко...
-                                                                </div>
-                                                                <div class="select__item_num">1</div>
-                                                                <span class="select__item_bg"
-                                                                      style="width: 100%;"></span>
-                                                            </div>
-                                                            <div class="select__item">
-                                                                <div class="select__item_text">
-                                                                    Сальса Чача Классно
-                                                                </div>
-                                                                <div class="select__item_num">2</div>
-                                                                <span class="select__item_bg"
-                                                                      style="width: 90%;"></span>
-                                                            </div>
-                                                            <div class="select__item">
-                                                                <div class="select__item_text">
-                                                                    ООО “Семиголов”
-                                                                </div>
-                                                                <div class="select__item_num">2</div>
-                                                                <span class="select__item_bg"
-                                                                      style="width: 80%;"></span>
-                                                            </div>
-
-
-                                                            <!-- Все компании -->
-                                                            <div class="select__list-item_title color-grey">Все
-                                                                компании
-                                                            </div>
-                                                            <? foreach ($arResult['ALL_LIST_COMPANY_CITY'] as $key => $item): ?>
-                                                                <div id="selected_company"
-                                                                     onclick="BX.setCookie('selected_company_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
-                                                                     class="select__item">
-                                                                    <div class="select__item_text">
-                                                                        <?= $item['NAME'] ?>
+                                                    <? if (count($arResult['ALL_LIST_COMPANY_CITY']) > 1): ?>
+                                                        <div class="select__head">Выбрать другую компанию</div>
+                                                        <div class="select__list" style="display: none;">
+                                                            <div class="select__list-item">
+                                                                <!-- Выбрано -->
+                                                                <div class="select__list-item_title">Выбрано</div>
+                                                                <div class="select__list-item_policy">
+                                                                    <div class="select__list-item_policy-top">
+                                                                <span class="font-weight policy-title">
+                                                                    Компания “ <span
+                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?></span> ”
+                                                                </span>
                                                                     </div>
-                                                                    <div class="select__item_num">4</div>
-                                                                    <span class="select__item_bg"
-                                                                          style="width: 70%;"></span>
                                                                 </div>
-                                                            <? endforeach; ?>
 
+
+                                                                <!-- Все компании -->
+                                                                <div class="select__list-item_title color-grey">Все
+                                                                    компании
+                                                                </div>
+                                                                <? foreach ($arResult['ALL_LIST_COMPANY_CITY'] as $key => $item): ?>
+                                                                    <div class="select__list-item_policy">
+                                                                        <div class="select__list-item_policy-top">
+                                                                            <span id="selected_company"
+                                                                                  onclick="BX.setCookie('selected_company_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
+                                                                                  class="policy-title">Компания“<span
+                                                                                        class="p"><?= $item['NAME'] ?></span>”</span>
+                                                                        </div>
+                                                                    </div>
+                                                                <? endforeach; ?>
+
+                                                            </div>
                                                         </div>
-                                                        <div class="box-shadow"></div>
-                                                    </div>
+                                                    <? endif; ?>
                                                 </form>
                                             </div>
                                         </div>
@@ -843,12 +827,13 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <? $currentSubcriptionFeeIndex = isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? $_COOKIE['selected_subscription_fee_id'] : array_key_last($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']); ?>
                                     <div class="solutions-card__contract_wrapper">
                                         <? foreach ($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'] as $key => $item): ?>
-                                            <div onclick="BX.setCookie('selected_subscription_fee_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
-                                                 class="contract__item <?= isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? (intval($item['ID']) === intval($_COOKIE['selected_subscription_fee_id']) ? 'active' : 'no-active') : (intval($item['PROPERTY_APTP_MESYAC_VALUE']) === 12 ? 'active' : 'no-active') ?>">
+                                            <div data-slug="<?= $arResult['CODE'] ?>"
+                                                 onclick="BX.setCookie('selected_subscription_fee_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
+                                                 class="js-refresh-equipitem-data-ajax contract__item <?= isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? (intval($item['ID']) === intval($_COOKIE['selected_subscription_fee_id']) ? 'active' : 'no-active') : (intval($item['PROPERTY_APTP_MESYAC_VALUE']) === 12 ? 'active' : 'no-active') ?>">
                                                 <div class="contract__item_top">
                                                     <div class="contract__item_title">
                                                         На <?= $item['PROPERTY_APTP_MESYAC_VALUE'] ?>
-                                                        месяц<?= in_array($item['PROPERTY_APTP_MESYAC_VALUE'], array(3, 4)) ? 'а' : 'ев' ?>
+                                                        месяц<?= in_array($item['PROPERTY_APTP_MESYAC_VALUE'], array(2,3, 4,22,23,24)) ? 'а' : 'ев' ?>
                                                     </div>
                                                     <div class="contract__item_img">
                                                         <? if (in_array($item['PROPERTY_APTP_MESYAC_VALUE'], array(3, 4))): ?>
@@ -986,13 +971,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__substrate_top-title">
                                     Страхование
                                 </div>
-                                <div id="closed-card-ins" class="closed-card">
-
-                                    <div class="closed-card__icon">
-                                        <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/closed-icon.svg"
-                                             alt="img">
+                                <? if (!$arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_STRAHOVKA_WITH_VALUE']): ?>
+                                    <div id="closed-card-ins" class="closed-card">
+                                        <div class="closed-card__icon">
+                                            <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/closed-icon.svg"
+                                                 alt="img">
+                                        </div>
                                     </div>
-                                </div>
+                                <? endif; ?>
                             </div>
                             <div class="solutions-card__center  products__item">
                                 <div class="solutions-card__top">
@@ -1070,9 +1056,13 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                 полисы
                                                             </div>
                                                             <? foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item): ?>
-                                                                <? foreach ($item['ITEMS'] as $key => $el): ?>
-                                                                    <div onclick="BX.setCookie('selected_policy_id',<?= $el['ID'] ?>, {expires: 86400, path: '/'});location.reload();"
-                                                                         class="select__list-item_policy">
+                                                                <? foreach ($item['ITEMS'] as $index => $el): ?>
+                                                                    <? if ($index == $currentPolicyIndex) {
+                                                                        continue;
+                                                                    } ?>
+                                                                    <div data-slug="<?= $arResult['CODE'] ?>"
+                                                                         onclick="BX.setCookie('selected_policy_id',<?= $el['ID'] ?>, {expires: 86400, path: '/'});"
+                                                                         class="js-refresh-equipitem-data-ajax select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
                                                                 <span class="policy-title">
                                                                     Полис “ <span class="p"><?= $el['NAME'] ?></span> ”
@@ -1141,14 +1131,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <? foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item): ?>
                                         <? foreach ($item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_OPTIONS_VALUE'] as $index => $el): ?>
 
-                                            <div class="products__payment-item <?= !empty($item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index]) && $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index]!='-' ? 'products__payment-item_active' : '' ?>">
+                                            <div class="products__payment-item <?= !empty($item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index]) && $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index] != '-' ? 'products__payment-item_active' : '' ?>">
                                                 <div class="no-stroke products__payment-photo">
                                                     <?= $arResult['ALL_INSURANCE_PAYMENT_OPTIONS_LIST'][$el]['PROPERTY_ICON_VALUE']['TEXT'] ?>
                                                 </div>
 
                                                 <div class="products__payment-name"><?= $arResult['ALL_INSURANCE_PAYMENT_OPTIONS_LIST'][$el]['NAME'] ?>
                                                 </div>
-                                                <div class="products__payment-cost"><?= $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index] ?>
+                                                <div class="products__payment-cost"><?= $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index] != '-' && $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index] != '' ? $item['ITEMS'][$currentPolicyIndex]['PROPERTY_PAYMENT_PRICE_VALUE'][$index] : '' ?>
                                                     руб.
                                                 </div>
 
@@ -1220,230 +1210,134 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                     </div>
                 </div>
             </div>
-        <? else: ?>
-            <div id="solutions__center" class="solutions__center">
-                <div class="container rating-center">
-                    <div class="solutions__center_title">
-                        В текущем городе данный комплект недоступен
-                    </div>
-                </div>
-            </div>
-        <? endif; ?>
-    </div>
-    <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
+        </div>
         <div id="b-vincko-basket-component"></div>
-        <? /*<div class="solutions__bottom">
-            <div class="container">
-                <div class="solutions__bottom_title">
-                    Итого, в ваше Готовое решение входит:
-                </div>
-                <div class="solutions__bottom_wrapper">
-                    <div class="solutions__bottom_left">
-                        <div class="solutions__bottom_row">
-                            <p class="solutions__bottom_row-left">Комплект оборудования</p>
-                            <div class="solutions__bottom_row-center">
-                                <span>Премиум</span>
-                                <span>AJAX SmartHome</span>
-                            </div>
-                            <div class="solutions__bottom_row-right">
-                                <span>доставка/монтаж в подарок</span>
-                            </div>
-                        </div>
-                        <div class="solutions__bottom_row">
-                            <p class="solutions__bottom_row-left">Охранная компания</p>
-                            <div class="solutions__bottom_row-center">
-                            <span>
-                                12
-                                месяев обслуживания
-                            </span>
-                                <span>ООО “Зубряков Охрана Компания Ва...</span>
-                            </div>
-                            <div class="solutions__bottom_row-right">
-                                <span>1 мес. в подарок</span>
-                            </div>
-                        </div>
-                        <div class="solutions__bottom_row">
-                            <p class="solutions__bottom_row-left">Страховая выплата</p>
-                            <div class="solutions__bottom_row-center">
-                            <span>
-                                при наступлении страхового случая
-                            </span>
-                                <span>
-                                2 млн.
-                                рублей
-                            </span>
-                            </div>
-                            <div class="solutions__bottom_row-right">
-                                <span>подарок</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="solutions__bottom_right">
-                        <div class="solutions__bottom_column">
-                            <div class="solutions__bottom_column-title">
-                                Всего
-                            </div>
-                            <div class="solutions__bottom_column-oldprice">
-                                50 630 ₽
-                            </div>
-                            <div class="solutions__bottom_column-newprice">
-                                12 000 ₽
-                            </div>
-                            <button class="solutions__bottom_column-btn grey">
-                                купить
-                            </button>
-                        </div>
-                        <div class="solutions__bottom_column">
-                            <div class="solutions__bottom_column-title">
-                                Рассрочка без процентов
-                            </div>
-                            <div class="solutions__bottom_column-interest">
-                                <p>все проценты<br>
-                                    за вас платит <span>vincko:</span>
-                                </p>
-                            </div>
-                            <div class="solutions__bottom_column-monthprice">
-                                <div class="solutions__bottom_column-select">
-                                    12 мес.
-                                </div>
-                                <p>по</p>
-                                <div class="solutions__bottom_column-price">
-                                    1 000 ₽
-                                </div>
-                            </div>
-                            <button class="solutions__bottom_column-btn yellow">
-                                В рассрочку
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*/ ?>
-    <? endif; ?>
     </div>
-    <? if (!$arResult['HIDE_BASKET_BLOCK']): ?>
-        <div class="container">
-            <section class="subscribe" id="subscribe">
-                <div class="subscribe__head">
-                    <h2 class="h2">Подписка <span>vincko: <br>
+    <div class="container">
+        <section class="subscribe" id="subscribe">
+            <div class="subscribe__head">
+                <h2 class="h2">Подписка <span>vincko: <br>
                 “Замена оборудования”</span>
-                    </h2>
+                </h2>
 
 
+            </div>
+
+            <div class="subscribe__content">
+                <div class="subscribe__column">
+                    <div class="subscribe__sub-title">
+                        <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.5 0.25C7.53 0.25 0.25 7.53 0.25 16.5C0.25 25.47 7.53 32.75 16.5 32.75C25.47 32.75 32.75 25.47 32.75 16.5C32.75 7.53 25.47 0.25 16.5 0.25ZM17.9788 26.4937C17.8652 26.6051 17.7214 26.6807 17.5653 26.7111C17.4092 26.7415 17.2476 26.7254 17.1006 26.6649C16.9535 26.6043 16.8274 26.5019 16.738 26.3704C16.6486 26.2389 16.5997 26.084 16.5975 25.925V24.625H16.5C14.42 24.625 12.34 23.8288 10.7475 22.2525C9.64417 21.1465 8.88272 19.7461 8.55421 18.2188C8.22569 16.6915 8.344 15.1019 8.895 13.64C9.20375 12.8112 10.2925 12.6 10.91 13.2337C11.2675 13.5912 11.3487 14.1113 11.1862 14.5663C10.4387 16.5813 10.8612 18.9212 12.4862 20.5462C13.6237 21.6838 15.1187 22.22 16.6138 22.1875V20.66C16.6138 19.9288 17.4913 19.5713 17.995 20.0912L20.6275 22.7237C20.9525 23.0487 20.9525 23.5525 20.6275 23.8775L17.9788 26.4937ZM22.09 19.7825C21.922 19.6096 21.8068 19.3925 21.7579 19.1565C21.709 18.9205 21.7283 18.6754 21.8138 18.45C22.5613 16.435 22.1388 14.095 20.5138 12.47C19.3763 11.3325 17.8812 10.78 16.4025 10.8125V12.34C16.4025 13.0712 15.525 13.4288 15.0212 12.9087L12.3725 10.2925C12.0475 9.9675 12.0475 9.46375 12.3725 9.13875L15.005 6.50625C15.1186 6.3949 15.2623 6.31934 15.4184 6.28891C15.5745 6.25849 15.7361 6.27456 15.8832 6.33511C16.0303 6.39567 16.1563 6.49805 16.2457 6.62958C16.3352 6.7611 16.384 6.91597 16.3862 7.075V8.39125C18.4988 8.35875 20.6275 9.1225 22.2362 10.7475C23.3396 11.8535 24.101 13.2539 24.4295 14.7812C24.7581 16.3085 24.6397 17.8981 24.0888 19.36C23.78 20.205 22.7075 20.4163 22.09 19.7825Z"
+                                  fill="#3CBA54"/>
+                        </svg>
+
+                        Что такое подписка “Замена оборудования”
+
+                    </div>
+
+                    <p>
+                        Подписка дает вам возможность бесплатно получить новый датчик для комплекта оборудования,
+                        купленного на платформе в рамках готового решения.
+                    </p>
                 </div>
 
-                <div class="subscribe__content">
-                    <div class="subscribe__column">
-                        <div class="subscribe__sub-title">
-                            <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.5 0.25C7.53 0.25 0.25 7.53 0.25 16.5C0.25 25.47 7.53 32.75 16.5 32.75C25.47 32.75 32.75 25.47 32.75 16.5C32.75 7.53 25.47 0.25 16.5 0.25ZM17.9788 26.4937C17.8652 26.6051 17.7214 26.6807 17.5653 26.7111C17.4092 26.7415 17.2476 26.7254 17.1006 26.6649C16.9535 26.6043 16.8274 26.5019 16.738 26.3704C16.6486 26.2389 16.5997 26.084 16.5975 25.925V24.625H16.5C14.42 24.625 12.34 23.8288 10.7475 22.2525C9.64417 21.1465 8.88272 19.7461 8.55421 18.2188C8.22569 16.6915 8.344 15.1019 8.895 13.64C9.20375 12.8112 10.2925 12.6 10.91 13.2337C11.2675 13.5912 11.3487 14.1113 11.1862 14.5663C10.4387 16.5813 10.8612 18.9212 12.4862 20.5462C13.6237 21.6838 15.1187 22.22 16.6138 22.1875V20.66C16.6138 19.9288 17.4913 19.5713 17.995 20.0912L20.6275 22.7237C20.9525 23.0487 20.9525 23.5525 20.6275 23.8775L17.9788 26.4937ZM22.09 19.7825C21.922 19.6096 21.8068 19.3925 21.7579 19.1565C21.709 18.9205 21.7283 18.6754 21.8138 18.45C22.5613 16.435 22.1388 14.095 20.5138 12.47C19.3763 11.3325 17.8812 10.78 16.4025 10.8125V12.34C16.4025 13.0712 15.525 13.4288 15.0212 12.9087L12.3725 10.2925C12.0475 9.9675 12.0475 9.46375 12.3725 9.13875L15.005 6.50625C15.1186 6.3949 15.2623 6.31934 15.4184 6.28891C15.5745 6.25849 15.7361 6.27456 15.8832 6.33511C16.0303 6.39567 16.1563 6.49805 16.2457 6.62958C16.3352 6.7611 16.384 6.91597 16.3862 7.075V8.39125C18.4988 8.35875 20.6275 9.1225 22.2362 10.7475C23.3396 11.8535 24.101 13.2539 24.4295 14.7812C24.7581 16.3085 24.6397 17.8981 24.0888 19.36C23.78 20.205 22.7075 20.4163 22.09 19.7825Z"
-                                      fill="#3CBA54"/>
-                            </svg>
-
-                            Что такое подписка “Замена оборудования”
-
-                        </div>
-
-                        <p>
-                            Подписка дает вам возможность бесплатно получить новый датчик для комплекта оборудования,
-                            купленного на платформе в рамках готового решения.
-                        </p>
+                <div class="subscribe__column">
+                    <div class="subscribe__sub-title">
+                        Почему эта подписка дает уверенность при покупке оборудования
                     </div>
 
-                    <div class="subscribe__column">
-                        <div class="subscribe__sub-title">
-                            Почему эта подписка дает уверенность при покупке оборудования
-                        </div>
+                    <p>
+                        В случае, если один из датчиков в комплекте вышел из строя, с этой подпиской Вы просто
+                        получите новый взамен, а ваша недвижимость останется под надежной охраной.
+                    </p>
+                </div>
 
-                        <p>
-                            В случае, если один из датчиков в комплекте вышел из строя, с этой подпиской Вы просто
-                            получите новый взамен, а ваша недвижимость останется под надежной охраной.
-                        </p>
+                <div class="subscribe__column subscribe__column-to-buy">
+                    <div class="subscribe__sub-title subscribe__sub-title--first">
+                        На какой срок оформить подписку?
                     </div>
+                    <div class="subscribe__sub-title subscribe__sub-title--ordered">
+                        В ваш комплект включена эта подписка
+                    </div>
+                    <div class="subscribe__column-to-buy-content">
+                        <div class="subscribe__conditions">
+                            <p>
+                                Длительность гарантии
+                            </p>
+                            <select name="time-choice" id="time-choice" class="time-choice">
+                                <option value="12">12 месяцев</option>
+                                <option value="6">6 месяцев</option>
+                            </select>
 
-                    <div class="subscribe__column subscribe__column-to-buy">
-                        <div class="subscribe__sub-title subscribe__sub-title--first">
-                            На какой срок оформить подписку?
-                        </div>
-                        <div class="subscribe__sub-title subscribe__sub-title--ordered">
-                            В ваш комплект включена эта подписка
-                        </div>
-                        <div class="subscribe__column-to-buy-content">
-                            <div class="subscribe__conditions">
-                                <p>
-                                    Длительность гарантии
-                                </p>
-                                <select name="time-choice" id="time-choice" class="time-choice">
-                                    <option value="12">12 месяцев</option>
-                                    <option value="6">6 месяцев</option>
-                                </select>
-
-                                <div class="subscribe__text">
-                                    Спокойствия и уверенности
-                                </div>
-
-                                <div class="subscribe__result">
-                                    Всего за
-                                    <div class="price">
-                                        600 ₽
-                                    </div>
-                                </div>
-
+                            <div class="subscribe__text">
+                                Спокойствия и уверенности
                             </div>
 
-                            <button class="blue-button to-card-btn">добавить в заказ</a></button>
-                            <button class="button button-ordered to-card-btn">Исключить</button>
+                            <div class="subscribe__result">
+                                Всего за
+                                <div class="price">
+                                    600 ₽
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
 
-                    <div class="subscribe__column subscribe__column-bought">
-                        <div class="subscribe__column-bought-head">
+                        <button id="b-add-subscribe-price" data-subscribe-price="600" class="blue-button to-card-btn">
+                            добавить в заказ</a></button>
+                        <button id="b-del-subscribe-price" data-subscribe-price="0"
+                                class="button button-ordered to-card-btn">Исключить
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="subscribe__column subscribe__column-bought">
+                    <div class="subscribe__column-bought-head">
                     <span>
                         Поздравляем!
                     </span>
 
-                            <svg width="50" height="37" viewBox="0 0 50 37" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M1.02433 17.998C2.38976 16.6592 4.60355 16.6592 5.96898 17.998L16.0099 28.7236L44.0313 1.00409C45.3967 -0.334696 47.6105 -0.334696 48.9759 1.00409C50.3414 2.34288 50.3414 4.51348 48.9759 5.85227L18.4822 35.9959C17.1168 37.3347 14.903 37.3347 13.5376 35.9959L1.02433 22.8462C-0.341092 21.5074 -0.341093 19.3368 1.02433 17.998Z"
-                                      fill="white"/>
-                            </svg>
+                        <svg width="50" height="37" viewBox="0 0 50 37" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M1.02433 17.998C2.38976 16.6592 4.60355 16.6592 5.96898 17.998L16.0099 28.7236L44.0313 1.00409C45.3967 -0.334696 47.6105 -0.334696 48.9759 1.00409C50.3414 2.34288 50.3414 4.51348 48.9759 5.85227L18.4822 35.9959C17.1168 37.3347 14.903 37.3347 13.5376 35.9959L1.02433 22.8462C-0.341092 21.5074 -0.341093 19.3368 1.02433 17.998Z"
+                                  fill="white"/>
+                        </svg>
 
-                        </div>
-                        <div class="subscribe__column-bought-content">
-                            <p>
-                                Ранее Вы уже получили подписку “Замена Оборудования”.
-                            </p>
-                            <p>
-                                Она будет действительна до 16.05.2021.
-                            </p>
-                            <p>
-                                У Вас возникли вопросы? Свяжитесь с нами.
-                            </p>
-                        </div>
                     </div>
-
+                    <div class="subscribe__column-bought-content">
+                        <p>
+                            Ранее Вы уже получили подписку “Замена Оборудования”.
+                        </p>
+                        <p>
+                            Она будет действительна до 16.05.2021.
+                        </p>
+                        <p>
+                            У Вас возникли вопросы? Свяжитесь с нами.
+                        </p>
+                    </div>
                 </div>
 
-            </section>
-        </div>
-    <? endif; ?>
+            </div>
+
+        </section>
+    </div>
+
     <div class="container">
 
-        <?$APPLICATION->IncludeComponent(
+        <? $APPLICATION->IncludeComponent(
             "bitrix:main.include",
             "",
-            Array(
+            array(
                 "AREA_FILE_SHOW" => "file",
                 "AREA_FILE_SUFFIX" => "inc",
                 "EDIT_TEMPLATE" => "",
                 "PATH" => "/include/callback.php"
             )
-        );?>
+        ); ?>
     </div>
-    <?$i=0;?>
+    <? $i = 0; ?>
     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
         <div class="slide-modal" data-slider-info="<?= $i ?>">
             <div class="modal-box">
@@ -1480,7 +1374,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 </div>
             </div>
         </div>
-    <?$i++;?>
+        <? $i++; ?>
     <? endforeach; ?>
 </main>
 
@@ -1517,6 +1411,17 @@ $totalPrice = $complectPrice + $subscriptionFeePrice + $policyPrice;
 $totalDiscountPrice = $complectOldPrice + $subscriptionFeeOldPrice + $policyOldPrice;
 
 $currentSubscriptionFeeMonthsCount = $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'][$currentSubcriptionFeeIndex]['PROPERTY_APTP_MESYAC_VALUE'];
+
+foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $company) {
+    foreach ($company['ITEMS'] as $policy) {
+        if ($policy['ID'] == $currentPolicyIndex) {
+            $policy_name = $policy['NAME'];
+            break;
+        }
+    }
+
+}
+
 $data = [
     'items' => [
         0 => [
@@ -1527,14 +1432,16 @@ $data = [
             'gift' => 'доставка/монтаж в подарок',
             'active' => true,
             'sum' => $complectPrice,
-            'old_sum' => $complectOldPrice
+            'old_sum' => $complectOldPrice,
+            'package_info' => ['name' => $arResult['PACKAGE_GROUP']['NAME'], 'picture_src' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src']]
         ],
         1 => [
             'id' => $currentSubcriptionFeeIndex,
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
-                ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(3, 4)) ? 'а' : 'ев') . ' обслуживания',
+                ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22 ,23,24)) ? 'а' : 'ев') . ' обслуживания',
             'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'months_count' => $currentSubscriptionFeeMonthsCount,
             'gift' => '1 мес. в подарок',
             'active' => true,
             'sum' => $subscriptionFeePrice,
@@ -1545,6 +1452,7 @@ $data = [
             'title' => 'Страховая выплата',
             'name1' => 'при наступлении страхового случая',
             'name2' => $currentPolicyMaxPrice . ' руб',
+            'policy_name' => $policy_name,
             'gift' => 'подарок',
             'active' => true,
             'sum' => $policyPrice,
@@ -1552,7 +1460,8 @@ $data = [
         ],
     ],
     'sum' => $totalPrice,
-    'old_sum' => $totalDiscountPrice
+    'old_sum' => $totalDiscountPrice,
+    'subscribe_sum' => 0
 ];
 
 ?>
@@ -1575,6 +1484,15 @@ $data = [
                     data.old_sum += e.old_sum;
                 }
             })
+            if (data.subscribe_sum > 0) {
+                data.sum += data.subscribe_sum;
+                data.old_sum += data.subscribe_sum;
+            } else {
+                data.sum -= data.subscribe_sum;
+                data.old_sum -= data.subscribe_sum;
+            }
+
+
             itd_basket.$set(data);
         }
 
@@ -1586,6 +1504,17 @@ $data = [
                 return e;
             });
         }
+
+        //subscribe
+        $("#b-add-subscribe-price").on('click', (e) => {
+            data.subscribe_sum = $("#b-add-subscribe-price").data("subscribe-price");
+            updateBasket(data);
+        })
+        $("#b-del-subscribe-price").on('click', (e) => {
+            data.subscribe_sum = $("#b-del-subscribe-price").data("subscribe-price");
+            ;
+            updateBasket(data);
+        })
 
         //complect
         $("#closed-card-eq").on('click', (e) => {

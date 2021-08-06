@@ -49,10 +49,11 @@ $params = array(
     'COOKIE'=>$_COOKIE
 );
 
+//найдем все готовые решения в текущем городе
 $packages = MainService::getPackagesIds($params);
-
-if(!$packages)
-    $arResult['HIDE_BASKET_BLOCK'] = true;
+//если текущего готового решения нет в массиве доступных
+if(!in_array($arResult['ID'],$packages))
+    \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
 
 //получаем группу готового решения
 $parentPackageGroupId = $arResult['IBLOCK_SECTION_ID'];
@@ -66,22 +67,26 @@ $res = CIBlockSection::GetList(
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
 }
-//получаем характеристики для группы готовых решений
-$res = \CIBlockElement::GetList(array(), array("IBLOCK_ID" => $packagesCharacteristicsIblockId ,"ID"=>$arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF'], "ACTIVE" => "Y"), false,
-    false, array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE","PROPERTY_CO_CHARACTERISTICS_REF"));
-while ($arFields = $res->Fetch()) {
-    $picEnd = CFile::ResizeImageGet($arFields["PREVIEW_PICTURE"], array("width" => 90, "height" => 110), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
-    $arResult["PACKAGE_GROUP_CHARACTERISTICS"][$arFields["ID"]] = array(
-        "ID" => $arFields["ID"],
-        "NAME" => $arFields["NAME"],
-        "PREVIEW_TEXT" => $arFields["PREVIEW_TEXT"],
-        "PREVIEW_PICTURE" => $picEnd["src"],
-    );
+if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
+{
+    //получаем характеристики для группы готовых решений
+    $res = \CIBlockElement::GetList(array(), array("IBLOCK_ID" => $packagesCharacteristicsIblockId ,"ID"=>$arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF'], "ACTIVE" => "Y"), false,
+        false, array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE","PROPERTY_CO_CHARACTERISTICS_REF"));
+    while ($arFields = $res->Fetch()) {
+        $picEnd = CFile::ResizeImageGet($arFields["PREVIEW_PICTURE"], array("width" => 90, "height" => 110), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
+        $arResult["PACKAGE_GROUP_CHARACTERISTICS"][$arFields["ID"]] = array(
+            "ID" => $arFields["ID"],
+            "NAME" => $arFields["NAME"],
+            "PREVIEW_TEXT" => $arFields["PREVIEW_TEXT"],
+            "PREVIEW_PICTURE" => $picEnd["src"],
+        );
+    }
 }
+
 //получаем все готовые решения из группы
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId,"=ID"=>$packages, "=IBLOCK_SECTION_ID" => $parentPackageGroupId),
     false,
     false,
     array("ID","*","PROPERTY_CO_CLASS_REF", "PROPERTY_P_COMPLECT")
@@ -128,7 +133,7 @@ while ($arFields = $res->Fetch()) {
 
 $params = array(
     'IBLOCK_ID' => $companyCityAndSubscriptionFeeIblockId,
-    'PACKAGE_ID' => $arResult['COMPLECT_PARENT_PACKAGE']['ID'],
+    'PACKAGE_ID' => $arResult['ID'],
     'COMPANY_CITY_IBLOCK_ID' => $companyCityIblockId,
     'COOKIE' => $_COOKIE
 );
@@ -227,6 +232,8 @@ $res = CIBlockElement::GetList(
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGES_CLASSES'][$arFields['ID']] = $arFields;
+    $previewPicture = CFile::ResizeImageGet($arFields["PREVIEW_PICTURE"], array("width" => 110, "height" => 100), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
+    $arResult['PACKAGES_CLASSES'][$arFields['ID']]['PICTURE'] = $previewPicture;
     $detailPicture = CFile::ResizeImageGet($arFields["DETAIL_PICTURE"], array("width" => 40, "height" => 40), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
     $arResult['PACKAGES_CLASSES'][$arFields['ID']]['ICON'] = $detailPicture;
 }

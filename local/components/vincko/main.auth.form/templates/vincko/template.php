@@ -17,8 +17,11 @@ if ($arResult['AUTHORIZED'])
 	return;
 }
 ?>
-
+<div class="test">
+	<h1>TEST</h1>
+</div>
 <div class="login">
+
 	<div class="login__flex">
 		<div class="login__form">
 
@@ -41,7 +44,7 @@ if ($arResult['AUTHORIZED'])
 				</div>
 				
 				<div class="login__form-block">
-					<label class="login__form-label" for="password"><?=Loc::getMessage('MAIN_AUTH_FORM_FIELD_PASS');?></label>
+					<label class="login__form-label" for="password">ПРОШУ, ДАЙ ЗНАК МНЕ<?=Loc::getMessage('MAIN_AUTH_FORM_FIELD_PASS');?></label>
 					<?if ($arResult['SECURE_AUTH']):?>
 					<div class="bx-authform-psw-protected" id="bx_auth_secure" style="display:none">
 						<div class="bx-authform-psw-protected-desc"><span></span>
@@ -92,8 +95,8 @@ if ($arResult['AUTHORIZED'])
 			<?endif;?>
 		</div>
 		<div class="login__text">
-			<div class="login__text-title">Регистрация нового пользователя</div>
-			<div class="login__text-info">Регистрация на нашем сайте дает возможность оценивать охранные организации и заказывать пакеты услуг.</div>
+			<div class="login__text-title">Регистрация офигенно нового пользователя</div>
+			<div class="login__text-info">(ПАМАГИТИ) Регистрация на нашем сайте дает возможность оценивать охранные организации и заказывать пакеты услуг.</div>
 			<noindex>
 			<?if (!empty($_REQUEST["backurl"])){?>
 			<a href="<?=$arResult['AUTH_REGISTER_URL']?>?backurl=<?=$_REQUEST["backurl"]?>" class="login__text-registration-link"><?=Loc::getMessage('MAIN_AUTH_FORM_URL_REGISTER_URL');?></a>

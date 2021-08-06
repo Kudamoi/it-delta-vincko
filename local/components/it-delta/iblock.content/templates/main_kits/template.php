@@ -77,14 +77,14 @@ $cities = CIBlockElement::GetList(
                             <h5>В подарок:</h5>
                             <ul>
                                 <li>
-                                    <? foreach ($item['PROPERTY_CO_PRESENTS_REF_VALUE'] as $present): ?>
+                                    <? foreach ($item['PRESENTS'] as $present): ?>
                                         <li><span>&#10003;</span> <?=$present?></li>
                                     <? endforeach; ?>
                             </ul>
                         </div>
                         <picture>
-                            <source type="image/svg" srcset="<?=SITE_TEMPLATE_PATH?>/img/ready-des/pic.svg">
-                            <img src="<?=SITE_TEMPLATE_PATH?>/img/ready-des/pic.svg" alt="img" loading="lazy">
+                            <source type="image/svg" srcset="/upload/images/equipment/podarok.svg">
+                            <img src="/upload/images/equipment/podarok.svg" alt="img" loading="lazy">
                         </picture>
                     </div>
                 </div>
