@@ -72,8 +72,7 @@ use Bitrix\Main\Localization\Loc;
 						</div>
 					</div>
 
-					<div class="forget-pass js-modal" data-modal-class=".popup--forget"
-						 data-modal="<?= $arParams["FORGOT_URL"] ?>">
+					<div class="forget-pass js-modal js-modal-forgot">
 						<?= Loc::getMessage("AUTH_FORGET") ?>
 					</div>
 					<? if ($arResult["STORE_PASSWORD"] == "Y"): ?>
@@ -101,8 +100,7 @@ use Bitrix\Main\Localization\Loc;
 			<?= GetMessage("AUTH_LOGIN_BUTTON") ?>
 		</button>
 
-		<div class="text-button js-modal" data-modal-class=".popup--registration"
-			 data-modal="<?= $arParams["REGISTER_URL"] ?>">
+		<div class="text-button js-modal js-modal-registration">
 			<?= GetMessage("AUTH_REGISTER") ?>
 		</div>
 	</div>

@@ -72,20 +72,6 @@ function sendCodeFunc(parent, switcher){
 
 	timer(parent1);
 }
-function eye(){
-	var open = 0;
-	$(".pass__eye").on("click", function(){
-		var $input = $(this).parent();
-		alert();
-	if(open==0){
-		$input.attr("type", "text");
-		open = 1;
-	}else{
-		$input.attr("type", "password");
-		open = 0
-	}
-});
-}
 function viewPopap(){
 	$(".pass-input").inputmask({
 		regex: "[1-9A-Za-z!@$%^&*()_+-]{8,}",
@@ -227,23 +213,31 @@ function load_modal() {
 
 
 	$(".js-modal").on("click", (function () {
-		var $new_modal_class, ajax_url;
-		if ($(this).hassClass("js-modal-change-password")) {
-			$new_modal_class = $(".popup--new-pass");
+		var $new_modal, ajax_url;
+		if ($(this).hasClass("js-modal-change-password")) {
+			$new_modal = $(".popup--new-pass");
+			ajax_url = "/ajax/profile-change-password.php";
 		}
-		if ($(this).hassClass("js-modal-auth")) {
-			$new_modal_class = $(".popup--new-pass");
+		if ($(this).hasClass("js-modal-auth")) {
+			$new_modal = $(".popup--login");
+			ajax_url = "/ajax/profile-auth.php";
 		}
-		if ($(this).hassClass("js-modal-forgot")) { $new_modal_class = ".popup--new-pass";}
-		if ($(this).hassClass("js-modal-registration")) { $new_modal_class = ".popup--new-pass";}
+		if ($(this).hasClass("js-modal-forgot")) {
+			$new_modal = $(".popup--forget");
+			ajax_url = "/ajax/profile-forgot.php";
+		}
+		if ($(this).hasClass("js-modal-registration")) {
+			$new_modal = $(".popup--registration");
+			ajax_url = "/ajax/profile-registration.php";
+		}
 
-		var $new_modal = $($(this).attr("data-modal-class"));
 		if ($new_modal.length > 0) {
 			$(".popup").addClass("hidden");
 			$new_modal.removeClass("hidden");
-		} else {
+		}
+
 			$.ajax({
-				url: $(this).attr("data-modal"),
+				url: ajax_url,
 				method: 'POST',
 				dataType: 'html',
 				success: function (html) {
@@ -252,11 +246,34 @@ function load_modal() {
 					viewPopap();
 				}
 			});
-		}
+
 		return false;
 	}));
 
 
+}
+function ajaxError($form, message, field = ""){
+	$form.find(".error").remove();
+	$form.find(".unknown").removeClass("unknown");
+	$form.find(".info-popup__text").empty();
+	if (field > '') {
+		var $errorBlock = $form.find('[data-field="' + field + '"]');
+		var $parent = $errorBlock.parent();
+		$parent.addClass("unknown");
+		$form.find('[name="' + field + '"]').show();
+		if (field == "USER_PASSWORD"){
+			$form.find('[name="' + field + '"]')
+				.attr("type","text").val("").attr("placeholder",message)
+				.parent().addClass("unknown");
+		}else {
+			$errorBlock.find('.info-popup__text').text(message);
+		}
+	} else {
+		$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + message + "</p>");
+	}
+}
+function initialPopap($form){
+	$form.find(".js-btn-disabled").attr("disabled").addClass();
 }
 
 $(document).ready(function () {

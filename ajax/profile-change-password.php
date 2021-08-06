@@ -6,8 +6,8 @@ $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 if ($request->isAjaxRequest()) { ?>
 	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/main.profile/popup.changepasswd/script.js"></script>
 <? }
-
-$APPLICATION->IncludeComponent(
+?>
+<? $APPLICATION->IncludeComponent(
 	"bitrix:main.profile",
 	"popup.changepasswd",
 	array(

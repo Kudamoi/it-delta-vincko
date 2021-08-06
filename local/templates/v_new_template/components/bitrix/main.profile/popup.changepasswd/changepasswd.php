@@ -1,8 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Localization\Loc;
-$ar = Vincko\Events::OnBeforeUserChangePassword($_REQUEST);
-dump($ar);
 ?>
 
 <div class="popup popup--new-pass">
@@ -22,11 +20,9 @@ dump($ar);
 			</div>
 
 			<div class="popup__subtitle">
-				<?= ($GLOBALS["USER"]->GetFullName() ?
-					str_replace("#NAME#", ", " . $GLOBALS["USER"]->GetFullName(), Loc::getMessage("CHANGE_HELLO"))
-					:
-					Loc::getMessage("CHANGE_HELLO")
-				) ?>
+				<? $fullName = (!empty($GLOBALS["USER"]->GetFullName())? ", " . $GLOBALS["USER"]->GetFullName() : "" );?>
+
+				<?= str_replace("#NAME#", $fullName, Loc::getMessage("CHANGE_HELLO"))?>
 			</div>
 
 			<div class="popup__text">
@@ -42,24 +38,7 @@ dump($ar);
 				<input type="hidden" name="LOGIN" value="<?=$arResult["arUser"]["LOGIN"]?>"/>
 				<input type="hidden" name="PHONE_NUMBER" value="<?=$arResult["arUser"]["PHONE_NUMBER"]?>"/>
 				<input type="hidden" name="AJAX" value="1"/>
-				<div class="popup__form">
-					<div class="popup__form-title">
-						<?= Loc::getMessage("CHANGE_CURRENT_PASSWORD") ?>
-					</div>
-					<div class="pass-wrapper">
-						<input type="password" name="PASSWORD" class="pass-input"
-							   placeholder="<?= Loc::getMessage("CHANGE_CURRENT") ?>" dis/>
-						<div class="pass__eye">
-							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
-								 xmlns="http://www.w3.org/2000/svg">
-								<path d="M16 6C16 6 13 0.5 8 0.5C3 0.5 0 6 0 6C0 6 3 11.5 8 11.5C13 11.5 16 6 16 6ZM1.173 6C1.65651 5.26512 2.21264 4.58069 2.833 3.957C4.12 2.668 5.88 1.5 8 1.5C10.12 1.5 11.879 2.668 13.168 3.957C13.7884 4.58069 14.3445 5.26512 14.828 6C14.77 6.087 14.706 6.183 14.633 6.288C14.298 6.768 13.803 7.408 13.168 8.043C11.879 9.332 10.119 10.5 8 10.5C5.88 10.5 4.121 9.332 2.832 8.043C2.21165 7.41931 1.65552 6.73487 1.172 6H1.173Z"
-									  fill="black"/>
-								<path d="M8 3.5C7.33696 3.5 6.70107 3.76339 6.23223 4.23223C5.76339 4.70107 5.5 5.33696 5.5 6C5.5 6.66304 5.76339 7.29893 6.23223 7.76777C6.70107 8.23661 7.33696 8.5 8 8.5C8.66304 8.5 9.29893 8.23661 9.76777 7.76777C10.2366 7.29893 10.5 6.66304 10.5 6C10.5 5.33696 10.2366 4.70107 9.76777 4.23223C9.29893 3.76339 8.66304 3.5 8 3.5ZM4.5 6C4.5 5.07174 4.86875 4.1815 5.52513 3.52513C6.1815 2.86875 7.07174 2.5 8 2.5C8.92826 2.5 9.8185 2.86875 10.4749 3.52513C11.1313 4.1815 11.5 5.07174 11.5 6C11.5 6.92826 11.1313 7.8185 10.4749 8.47487C9.8185 9.13125 8.92826 9.5 8 9.5C7.07174 9.5 6.1815 9.13125 5.52513 8.47487C4.86875 7.8185 4.5 6.92826 4.5 6Z"
-									  fill="black"/>
-							</svg>
-						</div>
-					</div>
-				</div>
+
 				<div class="popup__form">
 					<div class="popup__form-title">
 						<?= Loc::getMessage("CHANGE_NEW") ?>
@@ -76,6 +55,19 @@ dump($ar);
 									  fill="black"/>
 							</svg>
 						</div>
+						<div class="info-popup info-popup--unknown" data-field="NEW_PASSWORD">
+							<div class="info-popup__wrapper">
+								<div class="info-popup__sign">
+									<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+										 xmlns="http://www.w3.org/2000/svg">
+										<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
+											  fill="#FF3232"/>
+									</svg>
+								</div>
+								<div class="info-popup__text">
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="pass-wrapper">
 						<input type="password" name="NEW_PASSWORD_CONFIRM" value="" class="pass-input"
@@ -89,11 +81,25 @@ dump($ar);
 									  fill="black"/>
 							</svg>
 						</div>
+						<div class="info-popup info-popup--unknown" data-field="NEW_PASSWORD_CONFIRM">
+							<div class="info-popup__wrapper">
+								<div class="info-popup__sign">
+									<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+										 xmlns="http://www.w3.org/2000/svg">
+										<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
+											  fill="#FF3232"/>
+									</svg>
+								</div>
+								<div class="info-popup__text">
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 			<div class="popup__bottom">
-				<button class="blue-button" name="save" value="1">
+				<button class="blue-button blue-button--unactive js-btn-disabled" name="save" value="1">
 					<?= Loc::getMessage("CHANGE_SAVE") ?>
 				</button>
 			</div>

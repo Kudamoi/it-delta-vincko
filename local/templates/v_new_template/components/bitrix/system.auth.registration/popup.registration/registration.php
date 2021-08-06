@@ -215,8 +215,7 @@ $password = Vincko\Auth::generatePassword();
 					<?= Loc::getMessage("REG_BTN_REG") ?>
 				</button>
 
-				<div class="text-button js-modal" data-modal-class=".popup--login"
-					 data-modal="<?= $arParams["AUTH_URL"] ?>">
+				<div class="text-button js-modal js-modal-auth">
 					<?= Loc::getMessage("REG_BTN_AUTH") ?>
 				</div>
 			</div>

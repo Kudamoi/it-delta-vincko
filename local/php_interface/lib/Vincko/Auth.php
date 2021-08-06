@@ -118,13 +118,11 @@ class Auth
 		];
 		// проверяем авторизован ли пользователь
 		if ($GLOBALS["USER"]->isAuthorized()) {
-			// проверяем старый пароль
-			$checkOldPassword = self::checkPassword($request);
-			if ($checkOldPassword) {
-				if ($request["NEW_PASSWORD"] != $request["NEW_PASSWORD_CONFIRM"]) {
+
+			if ($request["NEW_PASSWORD"] != $request["NEW_PASSWORD_CONFIRM"]) {
 					$result = [
 						"TYPE"    => "ERROR",
-						"MESSAGE" => "Пароль отличается от введенного в предыдущем поле",
+						"MESSAGE" => "Пароли не совпадают, проверьте правильность ввода пароля",
 						"FIELD"   => "NEW_PASSWORD_CONFIRM"
 					];
 				} else {
@@ -133,13 +131,7 @@ class Auth
 						"MESSAGE" => "Пароль успешно изменен",
 					];
 				}
-			} else {
-				$result = [
-					"TYPE"    => "ERROR",
-					"MESSAGE" => "Текущий пароль не подходит",
-					"FIELD"   => "PASSWORD"
-				];
-			}
+
 
 		} else {
 			$result = [
