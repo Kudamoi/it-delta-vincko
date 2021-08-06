@@ -209,6 +209,7 @@ function viewPopap(){
 		popup.addClass("hidden");
 	});
 }
+function clickModal(){}
 function load_modal() {
 
 
@@ -265,8 +266,7 @@ function ajaxError($form, message, field = ""){
 		var $errorBlock = $form.find('[data-field="' + field + '"]');
 		var $parent = $errorBlock.parent();
 		$parent.addClass("unknown");
-		alert($parent.attr("class"));
-		alert($errorBlock.attr("class"));
+
 		$form.find('[name="' + field + '"]').show();
 		if (field == "USER_PASSWORD"){
 			$form.find('[name="' + field + '"]')

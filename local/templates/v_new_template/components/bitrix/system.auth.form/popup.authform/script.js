@@ -11,7 +11,6 @@ $(document).ready(function () {
 		if($("[name='USER_LOGIN']").attr("data-complete") == 1 && $("[name='USER_PASSWORD']").attr("data-complete") == 1){
 			$("[name='Login']").removeClass("blue-button--unactive");
 			$("[name='USER_LOGIN']").removeAttr("disabled");
-
 		}else{
 			$("[name='Login']").addClass("blue-button--unactive");
 			$("[name='USER_LOGIN']").attr("disabled");
@@ -19,7 +18,6 @@ $(document).ready(function () {
 		}
 	});
 	$('.js-auth-form').submit(function () {
-
 		var $form = $(this),
 			$btn = $(document.activeElement),
 			btnSerialize = $btn.attr("name") + "=" + $btn.val(),

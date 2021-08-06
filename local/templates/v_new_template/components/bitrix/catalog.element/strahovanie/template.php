@@ -40,7 +40,7 @@ $this->setFrameMode(true);
 						<div class="products__cost"><?= $arPolicy["PRICE"] ?>/год</div>
 						<form method="POST" action="<?= $arParams["BASKET_URL"] ?>">
 							<input type="hidden" name="POLICY_ID" value="<?= $arPolicy["ID"] ?>">
-							<button class="products__order js-modal js-modal-auth" value="1"><?= GetMessage('T_INSURANCE_ORDER') ?></button>
+							<button class="products__order<?=(!$GLOBALS["USER"]->IsAuthorized()?" js-modal js-modal-auth":"")?>" value="1"><?= GetMessage('T_INSURANCE_ORDER') ?></button>
 						</form>
 					</div>
 					<div class="products__footer-down">
