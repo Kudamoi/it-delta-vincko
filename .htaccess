@@ -1,8 +1,3 @@
-AuthType Basic
-AuthName "Password Protected Area"
-AuthUserFile /home/bitrix/ext_www/.htpasswd
-Require valid-user
-
 Options -Indexes
 ErrorDocument 404 /404.php
 
