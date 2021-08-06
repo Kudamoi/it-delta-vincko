@@ -9,7 +9,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
 				"AREA_FILE_SHOW"   => "file",
 				"AREA_FILE_SUFFIX" => "inc",
 				"EDIT_TEMPLATE"    => "",
-				"PATH"             => "/ajax/change-password.php"
+				"PATH"             => "/ajax/profile-change-password.php"
 			),
 			false,
 			array(

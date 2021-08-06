@@ -80,11 +80,6 @@ $("#ajax_form_callback_btn").on('click',function(){
 
 	})
 
-	$(".header__top-cabinet .js-modal").click(function () {
-		var thisModal = $(this).attr("data-modal-class");
-		$(thisModal).removeClass("hidden");
-		return false;
-	});
 
 	function timer(parent) {
 		parent.find(".popup__wait-time").css("display", "block");

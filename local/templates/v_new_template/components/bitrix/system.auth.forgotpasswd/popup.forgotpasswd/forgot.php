@@ -284,11 +284,11 @@ use Bitrix\Main\Localization\Loc;
 				</button>
 
 				<div class="popup__bottom-b">
-					<div class="text-button js-modal" data-modal-class=".popup--registration" data-modal="<?=$arParams["AUTH_URL"]?>">
+					<div class="text-button js-modal js-modal-registration">
 						<?= Loc::getMessage("FORGOT_BTN_AUTH") ?>
 					</div>
 
-					<div class="text-button js-modal" data-modal-class=".popup--registration" data-modal="<?=$arParams["REGISTER_URL"]?>">
+					<div class="text-button js-modal js-modal-registration">
 						<?= Loc::getMessage("FORGOT_BTN_REG") ?>
 					</div>
 				</div>
