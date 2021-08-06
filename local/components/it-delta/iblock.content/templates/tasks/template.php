@@ -51,15 +51,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         <div class="item__content">
                             <p>Услуги компании <a class="item__content-company-not">
                                     <select name="solutions__bottom_column-select" class="solutions__bottom_column-select">
-                                        <div class="rating-center__search_form">
-                                            <div class="searchForm__modal">
-                                                <div class="searchForm__modal_wrapper">
-                                                    <?foreach ($arResult['COMPANIES'] as $company):?>
-                                                        <option <?=isset($_GET['company']) && $_GET['company'] == $company['ID']? 'selected' : '';?> value="<?=$company['ID']?>"><?=$company['NAME']?></option>
-                                                    <?endforeach;?>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?foreach ($arResult['COMPANIES'] as $company):?>
+                                            <option <?=isset($_GET['company']) && $_GET['company'] == $company['ID']? 'selected' : '';?> value="<?=$company['ID']?>"><?=$company['NAME']?></option>
+                                        <?endforeach;?>
                                     </select>
                                 </a>
                                 в городе <a style="cursor: text" class="item__content-city"><?= $arResult['CURRENT_CITY']['NAME'] ?></a></p>
