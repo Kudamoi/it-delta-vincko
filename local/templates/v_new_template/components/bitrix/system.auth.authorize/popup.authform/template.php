@@ -4,6 +4,7 @@ use Bitrix\Main\Application;
 
 $request = Application::getInstance()->getContext()->getRequest();
 
+
 if ($request->getPost("AJAX")) {
 	include(Application::getDocumentRoot() . $templateFolder . '/ajax.php');
 }else {
