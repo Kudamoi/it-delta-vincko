@@ -158,16 +158,16 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
 }
 ?>
 <main class="complect main ">
-    <div class="container">
-        <div class="container up-top-slider-bg">
-            <div class="top-slider-bg ">
-                <picture>
-                    <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
-                    <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>"
-                         alt="<?= $arResult['NAME'] ?>">
-                </picture>
-            </div>
+    <div class="container up-top-slider-bg">
+        <div class="top-slider-bg ">
+            <picture>
+                <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
+                <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
+            </picture>
         </div>
+    </div>
+    <div class="container">
+        
         <section class="complect__slider">
             <div class="complect__slider-wrapper">
                 <div class="solutions-card__circles">
@@ -441,7 +441,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 </div>
                 <div class="slider__under">
 
-                    <div class="slider__under-block-1 close">
+                    <div class="slider__under-block-1">
                         <div class="slider__under-block-1-first">
                             <div class="title">Преимущества датчика</div>
                             <div class="line"></div>
@@ -475,7 +475,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <? $i++; ?>
                             <? endforeach; ?>
                         </div>
-                        <div class="close-btn">Развернуть</div>
+                      
                     </div>
                     <div class="slider__under-block-2 close" id="tech">
                         <div class="title">Технические характеристики датчика</div>
@@ -568,18 +568,18 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                name="solutions-card__top-select">
                                                         <div class="select__head">Выбрать другой комплект</div>
                                                         <div class="select__list" style="display: none;">
+                                                           
                                                             <div class="select__list-item">
                                                                 <!-- Выбрано -->
                                                                 <div class="select__list-item_title">Выбрано</div>
                                                                 <div class="select__list-item_policy">
                                                                     <div class="select__list-item_policy-top">
-                                                                <span class="font-weight policy-title">
-                                                                    Комплект “ <span
-                                                                            class="font-weight"><?= $arResult['NAME'] ?></span> ”
-                                                                </span>
+                                                                        <span class="font-weight policy-title">
+                                                                            <?= $arResult['NAME'] ?>
+                                                                        </span>
                                                                         <span>
-                                                                    <?= $arResult['PRICES']['BASE']['DISCOUNT_VALUE'] ?> руб
-                                                                </span>
+                                                                            <?= $arResult['PRICES']['BASE']['DISCOUNT_VALUE'] ?> руб
+                                                                        </span>
                                                                     </div>
                                                                 </div>
 
@@ -595,14 +595,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy">
                                                                         <div class="select__list-item_policy-top">
                                                                             <span data-slug="<?= $item['CODE'] ?>"
-                                                                                  class="js-refresh-equipitem-data-ajax policy-title">Комплект“<span
-                                                                                        class="p"><?= $item['NAME'] ?></span>”</span>
+                                                                                  class="js-refresh-equipitem-data-ajax policy-title"><?= $item['NAME'] ?></span>
                                                                             <span class="opacity"><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб</span>
                                                                         </div>
                                                                     </div>
                                                                 <? endforeach; ?>
 
                                                             </div>
+                                                         
                                                         </div>
                                                     </form>
                                                 </div>
@@ -1339,7 +1339,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
     </div>
     <? $i = 0; ?>
     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
-        <div class="slide-modal" data-slider-info="<?= $i ?>">
+        <div class="slide-modal " data-slider-info="<?= $i ?>">
             <div class="modal-box">
                 <div class="title"><?= $ec["NAME"] ?></div>
                 <div class="close" data-close="<?= $i ?>">
@@ -1348,8 +1348,9 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <img src="<?= SITE_TEMPLATE_PATH ?>/img/cartochka/close-modal.svg" alt="close-modal">
                     </picture>
                 </div>
+                
+                
                 <div class="modal-slider">
-
                     <? // additional photos
                     if (count($ec["EQUIPMENT_PICTURES"]) > 0):?>
                         <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
@@ -1359,6 +1360,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
+                   
                 </div>
                 <div class="modal-bottom">
                     <? if (count($ec["EQUIPMENT_PICTURES"]) > 0): ?>
