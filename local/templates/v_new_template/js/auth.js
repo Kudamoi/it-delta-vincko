@@ -227,6 +227,16 @@ function load_modal() {
 
 
 	$(".js-modal").on("click", (function () {
+		var $new_modal_class, ajax_url;
+		if ($(this).hassClass("js-modal-change-password")) {
+			$new_modal_class = $(".popup--new-pass");
+		}
+		if ($(this).hassClass("js-modal-auth")) {
+			$new_modal_class = $(".popup--new-pass");
+		}
+		if ($(this).hassClass("js-modal-forgot")) { $new_modal_class = ".popup--new-pass";}
+		if ($(this).hassClass("js-modal-registration")) { $new_modal_class = ".popup--new-pass";}
+
 		var $new_modal = $($(this).attr("data-modal-class"));
 		if ($new_modal.length > 0) {
 			$(".popup").addClass("hidden");
