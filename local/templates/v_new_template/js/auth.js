@@ -106,13 +106,16 @@ function viewPopap($form) {
 		showMaskOnHover: false,
 	});
 
-
-	$form.find(".popup__code").inputmask("999999", {
-		completed: function () {
-			$(this).parents("form").find(".popup__send-code").css("display", "grid");
-
+	$form.find(".popup__code").keyup(function(){
+		var $form = $(this).parents("form");
+		if ($(this).inputmask("isComplete")) {
+			$form.find(".popup__send-code").css("display", "grid");
+		}else{
+			$form.find(".popup__send-code").css("display", "none");
 		}
 	});
+
+	$form.find(".popup__code").inputmask("999999");
 
 	$form.find(".phone-input").inputmask("+7(999) 999-9999", {
 		completed: function () {
@@ -151,9 +154,7 @@ function viewPopap($form) {
 		timer($form);
 	});
 
-	$form.find(".popup__send-code").on("click", function () {
-		schowBtnSendCode($form);
-	});
+
 
 	$(".popup__close,.popup__wall").on("click", function () {
 		closePopup();
@@ -165,6 +166,9 @@ function closePopup() {
 	$(".js-event").removeAttr("data-ajax-stop");
 }
 
+function hideHelp(pthis){
+	pthis.unknown
+}
 
 function clickModal() {
 }
@@ -219,9 +223,26 @@ function ajaxError($form, message, field = "") {
 		} else {
 			$errorBlock.find('.info-popup__text').text(message);
 		}
+		setTimeout(function () {
+			$parent.find('.info-popup__text').hide();
+		}, 1000);
+		$parent.find(".info-popup__sign").find("svg").mouseenter(function(){
+			$(this).parents(".info-popup").find('.info-popup__text').show();
+		}).mouseleave(function(){
+			$(this).parents(".info-popup").find('.info-popup__text').hide();
+		})
 	} else {
 		$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + message + "</p>");
 	}
+}
+
+function sendCodeFuncDestroy($form) {
+	$form.find(".popup__send-code, .popup__code,  .popup__wait-repeat").show();
+	$form.find(".popup__wait").css("opacity", "1")
+	$form.find(".popup__wait-time").css("display", "none")
+	$form.find(".popup__success").css("display", "none");
+	$form.find(".popup--forget .popup__bottom .blue-button").removeClass("blue-button--active");
+	$form.find(".popup--forget .popup__bottom .blue-button").addClass("blue-button--unactive");
 }
 
 function removeError(){
