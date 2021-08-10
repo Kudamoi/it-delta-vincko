@@ -1,5 +1,8 @@
 <?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
+const cityIbId = 20;
+const companyIbId = 8;
+
 $usersIds = '';
 foreach ($arResult['rows'] as $row)
 {
@@ -16,7 +19,7 @@ $arResult['USERS_LIST'] = $arSpecUser;
 
 $res = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => 20, "ACTIVE" => "Y"),
+    array("IBLOCK_ID" => cityIbId, "ACTIVE" => "Y"),
     false,
     false,
     array("ID","NAME")
@@ -28,12 +31,12 @@ while($arFields = $res->Fetch()){
 
 $res = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "=PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
+    array("IBLOCK_ID" => companyIbId, "ACTIVE" => "Y", "=ID" => $arResult['rows'][0]['UF_CHOP_ID']),
     false,
     false,
-    array("ID","PROPERTY_CHOP_ID.NAME")
+    array("ID","NAME")
 );
 
 while($arFields = $res->Fetch()){
-    $arResult['SECURE_COMPANIES'][$arFields['ID']] = $arFields;
+    $arResult['CURRENT_SECURE_COMPANY'] = $arFields;
 }

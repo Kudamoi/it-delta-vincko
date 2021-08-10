@@ -485,7 +485,7 @@ if ($_GET['itd'] == 'y') {
 
     <div class="reviews__form-top--result__name">
         <span>Сейчас вы смотрите отзывы о компании:</span>
-        <p>ООО “Максимум Максимилиан Максимович”</p>
+        <p><?=$arResult['CURRENT_SECURE_COMPANY']['NAME']?></p>
     </div>
     <!-- form--result end-->
 
