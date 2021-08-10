@@ -57,13 +57,13 @@ use Bitrix\Main\Entity;
     ); ?>
 
     <?
-    $dbchops = CIBlockElement::GetList(
-        array(),
-        array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
-        false,
-        false,
-        array("ID")
-    );
+//    $dbchops = CIBlockElement::GetList(
+//        array(),
+//        array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
+//        false,
+//        false,
+//        array("ID")
+//    );
 
     //    while($chop = $dbchops->GetNext()){
     //        $dbreview = CIBlockElement::GetList(
@@ -108,7 +108,6 @@ use Bitrix\Main\Entity;
 
     Loader::includeModule("highloadblock");
 
-
     $hlblock = HL\HighloadBlockTable::getById(ReviewsHL)->fetch();
 
     $entity = HL\HighloadBlockTable::compileEntity($hlblock);
@@ -116,7 +115,8 @@ use Bitrix\Main\Entity;
 
     $rsData = $entity_data_class::getList(array(
         "select" => array("*"),
-        "filter" => array("UF_CHOP_ID" => 879)
+        "filter" => array("UF_CHOP_ID" => 879,
+            "UF_CITY_ID" => 771)
     ));
     $arrReviews = [];
     while ($arData = $rsData->Fetch()) {
