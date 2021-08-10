@@ -23,10 +23,12 @@ class Auth
 	public static function getUser($field)
 	{
 
-		if ($field["USER_EMAIL"]) {
-			$filter = ["EMAIL" => $field["USER_EMAIL"]];
-		} else {
-			$filter = ["LOGIN" => $field["USER_LOGIN"]];
+		if(empty($field["EMAIL"]) && empty($field["LOGIN"])){ return false; }
+
+		if (!empty($field["EMAIL"])) {
+			$filter["EMAIL"] = $field["EMAIL"];
+		} elseif (!empty($field["LOGIN"])) {
+			$filter["LOGIN"] = $field["LOGIN"];
 		}
 
 		$rsUsers = \CUser::GetList(
@@ -65,6 +67,7 @@ class Auth
 		$sms->setLanguage('ru');
 		$sms->send();
 	}
+
 // функция проверяетна соответсвие введеного пароля с текущим
 	public
 	static function checkPassword($request)
@@ -74,6 +77,59 @@ class Auth
 		return $checkOldPassword;
 	}
 
+	// функция получает ошибку
+	public static function getError($event, $arAuthResult = [], $arResult = [])
+	{
+		switch ($event) {
+			case "PHONE_NOT_REGISTERED":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Извините, пользователь с таким номером телефона не зарегистрирован. Проверьте правильность ввода номера.",
+					"FIELD"   => "USER_LOGIN"
+				];
+				break;
+			case "EMAIL_NOT_REGISTERED":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Извините, пользователь с таким e-mail не зарегистрирован. Проверьте правильность ввода e-mail.",
+					"FIELD"   => "USER_EMAIL"
+				];
+				break;
+			case "BAD_CHECKWORD_PHONE":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Проверьте правильность введенного кода или запросите SMS с кодом повторно",
+					"FIELD"   => "CHECKWORD"
+				];
+				break;
+			case "BAD_CHECKWORD_EMAIL":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Неверный проверочный код",
+					"FIELD"   => "CHECKWORD"
+				];
+				break;
+			case "CONFIRM_PASSWORD":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Проли не совпадают",
+					"FIELD"   => "USER_CONFIRM_PASSWORD"
+				];
+				break;
+			case "SUCCESS":
+				$result = [
+					"TYPE"    => "OK",
+					"MESSAGE" => "",
+					"RESULT" => $arResult
+				];
+				break;
+			default:
+				$result = $arAuthResult;
+		}
+
+
+		return $result;
+	}
 
 	// функция генерирует ошибки при заполнении формы регистрации, включает пользователя
 	public static function registration($request, $arAuthResult)
@@ -121,17 +177,17 @@ class Auth
 		if ($GLOBALS["USER"]->isAuthorized()) {
 
 			if ($request["NEW_PASSWORD"] != $request["NEW_PASSWORD_CONFIRM"]) {
-					$result = [
-						"TYPE"    => "ERROR",
-						"MESSAGE" => "Пароли не совпадают, проверьте правильность ввода пароля",
-						"FIELD"   => "NEW_PASSWORD_CONFIRM"
-					];
-				} else {
-					$result = [
-						"TYPE"    => "OK",
-						"MESSAGE" => "Пароль успешно изменен",
-					];
-				}
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Пароли не совпадают, проверьте правильность ввода пароля",
+					"FIELD"   => "NEW_PASSWORD_CONFIRM"
+				];
+			} else {
+				$result = [
+					"TYPE"    => "OK",
+					"MESSAGE" => "Пароль успешно изменен",
+				];
+			}
 
 
 		} else {
@@ -146,10 +202,10 @@ class Auth
 
 	// функция генерирует ошибки авторизации пользователя
 	public
-	static function authh($request)
+	static function auth($request)
 	{
 
-	$return = $GLOBALS["USER"]->Login(strip_tags($request['USER_LOGIN']),strip_tags($request['USER_PASSWORD']),($request['USER_REMEMBER'] == "Y" ? $request['USER_REMEMBER'] : "N"));
+		$return = $GLOBALS["USER"]->Login(strip_tags($request['USER_LOGIN']), strip_tags($request['USER_PASSWORD']), ($request['USER_REMEMBER'] == "Y" ? $request['USER_REMEMBER'] : "N"));
 
 		if (empty($return['MESSAGE'])) {
 			$result = [
@@ -164,11 +220,7 @@ class Auth
 					"FIELD"   => "USER_PASSWORD"
 				];
 			} else {
-				$result = [
-					"TYPE"    => "ERROR",
-					"MESSAGE" => "Пользователь с текущем номером не существует",
-					"FIELD"   => "USER_LOGIN"
-				];
+				$result = self::getError("PHONE_NOT_REGISTERED");
 			}
 		}
 
@@ -177,42 +229,49 @@ class Auth
 	}
 
 	// функция генерирует ошибки при изменении пароля зарегистрированного пользователя
-	public
-	static function forgot($request, $arAuthResult)
+	public static function forgot($request, $arAuthResult, $arResult)
 	{
-		if ($arAuthResult["TYPE"] == "ERROR") {
-			if(!empty($request["USER_EMAIL"]) || !empty($request["USER_LOGIN"])) {
-				//проверяем существует ли пользователь
-				if(!empty($_REQUEST["USER_EMAIL"])){
-					$field = ["EMAIL" => $_REQUEST["USER_EMAIL"]];
-				}else{
-					$field = ["LOGIN"=> $_REQUEST["USER_LOGIN"]];
-				}
 
-				if ($arUsers =  self::getUser($field)) {
-					if(!empty($request["USER_CHECKWORD_SMS"]) || !empty($request["USER_CHECKWORD_SMS"])) {
-						$arAuthResult["FIELD"] = ($request["USER_CHECKWORD_SMS"] ? "USER_CHECKWORD_SMS" : "USER_CHECKWORD_EMAIL");
-						$arAuthResult["MESSAGE"] = "Неверный проверочный код";
-					}elseif($request["USER_PASSWORD"]!=$request["USER_CONFIRM_PASSWORD"]){
-						$arAuthResult["FIELD"] = "USER_CONFIRM_PASSWORD";
-						$arAuthResult["MESSAGE"] = "Проли не совпадают";
-					}
-				}else{
-					if (!empty($request["USER_EMAIL"])) {
-						$arAuthResult["FIELD"] = "USER_EMAIL";
-						$arAuthResult["MESSAGE"] = "Данный e-mail не зарегистрирован на сайте";
-					} elseif (!empty($request["USER_LOGIN"])) {
-						$arAuthResult["FIELD"] = "USER_LOGIN";
-						$arAuthResult["MESSAGE"] = "Данный номер не зарегистрирован на сайте";
-					}
-				}
+		if (!empty($request["USER_EMAIL"]) || !empty($request["USER_LOGIN"])) {
+			// получаем пользователя
+			if (!empty($_REQUEST["USER_EMAIL"])) {
+				$field = ["EMAIL" => $_REQUEST["USER_EMAIL"]];
+			} else {
+				$field = ["LOGIN" => $_REQUEST["USER_LOGIN"]];
 			}
-		}else{
-			$arAuthResult["MESSAGE"] = "";
-			$arAuthResult["EVENT"]   = "AUTH";
+			$arUsers = self::getUser($field);
 		}
 
-		return json_encode($arAuthResult);
+		if ($arUsers) {
+			if ($request["USER_PASSWORD"] != $request["USER_CONFIRM_PASSWORD"]) {
+				$result = self::getError("CONFIRM_PASSWORD");
+			}
+		} else {
+
+			if (!empty($request["USER_EMAIL"])) {
+				$result = self::getError("EMAIL_NOT_REGISTERED");
+			} elseif (!empty($request["USER_LOGIN"])) {
+				$result = self::getError("PHONE_NOT_REGISTERED");
+			}
+		}
+
+		if (empty($result)) {
+		if ($arAuthResult["TYPE"] == "ERROR" ) {
+			if (!empty($request["USER_CHECKWORD"]) && $arUsers) {
+				if (!empty($request["USER_CHECKWORD_SMS"])) {
+					$result = self::getError("BAD_CHECKWORD_PHONE");
+				}else{
+					$result = self::getError("BAD_CHECKWORD_EMAIL");
+				}
+			} else {
+				$result = $arAuthResult;
+			}
+		}else{
+			$result = self::getError("SUCCESS", $arResult);
+		}}
+
+		return json_encode($result);
 	}
 
 }
+

@@ -1,23 +1,10 @@
 $(document).ready(function () {
 
-	load_modal();
+	var $form = $(".js-changepasswd-form");
 
-	$("[name='NEW_PASSWORD'],[name='NEW_PASSWORD_CONFIRM']").keyup(function(){
-		if ($(this).inputmask("isComplete")) {
-			$(this).attr("data-complete", 1);
-		}else {
-			$(this).attr("data-complete", 0);
-		}
-		if($("[name='NEW_PASSWORD']").attr("data-complete") == 1 && $("[name='NEW_PASSWORD_CONFIRM']").attr("data-complete") == 1){
-			btnActive($(this).parents("form"));
-		}else{
-			btnUnActive($(this).parents("form"));
-		}
-	});
+	viewPopap($form);
 
-	btnUnActive($('.js-changepasswd-form'));
-
-	$('.js-changepasswd-form').submit(function () {
+	$form.submit(function () {
 
 		var $form = $(this),
 			$btn = $(document.activeElement),
@@ -54,5 +41,11 @@ $(document).ready(function () {
 		});
 		return false;
 	});
+
+	$form.find("[name='NEW_PASSWORD'],[name='NEW_PASSWORD_CONFIRM']").keyup(function(){
+		changePass($form, $(this),"[name='NEW_PASSWORD']","[name='NEW_PASSWORD_CONFIRM']");
+	});
+
+	btnUnActive($form.find(".js-btn-disabled"));
 
 });

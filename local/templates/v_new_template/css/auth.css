@@ -1,5 +1,5 @@
 .sms_code,.auth-login{ position: relative;}
-.js-modal{cursor:pointer}
+.js-in-modal{cursor:pointer}
 .auth-form .popup__form-title, .auth-login{
     margin-bottom: 8px;
 }

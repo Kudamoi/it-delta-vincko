@@ -1,23 +1,10 @@
 $(document).ready(function () {
-	load_modal();
-	$("[name='USER_LOGIN']").attr("disabled");
+	var $form = $(".js-auth-form");
+	viewPopap($form);
 
-	$("[name='USER_LOGIN'],[name='USER_PASSWORD']").keyup(function(){
-		if ($(this).inputmask("isComplete")) {
-			$(this).attr("data-complete", 1);
-		}else {
-			$(this).attr("data-complete", 0);
-		}
-		if($("[name='USER_LOGIN']").attr("data-complete") == 1 && $("[name='USER_PASSWORD']").attr("data-complete") == 1){
-			$("[name='Login']").removeClass("blue-button--unactive");
-			$("[name='USER_LOGIN']").removeAttr("disabled");
-		}else{
-			$("[name='Login']").addClass("blue-button--unactive");
-			$("[name='USER_LOGIN']").attr("disabled");
+	$form.find("[name='USER_LOGIN']").attr("disabled");
 
-		}
-	});
-	$('.js-auth-form').submit(function () {
+	$form.submit(function () {
 		var $form = $(this),
 			$btn = $(document.activeElement),
 			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
@@ -26,7 +13,7 @@ $(document).ready(function () {
 		console.log($form.serialize());
 		console.log(btnSerialize);
 
-	$.ajax({
+		$.ajax({
 			url: action,
 			method: 'POST',
 			data: $form.serialize() + "&" + btnSerialize,
@@ -76,4 +63,21 @@ $(document).ready(function () {
 		});
 		return false;
 	});
+
+	$form.find("[name='USER_LOGIN'],[name='USER_PASSWORD']").keyup(function(){
+		if ($(this).inputmask("isComplete")) {
+			$(this).attr("data-complete", 1);
+		}else {
+			$(this).attr("data-complete", 0);
+		}
+		if($("[name='USER_LOGIN']").attr("data-complete") == 1 && $("[name='USER_PASSWORD']").attr("data-complete") == 1){
+			$("[name='Login']").removeClass("blue-button--unactive");
+			$("[name='USER_LOGIN']").removeAttr("disabled");
+		}else{
+			$("[name='Login']").addClass("blue-button--unactive");
+			$("[name='USER_LOGIN']").attr("disabled");
+
+		}
+	});
+
 });

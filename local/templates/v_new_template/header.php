@@ -40,8 +40,8 @@ $Asset = Asset::getInstance();
 
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/libs/jquery_maskedinput/jquery.maskedinput.min.js");?>
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/libs/Inputmask/jquery.inputmask.min.js");?>
-	<? $Asset->addJs("https://atuin.ru/demo/ui-slider/jquery-ui.min.js");?>
-	<? $Asset->addJs("https://atuin.ru/demo/ui-slider/jquery.ui.touch-punch.min.js");?>
+	<? $Asset->addJs(SITE_TEMPLATE_PATH."/libs/ui-slider/jquery-ui.min.js");?>
+	<? $Asset->addJs(SITE_TEMPLATE_PATH."/libs/ui-slider/jquery.ui.touch-punch.min.js");?>
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/libs/Inputmask/jquery.inputmask.min.js");?>
 
 	<? $Asset->addJs(SITE_TEMPLATE_PATH."/js/site.js");?>
