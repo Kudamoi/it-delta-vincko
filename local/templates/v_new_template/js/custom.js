@@ -145,11 +145,7 @@ $("#ajax_form_callback_btn").on('click',function(){
 			parent.find(".popup__wait-time").css("display", "block");
 			timer(parent);
 		});
-		parent.find(".popup__code").mask("9999", {
-			completed: function completed() {
-				parent.find(".popup__send-code").css("display", "grid");
-			}
-		});
+
 		parent.find(".popup__send-code").on("click", function () {
 			parent.find(".popup__send-code, .popup__code,  .popup__wait-repeat").css("display", "none");
 			parent.find(".popup__wait-time").css("opacity", "0");

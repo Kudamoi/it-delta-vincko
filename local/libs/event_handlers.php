@@ -5,6 +5,8 @@ CModule::AddAutoloadClasses(
     '',
     array(
         'MainService' => '/local/libs/service/MainService.php',
+        'FeedbackDTO' => '/local/libs/service/FeedbackDTO.php',
+        'FeedbackService' => '/local/libs/service/FeedbackService.php',
     )
 );
 //функция для кеширования данных

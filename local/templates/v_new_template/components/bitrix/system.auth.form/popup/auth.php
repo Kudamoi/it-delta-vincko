@@ -4,6 +4,12 @@ use Bitrix\Main\Localization\Loc;
 
 ?>
 <div class="popup popup--login">
+
+	<? $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+
+	if ($request->isAjaxRequest()) { ?>
+	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.form/popup/script.js"></script>
+	<? }?>
 	<div class="popup__wall"></div>
 
 	<div class="popup__content">
@@ -40,7 +46,7 @@ use Bitrix\Main\Localization\Loc;
 
 				<div class="auth-login">
 					<div class="popup__form">
-						<input type="tel" name="USER_LOGIN" class="phone-input"
+						<input type="tel" name="USER_LOGIN" data-field="USER_LOGIN" class="phone-input"
 							   placeholder="<?= Loc::getMessage("AUTH_PHONE") ?>" autocomplete="off"/>
 						<div class="info-popup info-popup--unknown" data-field="USER_LOGIN">
 							<div class="info-popup__wrapper">
@@ -59,8 +65,8 @@ use Bitrix\Main\Localization\Loc;
 				</div>
 				<div class="popup__form">
 					<div class="pass-wrapper">
-						<input type="password" name="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>"
-							   class="pass-input" autocomplete="off"/>
+						<input type="password" name="USER_PASSWORD"  data-field="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>"
+							   data-view="0" class="pass-input" autocomplete="off"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
 								 xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +78,7 @@ use Bitrix\Main\Localization\Loc;
 						</div>
 					</div>
 
-					<div class="forget-pass js-modal js-modal-forgot">
+					<div class="forget-pass js-in-modal js-modal-forgot">
 						<?= Loc::getMessage("AUTH_FORGET") ?>
 					</div>
 					<? if ($arResult["STORE_PASSWORD"] == "Y"): ?>
@@ -100,7 +106,7 @@ use Bitrix\Main\Localization\Loc;
 			<?= GetMessage("AUTH_LOGIN_BUTTON") ?>
 		</button>
 
-		<div class="text-button js-modal js-modal-registration">
+		<div class="text-button js-in-modal js-modal-registration">
 			<?= GetMessage("AUTH_REGISTER") ?>
 		</div>
 	</div>
