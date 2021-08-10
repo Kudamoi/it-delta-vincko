@@ -106,3 +106,6 @@ bower_components
 
 # и логи xhprof напоследок
 /xhprof/logs
+
+# фронтенд
+/local/HTML/
