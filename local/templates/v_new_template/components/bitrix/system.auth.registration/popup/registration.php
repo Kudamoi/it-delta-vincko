@@ -7,6 +7,13 @@ $password = Vincko\Auth::generatePassword();
 ?>
 
 <div class="popup popup--registration">
+	<?
+	$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+
+	if ($request->isAjaxRequest()) { ?>
+	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.registration/popup/script.js"></script>
+	<? } ?>
+
 	<div class="popup__wall"></div>
 
 	<div class="popup__content">
@@ -44,7 +51,7 @@ $password = Vincko\Auth::generatePassword();
 			<div class="popup__main">
 				<div class="popup__form popup__dub-form">
 					<div class="popup__form popup__form--name">
-
+						<?/*
 						<div class="popup__form-title">
 							<div class="info-popup-2">
 								<div class="info-popup-2__wrapper">
@@ -63,7 +70,7 @@ $password = Vincko\Auth::generatePassword();
 							</div>
 							<?= Loc::getMessage("REG_NAME") ?>
 						</div>
-						<div class="inputs-wrapper">
+					<div class="inputs-wrapper">
 							<input type="text" name="USER_NAME" value="<?= $arResult["USER_NAME"] ?>" placeholder="Имя"
 								   class="text-input bx-auth-input"/>
 							<input type="text" name="USER_LAST_NAME" value="<?= $arResult["USER_LAST_NAME"] ?>"
@@ -75,7 +82,7 @@ $password = Vincko\Auth::generatePassword();
 							<?= Loc::getMessage("REG_BODY_TEXT_2") ?>
 						</p>
 					</div>
-
+*/?>
 					<div class="popup__form popup__form--phone popup__form-mod--phone">
 						<div class="popup__form-title">
 							<div class="info-popup-2">
@@ -105,7 +112,7 @@ $password = Vincko\Auth::generatePassword();
 						<!-- unknown -->
 
 						<div class="phone-wrapper" data-field="PHONE">
-							<input type="tel" placeholder="<?= Loc::getMessage("REG_NUMBER") ?>" name="USER_LOGIN"
+							<input type="tel" data-field="USER_LOGIN" placeholder="<?= Loc::getMessage("REG_NUMBER") ?>" name="USER_LOGIN"
 								   autocomplete="off"
 								   value="" class="phone-input"/>
 							<div class="info-popup info-popup--unknown" data-field="USER_LOGIN">
@@ -154,7 +161,7 @@ $password = Vincko\Auth::generatePassword();
 						</div>
 
 						<div class="sms_code">
-							<input type="text" name="SMS_CODE" placeholder="Код из SMS" class="popup__code" disabled
+							<input type="text" name="SMS_CODE" data-field="SMS_CODE" placeholder="Код из SMS" class="popup__code" disabled
 								   autocomplete="off">
 								<div class="info-popup info-popup--unknown" data-field="SMS_CODE">
 									<div class="info-popup__wrapper">
@@ -195,7 +202,7 @@ $password = Vincko\Auth::generatePassword();
 
 						</div>
 					</div>
-
+				<?/*
 					<input type="checkbox" name="USER_AGREEMENT" id="agree">
 					<label class="remember-me" for="agree">
                         <span class="box">
@@ -207,7 +214,8 @@ $password = Vincko\Auth::generatePassword();
 
                         </span>
 						<?= Loc::getMessage("REG_AGREEMENT") ?>
-					</label>
+					</label>*/?>
+						<div style="height: 150px;"></div>
 				</div>
 			</div>
 			<div class="popup__bottom">
@@ -215,7 +223,7 @@ $password = Vincko\Auth::generatePassword();
 					<?= Loc::getMessage("REG_BTN_REG") ?>
 				</button>
 
-				<div class="text-button js-modal js-modal-auth">
+				<div class="text-button js-in-modal js-modal-auth">
 					<?= Loc::getMessage("REG_BTN_AUTH") ?>
 				</div>
 			</div>

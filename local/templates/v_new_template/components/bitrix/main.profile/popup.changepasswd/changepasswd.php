@@ -4,6 +4,12 @@ use Bitrix\Main\Localization\Loc;
 ?>
 
 <div class="popup popup--new-pass">
+<?
+	$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+
+	if ($request->isAjaxRequest()) { ?>
+	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/main.profile/popup.changepasswd/script.js"></script>
+	<? } ?>
 	<div class="popup__wall"></div>
 
 	<div class="popup__content">
@@ -21,7 +27,6 @@ use Bitrix\Main\Localization\Loc;
 
 			<div class="popup__subtitle">
 				<? $fullName = (!empty($GLOBALS["USER"]->GetFullName())? ", " . $GLOBALS["USER"]->GetFullName() : "" );?>
-
 				<?= str_replace("#NAME#", $fullName, Loc::getMessage("CHANGE_HELLO"))?>
 			</div>
 
@@ -43,8 +48,8 @@ use Bitrix\Main\Localization\Loc;
 						<?= Loc::getMessage("CHANGE_NEW") ?>
 					</div>
 					<div class="pass-wrapper">
-						<input type="password" name="NEW_PASSWORD" class="pass-input"
-							   placeholder="<?= Loc::getMessage("CHANGE_PASW") ?>" dis/>
+						<input type="password" data-view="0" name="NEW_PASSWORD" class="pass-input"
+							   placeholder="<?= Loc::getMessage("CHANGE_PASW") ?>" data-field="NEW_PASSWORD"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
 								 xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +74,7 @@ use Bitrix\Main\Localization\Loc;
 						</div>
 					</div>
 					<div class="pass-wrapper">
-						<input type="password" name="NEW_PASSWORD_CONFIRM" value="" class="pass-input"
+						<input type="password" name="NEW_PASSWORD_CONFIRM" value=""  data-view="0" class="pass-input" data-field="NEW_PASSWORD_CONFIRM"
 							   placeholder="<?= Loc::getMessage("CHANGE_PASW_CONFIRM") ?>"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
