@@ -9,7 +9,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
 				"AREA_FILE_SHOW"   => "file",
 				"AREA_FILE_SUFFIX" => "inc",
 				"EDIT_TEMPLATE"    => "",
-				"PATH"             => "/ajax/registration.php"
+				"PATH"             => "/ajax/profile-registration.php"
 			),
 			false,
 			array(
