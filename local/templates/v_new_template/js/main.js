@@ -1951,8 +1951,8 @@
               reviewBox.style.background = '#FFECEC';
               var source = reviewIcon.querySelector('source'),
                   img = reviewIcon.querySelector('img');
-              source.setAttribute('srcset', '../img/review/massage-bad.svg');
-              img.setAttribute('src', '../img/review/massage-bad.svg');
+              source.setAttribute('srcset', '/upload/review/massage-bad.svg');
+              img.setAttribute('src', "/upload/review/massage-bad.svg");
               reviewText.innerHTML = 'Этот отзыв не влияет на рейтинг, так как вы не являетесь покупателем услуг данной охранной компании в рамках платформы <a href="">vincko:</a>';
             }
           }
@@ -2213,19 +2213,19 @@
             _stepOneNext.addEventListener('click', function () {
               _stepOneMid.classList.remove('active');
 
-              _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"../img/review/step-1-no-active.svg\">\n                <img src=\"../img/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
+              _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-1-no-active.svg\">\n                <img src=\"/upload/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
 
               _stepTwoMid.classList.add('active');
 
               _reviewBlock.classList.add('step-2');
 
-              _stepTwoMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"../img/review/step-2-active.svg\">\n                <img src=\"../img/review/step-2-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n            <picture class=\"icon\">\n                <source srcset=\"../img/review/step-2-icon.svg\">\n                <img src=\"../img/review/step-2-icon.svg\" alt=\"good\">\n            </picture>\n            <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+              _stepTwoMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-2-active.svg\">\n                <img src=\"/upload/review/step-2-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n            <picture class=\"icon\">\n                <source srcset=\"/upload/review/step-2-icon.svg\">\n                <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n            </picture>\n            <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
             });
 
             _stepTwoNext.addEventListener('click', function () {
               _stepTwoMid.classList.remove('active');
 
-              _stepTwoMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"../img/review/step-2-no-active.svg\">\n        <img src=\"../img/review/step-2-no-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n        <picture class=\"icon\">\n            <source srcset=\"../img/review/step-2-icon.svg\">\n            <img src=\"../img/review/step-2-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+              _stepTwoMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-2-no-active.svg\">\n        <img src=\"/upload/review/step-2-no-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-2-icon.svg\">\n            <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
 
               _stepThreeMid.classList.add('active');
 
@@ -2233,7 +2233,7 @@
 
               _reviewBlock.classList.add('step-3');
 
-              _stepThreeMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"../img/review/step-3-active.svg\">\n        <img src=\"../img/review/step-3-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>3</span> \u041D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</p>\n        <picture class=\"icon\">\n            <source srcset=\"../img/review/step-3-icon.svg\">\n            <img src=\"../img/review/step-3-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+600 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+              _stepThreeMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-3-active.svg\">\n        <img src=\"/upload/review/step-3-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>3</span> \u041D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-3-icon.svg\">\n            <img src=\"/upload/review/step-3-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+600 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
             });
           }
         }
