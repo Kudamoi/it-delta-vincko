@@ -10,16 +10,9 @@ $request = Application::getInstance()->getContext()->getRequest();
 if ($request->isAjaxRequest()) {
 	$signedCheck = \Vincko\Auth::signedCheck($_REQUEST);
 	if ($signedCheck) {
-		$result = [
-			"TYPE"    => "OK",
-			"MESSAGE" => ""
-		];
+		$result = \Vincko\Auth::getError("SUCCESS");
 	} else {
-		$result = [
-			"TYPE"    => "ERROR",
-			"MESSAGE" => "Неверный код",
-			"FIELD"   => "SMS_CODE"
-		];
+		$result = \Vincko\Auth::getError("BAD_CHECKWORD_PHONE");
 	}
 
 	echo json_encode($result);
