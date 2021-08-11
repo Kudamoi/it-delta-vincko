@@ -2,6 +2,7 @@ $(document).ready(function () {
 
 	$(".js-bonuce").click(function(){
 		$(".header__popup").removeClass("hidden");
+		return false;
 	});
 $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 

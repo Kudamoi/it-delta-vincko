@@ -1,10 +1,15 @@
 <?php
 
 $MESS["FORM_POLICY_MORE"] = "Подробнее";
-$MESS["FORM_POLICY_STEP_ABOUT"] = "Шаг 1. Сведения о Вас";
-$MESS["FORM_POLICY_STEP_PAY"] = "Шаг 2. Оплата";
-$MESS["FORM_POLICY_PAY"] = "Выберите вариант оплаты";
-$MESS["FORM_POLICY_EXPAND"] = "Развернуть";
+$MESS["FORM_POLICY_STEP_ABOUT"] = "Сведения о Вас";
+$MESS["FORM_POLICY_STEP_1"] = "Шаг 1";
+$MESS["FORM_POLICY_STEP_PAY"] = "Оплата";
+$MESS["FORM_POLICY_STEP_2"] = "Шаг 2";
+$MESS["FORM_POLICY_PAY"] = "Способ оплаты";
+$MESS["FORM_POLICY_EXPAND"] = "Показать";
+$MESS["FORM_POLICY_HIDE"] = "Скрыть";
+$MESS["FORM_POLICY_TEXT_IF"] = "текст с условиями ";
+$MESS["FORM_POLICY_TOTAL"] = "Всего";
 $MESS["FORM_POLICY_INFORMATION"] = "Общая информация";
 $MESS["FORM_POLICY_GENDER"] = "Пол *";
 $MESS["FORM_POLICY_PASSPORT"] = "Паспортные данные";
@@ -19,4 +24,9 @@ $MESS["FORM_POLICY_PAYMENT_MAX"] = "Максимальная выплата :";
 $MESS["FORM_POLICY_PAYMENTS"] = "Выплаты по основным пунктам :";
 $MESS["FORM_POLICY_ANOTHER"] = "Выбрать другое";
 $MESS["FORM_POLICY_NEXT"] = "Далее";
-$MESS["FORM_POLICY_ERROR_MSG"] = "* Звездочкой отмечены поля обязательные для заполнения";
+$MESS["FORM_POLICY_ERROR_MSG"] = "Заполните обязательные поля *";
+$MESS["FORM_POLICY_DATA"] = "Данные введены";
+$MESS["FORM_POLICY_PAY_INFO"] = "Выберите способ оплаты. В случае оплаты картой, после нажатия кнопки “Оформить заказ” Вы будете перенаправлены на сайт банка для совершения оплаты заказа.";
+
+$MESS["FORM_POLICY_MAX_PAY"] = "Максимальная выплата";
+$MESS["FORM_POLICY_OPTIONS_PAY"] = "Выплаты по основным пунктам:";

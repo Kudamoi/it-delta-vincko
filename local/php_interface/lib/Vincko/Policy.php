@@ -100,11 +100,12 @@ class Policy
 		while ($arPolicy = $obPolicy->GetNextElement()) {
 			$fields = $arPolicy->GetFields();
 			$props = $arPolicy->GetProperties();
-
+			$price = \CPrice::GetBasePrice($fields["ID"]);
 			$policy[$fields["ID"]] = [
 				"ID"         => $fields["ID"],
 				"NAME"       => $fields["NAME"],
 				"PROPERTIES" => $props,
+				"PRICE" => number_format($price["PRICE"], 0, ' ', ' ')
 			];
 
 		}
@@ -169,7 +170,7 @@ class Policy
 			"MAX_PRICE_TEXT"     => $arOffer["PROPERTIES"]["MAX_PRICE_TEXT"]["~VALUE"]["TEXT"],
 			"MAX_PRICE"          => CurrencyFormat($arOffer["PROPERTIES"]["MAX_PRICE"]["VALUE"], 'RUB'),
 			"MAX_PRICE_ORIGINAL" => $arOffer["PROPERTIES"]["MAX_PRICE"]["VALUE"],
-			"PRICE"              => $arOffer["PRICES"]["BASE"]["PRINT_VALUE_NOVAT"],
+			"PRICE"              => (is_array($arOffer["PRICE"])? $arOffer["PRICE"]["BASE"]["PRINT_VALUE_NOVAT"] : $arOffer["PRICE"]),
 			"BONUS"              => number_format($arOffer["PRICES"]["BONUS"]["VALUE"], 0, ' ', ' ')
 		];
 
