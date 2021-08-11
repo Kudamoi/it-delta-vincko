@@ -37,7 +37,7 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$i = 0;
 
 				foreach ($arQuestion['STRUCTURE'] as $arAnsw) {
-					if($FIELD_SID == 'POLICY_ADDRESS' && $arAnsw["ID"]== 30 ){
+					if($FIELD_SID == 'POLICY_ADDRESS' && $arAnsw["VALUE"]== 3 ){
 						$id = "other";
 					}else{
 						$id = $arAnsw["ID"];
@@ -68,7 +68,7 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$name = "form_email_" . $idAnsw;
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
-				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value. ' id="email-field"  class="js-check-valid-field ' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
+				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value. ' id="email-field"  class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
 				break;
 			case "text":
 				$name = "form_text_" . $idAnsw;
