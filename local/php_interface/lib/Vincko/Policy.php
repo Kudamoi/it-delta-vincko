@@ -170,7 +170,7 @@ class Policy
 			"MAX_PRICE_TEXT"     => $arOffer["PROPERTIES"]["MAX_PRICE_TEXT"]["~VALUE"]["TEXT"],
 			"MAX_PRICE"          => CurrencyFormat($arOffer["PROPERTIES"]["MAX_PRICE"]["VALUE"], 'RUB'),
 			"MAX_PRICE_ORIGINAL" => $arOffer["PROPERTIES"]["MAX_PRICE"]["VALUE"],
-			"PRICE"              => (is_array($arOffer["PRICE"])? $arOffer["PRICE"]["BASE"]["PRINT_VALUE_NOVAT"] : $arOffer["PRICE"]),
+			"PRICE"              => (is_array($arOffer["PRICES"])? $arOffer["PRICES"]["BASE"]["PRINT_VALUE_NOVAT"] : $arOffer["PRICE"]),
 			"BONUS"              => number_format($arOffer["PRICES"]["BONUS"]["VALUE"], 0, ' ', ' ')
 		];
 
