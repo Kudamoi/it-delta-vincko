@@ -1,11 +1,27 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 ?>
-<?
+
+<? // TODO решение на скорую руку: надо разобраться почему не срабатывают настройки главного модуля при переключении шаблона формы?>
+<? $APPLICATION->IncludeComponent(
+	"bitrix:main.include",
+	"",
+	array(
+		"AREA_FILE_SHOW"   => "file",
+		"AREA_FILE_SUFFIX" => "inc",
+		"EDIT_TEMPLATE"    => "",
+		"PATH"             => "/ajax/profile-auth.php"
+	),
+	false,
+	array(
+		"HIDE_ICONS" => "Y"
+	)
+); ?>
+
+<?/*
 ShowMessage($arParams["~AUTH_RESULT"]);
 ShowMessage($arResult['ERROR_MESSAGE']);
 ?>
-
 <div class="login__flex">
 	<div class="login__form">
 	<?if($arResult["AUTH_SERVICES"]):?>
@@ -65,7 +81,7 @@ ShowMessage($arResult['ERROR_MESSAGE']);
 					<td><input type="checkbox" id="USER_REMEMBER" name="USER_REMEMBER" value="Y" /><label for="USER_REMEMBER">&nbsp;<?=GetMessage("AUTH_REMEMBER_ME")?></label></td>
 				</tr>
 	<?endif?>
-	*/?>
+	* /?>
 				<input type="submit" class="login__form-submit" name="Login" value="<?=GetMessage("AUTH_AUTHORIZE")?>">
 			</table>
 
@@ -86,7 +102,7 @@ ShowMessage($arResult['ERROR_MESSAGE']);
 				</p>
 			</noindex>
 	<?endif?>
-	*/?>
+	* /?>
 		</form>
 	</div>
 	<div class="login__text">
@@ -109,3 +125,4 @@ try{document.form_auth.USER_PASSWORD.focus();}catch(e){}
 try{document.form_auth.USER_LOGIN.focus();}catch(e){}
 <?endif?>
 </script>
+*/?>

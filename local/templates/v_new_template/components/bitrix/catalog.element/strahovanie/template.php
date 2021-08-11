@@ -32,7 +32,7 @@ $this->setFrameMode(true);
 						'POLICY'         => $arPolicy,
 					],
 					false,
-["HIDE_ICONS"=>"Y" ]
+					["HIDE_ICONS" => "Y"]
 				); ?>
 
 				<div class="products__footer">
@@ -40,7 +40,7 @@ $this->setFrameMode(true);
 						<div class="products__cost"><?= $arPolicy["PRICE"] ?>/год</div>
 						<form method="POST" action="<?= $arParams["BASKET_URL"] ?>">
 							<input type="hidden" name="POLICY_ID" value="<?= $arPolicy["ID"] ?>">
-							<button class="products__order"><?= GetMessage('T_INSURANCE_ORDER') ?></button>
+							<button class="products__order<?=(!$GLOBALS["USER"]->IsAuthorized()?" js-modal js-modal-auth":"")?>" value="1"><?= GetMessage('T_INSURANCE_ORDER') ?></button>
 						</form>
 					</div>
 					<div class="products__footer-down">
@@ -48,7 +48,7 @@ $this->setFrameMode(true);
 							<?= GetMessage('T_INSURANCE_BONUCE') ?>
 						</div>
 
-						<a class="products__get-bonuses blue-border-button">
+						<a class="products__get-bonuses blue-border-button js-bonuce">
 							<?= GetMessage('T_INSURANCE_GET_BONUCE') ?>
 						</a>
 
@@ -56,14 +56,22 @@ $this->setFrameMode(true);
 							<div class="products__instalment-offer">
 								<?= GetMessage('T_INSURANCE_ORDER_POLICE') ?>
 							</div>
-							<div class="products__instalment-info">
+							<a class="products__instalment-info">
 								<?= GetMessage('T_INSURANCE_MORE') ?>
-							</div>
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<? endforeach; ?>
+		<? $APPLICATION->IncludeComponent(
+			"bitrix:main.include", "",
+			[
+				"AREA_FILE_SHOW" => "file",
+				"EDIT_TEMPLATE"  => "",
+				"PATH"           => "/include/strahovanie-loyalty-program.php"
+			]
+		); ?>
 	</div>
 <? endif; ?>
 
@@ -128,6 +136,5 @@ $this->setFrameMode(true);
 	</div>
 <? endif; ?>
 <? $this->EndViewTarget("document"); ?>
-
 
 <? // БЛОК ЭТО ВЫГОДНО ?>

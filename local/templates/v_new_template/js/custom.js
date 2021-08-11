@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
-
+	$(".js-bonuce").click(function(){
+		$(".header__popup").removeClass("hidden");
+		return false;
+	});
 $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 
 	$("#b-add-order").click(
@@ -80,11 +83,6 @@ $("#ajax_form_callback_btn").on('click',function(){
 
 	})
 
-	$(".header__top-cabinet .js-modal").click(function () {
-		var thisModal = $(this).attr("data-modal-class");
-		$(thisModal).removeClass("hidden");
-		return false;
-	});
 
 	function timer(parent) {
 		parent.find(".popup__wait-time").css("display", "block");
@@ -148,11 +146,7 @@ $("#ajax_form_callback_btn").on('click',function(){
 			parent.find(".popup__wait-time").css("display", "block");
 			timer(parent);
 		});
-		parent.find(".popup__code").mask("9999", {
-			completed: function completed() {
-				parent.find(".popup__send-code").css("display", "grid");
-			}
-		});
+
 		parent.find(".popup__send-code").on("click", function () {
 			parent.find(".popup__send-code, .popup__code,  .popup__wait-repeat").css("display", "none");
 			parent.find(".popup__wait-time").css("opacity", "0");
@@ -296,6 +290,8 @@ function sendAjaxForm(result_form, ajax_form, url) {
 			$('#b-form-order-ajax-errors').html('Ошибка. Данные не отправлены.');
 		}
 	});
+
+
 }
 
 

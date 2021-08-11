@@ -1,17 +1,20 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Регистрация");
-?>
-<?$APPLICATION->IncludeComponent(
-    "vincko:main.register",
-    "vincko_reg",
-    Array(
-        "AUTH" => "N",
-        "REQUIRED_FIELDS" => array("PHONE_NUMBER","NAME","LAST_NAME"),
-        "SET_TITLE" => "N",
-        "SHOW_FIELDS" => array("PHONE_NUMBER","NAME","LAST_NAME"),
-        "SUCCESS_PAGE" => "/auth/",
-        "USER_PROPERTY_NAME" => "",
-        "USE_BACKURL" => "Y",
-    )
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php"); ?>
+	<main class="container main">
+		<? // TODO нужно выяснить как должна выглядеть страница авторизации, если не в попапе создать шаблон?>
+		<? $APPLICATION->IncludeComponent(
+			"bitrix:main.include",
+			"",
+			array(
+				"AREA_FILE_SHOW"   => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE"    => "",
+				"PATH"             => "/ajax/profile-registration.php"
+			),
+			false,
+			array(
+				"HIDE_ICONS" => "Y"
+			)
+		); ?>
+	</main>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

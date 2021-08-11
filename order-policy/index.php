@@ -23,7 +23,8 @@ $APPLICATION->SetTitle("Оформление страхового полиса")
 		"WEB_FORM_ID"            => "1",
 		"PAY_TO_LIST" => "/order/",
 		"BACK_LINK" => "/strahovanie/",
-		"TITLE" => "Страховой полис"
+		"TITLE" => "Оформление заказа",
+		"SUB_TITLE" => "Страхование"
 
 
 

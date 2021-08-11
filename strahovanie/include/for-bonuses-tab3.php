@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к подпискам</a>
+			<a href="" class="button js-bonuce">Перейти к подпискам</a>
 		</div>
 	</div>
 </div>

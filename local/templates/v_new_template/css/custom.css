@@ -279,10 +279,6 @@
 }
 
 
-.form__content .form__section:last-child {
-    border-bottom: none;
-}
-
 .select .selected-radio-btn {
     margin-left: 20px;
     height: 100%;
