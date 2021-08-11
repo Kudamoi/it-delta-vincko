@@ -37,6 +37,7 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$i = 0;
 
 				foreach ($arQuestion['STRUCTURE'] as $arAnsw) {
+					// если текущее поле "Адрес квартиры, для которой вы оформляете страховку", у ответа "Указать другой адрес" будет особый id и отображение, предусмотренное на верстке
 					if($FIELD_SID == 'POLICY_ADDRESS' && $arAnsw["VALUE"]== 3 ){
 						$id = "other";
 					}else{
