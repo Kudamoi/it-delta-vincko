@@ -15,7 +15,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 <main class="review">
     
     <div class="container">
-        <div class="breadcumbs">
+        <!-- <div class="breadcumbs">
             <nav>
                 <ul>
                     <li><a href="/">Главная </a></li>
@@ -24,7 +24,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <li><a href="">Оставить отзыв</a></li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
         <div class="reviews__form-top">
             <form>
                 <div class="pseudo__search">
@@ -521,7 +521,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             <?++$k?>
                                             <li class="q <?=$k == 1 ? "active" : "before"?>">
                                                 <div class="q-left">
-                                                    <h5><?=$item["NAME"]?></h5>
+                                                    <h5 data-id="<?=$item["ID"]?>"><?=$item["NAME"]?></h5>
                                                 </div>
                                                 <div class="q-right">
                                                     <span>7</span>

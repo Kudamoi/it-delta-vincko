@@ -3,7 +3,7 @@ $(document).ready(function() {
     var stepTwoNext = document.querySelector('.review__btn.step-2 .next');
     var stepThreeEnd = document.querySelector('.review__btn.step-3 .stop');
 
-    let score = [];
+    let score = {};
 
     stepOneNext.addEventListener('click', function () {
         var input = document.querySelector('.smile-input'),
@@ -36,7 +36,7 @@ $(document).ready(function() {
             
             if(i == 0){
                 score["CUSTOMER_FOCUS_SCORE"] = span;
-                score["CUSTOMER_FOCUS_SCORE_COMMENT"] = textarea.value;
+                score["CUSTOMER_FOCUS_COMMENT"] = textarea.value;
             }else if (i == 1) {
                 score["COMFORT_SCORE"] = span;
                 score["COMFORT_SCORE_COMMENT"] = textarea.value;
@@ -53,11 +53,12 @@ $(document).ready(function() {
         let arrElements = [];
 
         stepThreeItems.forEach(function (item, i) {
-            var span = item.querySelector('.q-right span').innerHTML;
+            var span = item.querySelector(".q-right span").innerHTML;
+            var questionId = item.querySelector(".q-left h5");
             var textarea = item.querySelector("textarea[name=coment]");
 
-            arrElements[i] = Array();
-            arrElements[i]["QUESTION"] = 1;
+            arrElements[i] = new Object();
+            arrElements[i]["QUESTION_ID"] = questionId.getAttribute("data-id");
             arrElements[i]["REVIEW_SCORE"] = span;
             arrElements[i]["REVIEW_SCORE_COMMENT"] = textarea.value;
         });
@@ -73,16 +74,17 @@ $(document).ready(function() {
         score["CHOP_ID"] = params["chop"];
         score["CITY_ID"] = params["city"];
         score["REVIEW_SCORES"] = arrElements;
-    });
 
-    $.ajax({
-        url: "ajax/Feedback.php",
-        type: "POST",
-        data: JSON.stringify(score),
-        dataType: "json",
-        success: function(data)
-        {
-            console.log(data);
-        }
+        console.log(score);
+        $.ajax({
+            method: "POST",
+            url: "/ajax/addFeedback.php",
+            data: {'feedbackData': score},
+            dataType: "html",
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
     });
 });

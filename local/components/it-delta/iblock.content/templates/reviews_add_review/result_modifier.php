@@ -1,7 +1,7 @@
 <?php
 $dbCompany = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("IBLOCK_ID" => 9, "ID" => intval($_GET["chop"])),
+    array("IBLOCK_ID" => 8, "ID" => intval($_GET["chop"])),
     false,
     false,
     array("ID", "NAME")
