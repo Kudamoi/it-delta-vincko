@@ -6877,7 +6877,7 @@ input[type="checkbox"] {
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item ul {
   display: flex;
-  margin-left: 32px;
+  margin-left: 28px;
   align-items: flex-end;
   margin-bottom: 13px;
 }
@@ -6886,7 +6886,8 @@ input[type="checkbox"] {
   font-size: 14px;
   font-weight: 500;
   color: #818181;
-  margin-right: 12px;
+  margin-right: 18px;
+  margin-left: 12px;
 }
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item ul li:first-child {
@@ -7223,7 +7224,8 @@ input[type="checkbox"] {
   font-size: 14px;
   font-weight: 500;
   color: #818181;
-  margin-right: 12px;
+  margin-right: 18px;
+  margin-left: 12px;
 }
 
 .review.step-3 .review__bottom.step-3 .step-3-item.active .content .content-wrapper .right .list-q .q.active .active-block ul li:first-child {
@@ -12511,7 +12513,8 @@ html {
 }
 
 .polzunok__number {
-  margin-top: 22 px;
+  margin-top: 22
+ px;
   display: block;
   color: #93b6ff;
   width: 5ch;
@@ -25475,7 +25478,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
 
   .loyality__calculator .content__items {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "left center" "left right";
+    grid-template-areas: "left center"
+ "left right";
   }
 
   .loyality__calculator .content__items-left {

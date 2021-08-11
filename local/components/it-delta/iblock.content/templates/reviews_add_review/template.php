@@ -2,6 +2,8 @@
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
+global $USER;
+
 /**
  * Bitrix component iblock.content (webgsite.ru)
  * Компонент для битрикс, работа с инфоблоком одностраничный вывод
@@ -280,7 +282,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 </div>
             </form>
         </div>
-        <div class="review__massage bad">
+        <div class="review__massage  <?=$USER->IsAuthorized() ? "" : "bad"?>">
             <div class="review__massage-icon">
                 <picture>
                     <source srcset="/upload/review/massage-good.svg">
@@ -399,7 +401,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </li>
                         </ul>
                         <div class="pseudo__range-reivew">
-                            <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="50000" value="1">
+                            <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="49999" value="1">
                         </div>
                     </div>
                     <p class="text-2">Насколько вы удовлетворены качеством <br> услуг, оказываемых охранной <br> компанией?</p>
@@ -416,15 +418,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         
         <div class="review__btn step-1">
             <button class="add-review">Оставить отзыв</button>
-            <button class="next">Продолжить</button>
-            <div class="bonus-block">
-                <span>и получить</span>
-                <picture>
-                    <source srcset="/upload/review/step-2-icon.svg">
-                    <img src="/upload/review/step-2-icon.svg" alt="good">
-                </picture> 
-                <span>500</span>
-            </div>
+            <? if($USER->IsAuthorized()): ?>
+                <button class="next">Продолжить</button>
+                <div class="bonus-block">
+                    <span>и получить</span>
+                    <picture>
+                        <source srcset="/upload/review/step-2-icon.svg">
+                        <img src="/upload/review/step-2-icon.svg" alt="good">
+                    </picture> 
+                    <span>500</span>
+                </div>
+            <? endif ?>
         </div>
         <div class="review__bottom step-2">
         <? foreach($arResult["SECTIONS"] as $elementPosition => $section): ?>
@@ -436,7 +440,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <div class="number-wrapper">
                         <span>?</span>
                     </div>
-                    <div class="item-name"><?=$section["NAME"]?></div>
+                    <div class="item-name" id="<?=$section["ID"]?>"><?=$section["NAME"]?></div>
                 </div>
                 <ul>
                     <li class="review-item-step-2 active">Не могу <br> оценить</li>
@@ -446,19 +450,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <li class="review-item-step-2">3</li>
                     <li class="review-item-step-2">4</li>
                     <li class="review-item-step-2">5</li>
-                    <li class="review-item-step-2">6</li>
-                    <li class="review-item-step-2">7</li>
-                    <li class="review-item-step-2">8</li>
-                    <li class="review-item-step-2">9</li>
-                    <li class="review-item-step-2">10</li>
                 </ul>
                 <div class="pseudo__range-reivew">
-                    <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="130000" value="0">
+                    <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="77999" value="0">
                 </div>
                 <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
                 <div class="coment-block">
                     <p><?=$section["~UF_TEXT_BEFORE_FIELD"]?></p>
-                    <textarea name="step-1-coment" placeholder="Комментарий"></textarea>
+                    <textarea name="step-2-coment" placeholder="Комментарий"></textarea>
                 </div>
             </div>
         <? endforeach ?>
@@ -507,7 +506,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         <div class="content-wrapper">
                             <div class="left">
                                 <div class="number-block">
-                                    <div class="number"><span>7</span></div>
+                                    <div class="number" id="<?=$section["ID"]?>"><span>?</span></div>
                                     <p class="num-text"><?=$section["NAME"]?> <br> <span>Подробная оценка</span></p>
                                 </div>
                                 <div class="left-text">
@@ -524,26 +523,21 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     <h5 data-id="<?=$item["ID"]?>"><?=$item["NAME"]?></h5>
                                                 </div>
                                                 <div class="q-right">
-                                                    <span>7</span>
+                                                    <span>?</span>
                                                 </div>
                                                 <div class="active-block">
                                                     <p><?=$item["~PREVIEW_TEXT"]?></p>
                                                     <ul>
-                                                        <li class="review-item-step-3">Не могу <br> оценить</li>
+                                                        <li class="review-item-step-3 active">Не могу <br> оценить</li>
                                                         <li class="review-item-step-3">0</li>
                                                         <li class="review-item-step-3">1</li>
                                                         <li class="review-item-step-3">2</li>
                                                         <li class="review-item-step-3">3</li>
                                                         <li class="review-item-step-3">4</li>
                                                         <li class="review-item-step-3">5</li>
-                                                        <li class="review-item-step-3">6</li>
-                                                        <li class="review-item-step-3 active">7</li>
-                                                        <li class="review-item-step-3">8</li>
-                                                        <li class="review-item-step-3">9</li>
-                                                        <li class="review-item-step-3">10</li>
                                                     </ul>
                                                     <div class="pseudo__range-reivew">
-                                                        <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="130000" value="89143">
+                                                        <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="77999" value="0">
                                                     </div>
                                                     <div class="block-coment">
                                                         <textarea name="coment"  placeholder="Комментарий"></textarea>

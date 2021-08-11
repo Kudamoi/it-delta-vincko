@@ -19,7 +19,6 @@ class FeedbackService
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
         $entity_data_class = $entity->getDataClass();
 
-
         $data = array(
             "UF_USER_ID"=> $USER->getId(),
             "UF_REVIEW_SOURCE_ID"=> 1,
@@ -37,13 +36,14 @@ class FeedbackService
             "UF_SECURITY_SCORE_COMMENT"=>$value['SECURITY_SCORE_COMMENT'],
         );
 
+        
         $DB->StartTransaction();
         $result = $entity_data_class::add($data);
-
-
+        
+        
         if ($result->isSuccess()) {
             $hlblock = HL\HighloadBlockTable::getById(ReviewsScoresHL)->fetch();
-
+            
             $entity = HL\HighloadBlockTable::compileEntity($hlblock);
             $entity_data_class = $entity->getDataClass();
             $id = $result->getId();
@@ -55,7 +55,7 @@ class FeedbackService
                     "UF_REVIEW_SCORE"=>$review_score['REVIEW_SCORE'],
                     "UF_REVIEW_SCORE_COMMENT"=>$review_score['REVIEW_SCORE_COMMENT']
                 );
-
+                
                 $result = $entity_data_class::add($data);
                 if (!$result->isSuccess()) {
                     $DB->Rollback();
