@@ -37,10 +37,23 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$i = 0;
 
 				foreach ($arQuestion['STRUCTURE'] as $arAnsw) {
-					$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= '<input type="radio"  id="' . $arAnsw["ID"] . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($i == 0 ? " checked" : "") . '>
-																	<label for="' . $arAnsw["ID"] . '"></label>
-																	<label for="' . $arAnsw["ID"] . '">' . $arAnsw["MESSAGE"] . '</label>
-																	' . ($FIELD_SID == 'POLICY_ADDRESS' ? '<br />' : '');
+					// если текущее поле "Адрес квартиры, для которой вы оформляете страховку", у ответа "Указать другой адрес" будет особый id и отображение, предусмотренное на верстке
+					if($FIELD_SID == 'POLICY_ADDRESS' && $arAnsw["VALUE"]== 3 ){
+						$id = "other";
+					}else{
+						$id = $arAnsw["ID"];
+					}
+					if($FIELD_SID == 'GENDER' ){
+					$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= '<input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($i == 0 ? " checked" : "") . '>
+																	<label for="' . $id . '"></label>
+																	<label for="' . $id . '">' . $arAnsw["MESSAGE"] . '</label>';
+					}else{
+						$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= ($id != "other"?'  <div class="radio-wrapper">':'').'
+                                        <input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($i == 0 ? " checked" : "") . '>
+                                        <label for="' . $id . '"></label>
+                                        <label for="' . $id . '">' . $arAnsw["MESSAGE"] . '</label>
+                                   '.($id != "other"?' </div>':'');
+					}
 					$i++;
 				}
 				break;
@@ -56,13 +69,13 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$name = "form_email_" . $idAnsw;
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
-				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value. ' class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
+				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value. ' id="email-field"  class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
 				break;
 			case "text":
 				$name = "form_text_" . $idAnsw;
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
-				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
+				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' '.($FIELD_SID=='PHONE'?'id="phone-field"':'').'class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
 				break;
 			case "checkbox":
 				$name = "form_checkbox_" . $FIELD_SID . "[]";

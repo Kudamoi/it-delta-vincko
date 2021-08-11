@@ -19,7 +19,7 @@
 				<li class="item" data-tab-name="tab-3"><span>Подписки за бонусы</span>
 				</li>
 
-				<li class="get-more-bonuses">
+				<li class="get-more-bonuses js-bonuce">
 					<a href="">Получить еще</a>
 				</li>
 			</ul>
