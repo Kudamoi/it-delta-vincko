@@ -4,26 +4,23 @@ use Bitrix\Highloadblock as HL;
 use Bitrix\Main\Entity;
 //use FeedbackDTO;
 
-CONST ReviewsHL = 5;
-CONST ReviewsScoresHL = 8;
-
 Loader::includeModule("highloadblock");
 
 class FeedbackService
 {
+    //добаляет новый отзыв
     public static function add($value) {
         global $DB;
         global $USER;
-        $hlblock = HL\HighloadBlockTable::getById(ReviewsHL)->fetch();
+        $hlblock = HL\HighloadBlockTable::query()->addSelect('*')->where('NAME', 'ReviewsHL')->exec()->fetch();
 
         $entity = HL\HighloadBlockTable::compileEntity($hlblock);
         $entity_data_class = $entity->getDataClass();
 
-
         $data = array(
             "UF_USER_ID"=> $USER->getId(),
             "UF_REVIEW_SOURCE_ID"=> 1,
-            "UF_REVIEW_TYPE_ID"=>3,
+            "UF_REVIEW_TYPE_ID"=>$value['REVIEW_TYPE_ID'],
             "UF_REVIEW_DATE"=>date("d.m.Y"),
             "UF_CITY_ID"=>$value['CITY_ID'],
             "UF_CHOP_ID"=>$value['CHOP_ID'],
@@ -40,9 +37,8 @@ class FeedbackService
         $DB->StartTransaction();
         $result = $entity_data_class::add($data);
 
-
         if ($result->isSuccess()) {
-            $hlblock = HL\HighloadBlockTable::getById(ReviewsScoresHL)->fetch();
+            $hlblock = HL\HighloadBlockTable::query()->addSelect('*')->where('NAME', 'ReviewsScoresHL')->exec()->fetch();
 
             $entity = HL\HighloadBlockTable::compileEntity($hlblock);
             $entity_data_class = $entity->getDataClass();
@@ -70,6 +66,7 @@ class FeedbackService
         $DB->Commit();
         return true;
     }
+    //удаляет отзыв
     public static function delete($id) {
         global $DB;
         $hlblock = HL\HighloadBlockTable::getById(ReviewsScoresHL)->fetch();

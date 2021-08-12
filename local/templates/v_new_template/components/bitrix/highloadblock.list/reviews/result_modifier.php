@@ -5,7 +5,7 @@ use Bitrix\Highloadblock as HL;
 use Bitrix\Main\Entity;
 
 const cityIbId = 20;
-const companyIbId = 8;
+const companyIbCode = 'chopcity';
 const criteriaIbId = 46;
 const ReviewsScoresHL = 8;
 const ReviewsSourcesHL = 6;
@@ -71,17 +71,18 @@ while ($arFields = $res->Fetch()) {
     $arResult['CITIES'][$arFields['ID']] = $arFields;
 }
 
-//получаем текущую компанию
+$arChopIds = array_column($arResult['rows'],'UF_CHOP_ID');
+//получаем список компаний
 $res = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => companyIbId, "ACTIVE" => "Y", "=ID" => $arResult['rows'][0]['UF_CHOP_ID']),
+    array("IBLOCK_CODE" => companyIbCode, "ACTIVE" => "Y", "=PROPERTY_CITY_ID" => $arResult['rows'][0]['UF_CITY_ID'],"=PROPERTY_CHOP_ID" => $arChopIds),
     false,
     false,
-    array("ID", "NAME")
+    array("ID", "NAME","PROPERTY_CHOP_ID.ID","PROPERTY_CHOP_ID.NAME","PROPERTY_EL_RATING_SUM")
 );
 
 while ($arFields = $res->Fetch()) {
-    $arResult['CURRENT_SECURE_COMPANY'] = $arFields;
+    $arResult['SECURE_COMPANY_LIST'][$arFields['PROPERTY_CHOP_ID_ID']] = $arFields;
 }
 
 //получаем список критериев
@@ -110,3 +111,5 @@ $res = CIBlockElement::GetList(
 while ($arFields = $res->Fetch()) {
     $arResult['CRITERIA_QUESTIONS'][$arFields['ID']] = $arFields;
 }
+
+$arResult['COMPANIES_RATING_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($arResult['rows'][0]['UF_CITY_ID']);

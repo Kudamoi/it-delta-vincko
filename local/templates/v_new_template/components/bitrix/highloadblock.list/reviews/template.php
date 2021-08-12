@@ -492,7 +492,7 @@ if ($_GET['itd'] == 'y') {
 
     <div class="reviews__form-send_btn">
         <div class="btn">
-            <a href="" class="button add_review" data-modal-target="#add__new__review">
+            <a href="/review-add/" class="button add_review">
                     <span class="icon"><svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -516,7 +516,8 @@ if ($_GET['itd'] == 'y') {
     <!-- reviews__items -->
     <ul class="reviews__items">
         <? foreach ($arResult['rows'] as $row): ?>
-            <li class="reviews__item <?=$arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME'] == "Vincko" ? "" : "not-vinco__raiting"?>">
+        <?$currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME'];?>
+            <li class="reviews__item <?=$currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
                 <div class="reviews__item-left">
                     <div class="reviews__item__head">
                         <div class="reviews__item__head--left">
@@ -524,7 +525,11 @@ if ($_GET['itd'] == 'y') {
                                 <img src="/upload/reviews/avatar.png" alt="img">
                             </div>
                             <div class="person__items">
-                                <span class="name"><?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['NAME'] ?></span>
+                                <? if ($currentSourceName == "Vincko"): ?>
+                                    <span class="name"><?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['NAME'] ?> <?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['LAST_NAME'] ?></span>
+                                <? else: ?>
+                                    <span class="name"><?= $row['UF_USER_NAME'] ?></span>
+                                <? endif; ?>
                                 <span class="town"><?= $arResult['CITIES'][$row['UF_CITY_ID']]['NAME'] ?></span>
                                 <? /*<div class="client"><span class="text">покупатель</span>
                                 <span class="icon">
@@ -552,7 +557,7 @@ if ($_GET['itd'] == 'y') {
                             <div class="raiting__content">
                                 <ul class="raiting__vincko">
                                     <? foreach ($arResult['CRITERIA'] as $criteria): ?>
-                                        <? if (!empty($criteria)): ?>
+                                        <? if ($row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']]!=-1): ?>
                                             <li><span class="icon">
                                       <img src="<?= $criteria['ICON']['src'] ?>" alt="<?= $criteria['NAME'] ?>">
                                         </span><span class="text"><?= $row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']] ?></span>
@@ -566,9 +571,9 @@ if ($_GET['itd'] == 'y') {
                     <div class="reviews__item__body">
                         <div class="reviews__item__body--top">
                             <? if (!empty($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'])): ?>
-                            <span>Общее впечатление: </span>
-                            <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
-                            <?endif;?>
+                                <span>Общее впечатление: </span>
+                                <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
+                            <? endif; ?>
                         </div>
                         <div class="reviews__item__body--center">
                             <? if (!empty($row['UF_CUSTOMER_FOCUS_COMMENT'])): ?>
@@ -946,7 +951,8 @@ if ($_GET['itd'] == 'y') {
                             <p>
                                 <span class="text">источник</span>
                                 <a href=""><span class="icon">
-                                        <img src="<?=$arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_LOGO']['src']?>" alt="<?=$arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']?>">
+                                        <img src="<?= $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_LOGO']['src'] ?>"
+                                             alt="<?= $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME'] ?>">
                                     </span></a>
                             </p>
                         </div>
@@ -964,13 +970,13 @@ if ($_GET['itd'] == 'y') {
                                                 stroke="#005DFF" stroke-width="4"/>
                                     </svg>
                                 </span>
-                                <span class="raiting__satr-number">6.0</span>
+                                <span class="raiting__satr-number"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_EL_RATING_SUM_VALUE'] ?></span>
                             </div>
                             <p><a href="">vincko:</a></p>
                         </div>
                         <div class="raiting__about">
-                            <span class="raiting__about-name">ООО “Зубр”</span>
-                            <span class="raiting__about-btn"><a href="">Оставить отзыв</a></span>
+                            <span class="raiting__about-name"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_CHOP_ID_NAME'] ?></span>
+                            <span class="raiting__about-btn"><a href="/review-add/">Оставить отзыв</a></span>
                             <span class="raiting__about-chart">
                                 <span class="icon">
                                     <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
@@ -980,7 +986,7 @@ if ($_GET['itd'] == 'y') {
                                               fill="#005DFF"/>
                                     </svg>
                                 </span>
-                                <span class="number">1</span>
+                                <span class="number"><?=$arResult['COMPANIES_RATING_POSITIONS'][$row['UF_CHOP_ID']]['POSITION_IN_RATING']?></span>
                                 <a href="">в Рейтинге</a>
                             </span>
                         </div>
