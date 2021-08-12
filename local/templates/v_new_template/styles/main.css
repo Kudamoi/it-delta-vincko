@@ -412,6 +412,16 @@ template {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gilroy-Semibold";
+  src: url("../fonts/Gilroy/Gilroy-Semibold.ttf") format("ttf");
+  src: url("../fonts/Gilroy/Gilroy-Semibold.woff") format("woff");
+  src: url("../fonts/Gilroy/Gilroy-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 * {
@@ -655,8 +665,24 @@ p a {
   color: #ff5252 !important;
 }
 
+.green {
+  color: #00a272 !important;
+}
+
 .underline {
   text-decoration: underline;
+}
+
+.sb-item {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 .blue-border-button:hover {
@@ -690,6 +716,15 @@ input[type="checkbox"] {
   transition: all 0.3s ease-in-out;
 }
 
+.products__info--center .products__text-container {
+  left: 200px;
+}
+
+.products__info-sign {
+  display: grid;
+  place-items: center;
+}
+
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .header {
@@ -716,8 +751,8 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .header__top-left__block {
@@ -746,6 +781,11 @@ input[type="checkbox"] {
 
 .header__top-info li .text {
   margin-left: 11px;
+}
+
+.header__top-info li.location .text {
+  font-size: 12px;
+  line-height: 15px;
 }
 
 .header__top-info li.tel {
@@ -944,6 +984,7 @@ input[type="checkbox"] {
 
 .header__top--open {
   grid-template-columns: 1fr 2fr 1fr;
+  border-bottom: 1px solid #dde8ff;
 }
 
 .header__top--open .header__top-info {
@@ -962,7 +1003,7 @@ input[type="checkbox"] {
   background-color: rgba(221, 232, 255, 0.5);
   display: grid;
   place-items: center;
-  padding: 28px 20px;
+  padding: 32px 20px;
   position: absolute;
 }
 
@@ -1055,7 +1096,7 @@ input[type="checkbox"] {
 }
 
 .header__submenu--open {
-  max-height: 400px;
+  max-height: 440px;
 }
 
 .header__submenu .container {
@@ -1069,6 +1110,7 @@ input[type="checkbox"] {
   padding: 48px 0;
 }
 
+.header__submenu-up li,
 .header__submenu-up a {
   color: #818181;
   font-size: 16px;
@@ -1077,11 +1119,13 @@ input[type="checkbox"] {
   letter-spacing: 0em;
 }
 
+.header__submenu-up li:hover,
 .header__submenu-up a:hover {
   text-decoration: underline;
   color: black;
 }
 
+.header__submenu-up li.active,
 .header__submenu-up a.active {
   color: #005dff;
 }
@@ -1155,7 +1199,54 @@ input[type="checkbox"] {
   gap: 9px;
 }
 
+.header__popup {
+  display: none;
+  z-index: 1000;
+}
+
+.header__popup.show {
+  display: block;
+}
+
+.header__popup .header-popup__content {
+  width: 496px;
+  max-width: 90vw;
+  padding: 24px 32px 56px;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 37, 131, 0.1);
+  border-radius: 20px;
+}
+
+.header__popup .header-popup__content p {
+  margin-bottom: 24px;
+}
+
+.header__popup .header-popup__close {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.header__popup .header-popup__title {
+  margin-bottom: 40px;
+}
+
+.header__popup .header-popup__image img {
+  margin-bottom: 24px;
+  width: 432px;
+  height: auto;
+  max-width: 100%;
+}
+
+.header__popup .header-popup__button {
+  max-width: 292px;
+  margin: 0 auto;
+  display: block;
+}
+
 .modal {
+  display: grid;
+  place-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -1168,9 +1259,6 @@ input[type="checkbox"] {
   opacity: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transform: translateY(-20px);
 }
 
@@ -1212,10 +1300,15 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
+.modal__content-body.searchForm__modal {
+  display: block !important;
+  position: relative;
+}
+
 .close-button {
   position: absolute;
-  right: 37px;
-  top: 37px;
+  right: 24px;
+  top: 30px;
   cursor: pointer;
   width: 20px;
   height: 20px;
@@ -7374,7 +7467,7 @@ input[type="checkbox"] {
 
 .footer {
   padding-top: 30px;
-  margin-top: 40px;
+  margin-top: 56px;
   background-color: rgba(230, 230, 230, 0.301);
   width: 100vw;
 }
@@ -10848,18 +10941,30 @@ html {
   max-width: 51ch;
 }
 
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
+
 .main {
   position: relative;
 }
 
 .main .up-top-slider-bg {
   position: relative;
+  top: -105px;
 }
 
 .main .top-slider-bg {
   position: absolute;
   top: 10px;
   right: 58px;
+}
+
+.main .top-slider-bg picture {
+  display: grid;
+  height: 287px;
+}
+
+.main .top-slider-bg picture img {
+  height: 287px;
 }
 
 .complect__slider .blue-vinco {
@@ -10895,6 +11000,7 @@ html {
 }
 
 .complect__slider-wrapper-item-about-top {
+  min-height: 34px;
   display: flex;
   margin-top: 40px;
   margin-bottom: 16px;
@@ -10914,6 +11020,7 @@ html {
 }
 
 .complect__slider-wrapper-item-about-bottom {
+  min-height: 34px;
   display: flex;
 }
 
@@ -11051,7 +11158,7 @@ html {
 
 .slick-slider-datchiki .slide .slide-box {
   width: 252px;
-  height: 315px;
+  height: max-content;
   border: 1px solid #93b6ff;
   border-radius: 10px;
   background-color: #fff;
@@ -11222,7 +11329,8 @@ html {
   position: relative;
   overflow-x: hidden;
   width: 100%;
-  height: 443px;
+  height: auto;
+  padding-bottom: 28px;
   background-color: #fff;
   border: 1px solid #93B5FF;
   border-radius: 10px;
@@ -11356,34 +11464,11 @@ html {
   margin-left: 3px;
 }
 
-.slider__under-block-1.close {
-  max-height: 230px;
-  height: auto;
-  padding-bottom: 45px;
-  overflow: hidden;
-}
-
-.slider__under-block-1.close p {
-  display: none;
-}
-
-.slider__under-block-1.close .line {
-  display: none;
-}
-
-.slider__under-block-1.close ul {
-  display: none;
-}
-
-.slider__under-block-1.close .close-btn::after {
-  transform: rotate(180deg);
-}
-
 .slider__under-block-2 {
   overflow: hidden;
   position: relative;
   width: 100%;
-  max-height: 500px;
+  max-height: 700px;
   border: 1px solid #93b6ff;
   border-radius: 10px;
   padding-bottom: 40px;
@@ -11418,8 +11503,8 @@ html {
 .slider__under-block-2 ul li span.slider__under-2-title {
   font-weight: 700;
   display: block;
-  width: 200px;
-  margin-right: 141px;
+  min-width: 300px;
+  margin-right: 41px;
 }
 
 .slider__under-block-2 ul li:last-child {
@@ -11613,7 +11698,8 @@ html {
 }
 
 .slide-modal {
-  display: none;
+  z-index: -1;
+  position: fixed;
 }
 
 .modal-mini {
@@ -11700,6 +11786,18 @@ html {
   position: relative;
 }
 
+.slide-modal.active .modal-box .modal-slider picture {
+  display: grid !important;
+  width: fit-content !important;
+  width: -moz-fit-content !important;
+  width: -webkit-fit-content !important;
+}
+
+.slide-modal.active .modal-box .modal-slider picture img {
+  height: 350px;
+  width: 350px;
+}
+
 .slide-modal.active .modal-box .title {
   font-size: 24px;
   font-weight: 700;
@@ -11748,6 +11846,18 @@ html {
   justify-content: center;
   border-radius: 10px;
   opacity: 0.5;
+}
+
+.slide-modal.active .modal-box .modal-bottom .item picture {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.slide-modal.active .modal-box .modal-bottom .item picture img {
+  height: 100%;
+  width: 100%;
 }
 
 .slide-modal.active .modal-box .modal-bottom .item.active {
@@ -11809,6 +11919,8 @@ html {
 .subscribe-ordered .button-ordered {
   display: block;
 }
+
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .complect-obor .safe__pay {
   display: flex;
@@ -12511,8 +12623,7 @@ html {
 }
 
 .polzunok__number {
-  margin-top: 22
- px;
+  margin-top: 22 px;
   display: block;
   color: #93b6ff;
   width: 5ch;
@@ -16691,6 +16802,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   color: black !important;
 }
 
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
+
 .safe__pay.rating-top {
   margin-top: 10px;
 }
@@ -19699,6 +19812,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   gap: 9px;
 }
 
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
+
 .popup {
   position: fixed;
   z-index: 1000;
@@ -21170,6 +21285,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   padding: 15.5px 31px !important;
 }
 
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
+
 .order .form__bottom {
   display: block;
 }
@@ -21413,6 +21530,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   font-weight: 700;
   color: #f5c000;
 }
+
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .order .form .h4 {
   display: flex;
@@ -21745,6 +21864,337 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   display: none;
 }
 
+/*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
+
+.profile .h1 {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__content {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 150px auto;
+  gap: 40px;
+}
+
+.profile__tabs-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile__tabs-choice label {
+  font-family: "Gilroy-Semibold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  transition: .3s;
+}
+
+.profile__tabs-choice input {
+  display: none;
+}
+
+.profile__tabs-choice input:checked + label {
+  color: #005dff;
+}
+
+.profile__tabs-content {
+  border: 1px solid #d1dbe3;
+  border-radius: 10px;
+}
+
+.profile__tabs-citem {
+  padding: 27px 24px 24px;
+}
+
+.profile__c-tabs {
+  display: flex;
+  gap: 32px;
+}
+
+.profile__c-head {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #d1dbe3;
+}
+
+.profile__c-head a {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-head label {
+  position: relative;
+}
+
+.profile__c-head label:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -16px;
+  transition: .3s;
+  border-bottom: 2px solid #00000000;
+}
+
+.profile__c-head input {
+  display: none;
+}
+
+.profile__c-head input:checked + label:after {
+  border-bottom: 2px solid #005dff;
+}
+
+.profile__c-main-block {
+  border-bottom: 1px solid #d1dbe3;
+  padding-bottom: 24px;
+  margin-top: 24px;
+  padding-left: 8px;
+}
+
+.profile__c-main-order {
+  display: grid;
+  gap: 33px;
+}
+
+.profile__c-main-order-head {
+  grid-column: 1/2;
+  display: grid;
+  gap: 16px;
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+}
+
+.profile__c-main-order-title {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  color: #818181;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-main-order-status {
+  font-family: "Gilroy-Semibold";
+  grid-column: 2/3;
+  grid-row: 1/2;
+  color: #f5c000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-main-order-date {
+  display: flex;
+  gap: 8px;
+}
+
+.profile__c-main-order-dates {
+  grid-column: 1/3;
+  grid-row: 2/3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #818181;
+  font-family: "Gilroy-Semibold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-main-order-price {
+  grid-column: 2/3;
+}
+
+.profile__c-main-order-price-value {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.profile__c-main-order-price-type {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: right;
+  color: #818181;
+  margin-bottom: 6px;
+}
+
+.profile__c-main-order-price-status {
+  font-family: "Gilroy-Semibold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: right;
+  color: #3cba54;
+}
+
+.profile__c-main-order-main {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: 312px auto;
+  gap: 0 48px;
+}
+
+.profile__c-main-order-main-name {
+  grid-column: 1/3;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.profile__c-main-order-main-firms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  grid-column: 1/2;
+}
+
+.profile__c-main-order-main-firm {
+  display: flex;
+  gap: 7px;
+  font-size: 14px;
+  font-family: "Gilroy-Semibold";
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-main-order-main-firm-name {
+  width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile__c-main-order-main-firm-more {
+  color: #818181;
+}
+
+.profile__c-main-order-main-infos {
+  grid-column: 2/3;
+  align-self: end;
+}
+
+.profile__c-main-order-main-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile__c-main-order-main-info svg path {
+  fill: #93b6ff;
+}
+
+.profile__c-main-order-main-info a {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 8px;
+}
+
+.profile__c-main-order-main-getter,
+.profile__c-main-order-main-setter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 32px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.profile__c-main-order-main-getter > *,
+.profile__c-main-order-main-setter > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 496px;
+}
+
+.profile__c-main-order-main-getter .cmom-title,
+.profile__c-main-order-main-setter .cmom-title {
+  font-family: "Gilroy-Semibold";
+  font-weight: 600;
+}
+
+.profile__c-main-order-bottom button {
+  width: 160px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.profile__c-main-order--paid .profile__c-main-order-bottom-download {
+  display: none;
+}
+
+.profile__c-main-order--not-paid .profile__c-main-order-bottom-paid {
+  display: none;
+}
+
+.profile__active-subs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile__active-subs-title {
+  font-family: "Gilroy-Semibold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #818181;
+}
+
 @media (min-width: 767px) {
   .sensors-benefits .benefits__item-left .benefits__desc {
     max-width: 57%;
@@ -21947,11 +22397,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   .slider__under-block-1-three {
     width: 90%;
     margin: 0 auto;
-  }
-
-  .slider__under-block-1.close {
-    height: auto;
-    padding-bottom: 40px;
   }
 }
 
@@ -22991,6 +23436,10 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
     max-width: 90%;
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .slider__under-block-2 ul li span.slider__under-2-title {
+    min-width: none;
   }
 
   .form {
@@ -25476,8 +25925,7 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
 
   .loyality__calculator .content__items {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "left center"
- "left right";
+    grid-template-areas: "left center" "left right";
   }
 
   .loyality__calculator .content__items-left {

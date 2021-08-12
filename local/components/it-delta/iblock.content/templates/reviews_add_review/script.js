@@ -1,4 +1,74 @@
 $(document).ready(function() {
+    // Работа фильтра
+    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
+    const config = {
+        attributes: true,
+    };
+    const callback = function(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
+                let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
+                let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+                if (companyID != companyPreID) {
+                    $.ajax({
+                        url: "/ajax/citymodal.php",
+                        type: "POST",
+                        data: {
+                            city: companyID
+                        },
+                        dataType: "json",
+                        success: function(d){
+                            location.search = "city=" + companyID;
+                        },
+                        error: function(e){
+                            location.search = "city=" + companyID;
+                        }
+                    });
+                }
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetCity, config);
+
+    let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
+
+    const callbackCompany = function(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
+                let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
+                location.search = "chop=" + companyID + "&" +"city=" + params["city"];
+            }
+        }
+    };
+    const observerCompany = new MutationObserver(callbackCompany);
+    observerCompany.observe(targetCompany, config);
+    
+    $('.searchForm__modal_input input').keyup(function(){
+        let str = $(this).val();
+        if($(this).val().length < 1) {
+            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display':'none'});
+        } else {
+            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display': 'block'});
+        }
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').html(' ');
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_bottomChek .itemText').each(function (){
+            if($(this).html().toLowerCase().indexOf(str.toLowerCase()) != -1) {
+                $(this).closest('.searchForm__modal_wrapper').find('.searchForm__modal_centerChek').append('' +
+                    '<div class="searchForm__modal_item bottomChekItem">' +
+                    '                                        <input type="checkbox" class="checkbox">' +
+                    '                                        <span data-id='+$(this).attr('data-id')+' class="itemText">'+ $(this).html()+'</span>' +
+                    '                                    </div>');
+            };
+        });
+    });
+    $('.searchForm__modal').on('click', '.bottomChekItem', function() {
+        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
+        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
+    });
+
     let score = {};
 
     var params = window.location.search.replace("?","").split("&").reduce(
@@ -93,11 +163,12 @@ $(document).ready(function() {
                 arrElements[i]["REVIEW_SCORE_COMMENT"] = textarea.value;
             });
 
-            score["CHOP_ID"] = params["chop"];
-            score["CITY_ID"] = params["city"];
-            score["REVIEW_TYPE_ID"] = document.querySelector(".review__massage").getAttribute("data-type");
             score["REVIEW_SCORES"] = arrElements;
         }
+
+        score["CHOP_ID"] = params["chop"];
+        score["CITY_ID"] = params["city"];
+        score["REVIEW_TYPE_ID"] = document.querySelector(".review__massage").getAttribute("data-type");
     }
 
     var stepOneNext = document.querySelector(".review__btn.step-1 .next");
@@ -122,9 +193,11 @@ $(document).ready(function() {
     // Валидация "формы" для перехода на 2 уровень оценок
     inputStepOne.addEventListener("input", function(){
         if(inputStepOne.value <= 30000){
-            stepOneNext.disabled = true;
+            if(textareaCommentOne.value == ""){
+                stepOneNext.disabled = true;
 
-            textareaCommentOne.style.border = "1px solid red";
+                textareaCommentOne.style.border = "1px solid red";
+            }
         }else if(inputStepOne.value > 30000 && inputStepOne.value <= 50000){
             stepOneNext.disabled = false;
 
@@ -230,75 +303,5 @@ $(document).ready(function() {
         setDataForAjax(3);
 
         sendAjax();
-    });
-
-    // Работа фильтра
-    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
-    const config = {
-        attributes: true,
-    };
-    const callback = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
-                let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
-                let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
-                if (companyID != companyPreID) {
-                    $.ajax({
-                        url: "/ajax/citymodal.php",
-                        type: "POST",
-                        data: {
-                            city: companyID
-                        },
-                        dataType: "json",
-                        success: function(d){
-                            location.search = "chop=" + params["chop"] + "&" +"city=" + companyID;
-                        },
-                        error: function(e){
-                            location.search = "chop=" + params["chop"] + "&" +"city=" + companyID;
-                        }
-                    });
-                }
-            }
-        }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetCity, config);
-
-    let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
-
-    const callbackCompany = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
-                let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
-                location.search = "chop=" + companyID + "&" +"city=" + params["city"];
-            }
-        }
-    };
-    const observerCompany = new MutationObserver(callbackCompany);
-    observerCompany.observe(targetCompany, config);
-    
-    $('.searchForm__modal_input input').keyup(function(){
-        let str = $(this).val();
-        if($(this).val().length < 1) {
-            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display':'none'});
-        } else {
-            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display': 'block'});
-        }
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').html(' ');
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_bottomChek .itemText').each(function (){
-            if($(this).html().toLowerCase().indexOf(str.toLowerCase()) != -1) {
-                $(this).closest('.searchForm__modal_wrapper').find('.searchForm__modal_centerChek').append('' +
-                    '<div class="searchForm__modal_item bottomChekItem">' +
-                    '                                        <input type="checkbox" class="checkbox">' +
-                    '                                        <span data-id='+$(this).attr('data-id')+' class="itemText">'+ $(this).html()+'</span>' +
-                    '                                    </div>');
-            };
-        });
-    });
-    $('.searchForm__modal').on('click', '.bottomChekItem', function() {
-        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
-        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
     });
 })
