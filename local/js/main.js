@@ -2030,6 +2030,35 @@ if (document.querySelector('.review') === null) {} else {
           svg.style.display = 'block';
           numberWrapper.style.border = '1px solid #D1DBE3';
           circle.style.strokeDashoffset = '72.5';
+        } else if (input.value > 78000 && input.value < 88000) {
+          li[7].classList.add('active');
+          span.innerHTML = '6';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '58';
+        } else if (input.value > 88000 && input.value < 98000) {
+          li[8].classList.add('active');
+          span.innerHTML = '7';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '43.5';
+        } else if (input.value > 98000 && input.value < 108000) {
+          li[9].classList.add('active');
+          span.innerHTML = '8';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '29';
+        } else if (input.value > 108000 && input.value < 118000) {
+          li[10].classList.add('active');
+          span.innerHTML = '9';
+          svg.style.display = 'block';
+          circle.style.strokeDashoffset = '14.5';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+        } else if (input.value > 118000) {
+          li[11].classList.add('active');
+          span.innerHTML = '10';
+          svg.style.display = 'none';
+          numberWrapper.style.border = '2px solid #005DFF';
         }
       });
     });
@@ -2070,6 +2099,22 @@ if (document.querySelector('.review') === null) {} else {
           } else if (input.value > 68000 && input.value < 78000) {
             li[6].classList.add('active');
             span.innerHTML = '5';
+          } else if (input.value > 78000 && input.value < 88000) {
+            li[7].classList.add('active');
+            span.innerHTML = '6';
+          } else if (input.value > 88000 && input.value < 98000) {
+            li[8].classList.add('active');
+            span.innerHTML = '7';
+          } else if (input.value > 98000 && input.value < 108000) {
+            li[9].classList.add('active');
+            span.innerHTML = '8';
+          } else if (input.value > 108000 && input.value < 118000) {
+            li[10].classList.add('active');
+            span.innerHTML = '9';
+          } else if (input.value > 118000) {
+            li[11].classList.add('active');
+            span.innerHTML = '10';
+          }
         });
       });
       elem.setAttribute('q-num', i);

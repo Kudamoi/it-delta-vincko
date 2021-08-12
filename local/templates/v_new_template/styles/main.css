@@ -6877,7 +6877,7 @@ input[type="checkbox"] {
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item ul {
   display: flex;
-  margin-left: 28px;
+  margin-left: 32px;
   align-items: flex-end;
   margin-bottom: 13px;
 }
@@ -6886,8 +6886,7 @@ input[type="checkbox"] {
   font-size: 14px;
   font-weight: 500;
   color: #818181;
-  margin-right: 18px;
-  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item ul li:first-child {
@@ -7224,8 +7223,7 @@ input[type="checkbox"] {
   font-size: 14px;
   font-weight: 500;
   color: #818181;
-  margin-right: 18px;
-  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .review.step-3 .review__bottom.step-3 .step-3-item.active .content .content-wrapper .right .list-q .q.active .active-block ul li:first-child {

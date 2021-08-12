@@ -83,7 +83,19 @@ function addToHighload(){
             // "UF_SECURITY_SCORE_COMMENT"=>$value['SECURITY_SCORE_COMMENT'],
         );
 
-        $result = $entity_data_class::add($data);
+        $rsData = $entity_data_class::getList(array(
+            "select" => array("ID", "UF_USER_NAME"),
+            "order" => array("ID" => "ASC"),
+            "filter" => array()
+        ));
+        
+        while($arData = $rsData->Fetch()){
+            if($arData["UF_USER_NAME"] == $fields[2]){
+                $result = $entity_data_class::update($arData["ID"], $data);
+            }else{
+                $result = $entity_data_class::add($data);
+            }
+        }
     }
 }
 

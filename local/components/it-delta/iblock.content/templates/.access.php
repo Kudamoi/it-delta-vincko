@@ -1,0 +1,10 @@
+<?
+$PERM["reviews_add_review"]["2"]="X";
+$PERM["reviews_add_review"]["6"]="X";
+$PERM["reviews_add_review"]["3"]="X";
+$PERM["reviews_add_review"]["4"]="X";
+$PERM["reviews_add_review"]["7"]="X";
+$PERM["reviews_add_review"]["5"]="X";
+$PERM["reviews_add_review"]["8"]="X";
+$PERM["reviews_add_review"]["*"]="X";
+?>
