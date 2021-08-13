@@ -1,84 +1,4 @@
 $(document).ready(function() {
-    // Работа фильтра
-    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
-    const config = {
-        attributes: true,
-    };
-    const callback = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
-                let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
-                let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
-                if (companyID != companyPreID) {
-                    $.ajax({
-                        url: "/ajax/citymodal.php",
-                        type: "POST",
-                        data: {
-                            city: companyID
-                        },
-                        dataType: "json",
-                        success: function(d){
-                            location.search = "city=" + companyID;
-                        },
-                        error: function(e){
-                            location.search = "city=" + companyID;
-                        }
-                    });
-                }
-            }
-        }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetCity, config);
-
-    let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
-
-    const callbackCompany = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
-                let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
-                location.search = "chop=" + companyID + "&" +"city=" + params["city"];
-            }
-        }
-    };
-    const observerCompany = new MutationObserver(callbackCompany);
-    observerCompany.observe(targetCompany, config);
-    
-    $('.searchForm__modal_input input').keyup(function(){
-        let str = $(this).val();
-        if($(this).val().length < 1) {
-            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display':'none'});
-        } else {
-            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display': 'block'});
-        }
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').html(' ');
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_bottomChek .itemText').each(function (){
-            if($(this).html().toLowerCase().indexOf(str.toLowerCase()) != -1) {
-                $(this).closest('.searchForm__modal_wrapper').find('.searchForm__modal_centerChek').append('' +
-                    '<div class="searchForm__modal_item bottomChekItem">' +
-                    '                                        <input type="checkbox" class="checkbox">' +
-                    '                                        <span data-id='+$(this).attr('data-id')+' class="itemText">'+ $(this).html()+'</span>' +
-                    '                                    </div>');
-            };
-        });
-    });
-    $('.searchForm__modal').on('click', '.bottomChekItem', function() {
-        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
-        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
-        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
-    });
-
-    let score = {};
-
-    var params = window.location.search.replace("?","").split("&").reduce(
-        function(p,e){
-            var a = e.split('=');
-            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-            return p;
-        },
-        {}
-    );
 
     function sendAjax(){
         $.ajax({
@@ -171,6 +91,87 @@ $(document).ready(function() {
         score["REVIEW_TYPE_ID"] = document.querySelector(".review__massage").getAttribute("data-type");
     }
 
+    // Работа фильтра
+    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
+    const config = {
+        attributes: true,
+    };
+    const callback = function(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
+                let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
+                let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+                if (companyID != companyPreID) {
+                    $.ajax({
+                        url: "/ajax/citymodal.php",
+                        type: "POST",
+                        data: {
+                            city: companyID
+                        },
+                        dataType: "json",
+                        success: function(d){
+                            location.search = "city=" + companyID;
+                        },
+                        error: function(e){
+                            location.search = "city=" + companyID;
+                        }
+                    });
+                }
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetCity, config);
+
+    let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
+
+    const callbackCompany = function(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
+                let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
+                location.search = "chop=" + companyID + "&" +"city=" + params["city"];
+            }
+        }
+    };
+    const observerCompany = new MutationObserver(callbackCompany);
+    observerCompany.observe(targetCompany, config);
+    
+    $('.searchForm__modal_input input').keyup(function(){
+        let str = $(this).val();
+        if($(this).val().length < 1) {
+            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display':'none'});
+        } else {
+            $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').css({'display': 'block'});
+        }
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_centerChek').html(' ');
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_bottomChek .itemText').each(function (){
+            if($(this).html().toLowerCase().indexOf(str.toLowerCase()) != -1) {
+                $(this).closest('.searchForm__modal_wrapper').find('.searchForm__modal_centerChek').append('' +
+                    '<div class="searchForm__modal_item bottomChekItem">' +
+                    '                                        <input type="checkbox" class="checkbox">' +
+                    '                                        <span data-id='+$(this).attr('data-id')+' class="itemText">'+ $(this).html()+'</span>' +
+                    '                                    </div>');
+            };
+        });
+    });
+    $('.searchForm__modal').on('click', '.bottomChekItem', function() {
+        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
+        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
+        $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
+    });
+
+    let score = {};
+
+    var params = window.location.search.replace("?","").split("&").reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
+
     var stepOneNext = document.querySelector(".review__btn.step-1 .next");
     var stepTwoNext = document.querySelector(".review__btn.step-2 .next");
     var stepThreeEnd = document.querySelector(".review__btn.step-3 .stop");
@@ -186,8 +187,6 @@ $(document).ready(function() {
         // Убирает табы с 2 уровнем и 3-ем уровнем отзывов
         document.querySelector('.review__mid-step-2').style.display = "none";
         document.querySelector('.review__mid-step-3').style.display = "none";
-    }else{
-        stepOneNext.disabled = true;
     }
 
     // Валидация "формы" для перехода на 2 уровень оценок
@@ -195,11 +194,13 @@ $(document).ready(function() {
         if(inputStepOne.value <= 30000){
             if(textareaCommentOne.value == ""){
                 stepOneNext.disabled = true;
+                stepOneReview.disabled = true;
 
                 textareaCommentOne.style.border = "1px solid red";
             }
         }else if(inputStepOne.value > 30000 && inputStepOne.value <= 50000){
             stepOneNext.disabled = false;
+            stepOneReview.disabled = false;
 
             textareaCommentOne.style.border = "1px solid #d1dbe3";
         }
@@ -209,10 +210,12 @@ $(document).ready(function() {
         if(inputStepOne.value <= 30000){
             if(textareaCommentOne.value != ""){
                 stepOneNext.disabled = false;
+                stepOneReview.disabled = false;
 
                 textareaCommentOne.style.border = "1px solid #d1dbe3";
             }else{
                 stepOneNext.disabled = true;
+                stepOneReview.disabled = true;
 
                 textareaCommentOne.style.border = "1px solid red";
             }
@@ -224,8 +227,6 @@ $(document).ready(function() {
 
         document.querySelector('.review__mid-step-2 .icon').style.display = "none";
         document.querySelector('.review__mid-step-2 .bonus').style.display = "none";
-
-        stepTwoNext.disabled = true;
     });
 
     stepOneReview.addEventListener("click", function(){
@@ -258,8 +259,10 @@ $(document).ready(function() {
 
             if(count.length == 3){
                 stepTwoNext.disabled = false;
+                stepTwoReview.disabled = false;
             }else{
                 stepTwoNext.disabled = true;
+                stepTwoReview.disabled = true;
             }
         });
 
@@ -278,8 +281,10 @@ $(document).ready(function() {
 
             if(count.length == 3){
                 stepTwoNext.disabled = false;
+                stepTwoReview.disabled = false;
             }else{
                 stepTwoNext.disabled = true;
+                stepTwoReview.disabled = true;
             }
         });
     });
