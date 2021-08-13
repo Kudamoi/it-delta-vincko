@@ -51,52 +51,54 @@ function addToHighload(){
     deleteEmptyLines("reviews.csv");
     $arParse = csvToArray("reviews.csv");
 
+    $entity = HL\HighloadBlockTable::compileEntity('ReviewsHL');
+
+    $entity_data_class = $entity->getDataClass();
+
     foreach($arParse as $fields){
-        $hlblock = HL\HighloadBlockTable::getById(5)->fetch(); 
+        //print_r($fields);
 
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock); 
-        $entity_data_class = $entity->getDataClass(); 
+        // $monthsList = array(".01." => "января", ".02." => "февраля", 
+        //     ".03." => "марта", ".04." => "апреля", ".05." => "мая", ".06." => "июня", 
+        //     ".07." => "июля", ".08." => "августа", ".09." => "сентября",
+        //     ".10." => "октября", ".11." => "ноября", ".12." => "декабря"
+        // );
 
-        $monthsList = array(".01." => "января", ".02." => "февраля", 
-            ".03." => "марта", ".04." => "апреля", ".05." => "мая", ".06." => "июня", 
-            ".07." => "июля", ".08." => "августа", ".09." => "сентября",
-            ".10." => "октября", ".11." => "ноября", ".12." => "декабря"
-        );
-
-        $date = date($fields[3]);
-        $replaceDate = date(".m.");
-        $date = str_replace($_mD, " ".$monthsList[$_mD]." ", $currentDate);
+        // $date = date($fields[3]);
+        // $replaceDate = date(".m.");
+        // $date = str_replace($_mD, " ".$monthsList[$_mD]." ", $currentDate);
 
         $data = array(
             "UF_CHOP_ID" => $fields[0],
             "UF_CITY_ID" => $fields[1],
-            "UF_USER_NAME" => $fields[2],
-            "UF_REVIEW_DATE" => $currentDate,
+            "UF_REVIEW_DATE" => $fields[2],
+            "UF_ALLSCORE_REVIEW_SCORE_COMMENT" => $fields[3],
             "UF_ALLSCORE_REVIEW_SCORE" => $fields[4],
-            "UF_CUSTOMER_FOCUS_SCORE" => $fields[5],
+            "UF_SECURITY_SCORE" => $fields[5],
             "UF_COMFORT_SCORE" => $fields[6],
-            "UF_SECURITY_SCORE" => $fields[7],
-            "UF_ALLSCORE_REVIEW_SCORE_COMMENT" => $fields[8],
+            "UF_CUSTOMER_FOCUS_SCORE" => $fields[7],
             "UF_REVIEW_TYPE_ID" => 1,
-            // "UF_CUSTOMER_FOCUS_COMMENT"=>$value['CUSTOMER_FOCUS_COMMENT'],
-            // "UF_COMFORT_SCORE_COMMENT"=>$value['COMFORT_SCORE_COMMENT'],
-            // "UF_SECURITY_SCORE_COMMENT"=>$value['SECURITY_SCORE_COMMENT'],
         );
 
         $rsData = $entity_data_class::getList(array(
-            "select" => array("ID", "UF_USER_NAME"),
+            "select" => array("ID", /*"UF_USER_NAME"*/"UF_ALLSCORE_REVIEW_SCORE_COMMENT"),
             "order" => array("ID" => "ASC"),
-            "filter" => array()
+            "filter" => array("UF_ALLSCORE_REVIEW_SCORE_COMMENT" => $fields[3])
         ));
-        
-        while($arData = $rsData->Fetch()){
-            if($arData["UF_USER_NAME"] == $fields[2]){
-                $result = $entity_data_class::update($arData["ID"], $data);
-            }else{
-                $result = $entity_data_class::add($data);
-            }
+
+        // Удаление всех элементов
+        // while($t = $rsData->fetch()){
+        //     $entity_data_class::Delete($t["ID"]);
+        // }
+
+        if($arData = $rsData->Fetch()){
+            $entity_data_class::update($arData["ID"], $data);
+        }else{
+            $entity_data_class::add($data);
         }
     }
+
+    return true;
 }
 
 addToHighload();

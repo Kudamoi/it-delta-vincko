@@ -26,6 +26,7 @@
     cursor: not-allowed;
 }
 
+/* Изменение стилий фильтра */
 .rating-block .rating-center__search_form-select::after {
     display: none;
 }
