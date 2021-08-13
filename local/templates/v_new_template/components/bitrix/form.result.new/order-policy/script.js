@@ -12,8 +12,13 @@ $(document).ready(function () {
 
 	var value = $('input[name="radio"]:checked').val();
 
+	$("[name='web_form_apply']").click(function(){
+		alert();
+		$(this).parents("section").find("form").submit();
+	})
+
 	$(".js-check-form-valid").click(function (e) {
-		$("input[data-field='AGREEMENT']").prop("checked", true);
+		$("input[data-field='AGREEMENT']").prop("checked", true).removeAttr("disabled");
 
 		var $form = $(this).parents("form"),
 			$error = $(this).parents("form").find(".error_message"),
@@ -51,21 +56,20 @@ $(document).ready(function () {
 		});
 	});
 
-	$("[name='PAYMENT']").change(function(){
-		$(this).parents('form').find("[name='web_form_apply']").removeAttr("disabled");
+	$("input[data-field='AGREEMENT']").change(function(){
+		if($(this).prop("checked")){
+			$("form input[data-field='AGREEMENT']").removeAttr("disabled");
+		}else{
+			$("form input[data-field='AGREEMENT']").attr("disabled","disabled");
+		}
 	});
 
+	$("[name='PAYMENT']").change(function(){
+			$(this).parents('section').find("[name='web_form_apply']").removeAttr("disabled");
+		});
 	$(".to-short-rd").on("click", function () {
 		$("#short-rd").removeClass("hidden");
 	});
-
-	$('input[type=radio][name=form_radio_POLICY_ADDRESS]').change(function () {
-			if (this.value == '30') {
-				$(".address-installment-other").show();
-			} else {
-				$(".address-installment-other").hide();
-			}
-		});
 
 
 	function closeOpenBlockNext(blockClose, blockOpen, btn) {

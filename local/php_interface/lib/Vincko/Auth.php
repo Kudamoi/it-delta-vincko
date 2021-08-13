@@ -45,6 +45,7 @@ class Auth
 	public static function signedCheck($request)
 	{
 		$result = false;
+		$request["SIGNED_DATA"]= \Bitrix\Main\Controller\PhoneAuth::signData(['phoneNumber' => $request['USER_LOGIN']]);
 
 		if (($params = \Bitrix\Main\Controller\PhoneAuth::extractData($request["SIGNED_DATA"])) !== false) {
 			if (($userId = \CUser::VerifyPhoneCode($params['phoneNumber'], $request["SMS_CODE"]))) {
@@ -81,6 +82,13 @@ class Auth
 	public static function getError($event, $arAuthResult = [], $arResult = [])
 	{
 		switch ($event) {
+			case "PHONE_REGISTERED":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Пользователь с таким номером телефона был ранее зарегистрирован.",
+					"FIELD"   => "USER_LOGIN"
+				];
+				break;
 			case "PHONE_NOT_REGISTERED":
 				$result = [
 					"TYPE"    => "ERROR",
@@ -116,10 +124,31 @@ class Auth
 					"FIELD"   => "USER_CONFIRM_PASSWORD"
 				];
 				break;
-			case "SUCCESS":
+			case "GET_SMS":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Для регистрации необходимо получить код",
+					"FIELD"   => "CHECKWORD"
+				];
+				break;
+			case "ERROR_SMS":
+				$result = [
+					"TYPE"    => "ERROR",
+					"MESSAGE" => "Ошибка отправки смс",
+					"FIELD"   => "CHECKWORD"
+				];
+				break;
+				case "SUCCESS":
 				$result = [
 					"TYPE"    => "OK",
 					"MESSAGE" => "",
+					"RESULT" => $arResult
+				];
+				break;
+			case "SUCCESS_SMS":
+				$result = [
+					"TYPE"    => "OK",
+					"MESSAGE" => "На ваш номер было выслано смс с паролем",
 					"RESULT" => $arResult
 				];
 				break;
@@ -135,10 +164,9 @@ class Auth
 	public static function registration($request, $arAuthResult)
 	{
 		// проверяем существует ли пользователь
-		$arUser = self::getUser($request);
+		$arUser = self::getUser(["LOGIN" => $_REQUEST["USER_LOGIN"]]);
 		if ($request["Register"] == 1) {
-			if (!empty($request["USER_AGREEMENT"]) && !empty($arUser)) {
-				if ($arUser["ACTIVE"] != "Y") {
+			if ($arUser && $arUser["ACTIVE"] != "Y") {
 					$password = self::generatePassword();
 					self::sendSmsPassword($arUser, $password);
 					$user = new \CUser;
@@ -148,21 +176,25 @@ class Auth
 							"PASSWORD"         => $password,
 							"CONFIRM_PASSWORD" => $password
 						]);
-					$arAuthResult["ERROR"] = "OK";
-					$arAuthResult["MESSAGE"] = "На ваш номер было выслано смс с паролем";
-				}
+				$result = self::getError("SUCCESS_SMS");
+			}elseif(empty($_REQUEST["SMS_CODE"])){
+				$result = self::getError("GET_SMS");
 			}
-		} else {
-			// если в возвращаемом результате есть ошибка
-			if ($arAuthResult["TYPE"] == "ERROR") {
-				if ($arUser) {
-					$arAuthResult["FIELD"] = "USER_LOGIN";
-					$arAuthResult["MESSAGE"] = "Пользователь с таким номером существует";
-				}
+		} elseif($request["code_submit_button"] == 1) {
+			if ($arUser && $arAuthResult["TYPE"] == "ERROR") {
+					$result = self::getError("PHONE_REGISTERED");
 			}
 		}
 
-		return json_encode($arAuthResult);
+		if (empty($result)) {
+			if ($arAuthResult["TYPE"] == "ERROR" ) {
+				$result = $arAuthResult;
+			}else {
+				$result = self::getError("SUCCESS");
+			}
+		}
+
+		return json_encode($result);
 	}
 
 
@@ -247,12 +279,15 @@ class Auth
 				$result = self::getError("CONFIRM_PASSWORD");
 			}
 		} else {
-
 			if (!empty($request["USER_EMAIL"])) {
 				$result = self::getError("EMAIL_NOT_REGISTERED");
 			} elseif (!empty($request["USER_LOGIN"])) {
 				$result = self::getError("PHONE_NOT_REGISTERED");
 			}
+		}
+		if($request["code_check_submit_button"]==1){
+			$result = self::getError("SUCCESS",[], $arResult);
+
 		}
 
 		if (empty($result)) {
@@ -267,7 +302,7 @@ class Auth
 				$result = $arAuthResult;
 			}
 		}else{
-			$result = self::getError("SUCCESS", $arResult);
+			$result = self::getError("SUCCESS",[], $arResult);
 		}}
 
 		return json_encode($result);

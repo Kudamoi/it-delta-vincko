@@ -31,7 +31,8 @@ use Bitrix\Main\Localization\Loc;
 			</div>
 
 			<div class="popup__text">
-				<?= $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"]; ?>
+				Придумайте новый, надежный пароль
+				состоящий минимум из 8 символов.
 			</div>
 		</div>
 

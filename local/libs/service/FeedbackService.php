@@ -34,6 +34,7 @@ class FeedbackService
             "UF_SECURITY_SCORE_COMMENT"=>$value['SECURITY_SCORE_COMMENT'],
         );
 
+        
         $DB->StartTransaction();
         $result = $entity_data_class::add($data);
 
@@ -51,7 +52,7 @@ class FeedbackService
                     "UF_REVIEW_SCORE"=>$review_score['REVIEW_SCORE'],
                     "UF_REVIEW_SCORE_COMMENT"=>$review_score['REVIEW_SCORE_COMMENT']
                 );
-
+                
                 $result = $entity_data_class::add($data);
                 if (!$result->isSuccess()) {
                     $DB->Rollback();

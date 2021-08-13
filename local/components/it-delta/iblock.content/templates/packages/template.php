@@ -12,15 +12,20 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
 //
-//echo '<pre>';
-//print_r($arResult);
-//echo '</pre>';
+// echo '<pre>';
+// print_r($arResult);
+// echo '</pre>';
 ?>
 <!--<pre>-->
 <!--    --><?//print_r($arResult)?>
 <!--</pre>-->
 <?php foreach ($arResult['SECTIONS'] as $section): ?>
     <? if (!empty($section['EQUIPMENT-KITS'])): ?>
+        <?
+        // echo '<pre>';
+        // print_r($section);
+        // echo '</pre>';
+        ?>
         <?php $checkEquip = 1?>
         <div class="ready-des2__show-item close">
             <div class="ready-des2__show-header">
@@ -204,8 +209,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                                         </div>
                                     </div>
-
-                                    <button class="ready-pack__bottom-button button yellow-button" onclick="location.href='/equipment-kits/<?= $item['DETAIL_URL'] ?>/'">
+                                    <button class="ready-pack__bottom-button button yellow-button" onclick="location.href='/packages/<?= $item['ELEMENT_CODE'] ?>/'">
                                         ПОДРОБНЕЕ
                                     </button>
 

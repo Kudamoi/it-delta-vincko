@@ -166,6 +166,10 @@ class GeoCity
             );
             setcookie('selected_city', $GLOBALS["GEOCITY"]['ID'] , time() + 3600 * 24 * 7, '/');
         }
+
+        if(!isset($_COOKIE["selected_estate"])) {
+            setcookie('selected_estate', 643 , time() + 3600 * 24 * 7, '/');
+        }
     }
 }
 

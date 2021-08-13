@@ -1,0 +1,86 @@
+/* Стили для range на странице review-add, чтобы цифры нормально отображались */
+.review.step-2 .review__bottom.step-2 .review__bottom-item ul {
+    margin-left: 28px;
+}
+
+.review.step-2 .review__bottom.step-2 .review__bottom-item ul li {
+    margin-right: 19px;
+    margin-left: 10px;
+}
+
+.review.step-3 .review__bottom.step-3 .step-3-item.active .content .content-wrapper .right .list-q .q.active .active-block ul li {
+    margin-right: 19px;
+    margin-left: 10px;
+}
+
+/* Изменение кнопки "Продолжить", когда она выключена */
+.review__btn.step-1 button.next:disabled {
+    background: #f7f7f7;
+    color: #aeaeae;
+    cursor: not-allowed;
+}
+
+.review__btn.step-2 .next-block button:disabled {
+    background: #f7f7f7;
+    color: #aeaeae;
+    cursor: not-allowed;
+}
+
+.rating-block .rating-center__search_form-select::after {
+    display: none;
+}
+
+.searchForm__modal {
+    width: 100%;
+    z-index: 99999;
+}
+.searchForm__modal_input,
+.searchForm__modal_topChek.active,
+.searchForm__modal_centerChek {
+    width: 90%;
+}
+.searchForm__modal_centerChek {
+    display: none;
+}
+.rating-center__search_form .rating-center__search_form-select input[type=text] {
+    pointer-events: none;
+    cursor: pointer;
+}
+.rating-center__search_form .rating-center__search_form-select input[type=text]::-webkit-input-placeholder{
+    color: #818181;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+}
+.rating-center__search_form .rating-center__search_form-select input[type=text]::-moz-placeholder{
+    color: #818181;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+}
+.rating-center__search_form .rating-center__search_form-select input[type=text]:-moz-placeholder {
+    color: #818181;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+}
+.rating-center__search_form .rating-center__search_form-select input[type=text]:-ms-input-placeholder {
+    color: #818181;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+}
+.searchForm__modal_topChek .topChekItem:first-child {
+    display: none!important;
+}
+.rating-center__search_form-input input::-webkit-input-placeholder {color: #005DFF!important;}/* webkit */
+.rating-center__search_form-input input::-moz-placeholder          {color: #005DFF!important;}/* Firefox 19+ */
+.rating-center__search_form-input input:-moz-placeholder           {color: #005DFF!important;}/* Firefox 18- */
+.rating-center__search_form-input input:-ms-input-placeholder      {color: #005DFF!important;}/* IE */
+.rating-center__subtitle_text a:last-child {
+    text-decoration: none;
+}

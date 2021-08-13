@@ -28,12 +28,15 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 			<div class="popup__title">
 				<?= Loc::getMessage("FORGOT_TITLE") ?>
 			</div>
-			<div class="popup__subtitle"<?=(!$changePwd?" style='display:none'":"")?>></div>
-			<div class="popup__text"<?=(!$changePwd?" style='display:none'":"")?>>
-				<?= $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"]; ?>
+			<div class="popup__subtitle js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
+			Здравствуйте!
+			</div>
+			<div class="popup__text js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
+				Придумайте новый, надежный пароль
+				состоящий минимум из 8 символов.
 			</div>
 
-			<div class="popup__switch"<?=($changePwd?" style='display:none'":"")?>>
+			<div class="popup__switch js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
 				<div class="popup__switch-item popup__switch-item-left popup__switch-item--active">
 					<?= Loc::getMessage("FORGOT_PHONE") ?>
 				</div>
@@ -50,7 +53,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 				</div>
 
 			</div>
-			<div class="popup__text"<?=($changePwd?" style='display:none'":"")?>>
+			<div class="popup__text js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
 				<?= Loc::getMessage("FORGOT_PHONE_TEXT") ?>
 			</div>
 		</div>
@@ -67,7 +70,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 
 			<div class="popup__main">
 
-				<div class="popup__form popup__form--phone popup__form-mod--phone"<?=($changePwd?" style='display:none'":"")?>>
+				<div class="popup__form popup__form--phone popup__form-mod--phone js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("FORGOT_PHONE_YOUR") ?>
 					</div>
@@ -153,7 +156,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 						<?= Loc::getMessage("FORGOT_SUCCESS") ?>
 
 					</div>*/ ?>
-					<div class="popup__send-code blue-button">
+					<button class="popup__send-code blue-button" value="1" name="code_check_submit_button">
 						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
 							 xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd"
@@ -161,10 +164,10 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 								  fill="white"/>
 						</svg>
 
-					</div>
+					</button>
 				</div>
 
-				<div class="popup__form popup__form--mail popup__form-mod--mail"<?=($changePwd?" style='display:none'":"")?>>
+				<div class="popup__form popup__form--mail popup__form-mod--mail js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("FORGOT_EMAIL_ADDRESS") ?>
 					</div>
@@ -238,7 +241,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 
 					</div>
 					*/ ?>
-					<div class="popup__send-code blue-button">
+					<button class="popup__send-code blue-button" value="1" name="code_check_submit_button">
 						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
 							 xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd"
@@ -246,10 +249,10 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 								  fill="white"/>
 						</svg>
 
-					</div>
+					</button>
 				</div>
 
-				<div class="popup__form"<?=(!$changePwd?" style='display:none'":"")?>>
+				<div class="popup__form js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("CHANGE_NEW") ?>
 					</div>
@@ -316,7 +319,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 
 
 			<div class="popup__bottom">
-				<button name="change_pwd" class="new-pass-button blue-button blue-button--unactive" value="1">
+				<button name="change_pwd" class="new-pass-button blue-button blue-button--unactive js-btn-disabled" value="1">
 					<?= Loc::getMessage("FORGOT_UPDATE_PASS") ?>
 				</button>
 
