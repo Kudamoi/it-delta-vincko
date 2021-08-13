@@ -132,7 +132,12 @@ class Order
 			"CODE"  => "DATE_TERM_BY",
 			"VALUE" => $date_by->format("d.m.Y")
 		];
-
+		// добавляем ссылку на pdf
+		$result[] = [
+			"NAME"  => "Ссылка на страховой полис",
+			"CODE"  => "LINK",
+			"VALUE" => "/lk/orders/policy/?ORDER_ID=".$orderID
+		];
 
 		// номер
 		// прибавим и сохраним

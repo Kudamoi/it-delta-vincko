@@ -28,6 +28,9 @@ upload
 #/bitrix/php_interface/after_connect*
 #/bitrix/php_interface/logs/
 
+# исключаем настройки сайта
+/settings.php
+
 # сохраняем шаблоны сайта
 #!/bitrix/templates/
 
@@ -44,6 +47,7 @@ upload
 /awstats/
 /webstat/
 .DS_Store
+/.htaccess
 
 
 .Spotlight-V100
@@ -102,3 +106,9 @@ bower_components
 
 # и логи xhprof напоследок
 /xhprof/logs
+
+# фронтенд
+/local/HTML/
+
+# кеш автозагрузки классов
+/local/php_interface/lib/__autoload.cache.php

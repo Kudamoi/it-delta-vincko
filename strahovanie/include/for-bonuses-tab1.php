@@ -1,886 +1,115 @@
+<script>
+	$(document).ready(function () {
+		var $prevArrowImg = "<svg width=\"10\" height=\"18\" viewBox=\"0 0 10 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0.545444 9.82854L7.78681 17.0496C8.24745 17.5092 8.9943 17.5092 9.45471 17.0496C9.91516 16.5904 9.91516 15.8457 9.45471 15.3865L3.04722 8.99701L9.45452 2.6077C9.91498 2.14834 9.91498 1.40367 9.45452 0.944496C8.99407 0.485135 8.24726 0.485135 7.78662 0.944496L0.545258 8.16567C0.315031 8.39537 0.200048 8.6961 0.200048 8.99697C0.200048 9.298 0.315254 9.59895 0.545444 9.82854Z\" fill=\"#989898\"/>\n    </svg>";
+		var $nextArrowImg = "<svg width=\"10\" height=\"18\" viewBox=\"0 0 10 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M9.45456 9.82854L2.21319 17.0496C1.75255 17.5092 1.0057 17.5092 0.54529 17.0496C0.0848382 16.5904 0.0848382 15.8457 0.54529 15.3865L6.95278 8.99701L0.545477 2.6077C0.0850245 2.14834 0.0850245 1.40367 0.545477 0.944496C1.00593 0.485135 1.75274 0.485135 2.21338 0.944496L9.45474 8.16567C9.68497 8.39537 9.79995 8.6961 9.79995 8.99697C9.79995 9.298 9.68475 9.59895 9.45456 9.82854Z\" fill=\"#989898\"/>\n    </svg>";
+		var prevArrowBtn = "<button type=\"button\" class=\"slick-prev\">".concat($prevArrowImg, "</button>");
+		var netArrowBtn = "<button type=\"button\" class=\"slick-next\">".concat($nextArrowImg, "</button>");
+		var copies = document.getElementsByClassName('r-d-s');
 
-<div class="tabs__content_slider presents__tabs_slider-js slick-initialized slick-slider"><button type="button" class="slick-prev slick-arrow" style=""><svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M0.545444 9.82854L7.78681 17.0496C8.24745 17.5092 8.9943 17.5092 9.45471 17.0496C9.91516 16.5904 9.91516 15.8457 9.45471 15.3865L3.04722 8.99701L9.45452 2.6077C9.91498 2.14834 9.91498 1.40367 9.45452 0.944496C8.99407 0.485135 8.24726 0.485135 7.78662 0.944496L0.545258 8.16567C0.315031 8.39537 0.200048 8.6961 0.200048 8.99697C0.200048 9.298 0.315254 9.59895 0.545444 9.82854Z" fill="#989898"></path>
-		</svg></button><div class="slick-list" style="padding: 0px 50px;"><div class="slick-track" style="opacity: 1; width: 40000px; transform: translate3d(-1828px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-6" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="-5" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="-4" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned slick-active prev-slide-sub" data-slick-index="-2" id="" aria-hidden="false" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="0">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned slick-active prev-slide" data-slick-index="-1" id="" aria-hidden="false" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="0">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-current slick-active slick-center" data-slick-index="0" aria-hidden="false"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="0">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-active next-slide" data-slick-index="1" aria-hidden="false"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="0">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-active next-slide-sub" data-slick-index="2" aria-hidden="false"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="0">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide" data-slick-index="3" aria-hidden="true"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide" data-slick-index="4" aria-hidden="true"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned slick-center" data-slick-index="10" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="11" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="12" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="13" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="14" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div><div class="slick-slide slick-cloned" data-slick-index="15" id="" aria-hidden="true" tabindex="-1"><div><div class="item" style="width: 100%; display: inline-block;">
-						<div class="item__top">
-							<div class="item__img">
-								<picture>
-									<source type="image/webp" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.webp">
-									<source type="image/png" srcset="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png">
-									<img src="/local/templates/v_new_template/img/loyality/restayling/presents_item1.png" alt="img" loading="lazy">
-								</picture>
-							</div>
-							<div class="item__top__content">
-								<div class="item__top__content-name">
-									<div class="left">
-										<span class="left_top">Полис “ВСК”</span>
-										<span class="left_bottom">«Медиум»</span>
-									</div>
-									<div class="right">
-										<span class="right_top">1 000</span>
-										<span class="right_bottom">Бонусов</span>
-									</div>
-								</div>
-								<div class="item__top__content-max">
-									<span class="max_top">Максимальная выплата</span>
-									<span class="max_bottom">600 000 руб</span>
-								</div>
-							</div>
-						</div>
-						<div class="item__bottom">
-							<div class="item__bottom-bonuses">
-								<div class="item__bottom-left">
-									Для покупки полиса за бонусы, вам не хватает
-								</div>
-								<div class="item__bottom-right">
-									Всего
-									<div class="num">
-										0 бонусов
-									</div>
-								</div>
-							</div>
-							<a href="" class="blue-border-button button" tabindex="-1">получить бонусы</a>
-						</div>
-					</div></div></div></div></div><button type="button" class="slick-next slick-arrow" style=""><svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M9.45456 9.82854L2.21319 17.0496C1.75255 17.5092 1.0057 17.5092 0.54529 17.0496C0.0848382 16.5904 0.0848382 15.8457 0.54529 15.3865L6.95278 8.99701L0.545477 2.6077C0.0850245 2.14834 0.0850245 1.40367 0.545477 0.944496C1.00593 0.485135 1.75274 0.485135 2.21338 0.944496L9.45474 8.16567C9.68497 8.39537 9.79995 8.6961 9.79995 8.99697C9.79995 9.298 9.68475 9.59895 9.45456 9.82854Z" fill="#989898"></path>
-		</svg></button></div>
+		$(".presents__tabs_slider-js").slick('unslick').slick({
+			variableWidth: true,
+			centerMode: true,
+			arrows: true,
+			dots: false,
+			draggable: false,
+			infinite: true,
+			slidesToShow: 1,
+			prevArrow: prevArrowBtn,
+			nextArrow: netArrowBtn
+		});
+
+	});
+</script>
+<? $APPLICATION->IncludeComponent(
+	"bitrix:catalog.element",
+	"policy-slider",
+	array(
+		"ELEMENT_CODE"                    => "strakhovka-sao-reso-garantiya-na-150-000-rub",
+		"IBLOCK_ID"                       => "14",
+		"IBLOCK_TYPE"                     => "equipment",
+		"COMPONENT_TEMPLATE"              => "strahovanie",
+		"ELEMENT_ID"                      => $_REQUEST["ELEMENT_ID"],
+		"SECTION_ID"                      => $_REQUEST["SECTION_ID"],
+		"SECTION_CODE"                    => "",
+		"SHOW_DEACTIVATED"                => "N",
+		"HIDE_NOT_AVAILABLE_OFFERS"       => "N",
+		"OFFERS_FIELD_CODE"               => array(
+			0 => "NAME",
+			1 => "PROPERTY_ILL",
+			2 => "PROPERTY_MAX_PRICE",
+			3 => "PROPERTY_PAYMENT_OPTIONS",
+			4 => "PROPERTY_PAYMENT_PRICE",
+		),
+		"OFFERS_SORT_FIELD"               => "sort",
+		"OFFERS_SORT_ORDER"               => "asc",
+		"OFFERS_SORT_FIELD2"              => "id",
+		"OFFERS_SORT_ORDER2"              => "desc",
+		"OFFERS_LIMIT"                    => "0",
+		"BACKGROUND_IMAGE"                => "-",
+		"SECTION_URL"                     => "",
+		"DETAIL_URL"                      => "",
+		"SECTION_ID_VARIABLE"             => "SECTION_ID",
+		"CHECK_SECTION_ID_VARIABLE"       => "N",
+		"SEF_MODE"                        => "N",
+		"CACHE_TYPE"                      => "A",
+		"CACHE_TIME"                      => "36000000",
+		"CACHE_GROUPS"                    => "Y",
+		"SET_TITLE"                       => "Y",
+		"SET_CANONICAL_URL"               => "N",
+		"SET_BROWSER_TITLE"               => "Y",
+		"BROWSER_TITLE"                   => "-",
+		"SET_META_KEYWORDS"               => "Y",
+		"META_KEYWORDS"                   => "-",
+		"SET_META_DESCRIPTION"            => "Y",
+		"META_DESCRIPTION"                => "-",
+		"SET_LAST_MODIFIED"               => "N",
+		"USE_MAIN_ELEMENT_SECTION"        => "N",
+		"STRICT_SECTION_CHECK"            => "N",
+		"ADD_SECTIONS_CHAIN"              => "Y",
+		"ADD_ELEMENT_CHAIN"               => "N",
+		"SHOW_SKU_DESCRIPTION"            => "N",
+		"ACTION_VARIABLE"                 => "action",
+		"PRODUCT_ID_VARIABLE"             => "id",
+		"DISPLAY_COMPARE"                 => "N",
+		"PRICE_CODE"                      => array("BASE","BONUS"),
+		"USE_PRICE_COUNT"                 => "N",
+		"SHOW_PRICE_COUNT"                => "1",
+		"PRICE_VAT_INCLUDE"               => "Y",
+		"PRICE_VAT_SHOW_VALUE"            => "N",
+		"CONVERT_CURRENCY"                => "N",
+		"BASKET_URL"                      => "/order-policy/",
+		"USE_PRODUCT_QUANTITY"            => "N",
+		"PRODUCT_QUANTITY_VARIABLE"       => "quantity",
+		"ADD_PROPERTIES_TO_BASKET"        => "Y",
+		"PRODUCT_PROPS_VARIABLE"          => "prop",
+		"PARTIAL_PRODUCT_PROPERTIES"      => "N",
+		"LINK_IBLOCK_TYPE"                => "",
+		"LINK_IBLOCK_ID"                  => "",
+		"LINK_PROPERTY_SID"               => "",
+		"LINK_ELEMENTS_URL"               => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
+		"USE_GIFTS_DETAIL"                => "Y",
+		"USE_GIFTS_MAIN_PR_SECTION_LIST"  => "Y",
+		"GIFTS_DETAIL_PAGE_ELEMENT_COUNT" => "4",
+		"GIFTS_DETAIL_HIDE_BLOCK_TITLE"   => "N",
+		"GIFTS_DETAIL_BLOCK_TITLE"        => "Выберите один из подарков",
+		"GIFTS_DETAIL_TEXT_LABEL_GIFT"    => "Подарок",
+		"GIFTS_SHOW_DISCOUNT_PERCENT"     => "Y",
+		"GIFTS_SHOW_OLD_PRICE"            => "Y",
+		"GIFTS_SHOW_NAME"                 => "Y",
+		"GIFTS_SHOW_IMAGE"                => "Y",
+
+		"GIFTS_MESS_BTN_BUY"                           => "Выбрать",
+		"GIFTS_MAIN_PRODUCT_DETAIL_PAGE_ELEMENT_COUNT" => "4",
+		"GIFTS_MAIN_PRODUCT_DETAIL_HIDE_BLOCK_TITLE"   => "N",
+		"GIFTS_MAIN_PRODUCT_DETAIL_BLOCK_TITLE"        => "Выберите один из товаров, чтобы получить подарок",
+		"SET_STATUS_404"                               => "N",
+		"SHOW_404"                                     => "N",
+		"MESSAGE_404"                                  => "",
+		"COMPATIBLE_MODE"                              => "Y",
+		"USE_ELEMENT_COUNTER"                          => "Y",
+		"DISABLE_INIT_JS_IN_COMPONENT"                 => "N",
+		"SET_VIEWED_IN_COMPONENT"                      => "N",
+		"TITLE_POLICY"                                 => "Доступные страховые полисы"
+	),
+	false
+); ?>

@@ -1,16 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-
+$APPLICATION->RestartBuffer();
 
 header('Content-type: application/json');
-if ($arResult['ERROR']) {
-	echo json_encode(array(
-		'type' => 'error',
-		'message' => strip_tags($arResult['ERROR_MESSAGE']['MESSAGE']),
-	));
-} else {
-	echo json_encode(array('type' => 'ok'));
-}
+
+echo Vincko\Auth::auth($_REQUEST, $arResult);
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
 ?>

@@ -8,10 +8,16 @@ $(document).ready(function () {
 		closeOpenBlockBtn(btns[i], forms[i]);
 	}
 
+
+
 	var value = $('input[name="radio"]:checked').val();
 
+	$("[name='web_form_apply']").click(function(){
+		$(this).parents("section").find("form").submit();
+	})
+
 	$(".js-check-form-valid").click(function (e) {
-		$("input[data-field='AGREEMENT']").prop("checked", true);
+		$("input[data-field='AGREEMENT']").prop("checked", true).removeAttr("disabled");
 
 		var $form = $(this).parents("form"),
 			$error = $(this).parents("form").find(".error_message"),
@@ -20,7 +26,6 @@ $(document).ready(function () {
 			class_name = "error";
 
 		$('.js-check-valid-field').removeClass(class_name);
-
 		$.ajax({
 			url: '/ajax/form-valid-order-policy.php',
 			method: 'GET',
@@ -30,6 +35,7 @@ $(document).ready(function () {
 				$.each(res.value, function (i, value) {
 					$('input[name="'+i+'"]').val(value);
 				});
+				console.log(res);
 				if (res.count > 0) {
 					$('html').scrollTop(top1);
 					$error.show();
@@ -38,8 +44,8 @@ $(document).ready(function () {
 					});
 				} else {
 					$error.hide();
-					closeOpenBlockNext(forms[0], forms[1], btns[0]);
-					$('html').scrollTop($("#form-2").position().top);
+					$("#form-2").removeClass("def-close");
+					$('html').scrollTop($("#form-2").offset().top-15);
 					$('.installment__rules').addClass("installment__rules--active");
 				}
 			},
@@ -47,20 +53,22 @@ $(document).ready(function () {
 				console.log(e);
 			}
 		});
-
 	});
 
+	$("input[data-field='AGREEMENT']").change(function(){
+		if($(this).prop("checked")){
+			$("form input[data-field='AGREEMENT']").removeAttr("disabled");
+		}else{
+			$("form input[data-field='AGREEMENT']").attr("disabled","disabled");
+		}
+	});
+
+	$("[name='PAYMENT']").change(function(){
+			$(this).parents('section').find("[name='web_form_apply']").removeAttr("disabled");
+		});
 	$(".to-short-rd").on("click", function () {
 		$("#short-rd").removeClass("hidden");
 	});
-
-	$('input[type=radio][name=form_radio_POLICY_ADDRESS]').change(function () {
-			if (this.value == '30') {
-				$(".address-installment-other").show();
-			} else {
-				$(".address-installment-other").hide();
-			}
-		});
 
 
 	function closeOpenBlockNext(blockClose, blockOpen, btn) {

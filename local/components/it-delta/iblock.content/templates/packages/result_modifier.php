@@ -51,11 +51,6 @@ $arrCompanyInfo = CIBlockElement::GetList(
     array("ID", "NAME", "PROPERTY_CH_PACKETS")
 )->fetch();
 
-//echo "<pre>";
-//print_r($arrCompanyInfo['PROPERTY_CH_PACKETS_VALUE']);
-//echo "</pre>";
-
-
 //получаем разделы и собираем в массив
 $dbResSect = CIBlockSection::GetList(
     array("SORT" => "ASC"),
@@ -95,18 +90,12 @@ foreach ($arSections as $key => $arSection) {
 
 
     foreach ($arSection['ITEMS'] as $arItem) {
-//        echo "<pre>";
-//        print_r($arItem['ID'].$arItem['NAME'].!in_array($arItem['ID'], $arrCompanyInfo['PROPERTY_CH_PACKETS_VALUE']));
-//        echo "</pre>";
-
         if(in_array($arItem['ID'], $arrCompanyInfo['PROPERTY_CH_PACKETS_VALUE'])) {
-//            echo "<pre>";
-//            print_r($arItem['ID']);
-//            echo "</pre>";
             $item = $arItem['PROPERTIES']['P_COMPLECT']['VALUE'];
             if (is_array($item))
                 $equipmentKitsIds = array_merge($equipmentKitsIds, $item);
             foreach ($arItem['PROPERTIES']['P_COMPLECT']['VALUE'] as $complect):
+                $element_code[$complect] = $arItem["CODE"];
                 $arConnect[$complect] = $arrClass[$arItem['PROPERTIES']['CO_CLASS_REF']['VALUE']];
                 $arConnect[$complect]['COMPANY_NAME'] = $arrCompanyInfo['NAME'];
             endforeach;
@@ -136,7 +125,8 @@ while ($equipmentKitsRes = $dbResEquipmentKits->GetNext()) {
 
     $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] != null ? $arrComplect[] = $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] : '';
     $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE'] != null ? $arCharacteristic = array_merge($arCharacteristic, $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE']) : '';
-
+    $equipmentKitsRes = array_merge($equipmentKitsRes, ["ELEMENT_CODE" => $element_code[$equipmentKitsRes["ID"]]]);
+    
     $arEquipmentKits[$equipmentKitsRes['ID']] = $equipmentKitsRes;
 }
 

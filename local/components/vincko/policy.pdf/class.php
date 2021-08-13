@@ -55,7 +55,7 @@ class PolicyPdf extends CBitrixComponent
 			$this->errors = "В заказе нет страховки";
 		}
 
-		if (empty($this->policyData) || $this->order->getUserId() !== $GLOBALS["USER"]->GetID()){
+		if (empty($this->policyData) || ($this->order->getUserId() !== $GLOBALS["USER"]->GetID() && !$GLOBALS["USER"]->IsAdmin())) {
 			$this->errors = "Заказ не существует";
 		}
 
@@ -120,6 +120,8 @@ class PolicyPdf extends CBitrixComponent
 					"LENGTH"      => $fieldValue->LENGTH,
 					"ALIGN"       => $fieldValue->ALIGN,
 					"COORDINATES" => $fieldValue->COORDINATES,
+					"LINE"        => $fieldValue->LINE,
+					"VALIGN"      => $fieldValue->VALIGN,
 					"TEXT"        => $this->policyData[$fieldName]
 				];
 			}

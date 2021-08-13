@@ -83,7 +83,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="item__content">
                             <p>При заказе услуг этой компании действует гарантия <span class="blue">vincko:</span> <a
-                                        href="">Безопасная сделка</a></p>
+                                        href="/raiting#guarantee">Безопасная сделка</a></p>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
             </div>
             <div class="choice-top-right">
                 <span>Хотите больше узнать об оборудовании?</span>
-                <button class="button grey-border-button">Тех. характеристики</button>
+                <button onclick="location.href='/equipment-kits/'" class="button grey-border-button">Тех. характеристики</button>
             </div>
         </div>
         <div class="ready-des2__choice">
@@ -185,7 +185,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 </label>
 
                 <input id="9c" type="checkbox" name="goal">
-                <label for="9c" id="subscription" class="ready-des2__choice-item ready-des2__choice-item--subscription">
+                <label for="9c" id="subscription" class="ready-des2__choice-item ready-des2__choice-item--subscription" data-params=''
+                       onclick='return TaskManager.viewSotulion()'>
                     <span class="ready-des2__choice-title--subscription">
                         <span>Показать решения</span>
                         <span>для которых действует <span class="with-subscription">Ваша</span> Подписка</span>

@@ -5,6 +5,8 @@ CModule::AddAutoloadClasses(
     '',
     array(
         'MainService' => '/local/libs/service/MainService.php',
+        'FeedbackDTO' => '/local/libs/service/FeedbackDTO.php',
+        'FeedbackService' => '/local/libs/service/FeedbackService.php',
     )
 );
 //функция для кеширования данных
@@ -24,10 +26,10 @@ if (!function_exists('returnResultCache')) {
     }
 }
 
-AddEventHandler("main", "OnBeforeUserRegister", array("RegisterHandler", "OnBeforeUserRegisterHandler"));
-AddEventHandler("main", "OnAfterUserRegister", array("RegisterHandler", "OnAfterUserRegisterHandler"));
-AddEventHandler("main", "OnBeforeUserChangePassword", array("RegisterHandler", "OnBeforeUserChangePasswordHandler"));
-AddEventHandler("main", "OnAfterUserUpdate", array("RegisterHandler", "OnAfterUserUpdateHandler"));
+//AddEventHandler("main", "OnBeforeUserRegister", array("RegisterHandler", "OnBeforeUserRegisterHandler"));
+//AddEventHandler("main", "OnAfterUserRegister", array("RegisterHandler", "OnAfterUserRegisterHandler"));
+//AddEventHandler("main", "OnBeforeUserChangePassword", array("RegisterHandler", "OnBeforeUserChangePasswordHandler"));
+//AddEventHandler("main", "OnAfterUserUpdate", array("RegisterHandler", "OnAfterUserUpdateHandler"));
 
 
 class RegisterHandler
@@ -165,8 +167,9 @@ class GeoCity
             setcookie('selected_city', $GLOBALS["GEOCITY"]['ID'] , time() + 3600 * 24 * 7, '/');
         }
 
-        if(!isset($_COOKIE["selected_estate"]))
+        if(!isset($_COOKIE["selected_estate"])) {
             setcookie('selected_estate', 643 , time() + 3600 * 24 * 7, '/');
+        }
     }
 }
 
@@ -202,5 +205,3 @@ class ExtraElement
         else return false;
     }
 }
-
-//define('NEED_AUTH','Y');
