@@ -466,7 +466,7 @@ global $USER;
             <div class="review__bottom step-1">
                 <div class="review__bottom-step-1">
                     <div class="review__bottom-step-1-left">
-                        <p>Общие впечатления <br> от сотрудничества с охранной <br> компанией</p>
+                        <p><?=$arResult["MAIN_SECTION"]["NAME"]?> <br> от сотрудничества с охранной <br> компанией</p>
                         <div class="input-block">
                             <ul>
                                 <li class="active smile">
@@ -504,9 +504,9 @@ global $USER;
                                 <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="49999" value="1">
                             </div>
                         </div>
-                        <p class="text-2">Насколько вы удовлетворены качеством <br> услуг, оказываемых охранной <br> компанией?</p>
+                        <p class="text-2"><?=$arResult["MAIN_SECTION"]["~UF_TEXT_BEFORE_FIELD"]?></p>
                         <div class="coment-block">
-                            <p>Расскажите подробнее о ситуации, благодаря которой Вы смогли оценить этот параметр</p>
+                            <p><?=$arResult["MAIN_SECTION"]["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
                             <textarea name="step-1-coment" placeholder="Комментарий"></textarea>
                         </div>
                     </div>
@@ -517,9 +517,9 @@ global $USER;
             </div>
             
             <div class="review__btn step-1">
-                <button class="add-review">Оставить отзыв</button>
+                <button class="add-review" disabled>Оставить отзыв</button>
                 <? if($USER->IsAuthorized()): ?>
-                    <button class="next">Продолжить</button>
+                    <button class="next" disabled>Продолжить</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <span>и получить</span>
@@ -532,8 +532,9 @@ global $USER;
                 <? endif ?>
             </div>
             <div class="review__bottom step-2">
-            <? foreach($arResult["SECTIONS"] as $elementPosition => $section): ?>
-                <div class="review__bottom-item <?=$elementPosition == 0 ? "first" : ""?>">
+            <? foreach($arResult["SECTIONS"] as $section): ?>
+                <?++$i?>
+                <div class="review__bottom-item <?=$i == 1 ? "first" : ""?>">
                     <div class="value-block">
                         <svg height="58" width="58">
                             <circle cx="28.5" cy="28.5" r="24" />
@@ -574,7 +575,7 @@ global $USER;
                     </p>
                 </div>
                 <div class="add-review-block">
-                    <button class="add-review">Оставить отзыв</button>
+                    <button class="add-review" disabled>Оставить отзыв</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <picture>
@@ -585,7 +586,7 @@ global $USER;
                     </div> -->
                 </div>
                 <div class="next-block">
-                    <button class="next">Продолжить</button>
+                    <button class="next" disabled>Продолжить</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <picture>
@@ -600,10 +601,10 @@ global $USER;
 
             <div class="review__bottom step-3">
                 <? foreach($arResult["SECTIONS"] as $section): ?>
-                    <?++$i?>
-                    <div class="step-3-item <?=$i == 1 ? "active" : ""?><?=$i == 2 ? "next" : ""?><?=$i == 3 ? "pre-next" : ""?>" >
+                    <?++$k?>
+                    <div class="step-3-item <?=$k == 1 ? "active" : ""?><?=$k == 2 ? "next" : ""?><?=$k == 3 ? "pre-next" : ""?>" >
                         <div class="content">
-                        <? if($i !== 1): ?>
+                        <? if($k !== 1): ?>
                             <div class="content">
                         <? endif ?>
                             <div class="content-wrapper">
@@ -620,8 +621,8 @@ global $USER;
                                     <div class="block-q">
                                         <ul class="list-q">
                                             <? foreach($section["ITEMS"] as $item): ?>
-                                                <?++$k?>
-                                                <li class="q <?=$k == 1 ? "active" : "before"?>">
+                                                <?++$q?>
+                                                <li class="q <?=$q == 1 ? "active" : "before"?>">
                                                     <div class="q-left">
                                                         <h5 data-id="<?=$item["ID"]?>"><?=$item["NAME"]?></h5>
                                                     </div>
@@ -653,7 +654,7 @@ global $USER;
                                     </div>
                                 </div>
                             </div>
-                            <? if($i !== 1): ?>
+                            <? if($k !== 1): ?>
                                 </div>
                             <? endif ?>
                         </div>
