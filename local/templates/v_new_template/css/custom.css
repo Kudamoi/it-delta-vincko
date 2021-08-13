@@ -509,3 +509,11 @@ a.item__content-company-not {
     margin-top: 24px;
 }
 }
+
+.safe__pay_left-img img {
+    width: auto;
+    height: auto;
+
+    margin: auto;
+    display: block;
+}
