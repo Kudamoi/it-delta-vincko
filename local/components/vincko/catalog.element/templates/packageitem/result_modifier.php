@@ -66,6 +66,7 @@ $res = CIBlockSection::GetList(
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
+    $arResult['PACKAGE_GROUP']['PICTURE'] = CFile::ResizeImageGet($arFields['PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
 if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
 {
