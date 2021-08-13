@@ -12,9 +12,13 @@
 }
 .unknown ::placeholder{color: #ff5252}
 .js-forgot-pwd{display: flex}
-.popup__form.js-forgot-pwd{display: grid}
-.js-change-pwd{display: none}
+.popup__form.js-forgot-pwd,.popup__form.js-change-pwd{
+    display: grid;
+    gap: 16px;}
+
 .popup input{z-index:1}
 .popup .info-popup{z-index:2}
 
 .info-popup__sign svg{cursor:pointer}
+
+.hide{display:none}

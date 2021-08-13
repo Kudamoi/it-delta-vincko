@@ -32,10 +32,10 @@ $(document).ready(function () {
 							$domClick.parents("form").submit();
 						}else{
 							//document.location.href = $domClick.attr("href");
-							location.reload();
+							//location.reload();
 						}
 					}else{
-						location.reload();
+						//location.reload();
 					}
 
 				}

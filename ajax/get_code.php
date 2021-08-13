@@ -9,7 +9,7 @@ $request = Application::getInstance()->getContext()->getRequest();
 
 if ($request->isAjaxRequest() && !empty($_REQUEST["USER_LOGIN"])) {
 
-	$arUser = \Vincko\Auth::getUser(["LOGIN" => $_REQUEST["USER_LOGIN"]]);
+	$arUser = \Vincko\Auth::getUser(["PHONE" => $_REQUEST["USER_LOGIN"]]);
 	if($arUser) {
 		$ar = $GLOBALS["USER"]->SendPhoneCode($_REQUEST["USER_LOGIN"], "SMS_USER_CONFIRM_NUMBER", "v1");
 		$result = \Vincko\Auth::getError("SUCCESS_SMS");
