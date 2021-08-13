@@ -20,5 +20,7 @@ $MESS["FORGOT_BTN_AUTH"] = "Войти";
 $MESS["CHANGE_NEW"] = "Новый пароль";
 $MESS["CHANGE_PASW"] = "Пароль";
 $MESS["CHANGE_PASW_CONFIRM"] = "Повторите пароль";
+$MESS["CHANGE_TIME_UNIT"] = "сек";
+
 
 ?>

@@ -2,18 +2,15 @@
 
 use Bitrix\Main\Localization\Loc;
 
-$changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD"]);
+$changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_CHECKWORD"));
 ?>
 
 
 <div class="popup popup--forget">
 
-	<?
-	$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
-
-	if ($request->isAjaxRequest()) { ?>
-	<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.forgotpasswd/popup/script.js"></script>
-	<? }?>
+	<? if ($request->isAjaxRequest()) : ?>
+		<script src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/system.auth.forgotpasswd/popup/script.js"></script>
+	<? endif; ?>
 	<div class="popup__wall"></div>
 
 	<div class="popup__content">
@@ -28,15 +25,15 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 			<div class="popup__title">
 				<?= Loc::getMessage("FORGOT_TITLE") ?>
 			</div>
-			<div class="popup__subtitle js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
-			Здравствуйте!
+			<div class="popup__subtitle js-change-pwd"<?= (!$changePwd ? " style='display:none'" : "") ?>>
+				Здравствуйте!
 			</div>
-			<div class="popup__text js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
+			<div class="popup__text js-change-pwd"<?= (!$changePwd ? " style='display:none'" : "") ?>>
 				Придумайте новый, надежный пароль
 				состоящий минимум из 8 символов.
 			</div>
 
-			<div class="popup__switch js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
+			<div class="popup__switch js-forgot-pwd"<?= ($changePwd ? " style='display:none'" : "") ?>>
 				<div class="popup__switch-item popup__switch-item-left popup__switch-item--active">
 					<?= Loc::getMessage("FORGOT_PHONE") ?>
 				</div>
@@ -53,24 +50,24 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 				</div>
 
 			</div>
-			<div class="popup__text js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
+			<div class="popup__text js-forgot-pwd"<?= ($changePwd ? " style='display:none'" : "") ?>>
 				<?= Loc::getMessage("FORGOT_PHONE_TEXT") ?>
 			</div>
 		</div>
 
-		<form name="bform" method="post" target="_top" class="js-forgot-form" action="<?= $arResult["AUTH_URL"] ?>">
+		<form name="bform" method="post" target="_top" class="js-forgot-form" action="<?= ($changePwd?  $APPLICATION->GetCurPage() : $arResult["AUTH_URL"]) ?>">
 			<? if ($arResult["BACKURL"] <> ''): ?>
 				<input type="hidden" name="backurl" value="<?= $arResult["BACKURL"] ?>"/>
 			<? endif; ?>
 			<input type="hidden" name="AUTH_FORM" value="Y">
-			<input type="hidden" name="TYPE" value="SEND_PWD">
+			<input type="hidden" name="TYPE" value="<?= ($changePwd? "CHANGE_PWD":"SEND_PWD")?>">
 			<input type="hidden" name="AJAX" value="1">
-			<input type="hidden" name="USER_CHECKWORD" value="<?=$arResult["USER_CHECKWORD"]?>">
-			<input type="hidden" name="USER_LOGIN" value="<?=$arResult["LAST_LOGIN"]?>">
+			<input type="hidden" name="USER_CHECKWORD" value="<?= $request->get("USER_CHECKWORD") ?>">
+			<input type="hidden" name="USER_LOGIN" value="<?= $request->get("USER_LOGIN") ?>">
 
 			<div class="popup__main">
 
-				<div class="popup__form popup__form--phone popup__form-mod--phone js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
+				<div class="popup__form popup__form--phone popup__form-mod--phone js-forgot-pwd"<?= ($changePwd ? " style='display:none'" : "") ?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("FORGOT_PHONE_YOUR") ?>
 					</div>
@@ -99,12 +96,12 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 					</div>
 
 					<div class="popup__wait">
-						<div class="popup__wait-time">
+						<div class="popup__wait-time" data-interval="<?= $arResult["PHONE_CODE_RESEND_INTERVAL"] ?>">
 							<?= Loc::getMessage("FORGOT_RE_TIME") ?>
 							<span class="popup__wait-num">
-                                  <?= $arParams["TIMEOUT"] ?>
+                                  <?= $arResult["PHONE_CODE_RESEND_INTERVAL"] ?>
                             </span>
-							сек
+							<?= Loc::getMessage("CHANGE_TIME_UNIT") ?>
 						</div>
 						<div class="popup__wait-repeat">
 							<?= Loc::getMessage("FORGOT_RE") ?>
@@ -167,7 +164,7 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 					</button>
 				</div>
 
-				<div class="popup__form popup__form--mail popup__form-mod--mail js-forgot-pwd"<?=($changePwd?" style='display:none'":"")?>>
+				<div class="popup__form popup__form--mail popup__form-mod--mail js-forgot-pwd"<?= ($changePwd ? " style='display:none'" : "") ?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("FORGOT_EMAIL_ADDRESS") ?>
 					</div>
@@ -200,38 +197,9 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 							value="1">
 						<?= Loc::getMessage("FORGOT_POST") ?>
 					</button>
-					<div class="sms_code">
-					<input
-							type="text"
-							name="USER_CHECKWORD_EMAIL"
-							value="<?= $arResult["USER_CHECKWORD"] ?>"
-							autocomplete="off"
-							placeholder="<?= Loc::getMessage("FORGOT_EMAIL_CODE") ?>"
-							class="popup__code"
-							data-field="CHECKWORD"
-							disabled/>
-					<div class="info-popup info-popup--unknown" data-field="CHECKWORD">
-						<div class="info-popup__wrapper">
-							<div class="info-popup__sign">
-								<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-									 xmlns="http://www.w3.org/2000/svg">
-									<path d="M8.99996 17.3333C4.40496 17.3333 0.666626 13.595 0.666626 8.99998C0.666626 4.40498 4.40496 0.666645 8.99996 0.666645C13.595 0.666645 17.3333 4.40498 17.3333 8.99998C17.3333 13.595 13.595 17.3333 8.99996 17.3333ZM9.83329 4.83331H8.16663V9.83331H9.83329V4.83331ZM9.83329 11.5H8.16663V13.1666H9.83329V11.5Z"
-										  fill="#FF3232"/>
-								</svg>
-							</div>
-							<div class="info-popup__text">
-							</div>
-						</div>
-					</div>
-					</div>
-					<? /*	<div class="popup__send-code blue-button">
-						<svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd" clip-rule="evenodd" d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z" fill="white"/>
-						</svg>
 
-					</div>
 
-					<div class="popup__success">
+					<div class="popup__success hide">
 						<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M16.1402 7.7318C16.5645 8.08537 16.6218 8.71593 16.2682 9.14021L11.2682 15.1402C11.0884 15.356 10.826 15.4863 10.5453 15.499C10.2646 15.5117 9.99156 15.4058 9.79289 15.2071L6.79289 12.2071C6.40237 11.8166 6.40237 11.1834 6.79289 10.7929C7.18342 10.4024 7.81658 10.4024 8.20711 10.7929L10.4328 13.0186L14.7318 7.85984C15.0853 7.43556 15.7159 7.37824 16.1402 7.7318Z" fill="white"/>
 							<path d="M11.5 21C17.0228 21 21.5 16.5228 21.5 11C21.5 5.47715 17.0228 1 11.5 1C5.97715 1 1.5 5.47715 1.5 11C1.5 16.5228 5.97715 21 11.5 21Z" stroke="white" stroke-width="2"/>
@@ -240,19 +208,11 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 						Отправлено
 
 					</div>
-					*/ ?>
-					<button class="popup__send-code blue-button" value="1" name="code_check_submit_button">
-						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
-							 xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd" clip-rule="evenodd"
-								  d="M9.64018 0.731804C10.0645 1.08537 10.1218 1.71593 9.76822 2.14021L4.76822 8.14021C4.58836 8.35605 4.32599 8.48627 4.04531 8.499C3.76464 8.51173 3.49156 8.4058 3.29289 8.20713L0.292893 5.20713C-0.0976311 4.81661 -0.0976311 4.18344 0.292893 3.79292C0.683417 3.40239 1.31658 3.40239 1.70711 3.79292L3.9328 6.01861L8.23178 0.859841C8.58534 0.435564 9.21591 0.37824 9.64018 0.731804Z"
-								  fill="white"/>
-						</svg>
+						</div>
+				<p class="js-info-mail popup__text hide"><br />На указанный адрес было отправлено письмо со ссылкой на восстановление доступа к личному кабинету.</p>
 
-					</button>
-				</div>
 
-				<div class="popup__form js-change-pwd"<?=(!$changePwd?" style='display:none'":"")?>>
+				<div class="popup__form js-change-pwd"<?= (!$changePwd ? " style='display:none'" : "") ?>>
 					<div class="popup__form-title">
 						<?= Loc::getMessage("CHANGE_NEW") ?>
 					</div>
@@ -319,7 +279,8 @@ $changePwd = !empty($arResult["LAST_LOGIN"]) && !empty($arResult["USER_CHECKWORD
 
 
 			<div class="popup__bottom">
-				<button name="change_pwd" class="new-pass-button blue-button blue-button--unactive js-btn-disabled" value="1">
+				<button name="change_pwd" class="blue-button blue-button--unactive js-btn-disabled"
+						value="1">
 					<?= Loc::getMessage("FORGOT_UPDATE_PASS") ?>
 				</button>
 

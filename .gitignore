@@ -109,3 +109,6 @@ bower_components
 
 # фронтенд
 /local/HTML/
+
+# кеш автозагрузки классов
+/local/php_interface/lib/__autoload.cache.php

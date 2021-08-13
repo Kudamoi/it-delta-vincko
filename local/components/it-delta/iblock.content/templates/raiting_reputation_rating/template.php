@@ -50,7 +50,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <div>
                         <div class="rating-help-window active">
                             <div class="rating-help-window-close">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
                                           fill="#D1DBE3"/>
                                 </svg>
@@ -77,9 +78,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                 </div>
                                 <div class="block-rating-help-item">
                                     <div class="top-block-rating-help-item" style="color:#F5C000;">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#F5C000"/>
-                                            <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                                  fill="#F5C000"/>
+                                            <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                                  fill="white"/>
                                         </svg>
 
                                         <div class="top-block-rating-help-item-title">
@@ -104,7 +108,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                     </div>
                                     <div class="content-top-block-rating-help-item">
-                                        Услуги этих компаний заказать на платформе нельзя, однако, можно ознакомиться с отзывами
+                                        Услуги этих компаний заказать на платформе нельзя, однако, можно ознакомиться с
+                                        отзывами
                                         и информацией о них.
                                     </div>
                                 </div>
@@ -133,7 +138,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 <div class="rating-center__search_item-title">
                     Город
                 </div>
-                <div class="rating-center__search_form">
+                <div class="rating-center__search_form select-city">
                     <button class="rating-center__search_form-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 21L11.3254 21.7382L12 22.3546L12.6746 21.7382L12 21ZM12 21C12.6746 21.7382 12.6747 21.7381 12.6749 21.7379L12.6754 21.7374L12.677 21.736L12.6819 21.7315L12.6991 21.7156C12.7139 21.7019 12.7351 21.6822 12.7623 21.6567C12.8168 21.6057 12.8953 21.5314 12.9946 21.4358C13.1929 21.2447 13.4743 20.9681 13.811 20.6215C14.4833 19.9294 15.382 18.9526 16.2834 17.8165C17.1823 16.6834 18.0998 15.372 18.7964 14.0109C19.4871 12.6615 20 11.1878 20 9.75C20 7.6826 19.148 5.70756 17.6439 4.25718C16.141 2.80801 14.1102 2 12 2C9.88977 2 7.85897 2.80801 6.35612 4.25718C4.85203 5.70755 4 7.6826 4 9.75C4 11.1878 4.51291 12.6615 5.20357 14.0109C5.90021 15.372 6.8177 16.6834 7.7166 17.8165C8.61795 18.9526 9.51668 19.9294 10.189 20.6215C10.5257 20.9681 10.8071 21.2447 11.0054 21.4358C11.1047 21.5314 11.1832 21.6057 11.2377 21.6567C11.2649 21.6822 11.2861 21.7019 11.3009 21.7156L11.3181 21.7315L11.323 21.736L11.3246 21.7374L11.3251 21.7379C11.3253 21.7381 11.3254 21.7382 12 21ZM12 12.125C11.3255 12.125 10.6855 11.8663 10.2193 11.4166C9.75422 10.9682 9.5 10.3679 9.5 9.75C9.5 9.13209 9.75422 8.5318 10.2193 8.08336C10.6855 7.63373 11.3255 7.375 12 7.375C12.6745 7.375 13.3145 7.63373 13.7807 8.08336C14.2458 8.5318 14.5 9.13209 14.5 9.75C14.5 10.3679 14.2458 10.9682 13.7807 11.4166C13.3145 11.8663 12.6745 12.125 12 12.125Z"
@@ -141,7 +146,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </svg>
                     </button>
                     <div class="rating-center__search_form-input rating-center__search_form-select">
-                        <input type="text" placeholder="Петропавловск-Камчатский">
+                        <input type="text" data-pre-id="<?= $arResult['CITY_SELECTED']['ID']?>" data-id="<?= $arResult['CITY_SELECTED']['ID']?>" placeholder="<?= $arResult['CITY_SELECTED']['NAME'] ?>">
                     </div>
                     <div class="searchForm__modal">
                         <div class="searchForm__modal_closed">
@@ -154,55 +159,21 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </button>
                         </div>
                         <div class="searchForm__modal_wrapper">
-                            <div class="searchForm__modal_topChek active">
-                                <div class="searchForm__modal_item topChekItem">
+                            <div class="searchForm__modal_topChek actived">
+                                <div class="searchForm__modal_item bottomChekItem">
                                     <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Санкт-Петербург</span>
+                                    <span data-id="<?= $arResult['CITY_SELECTED']['ID']?>" class="itemText"><?= $arResult['CITY_SELECTED']['NAME'] ?></span>
                                 </div>
                             </div>
                             <div class="searchForm__modal_centerChek">
-                                <div class="searchForm__modal_item">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Санкт-Петербург</span>
-                                </div>
                             </div>
                             <div class="searchForm__modal_bottomChek">
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Абинск</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Владивосток</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Воронеж</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Сочи</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Симферополь</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Сиверс</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Москва</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Санкт-Петербург</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Санкт-Петербург</span>
-                                </div>
+                                <? foreach ($arResult['CITIES'] as $item): ?>
+                                    <div class="searchForm__modal_item bottomChekItem">
+                                        <input type="checkbox" class="checkbox">
+                                        <span data-id="<?= $item['ID']?>" class="itemText"><?= $item['NAME'] ?></span>
+                                    </div>
+                                <? endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -213,7 +184,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 <div class="rating-center__search_item-title">
                     Найдите компании по названию
                 </div>
-                <div class="rating-center__search_form">
+                <div class="rating-center__search_form select-company">
                     <button class="rating-center__search_form-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21 21L16.7501 16.7425L21 21ZM19.1053 11.0526C19.1053 13.1883 18.2569 15.2365 16.7467 16.7467C15.2365 18.2569 13.1883 19.1053 11.0526 19.1053C8.91694 19.1053 6.86872 18.2569 5.35856 16.7467C3.8484 15.2365 3 13.1883 3 11.0526C3 8.91694 3.8484 6.86872 5.35856 5.35856C6.86872 3.8484 8.91694 3 11.0526 3C13.1883 3 15.2365 3.8484 16.7467 5.35856C18.2569 6.86872 19.1053 8.91694 19.1053 11.0526V11.0526Z"
@@ -236,54 +207,16 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="searchForm__modal_wrapper">
                             <div class="searchForm__modal_topChek active">
-                                <div class="searchForm__modal_item topChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText"></span>
-                                </div>
                             </div>
                             <div class="searchForm__modal_centerChek">
-                                <div class="searchForm__modal_item">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Дефенд Уикенд</span>
-                                </div>
                             </div>
                             <div class="searchForm__modal_bottomChek">
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Карпов и Наживкин</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Сальса Чача Классико</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Убер Пубер</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Карпов и Наживкин</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Сальса Чача Классно</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Убер Пубертаг</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Крапов</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Кремлинг</span>
-                                </div>
-                                <div class="searchForm__modal_item bottomChekItem">
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="itemText">Горнг</span>
-                                </div>
+                                <? foreach ($arResult['CITY_COMPANIES'] as $item): ?>
+                                    <div class="searchForm__modal_item bottomChekItem">
+                                        <input type="checkbox" class="checkbox">
+                                        <span data-id="<?= $item['ID'] ?>" class="itemText"><?= $item['NAME'] ?></span>
+                                    </div>
+                                <? endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -376,7 +309,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="rating-center__items_top-btns">
                             <div class="rating-center__items_top-btns-item">
-                                <input type="checkbox" id="btn7" name="rating-home">
+                                <input class="rating-home" type="radio" id="btn7" name="rating-home">
                                 <label for="btn7">
                                     <svg width="24" stroke="#93B6FF" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -393,7 +326,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                 </label>
                             </div>
                             <div class="rating-center__items_top-btns-item">
-                                <input type="checkbox" id="btn6" name="rating-home">
+                                <input class="rating-home" type="radio" id="btn6" name="rating-home">
                                 <label for="btn6">
                                     <svg width="24" height="24" viewBox="0 0 24 24" stroke="#93B6FF" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -414,7 +347,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                 </label>
                             </div>
                             <div class="rating-center__items_top-btns-item">
-                                <input type="checkbox" id="btn5" name="rating-home">
+                                <input class="rating-home" type="radio" id="btn5" name="rating-home">
                                 <label for="btn5">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#93B6FF"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -474,7 +407,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         Оценивание производится по<br/>5-балльной шкале, где:
                                         <div class="content-top-block-rating-help-item-rating-panel">
                                             <div class="content-top-block-rating-help-item-rating-panel-left">
-                                                <div class="content-top-block-rating-help-item-rating-panel-left-top"><span>5,0</span>
+                                                <div class="content-top-block-rating-help-item-rating-panel-left-top">
+                                                    <span>5,0</span>
                                                 </div>
                                                 <div class="content-top-block-rating-help-item-rating-panel-left-bottom">
                                                     <svg width="42" height="10" viewBox="0 0 42 10" fill="none"
@@ -494,7 +428,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                                   fill="#005DFF"/>
                                                             <path d="M35.6943 10.0002C33.619 10.0002 32.0625 8.31077 32.0625 6.23624C32.0625 4.16171 33.619 2.48779 35.6943 2.48779C37.7696 2.48779 39.3105 4.16171 39.3105 6.23624C39.3105 8.31077 37.7696 10.0002 35.6943 10.0002ZM35.6943 3.92568C34.405 3.92568 33.5009 4.94742 33.5009 6.23624C33.5009 7.52506 34.405 8.56233 35.6943 8.56233C36.9836 8.56233 37.8721 7.52506 37.8721 6.23624C37.8721 4.94742 36.9836 3.92568 35.6943 3.92568Z"
                                                                   fill="#005DFF"/>
-                                                            <path d="M9.44242 0H8.01953V1.42236H9.44242V0Z" fill="#005DFF"/>
+                                                            <path d="M9.44242 0H8.01953V1.42236H9.44242V0Z"
+                                                                  fill="#005DFF"/>
                                                             <path d="M41.9991 8.56201H40.5762V9.98437H41.9991V8.56201Z"
                                                                   fill="#005DFF"/>
                                                             <path d="M41.9991 3.33252H40.5762V4.75488H41.9991V3.33252Z"
@@ -538,7 +473,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                     </div>
                                     <div class="content-top-block-rating-help-item">
-                                        Оценки Репутационного рейтинга формируются на основании оценок и отзывов клиентов
+                                        Оценки Репутационного рейтинга формируются на основании оценок и отзывов
+                                        клиентов
                                         охранных компаний
                                         <a class="link-item" href="#formation">Подробнее о рейтинге</a>
                                     </div>
@@ -653,9 +589,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                 </div>
                                 <div>
                                     удобством и разнообразием <span>каналов коммуникации</span> с охранной компанией:
-                                    колл-центр,
-                                    мессенджеры, чат на сайте или в
-                                    приложении и др.
+                                    колл-центр, мессенджеры, чат на сайте или в приложении и др.
                                 </div>
                             </div>
                         </div>
@@ -691,7 +625,474 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
             </div>
             <div class="rating-center__items-wrapper">
-                <div class="rating-center__item-wrapper">
+                <? $i = isset($_GET['PAGEN_2']) ? $_GET['PAGEN_2'] * 10 - 9 : 1;
+                foreach ($arResult['ITEMS'] as $item): ?>
+                    <div class="rating-center__item-wrapper <?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SUM'])) == '0,0' ? ' item-rating-hide' : ''; ?>">
+                        <div class="rating-center__item">
+                            <div class="rating-center__item_wrappers" data-id="<?= $item['CHOP_ID']['ID']?>">
+                                <div class="rating-center__item_circle">
+                                    <span><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SUM'])) ?></span>
+                                    <svg height="40" width="40">
+                                        <circle cx="20.5" cy="20.5" r="18" style="stroke-dashoffset: 14.5;"/>
+                                    </svg>
+                                </div>
+                                <div class="rating-center__item_num">
+                                    <?= $i ?>
+                                </div>
+                                <div class="rating-center__item_name">
+                                    <?= $item['CHOP_ID']['NAME'] ?>
+                                </div>
+                                <div class="rating-center__item_icon">
+                                    <div class="rating-center__item_icon-one">
+                                        <img src="<?= $item['STATUS_COMPANY']['PICTURE'] ?>"
+                                             alt="<?= $item['STATUS_COMPANY']['NAME'] ?>">
+                                    </div>
+                                    <div class="rating-center__item_icon-two">
+                                        <img src="/upload/rating/icon-arrow-down.svg" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="num"><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SUM'])) ?></div>
+                        </div>
+                        <div class="rating-center__item-rating">
+                            <div class="line-panel-percent"></div>
+                        </div>
+                        <div class="itemRating-open" data-id="<?= $item['CHOP_ID']['ID']?>">
+                            <button class="itemRating-open__closed">
+                                <img src="/upload/rating/closed-icon.svg" alt="img">
+                            </button>
+                            <div class="itemRating-open__top">
+                                <div class="itemRating-open__left_top">
+                                    <div class="itemRating-open__left_num">
+                                        <span class="num"><?=$i++?></span> <span>в Рейтинге</span>
+                                        <p>г. <?= $arResult['CITY_SELECTED']['NAME'] ?></p>
+                                    </div>
+                                    <div class="itemRating-open__left_endorsements <? if ($item['STATUS_COMPANY']['ID'] == 1497): echo 't-c-green'; elseif ($item['STATUS_COMPANY']['ID'] == 1498): echo 't-c-yellow-d'; else: echo 't-c-gray'; endif; ?>">
+                                        <img src="<?= $item['STATUS_COMPANY']['PICTURE'] ?>"
+                                             alt="<?= $item['STATUS_COMPANY']['NAME'] ?>">
+                                        <span><?= $item['STATUS_COMPANY']['NAME'] ?></span>
+                                        <div class="endorsements_modal modal-mini">
+                                            <div class="modal-mini__title">
+                                                <span>Охранные услуги</span> одобренной компании
+                                            </div>
+                                            <div class="modal-mini__text">
+                                                Вы можете <span>заказать на платформе:</span> конфортно, без переплат,
+                                                скрытых платежей
+                                                за монтаж оборудования и с гарантиями <span>vincko:</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <? if ($item['SAFE_DEAL'] == '01a8c33537514f60a4b14ec8bd8badbe'): ?>
+                                        <div class="itemRating-open__left_deal">
+                                            <a href="#guarantee">Безопасная сделка</a>
+                                            <img src="/upload/rating/deal-icon.svg" alt="img">
+                                            <div class="deal_modal modal-mini">
+                                                <div class="modal-mini__title">
+                                                    <span>Безопасная сделка</span> при покупке услуг охраны
+                                                </div>
+                                                <div class="modal-mini__text">
+                                                    <span>vincko:</span> предоставляет дополнительные гарантии при
+                                                    покупке
+                                                    услуг
+                                                    <span class="green">одобренных</span>
+                                                    охранных компаний на платформе
+                                                    <a href="#guarantee">Подробнее</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <? endif; ?>
+                                </div>
+                                <div class="itemRating-open__left_name">
+                                    <?= $item['CHOP_ID']['NAME'] ?>
+                                </div>
+                                <div class="itemRating-open__showRating">
+                                    <div class="itemRating-open__showRating_title">
+                                        Показаны рейтинг, услуги и отзывы для города:
+                                        <span>г. <?= $arResult['CITY_SELECTED']['NAME'] ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemRating-open__wrapper">
+                                <div class="itemRating-open__left">
+                                    <div class="itemRating-open__left_info">
+                                        <div class="info-block-one rating-check-window">
+                                            <div class="info-block-one__left">
+                                                <span><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SUM'])) ?></span>
+                                                <svg height="60" width="60">
+                                                    <circle cx="30.5" cy="24.5" r="24" style="stroke-dashoffset: 39;"/>
+                                                </svg>
+                                                <div class="info-block-one__left_icon">
+                                                    <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
+                                                </div>
+                                            </div>
+                                            <div class="info-block-one__right">
+                                                <div class="info-block-one__right_row">
+                                                    <img class="icon-open-info-block" src="/upload/rating/icon-info.svg"
+                                                         alt="img">
+                                                    Оценка по критериям <a href="#">vincko:</a>
+                                                </div>
+                                                <div class="info-block-one__right_row">
+                                                    <img src="/upload/rating/info-block-one__left_right-row_icon2.svg"
+                                                         alt="img">
+                                                    <span><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_ZABOTA'])) ?></span>
+                                                    Безопасность
+                                                </div>
+                                                <div class="info-block-one__right_row">
+                                                    <img src="/upload/rating/info-block-one__left_right-row_icon1.svg"
+                                                         alt="img">
+                                                    <span><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SPASENIE'])) ?></span>
+                                                    Клиентоориентированность
+                                                </div>
+                                                <div class="info-block-one__right_row">
+                                                    <img src="/upload/rating/info-block-one__left_right-row_icon3.svg"
+                                                         alt="img">
+                                                    <span><?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_FINANCE'])) ?></span>
+                                                    Комфорт
+                                                </div>
+                                            </div>
+                                            <div class="rating-help-window active" style="display: none;">
+                                                <div class="rating-help-window-close">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                                              fill="#D1DBE3"></path>
+                                                    </svg>
+
+                                                </div>
+                                                <div class="rating-help-window-body">
+                                                    <div class="block-rating-help-item">
+                                                        <div class="top-block-rating-help-item" style="color:#000000;">
+                                                            <div class="top-block-rating-help-item-title">
+                                                                Оценки <span
+                                                                        class="t-c-blue">Репутационного рейтинга</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="content-top-block-rating-help-item t-c-black">
+                                                            <br>
+                                                            образуется на основании отзывов клиентов охранных компаний,
+                                                            которые оценивают свой опыт взаимодействия с ними по трем
+                                                            критериямм:
+                                                            <br><br>
+
+                                                            <ul>
+                                                                <li>Клиентоориентированность</li>
+                                                                <li>Безопасность</li>
+                                                                <li>Комфорт</li>
+                                                            </ul>
+                                                            <br>
+
+                                                            <a href="#formation" class="link-item">Как формируется
+                                                                Рейтинг</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <? if ($item['STATUS_COMPANY']['ID'] == 1497): ?>
+                                            <div class="info-block-two rating-check-window">
+                                                <div class="info-block-two__right">
+                                                    <div class="info-block-two__right_row">
+                                                        <img class="icon-open-info-block"
+                                                             src="/upload/rating/icon-info.svg"
+                                                             alt="img">
+                                                        Ссылка на договор
+                                                    </div>
+                                                    <div class="info-block-bottom">
+                                                        <div class="links-contract">
+                                                            <a class="link-item<?= $item['HONEST_CONTRACT'] == 'Y' ? '' : ' t-c-gray' ?>">vincko:
+                                                                Честный договор</a>
+                                                            <a class="link-item<?= $item['HONEST_CONTRACT'] == 'Y' ? ' t-c-gray' : '' ?>" <?= $item['HONEST_CONTRACT'] == 'Y'? '':'href=\''.$item['CONTRACT'].'\' target=\'_blank\''?>>Договор
+                                                                охранной компании</a>
+                                                        </div>
+                                                        <div class="text-descrip t-c-gray">
+                                                            Lorem Ipsum является стандартной "рыбой" для текстов на
+                                                            латинице
+                                                            с
+                                                            начала XVI века.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-help-window active" style="display: none;">
+                                                    <div class="rating-help-window-close">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                                                  fill="#D1DBE3"></path>
+                                                        </svg>
+
+                                                    </div>
+                                                    <div class="rating-help-window-body">
+                                                        <div class="block-rating-help-item">
+                                                            <div class="top-block-rating-help-item"
+                                                                 style="color:#000000;">
+                                                                <div class="top-block-rating-help-item-title">
+                                                                    <span class="t-c-blue">Договор</span> с охранной
+                                                                    компанией
+                                                                </div>
+                                                            </div>
+                                                            <div class="content-top-block-rating-help-item t-c-black">
+                                                                <br>
+                                                                <ul>
+                                                                    <li>
+                                                                        <span>Честный договор составлен и рекомендован vincko: договор сформулирован таким образом, чтобы максимально защитить права и интересы клиентов, заказывающих услуги охранных компаний на платформе vincko:</span>
+                                                                        <br><br>
+                                                                        <span class="t-c-gray"
+                                                                              style="font-weight: normal"><span
+                                                                                    class="t-c-blue t-u-under b">vincko: Честный договор</span> - доступен при покупке услуг данной компании</span>
+                                                                        <br>
+                                                                        <span class="t-c-gray"
+                                                                              style="font-weight: normal"><span
+                                                                                    class="t-u-under g">vincko: Честный договор</span> - <span
+                                                                                    class="t-c-red">не</span> доступен при покупке услуг данной компании</span>
+                                                                        <br><br>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span>Договор охранной компании: предоставляется индивидуально самой компанией, всю ответственность за условия такого договора несет данная охранная компания.</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <? elseif ($item['STATUS_COMPANY']['ID'] == 1498): ?>
+                                            <div class="info-block-two">
+                                                <div class="info-block-two__right">
+                                                    <div class="text-descrip t-c-gray">
+                                                        Мы оповестим охранные компании о вашем намерении и поможем вам
+                                                        заключить
+                                                        договор охраны.
+                                                    </div>
+                                                    <div class="single-zayavka">
+                                                        <a class="single-zayavka-btn" href="#">Заполнить индивидуальную
+                                                            заявку</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        <? endif; ?>
+                                    </div>
+                                    <?if($item['STATUS_COMPANY']['ID'] == 1498||$item['STATUS_COMPANY']['ID'] == 1497): ?>
+                                    <div class="itemRating-open__tab">
+                                        <div class="tabs-wrapper links-tab">
+                                            <a class="tab tab-one tab_active" href="#">
+                                                Охрана квартиры
+                                            </a>
+                                            <a class="tab tab-two" href="#">
+                                                Охрана дома
+                                            </a>
+                                            <a class="tab tab-three" href="#">
+                                                Охрана коммерческой недвижимости
+                                            </a>
+                                        </div>
+                                        <div class="tabs-wrapper content-tab">
+                                            <div class="tabs-content content-one tabs-content_active">
+                                                <div class="tabs-content__column">
+                                                    <div class="tabs-content__column_title">
+                                                        Услуги
+                                                    </div>
+                                                    <div class="tabs-content__column_lists">
+                                                        <?=$item['SERVICES_APPARTAMENT']?>
+                                                    </div>
+                                                </div>
+                                                <div class="tabs-content__column">
+                                                    <div class="tabs-content__column_title">
+                                                        Стандартные<br>
+                                                        периоды обслуживания
+                                                    </div>
+                                                    <div class="tabs-content__column_lists">
+                                                        <?=$item['DESCRIPTION_APPARTAMENT']?>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="tabs-content content-two">
+                                                <div class="tabs-content__column">
+                                                    <div class="tabs-content__column_title">
+                                                        Услуги
+                                                    </div>
+                                                    <div class="tabs-content__column_lists">
+                                                        <?=$item['SERVICES_HOME']?>
+                                                    </div>
+                                                </div>
+                                                <div class="tabs-content__column border-none">
+                                                    <div class="tabs-content__column_title">
+                                                        Решение индивидуальных задач
+                                                    </div>
+                                                    <div class="tabs-content__column_text tabs-content__column_lists">
+                                                        <?=$item['DESCRIPTION_HOME']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tabs-content content-three">
+                                                <div class="tabs-content__column">
+                                                    <div class="tabs-content__column_title">
+                                                        Услуги
+                                                    </div>
+                                                    <div class="tabs-content__column_lists">
+                                                        <?=$item['SERVICES_COMMERCE']?>
+                                                    </div>
+                                                </div>
+                                                <div class="tabs-content__column border-none">
+                                                    <div class="tabs-content__column_title">
+                                                        Решение индивидуальных задач
+                                                    </div>
+                                                    <div class="tabs-content__column_text tabs-content__column_lists">
+                                                        <?=$item['DESCRIPTION_COMMERCE']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="itemRating-open__left_bottom">
+                                        <div class="itemRating-open__left_bottom-mobilLinks">
+                                            <a href="#">Читать все <span>32</span> отзыва</a>
+                                            <span class="closed-card">Закрыть карточку</span>
+                                        </div>
+                                        <div class="itemRating-open__left_bottom-btns">
+                                            <a href="#" class="itemRating-open__left_bottom-btn">
+                                                к компании
+                                            </a>
+                                            <a href="#" class="itemRating-open__left_bottom-btn">
+                                                Заказать услуги
+                                            </a>
+                                        </div>
+                                        <div class="itemRating-open__left_bottom-text">
+                                            Производители, с оборудованием которых работает компания:
+                                            <div>
+                                                <span>Livicom</span><span>C.nord</span><span>AJAX</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?else:?>
+                                        <div class="itemRating-open__left_text">
+                                            <div class="itemRating-open__left_text-top">
+                                                <span>О компании есть отзывы на платформе, но Не является партнером vincko:</span>
+                                            </div>
+                                            <div class="itemRating-open__left_text-bottom">
+                                                Для вас мы постарались найти оценки и отзывы о компании и в сторонних
+                                                источниках,<br>
+                                                но этого оказалось недостаточно, чтобы распространить <a
+                                                        href="#guarantee">гарантии
+                                                    vincko:</a> на услуги этой компании.
+                                            </div>
+                                            <div class="itemRating-open__left_text-mobilLinks">
+                                                <a href="#">Читать все <span>32</span> отзыва</a>
+                                                <span class="closed-card">Закрыть карточку</span>
+                                            </div>
+                                        </div>
+                                    <?endif;?>
+                                </div>
+                                <div class="itemRating-open__right">
+                                    <div class="itemRating-open__right_top">
+                                        <a href="#">Читать все <span>32</span> отзыва</a>
+                                    </div>
+                                    <div class="itemRating-open__right_wrapper">
+                                        <div class="swiper-container mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <div class="itemRating-open__review">
+                                                        <div class="itemRating-open__review_top">
+                                                            <div class="itemRating-open__review_top-icon">
+                                                                <img src="/upload/rating/itemRating-open__review_top-icon.svg"
+                                                                     alt="img">
+                                                            </div>
+                                                            <div class="itemRating-open__review_top-text">
+                                                                <span class="name">Владимир С.</span>
+                                                                <span class="city">Ростов-на-Дону</span>
+                                                                <span class="buyer">покупатель</span>
+                                                                <img src="/upload/rating/icon-info.svg" alt="img">
+                                                            </div>
+                                                        </div>
+                                                        <div class="itemRating-open__review_bottom">
+                                                            <span>Комментарий пользователя:</span>
+                                                            Lorem Ipsum является стандартной "рыбой" для текстов на
+                                                            латинице
+                                                            с
+                                                            начала XVI века. В то время некий безымянный печатник
+                                                            создал большую коллекцию размеров и форм шрифтов, используя
+                                                            Lorem
+                                                            Ipsum для распечатки образц...
+                                                            <button>Читать далее</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <div class="itemRating-open__review">
+                                                        <div class="itemRating-open__review_top">
+                                                            <div class="itemRating-open__review_top-icon">
+                                                                <img src="/upload/rating/itemRating-open__review_top-icon.svg"
+                                                                     alt="img">
+                                                            </div>
+                                                            <div class="itemRating-open__review_top-text">
+                                                                <span class="name">Владимир С.</span>
+                                                                <span class="city">Ростов-на-Дону</span>
+                                                                <span class="buyer">покупатель</span>
+                                                                <img src="/upload/rating/icon-info.svg" alt="img">
+                                                            </div>
+                                                        </div>
+                                                        <div class="itemRating-open__review_bottom">
+                                                            <span>Комментарий пользователя:</span>
+                                                            Lorem Ipsum является стандартной "рыбой" для текстов на
+                                                            латинице
+                                                            с
+                                                            начала XVI века. В то время некий безымянный печатник
+                                                            создал большую коллекцию размеров и форм шрифтов, используя
+                                                            Lorem
+                                                            Ipsum для распечатки образц...
+                                                            <button>Читать далее</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <div class="itemRating-open__review">
+                                                        <div class="itemRating-open__review_top">
+                                                            <div class="itemRating-open__review_top-icon">
+                                                                <img src="/upload/rating/itemRating-open__review_top-icon.svg"
+                                                                     alt="img">
+                                                            </div>
+                                                            <div class="itemRating-open__review_top-text">
+                                                                <span class="name">Владимир С.</span>
+                                                                <span class="city">Ростов-на-Дону</span>
+                                                                <span class="buyer">покупатель</span>
+                                                                <img src="/upload/rating/icon-info.svg" alt="img">
+                                                            </div>
+                                                        </div>
+                                                        <div class="itemRating-open__review_bottom">
+                                                            <span>Комментарий пользователя:</span>
+                                                            Lorem Ipsum является стандартной "рыбой" для текстов на
+                                                            латинице
+                                                            с
+                                                            начала XVI века. В то время некий безымянный печатник
+                                                            создал большую коллекцию размеров и форм шрифтов, используя
+                                                            Lorem
+                                                            Ipsum для распечатки образц...
+                                                            <button>Читать далее</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                    </div>
+                                    <div class="itemRating-open__right_bottom">
+                                        <a class="itemRating-open__right_bottom-btn" href="/reviews/">Оставить свой
+                                            отзыв</a>
+                                        <div class="itemRating-open__right_bottom-text">
+                                            <span>источник</span>
+                                            <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <? endforeach; ?>
+                <?/*<div class="rating-center__item-wrapper">
                     <div class="rating-center__item">
                         <div class="rating-center__item_wrappers">
                             <div class="rating-center__item_circle">
@@ -708,10 +1109,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                             <div class="rating-center__item_icon">
                                 <div class="rating-center__item_icon-one">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z" fill="white"/>
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#35A34A"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z"
+                                              fill="white"/>
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#35A34A"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
                                 </div>
                                 <div class="rating-center__item_icon-two">
@@ -735,10 +1140,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <p>г.Москва</p>
                                 </div>
                                 <div class="itemRating-open__left_endorsements t-c-green">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z" fill="white"/>
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#35A34A"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z"
+                                              fill="white"/>
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#35A34A"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
 
                                     <span>Компания-партнер vincko:</span>
@@ -793,7 +1202,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                         <div class="info-block-one__right">
                                             <div class="info-block-one__right_row">
-                                                <img class="icon-open-info-block" src="/upload/rating/icon-info.svg" alt="img">
+                                                <img class="icon-open-info-block" src="/upload/rating/icon-info.svg"
+                                                     alt="img">
                                                 Оценка по критериям <a href="#">vincko:</a>
                                             </div>
                                             <div class="info-block-one__right_row">
@@ -817,8 +1227,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                         <div class="rating-help-window active" style="display: none;">
                                             <div class="rating-help-window-close">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z" fill="#D1DBE3"></path>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                                          fill="#D1DBE3"></path>
                                                 </svg>
 
                                             </div>
@@ -831,7 +1243,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     </div>
                                                     <div class="content-top-block-rating-help-item t-c-black">
                                                         <br>
-                                                        образуется на основании отзывов клиентов охранных компаний, которые оценивают свой опыт взаимодействия с ними по трем критериямм:
+                                                        образуется на основании отзывов клиентов охранных компаний,
+                                                        которые оценивают свой опыт взаимодействия с ними по трем
+                                                        критериямм:
                                                         <br><br>
 
                                                         <ul>
@@ -841,7 +1255,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                         </ul>
                                                         <br>
 
-                                                        <a href="#formation" class="link-item">Как формируется Рейтинг</a>
+                                                        <a href="#formation" class="link-item">Как формируется
+                                                            Рейтинг</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -851,7 +1266,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <div class="info-block-two rating-check-window">
                                         <div class="info-block-two__right">
                                             <div class="info-block-two__right_row">
-                                                <img class="icon-open-info-block" src="/upload/rating/icon-info.svg" alt="img">
+                                                <img class="icon-open-info-block" src="/upload/rating/icon-info.svg"
+                                                     alt="img">
                                                 Ссылка на договор
                                             </div>
                                             <div class="info-block-bottom">
@@ -867,8 +1283,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                         <div class="rating-help-window active" style="display: none;">
                                             <div class="rating-help-window-close">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z" fill="#D1DBE3"></path>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                                          fill="#D1DBE3"></path>
                                                 </svg>
 
                                             </div>
@@ -885,9 +1303,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                             <li>
                                                                 <span>Честный договор составлен и рекомендован vincko: договор сформулирован таким образом, чтобы максимально защитить права и интересы клиентов, заказывающих услуги охранных компаний на платформе vincko:</span>
                                                                 <br><br>
-                                                                <span class="t-c-gray" style="font-weight: normal"><span class="t-c-blue t-u-under b">vincko: Честный договор</span> - доступен при покупке услуг данной компании</span>
+                                                                <span class="t-c-gray" style="font-weight: normal"><span
+                                                                            class="t-c-blue t-u-under b">vincko: Честный договор</span> - доступен при покупке услуг данной компании</span>
                                                                 <br>
-                                                                <span class="t-c-gray" style="font-weight: normal"><span class="t-u-under g">vincko: Честный договор</span> - <span class="t-c-red">не</span> доступен при покупке услуг данной компании</span>
+                                                                <span class="t-c-gray" style="font-weight: normal"><span
+                                                                            class="t-u-under g">vincko: Честный договор</span> - <span
+                                                                            class="t-c-red">не</span> доступен при покупке услуг данной компании</span>
                                                                 <br><br>
                                                             </li>
                                                             <li>
@@ -1137,7 +1558,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <div class="swiper-button-prev"></div>
                                 </div>
                                 <div class="itemRating-open__right_bottom">
-                                    <a class="itemRating-open__right_bottom-btn" href="/reviews/">Оставить свой отзыв</a>
+                                    <a class="itemRating-open__right_bottom-btn" href="/reviews/">Оставить свой
+                                        отзыв</a>
                                     <div class="itemRating-open__right_bottom-text">
                                         <span>источник</span>
                                         <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">
@@ -1164,9 +1586,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                             <div class="rating-center__item_icon">
                                 <div class="rating-center__item_icon-one">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z" fill="#D1DBE3"/>
-                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z"
+                                              fill="#D1DBE3"/>
+                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z"
+                                              fill="white"/>
                                     </svg>
                                 </div>
                                 <div class="rating-center__item_icon-two">
@@ -1192,9 +1617,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <p>г.Москва</p>
                                 </div>
                                 <div class="itemRating-open__left_endorsements t-c-gray">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z" fill="#D1DBE3"/>
-                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z"
+                                              fill="#D1DBE3"/>
+                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z"
+                                              fill="white"/>
                                     </svg>
                                     <span>Не является партнером vincko:</span>
                                 </div>
@@ -1378,9 +1806,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                             <div class="rating-center__item_icon">
                                 <div class="rating-center__item_icon-one">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#F5C000"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#F5C000"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
                                 </div>
                                 <div class="rating-center__item_icon-two">
@@ -1406,9 +1837,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <p>г.Москва</p>
                                 </div>
                                 <div class="itemRating-open__left_endorsements t-c-yellow-d">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#F5C000"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#F5C000"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
                                     <span>Ассоциированный партнер vincko:</span>
                                 </div>
@@ -1463,10 +1897,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <div class="info-block-two">
                                         <div class="info-block-two__right">
                                             <div class="text-descrip t-c-gray">
-                                                Мы оповестим охранные компании о вашем намерении и поможем вам заключить договор охраны.
+                                                Мы оповестим охранные компании о вашем намерении и поможем вам заключить
+                                                договор охраны.
                                             </div>
                                             <div class="single-zayavka">
-                                                <a class="single-zayavka-btn" href="#">Заполнить индивидуальную заявку</a>
+                                                <a class="single-zayavka-btn" href="#">Заполнить индивидуальную
+                                                    заявку</a>
                                             </div>
 
                                         </div>
@@ -1732,10 +2168,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                             <div class="rating-center__item_icon">
                                 <div class="rating-center__item_icon-one">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z" fill="white"/>
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#35A34A"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z"
+                                              fill="white"/>
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#35A34A"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
                                 </div>
                                 <div class="rating-center__item_icon-two">
@@ -1761,10 +2201,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <p>г.Москва</p>
                                 </div>
                                 <div class="itemRating-open__left_endorsements t-c-green">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z" fill="white"/>
-                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z" fill="#35A34A"/>
-                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.025 0.835486C19.573 0.747001 20.0883 1.1219 20.1727 1.6706L20.6783 4.95574C20.7266 5.26975 20.9212 5.54212 21.2027 5.68951L24.1238 7.21928C24.6045 7.47101 24.7967 8.06016 24.557 8.54694L23.0716 11.5632C22.9341 11.8424 22.9345 12.1698 23.0726 12.4487L24.5646 15.4614C24.8064 15.9496 24.6128 16.5416 24.1293 16.7927L21.1813 18.3234C20.8983 18.4704 20.7023 18.7436 20.6538 19.0588L20.1485 22.3422C20.0641 22.8907 19.5491 23.2656 19.0012 23.1774L15.8161 22.6645C15.4951 22.6128 15.1691 22.7203 14.9419 22.9528L12.6829 25.2643C12.2891 25.6672 11.6404 25.6654 11.2488 25.2604L8.97802 22.9118C8.74854 22.6744 8.4167 22.5656 8.09124 22.6211L4.95678 23.1547C4.40668 23.2484 3.88635 22.8737 3.80076 22.3223L3.28608 19.0062C3.23743 18.6927 3.04291 18.4209 2.76188 18.2737L-0.133974 16.757C-0.615405 16.5048 -0.807323 15.9144 -0.566133 15.4273L0.92645 12.4135C1.06513 12.1335 1.06494 11.8047 0.925925 11.5248L-0.554492 8.54445C-0.795679 8.05889 -0.606004 7.46957 -0.126873 7.21585L2.80158 5.6651C3.08056 5.51737 3.2734 5.24658 3.32178 4.93463L3.82504 1.68978C3.91055 1.13847 4.43063 0.763747 4.98065 0.857155L8.12653 1.3914C8.45248 1.44676 8.78473 1.33743 9.01412 1.09932L11.2837 -1.25648C11.6755 -1.66322 12.3263 -1.66496 12.7203 -1.26033L14.9778 1.05793C15.2051 1.29138 15.5319 1.39943 15.8536 1.34749L19.025 0.835486Z"
+                                              fill="white"/>
+                                        <path d="M16.5486 4.07778C17.1 3.98595 17.6195 4.36385 17.702 4.91667L17.9875 6.83051C18.0339 7.14185 18.2242 7.41314 18.5011 7.56278L20.1548 8.4563C20.6236 8.70959 20.8115 9.28597 20.5819 9.76684L19.7201 11.5725C19.5897 11.8456 19.5901 12.1631 19.721 12.4359L20.586 14.238C20.8176 14.7203 20.6284 15.2995 20.1567 15.5522L18.4873 16.4466C18.2087 16.5958 18.0171 16.868 17.9704 17.1805L17.6852 19.0926C17.6028 19.6453 17.0835 20.0231 16.5323 19.9315L14.8119 19.6457C14.4841 19.5913 14.1506 19.7032 13.922 19.9445L12.7049 21.2294C12.309 21.6474 11.6428 21.6456 11.2492 21.2255L10.0239 19.918C9.79309 19.6717 9.45362 19.5584 9.12118 19.6168L7.44079 19.912C6.88735 20.0092 6.36248 19.6315 6.27889 19.0759L5.98799 17.1421C5.94123 16.8312 5.75106 16.5605 5.47453 16.411L3.8386 15.527C3.3691 15.2733 3.18155 14.6956 3.41249 14.2145L4.27806 12.4113C4.40954 12.1374 4.40936 11.8185 4.27756 11.5447L3.42041 9.76434C3.18949 9.2847 3.37481 8.70823 3.84196 8.453L5.50314 7.5454C5.77759 7.39545 5.96608 7.12575 6.01257 6.81649L6.29575 4.93267C6.37926 4.37713 6.90388 3.99937 7.45723 4.09633L9.14534 4.39211C9.47827 4.45045 9.81814 4.33665 10.0488 4.0896L11.273 2.77857C11.6669 2.35676 12.335 2.35497 12.7311 2.77466L13.9468 4.06265C14.1755 4.30492 14.5097 4.41741 14.8383 4.36267L16.5486 4.07778Z"
+                                              fill="#35A34A"/>
+                                        <path d="M14.8291 10.1751L10.9491 13.5568L9.17087 12.0068C8.90306 11.7734 8.46876 11.7734 8.2009 12.0068C7.93303 12.2403 7.93303 12.6187 8.2009 12.8522L10.4641 14.8249C10.5928 14.937 10.7672 15 10.9491 15C10.9491 15 10.9491 15 10.9491 15C11.131 15 11.3055 14.937 11.4341 14.8249L15.7991 11.0205C16.067 10.7871 16.067 10.4086 15.7991 10.1751C15.5312 9.94165 15.097 9.94161 14.8291 10.1751Z"
+                                              fill="white"/>
                                     </svg>
                                     <span>Компания-партнер vincko:</span>
 
@@ -2107,7 +2551,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                     </div>
                 </div>
-
                 <div class="rating-center__item-wrapper no-approved reviews-non item-rating-hide">
                     <div class="rating-center__item">
                         <div class="rating-center__item_wrappers">
@@ -2125,9 +2568,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                             <div class="rating-center__item_icon">
                                 <div class="rating-center__item_icon-one">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z" fill="#D1DBE3"/>
-                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z"
+                                              fill="#D1DBE3"/>
+                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z"
+                                              fill="white"/>
                                     </svg>
                                 </div>
                                 <div class="rating-center__item_icon-two">
@@ -2153,9 +2599,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     <p>г.Москва</p>
                                 </div>
                                 <div class="itemRating-open__left_endorsements t-c-gray">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z" fill="#D1DBE3"/>
-                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z" fill="white"/>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5486 4.07827C17.1 3.98643 17.6195 4.36434 17.702 4.91716L17.9875 6.831C18.0339 7.14233 18.2242 7.41363 18.5011 7.56327L20.1548 8.45679C20.6236 8.71008 20.8115 9.28646 20.5819 9.76733L19.7201 11.5729C19.5897 11.8461 19.5901 12.1636 19.721 12.4364L20.586 14.2384C20.8176 14.7208 20.6284 15.3 20.1567 15.5527L18.4873 16.4471C18.2087 16.5963 18.0171 16.8684 17.9704 17.181L17.6852 19.0931C17.6028 19.6457 17.0835 20.0236 16.5323 19.932L14.8119 19.6462C14.4841 19.5917 14.1506 19.7037 13.922 19.945L12.7049 21.2299C12.309 21.6479 11.6428 21.6461 11.2492 21.226L10.0239 19.9184C9.79309 19.6721 9.45362 19.5589 9.12118 19.6173L7.44079 19.9125C6.88735 20.0097 6.36248 19.632 6.27889 19.0763L5.98799 17.1425C5.94123 16.8317 5.75106 16.561 5.47453 16.4115L3.8386 15.5275C3.3691 15.2738 3.18155 14.6961 3.41249 14.215L4.27806 12.4118C4.40954 12.1378 4.40936 11.819 4.27756 11.5452L3.42041 9.76483C3.18949 9.28519 3.37481 8.70872 3.84196 8.45349L5.50314 7.54589C5.77759 7.39594 5.96608 7.12624 6.01257 6.81698L6.29575 4.93316C6.37926 4.37762 6.90388 3.99986 7.45723 4.09682L9.14534 4.3926C9.47827 4.45094 9.81814 4.33714 10.0488 4.09009L11.273 2.77905C11.6669 2.35725 12.335 2.35546 12.7311 2.77515L13.9468 4.06314C14.1755 4.3054 14.5097 4.4179 14.8383 4.36316L16.5486 4.07827Z"
+                                              fill="#D1DBE3"/>
+                                        <path d="M9.25412 9.78649C9.25275 9.81878 9.258 9.85102 9.26955 9.8812C9.2811 9.91139 9.2987 9.9389 9.32127 9.96204C9.34385 9.98517 9.37091 10.0034 9.40081 10.0157C9.43071 10.028 9.4628 10.0341 9.49512 10.0335H10.3201C10.4581 10.0335 10.5681 9.92049 10.5861 9.78349C10.6761 9.12749 11.1261 8.64949 11.9281 8.64949C12.6141 8.64949 13.2421 8.99249 13.2421 9.81749C13.2421 10.4525 12.8681 10.7445 12.2771 11.1885C11.6041 11.6775 11.0711 12.2485 11.1091 13.1755L11.1121 13.3925C11.1132 13.4581 11.14 13.5207 11.1867 13.5667C11.2335 13.6127 11.2965 13.6385 11.3621 13.6385H12.1731C12.2394 13.6385 12.303 13.6121 12.3499 13.5653C12.3968 13.5184 12.4231 13.4548 12.4231 13.3885V13.2835C12.4231 12.5655 12.6961 12.3565 13.4331 11.7975C14.0421 11.3345 14.6771 10.8205 14.6771 9.74149C14.6771 8.23049 13.4011 7.50049 12.0041 7.50049C10.7371 7.50049 9.34912 8.09049 9.25412 9.78649ZM10.8111 15.5495C10.8111 16.0825 11.2361 16.4765 11.8211 16.4765C12.4301 16.4765 12.8491 16.0825 12.8491 15.5495C12.8491 14.9975 12.4291 14.6095 11.8201 14.6095C11.2361 14.6095 10.8111 14.9975 10.8111 15.5495Z"
+                                              fill="white"/>
                                     </svg>
 
                                     <span>Не является партнером vincko:</span>
@@ -2209,29 +2658,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/?>
             </div>
             <div class="rating-center__items_bottom">
                 <a href="#rating-center" class="rating-center__items_bottom-btnTop">
                     Подняться к фильтрам
                 </a>
-                <div class="rating-center__items_bottom-pagin">
-                    <a href="#rating-center" class="rating-center__items_bottom-arrow">
-                        <img src="/upload/rating/pagin-arrow-left.svg" alt="img">
-                    </a>
-                    <div class="rating-center__items_bottom-links">
-                        <a class="active" href="#rating-center">1</a>
-                        <a href="#rating-center">2</a>
-                        <a href="#rating-center">3</a>
-                        <a href="#rating-center">4</a>
-                        <a href="#rating-center">5</a>
-                        <a href="#rating-center">6</a>
-                        <a href="#rating-center">7</a>
-                    </div>
-                    <a href="#rating-center" class="rating-center__items_bottom-arrow">
-                        <img src="/upload/rating/pagin-arrow-right.svg" alt="img">
-                    </a>
-                </div>
+                <?= $arResult['PAGINATION'] ?>
+
             </div>
         </div>
     </div>
