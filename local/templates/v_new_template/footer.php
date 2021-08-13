@@ -7,10 +7,10 @@
 						"bitrix:main.include",
 						"",
 						array(
-							"AREA_FILE_SHOW"   => "file",
+							"AREA_FILE_SHOW" => "file",
 							"AREA_FILE_SUFFIX" => "inc",
-							"EDIT_TEMPLATE"    => "",
-							"PATH"             => "/include/logo_footer.php"
+							"EDIT_TEMPLATE" => "",
+							"PATH" => "/include/logo_footer.php"
 						)
 					); ?>
 				</a>
@@ -19,10 +19,10 @@
 				"bitrix:main.include",
 				"",
 				array(
-					"AREA_FILE_SHOW"   => "file",
+					"AREA_FILE_SHOW" => "file",
 					"AREA_FILE_SUFFIX" => "inc",
-					"EDIT_TEMPLATE"    => "",
-					"PATH"             => "/include/top-service_footer.php"
+					"EDIT_TEMPLATE" => "",
+					"PATH" => "/include/top-service_footer.php"
 				)
 			); ?>
 		</div>
@@ -130,10 +130,10 @@
 				"bitrix:main.include",
 				"",
 				array(
-					"AREA_FILE_SHOW"   => "file",
+					"AREA_FILE_SHOW" => "file",
 					"AREA_FILE_SUFFIX" => "inc",
-					"EDIT_TEMPLATE"    => "",
-					"PATH"             => "/include/bottom_footer.php"
+					"EDIT_TEMPLATE" => "",
+					"PATH" => "/include/bottom_footer.php"
 				)
 			); ?>
 		</div>
@@ -142,10 +142,10 @@
 			"bitrix:main.include",
 			"",
 			array(
-				"AREA_FILE_SHOW"   => "file",
+				"AREA_FILE_SHOW" => "file",
 				"AREA_FILE_SUFFIX" => "inc",
-				"EDIT_TEMPLATE"    => "",
-				"PATH"             => "/include/footer_signature.php"
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/include/footer_signature.php"
 			)
 		); ?>
 	</div>
