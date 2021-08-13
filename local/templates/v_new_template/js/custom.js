@@ -215,39 +215,38 @@ $(document).ready(function () {
 		}
 	});
 });
+
 //функция оформления заказа
 function sendAjaxForm(result_form, ajax_form, url) {
 
-		$error = $("#"+ajax_form).find(".form__required"),
-		top1 = $("#"+ajax_form).position().top,
+	$error = $("#" + ajax_form).find(".form__required"),
+		top1 = $("#" + ajax_form).position().top,
 		class_name = "error";
 
 	$('.js-check-valid-field').removeClass(class_name);
 
 	$.ajax({
-		url:     url, //url страницы
-		type:     "POST", //метод отправки
+		url: url, //url страницы
+		type: "POST", //метод отправки
 		dataType: "html", //формат данных
-		data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
-		success: function(response) { //Данные отправлены успешно
+		data: $("#" + ajax_form).serialize(),  // Сеарилизуем объект
+		success: function (response) { //Данные отправлены успешно
 			response = $.parseJSON(response);
-			if(response.type=='error')
-			{
+			if (response.type == 'error') {
 
-					$('html').scrollTop(top1);
-					$error.show();
-					$.each(response.msg, function (i, value) {
-						$('input[name="'+value+'"]').addClass('error');
-					});
+				$('html').scrollTop(top1);
+				$error.show();
+				$.each(response.msg, function (i, value) {
+					$('input[name="' + value + '"]').addClass('error');
+				});
 
 
 				//$('#b-form-order-ajax-errors').html("<style>.messages{margin-bottom: 20px;}</style><span style='color: red;font-size: 1.2em;'>" + response.msg + "</span>");
-			} else
-			if (response.type=='ok') {
+			} else if (response.type == 'ok') {
 				window.location.href = response.url;
 			}
 		},
-		error: function(response) { // Данные не отправлены
+		error: function (response) { // Данные не отправлены
 			$('#b-form-order-ajax-errors').html('Ошибка. Данные не отправлены.');
 		}
 	});
