@@ -722,7 +722,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     </div>
                                     <div class="solutions-card__top_text">
                                         <div class="h4 solutions-card__top_text-title">
-                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?>
+                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?>
                                         </div>
                                         <div class="itemRating-open__left_deal">
                                             <a href="#guarantee">Безопасная сделка</a>
@@ -755,7 +755,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy-top">
                                                                 <span class="font-weight policy-title">
                                                                     Компания “ <span
-                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?></span> ”
+                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?></span> ”
                                                                 </span>
                                                                     </div>
                                                                 </div>
@@ -1404,7 +1404,7 @@ $data = [
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22 ,23,24)) ? 'а' : 'ев') . ' обслуживания',
-            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'],
             'months_count' => $currentSubscriptionFeeMonthsCount,
             'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,

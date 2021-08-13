@@ -139,8 +139,10 @@ $arSKU = CCatalogSKU::getOffersList(
 //получаем все элементы ИБ Компания-Город
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds)
-
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
+    false,
+    false,
+    array("*","PROPERTY_CHOP_ID.NAME")
 );
 while ($arFields = $res->Fetch()) {
 

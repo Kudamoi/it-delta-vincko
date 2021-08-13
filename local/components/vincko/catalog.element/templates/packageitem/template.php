@@ -413,7 +413,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <div class="solutions-card__top_text">
                                     <div class="h4 solutions-card__top_text-title">
-                                        <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?>
+                                        <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?>
                                     </div>
                                     <div class="itemRating-open__left_deal">
                                         <a href="#guarantee">Безопасная сделка</a>
@@ -436,6 +436,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                             <form action="#">
                                                 <input class="select__input" type="hidden"
                                                        name="solutions-card__top-select">
+                                                <? if (count($arResult['ALL_LIST_COMPANY_CITY']) > 1): ?>
                                                 <div class="select__head">Выбрать другую компанию</div>
                                                 <div class="select__list" style="display: none;">
                                                     <div class="select__input-search">
@@ -457,7 +458,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                  onclick="BX.setCookie('selected_company_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
                                                                  class="js-refresh-packageitem-data-ajax select__item">
                                                                 <div class="select__item_text">
-                                                                    <?= $item['NAME'] ?>
+                                                                    <?= $item['PROPERTY_CHOP_ID_NAME'] ?>
                                                                 </div>
                                                                 <div class="select__item_num">4</div>
                                                                 <span class="select__item_bg"
@@ -468,6 +469,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                     </div>
                                                     <div class="box-shadow"></div>
                                                 </div>
+                                                <?endif;?>
                                             </form>
                                         </div>
                                     </div>
@@ -1054,7 +1056,7 @@ $data = [
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22, 23, 24)) ? 'а' : 'ев') . ' обслуживания',
-            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'],
             'months_count' => $currentSubscriptionFeeMonthsCount,
             'gift' => $arResult['PROPERTIES']['P_BONUSES']['VALUE'],
             'active' => true,
