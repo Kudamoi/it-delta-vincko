@@ -461,10 +461,14 @@ if ($(window).width() <= '767') {
       });
     }); // слайдер
     // let copies = document.getElementsByClassName('slick-slider-datchiki');
-    // for (let i = 0; i < copies.length; i++) {
-    //     let inner = copies[i].innerHTML;
-    //     inner += inner
-    //     copies[i].innerHTML = inner;
+    // let slides = document.getElementsByClassName('slide');
+    // if (slides.length <6){
+    //     let inner = copies[0].innerHTML;
+    //     inner += inner;
+    //     if (slides.length <3){
+    //         inner += inner;
+    //     }
+    //     copies[0].innerHTML = inner;
     // }
     //let copies2 = document.getElementsByClassName('modal-slider');
     //for (let i = 0; i < copies2.length; i++) {
@@ -487,25 +491,25 @@ if ($(window).width() <= '767') {
     //         });
     // }
     // if ($('.slide-box').length >= 5) {
-
-// >>>> вынести в компонент (для асинхронной загрузки) >>>>>
-    $('.slick-slider-datchiki').slick({
-      variableWidth: true,
-      centerMode: true,
-      arrows: true,
-      centerPadding: '60px',
-      slidesToShow: 1,
-      prevArrow: '<div class="arrow-prev arrow"><img src="../img/cartochka/prew.svg"></div>',
-      nextArrow: '<div class="arrow-next arrow"><img src="../img/cartochka/next.svg"></div>',
-      infinity: true
-    }); // }
+    // $('.slick-slider-datchiki').slick({
+    //         variableWidth: true,
+    //         centerMode: true,
+    //         arrows: true,
+    //         centerPadding: '60px',
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //         prevArrow: '<div class="arrow-prev arrow"><img src="../img/cartochka/prew.svg"></div>',
+    //         nextArrow: '<div class="arrow-next arrow"><img src="../img/cartochka/next.svg"></div>',
+    //         infinity: true,
+    //     });
+    // }
 
     $('.slide-box-slider-item').slick({
       arrows: true,
       slidesToShow: 1,
       dots: true,
-      prevArrow: '<div class="arrow-prev-mini arrow-mini"><img src="../img/cartochka/arrow-prev-mini.svg"></div>',
-      nextArrow: '<div class="arrow-next-mini arrow-mini"><img src="../img/cartochka/arrow-next-mini.svg"></div>'
+      prevArrow: '<div class="arrow-prev-mini arrow-mini"><svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.546177 8.17134L7.78754 0.950275C8.24818 0.490692 8.99503 0.490692 9.45544 0.950275C9.9159 1.40945 9.9159 2.15419 9.45544 2.61333L3.04795 9.00287L9.45526 15.3922C9.91571 15.8515 9.91571 16.5962 9.45526 17.0554C8.9948 17.5147 8.24799 17.5147 7.78736 17.0554L0.545991 9.83421C0.315764 9.60451 0.200782 9.30378 0.200782 9.0029C0.200782 8.70188 0.315987 8.40093 0.546177 8.17134Z" fill="#005DFF"/></svg></div>',
+      nextArrow: '<div class="arrow-next-mini arrow-mini"><svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.25461 9.83427L2.01324 17.0553C1.5526 17.5149 0.805754 17.5149 0.345339 17.0553C-0.115113 16.5962 -0.115113 15.8514 0.345339 15.3923L6.75283 9.00275L0.345525 2.61343C-0.114927 2.15407 -0.114927 1.40941 0.345525 0.950234C0.805977 0.490873 1.55279 0.490873 2.01342 0.950234L9.25479 8.17141C9.48502 8.40111 9.6 8.70184 9.6 9.00271C9.6 9.30374 9.48479 9.60469 9.25461 9.83427Z" fill="#005DFF"/></svg></div>'
     });
     var activeSlide = document.querySelector('.slick-slide.slick-center'),
         infoBlocks = document.querySelectorAll('.info'),
@@ -646,6 +650,8 @@ if ($(window).width() <= '767') {
       });
     });
     $('.slick-slider-datchiki').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+      console.log(slick);
+
       if (!slick.$nextArrow[0].classList.contains("arrow-next-mini")) {
         $('.info').removeClass("vis");
         $('[data-slider-info="' + nextSlide + '"]').addClass('vis');
@@ -683,11 +689,6 @@ if ($(window).width() <= '767') {
   items.each(function (index) {
     var parent = $(this).children(" .ready-pack__mid");
     var ul = parent.find(".ready-pack__mid-list");
-        /* WEBPACK VAR INJECTION */(function($) {if (!document.querySelector('.complect__slider')) {} else {
-        }
-          /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
-// <<<<<<<<<<<
-
 
     if (ul.find("li").length > 5) {
       var el = ul.find("li").slice(5, 100);
@@ -799,9 +800,11 @@ jQuery(document).ready(function ($) {
   // });
 
   $("#buy-bonuses").on("click", function () {
-    console.log("click buy-bonuses");
     $(".header__popup").removeClass("hidden");
   });
+  $(".header-popup__button").on("click", function () {
+    $(".header__popup").addClass("hidden");
+  }); // $(".searchForm__modal.modal__content-body").style.display = "block"
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
 
@@ -1656,33 +1659,9 @@ var _loop = function _loop(i) {
   });
 };
 
-            if ($('.questions__text').hasClass('questions__textHide')) {
-              $('.questions__text-show').text('Развернуть');
-            } else {
-              $('.questions__text-show').text('Свернуть');
-            }
-          });
-          $('.icon-info_cli').hover(function () {
-            $('.icon-info_modal').fadeIn();
-          }, function () {
-            $('.icon-info_modal').fadeOut();
-          });
-          $('.itemRating-open__left_endorsements').hover(function () {
-            $('.endorsements_modal').fadeIn();
-          }, function () {
-            $('.endorsements_modal').fadeOut();
-          });
-          $('body').on('mouseover', '.itemRating-open__left_deal', function (){
-            $('.deal_modal').fadeIn();
-          })
-          $('body').on('mouseout', '.itemRating-open__left_deal', function (){
-            $('.deal_modal').fadeOut();
-          });
-          $('.itemRating-open__showRating_title-modal').hover(function () {
-            $('.itemRating-open__showRating_title-modalShow').fadeIn();
-          }, function () {
-            $('.itemRating-open__showRating_title-modalShow').fadeOut();
-          });
+for (var i = 0; i < btns_modals.length; i++) {
+  _loop(i);
+}
 
 /***/ }),
 
@@ -1803,9 +1782,37 @@ var _loop = function _loop(i) {
   !*** ./src/blocks/modules/profile/profile.js ***!
   \***********************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
+  tabsChange();
+  $(".profile__c-tabs").on("click", function () {
+    tabsChange();
+  });
 
+  function tabsChange() {
+    if ($("#c-all-orders").is(':checked')) {
+      $(".profile__c-main").removeClass("show");
+      $(".profile__c-main--all-orders").addClass("show");
+    } else if ($("#c-p-requests").is(':checked')) {
+      $(".profile__c-main").removeClass("show");
+      $(".profile__c-main--personal-requests").addClass("show");
+    }
+  }
+
+  if ($(".profile__c-main--all-orders").find('.profile__c-main-block').length === 0) {
+    $(".profile__c-main--all-orders .profile__empty").addClass("show");
+  }
+
+  ;
+
+  if ($(".profile__c-main--personal-requests").find('.profile__c-main-request').length === 0) {
+    $(".profile__c-main--personal-requests .profile__empty").addClass("show");
+  }
+
+  ;
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
 
 /***/ }),
 
@@ -2321,7 +2328,6 @@ var _loop = function _loop(i) {
           settings: {
             slidesToShow: 1
           }
-<<<<<<< HEAD
         }]
       });
     } else if ($("#r-d-s-" + i).children(".ready-pack__item-wrapper").length > 2) {
@@ -2648,376 +2654,6 @@ if (document.querySelector('.review') === null) {} else {
           } else if (input.value > 118000) {
             li[11].classList.add('active');
             span.innerHTML = '10';
-=======
-
-          $(".ready-des2__choice-item").on("click", function () {
-            var top = $('.ready-des2__show').position().top;
-            $('html').scrollTop(top);
-            $(".ready-des2__show--open").removeClass("hidden");
-
-            if (!$(".ready-des2__show--close").hasClass("hidden")) {
-              $(".ready-des2__show--close").addClass("hidden");
-            }
-          });
-          $("#allC").on("click", function () {
-            $(".ready-des2__show-item:first").removeClass("close");
-          });
-
-          var companySelect = function companySelect() {
-            var element = document.querySelector('.ready-des2__company-select');
-
-            if (element) {
-              var choices = new Choices(element, {
-                searchEnabled: false,
-                itemSelectText: ''
-              });
-            }
-          };
-
-          var citySelect = function citySelect() {
-            var element = document.querySelector('.ready-des2__city-select');
-
-            if (element) {
-              var choices = new Choices(element, {
-                searchEnabled: true,
-                itemSelectText: ''
-              });
-            }
-          };
-
-          var rdSelect = function rdSelect() {
-            var element = document.querySelectorAll('.ready__des_select-js-2');
-
-            if (element) {
-              element.forEach(function (el) {
-                var choices = new Choices(el, {
-                  searchEnabled: false,
-                  itemSelectText: ''
-                });
-              });
-            }
-          };
-
-          companySelect();
-          citySelect();
-          rdSelect();
-        });
-          /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
-
-        /***/ }),
-
-      /***/ "./src/blocks/modules/review/review.js":
-      /*!*********************************************!*\
-        !*** ./src/blocks/modules/review/review.js ***!
-        \*********************************************/
-      /*! no static exports found */
-      /***/ (function(module, exports) {
-
-        if (document.querySelector('.review') === null) {} else {
-          var reviewBottomItem = document.querySelectorAll('.review__bottom-item');
-          reviewBottomItem.forEach(function (item) {
-            item.addEventListener('mouseover', function () {
-              reviewBottomItem.forEach(function (el) {
-                el.classList.remove('hover');
-              });
-              reviewBottomItem[0].classList.remove('hover');
-              item.classList.add('hover');
-            });
-          });
-
-          if (document.querySelector('.review__massage') === null) {} else {
-            var reviewBox = document.querySelector('.review__massage');
-            reviewIcon = reviewBox.querySelector('.review__massage-icon > picture'), reviewText = reviewBox.querySelector('.review__massage-text > p');
-
-            if (reviewBox.classList.contains('bad')) {
-              reviewBox.style.background = '#FFECEC';
-              var source = reviewIcon.querySelector('source'),
-                  img = reviewIcon.querySelector('img');
-              source.setAttribute('srcset', '/upload/review/massage-bad.svg');
-              img.setAttribute('src', "/upload/review/massage-bad.svg");
-              reviewText.innerHTML = 'Этот отзыв не влияет на рейтинг, так как вы не являетесь покупателем услуг данной охранной компании в рамках платформы <a href="">vincko:</a>';
-            }
-          }
-
-          if (document.querySelector('.smile-input') === null) {} else {
-            var input = document.querySelector('.smile-input'),
-                smiles = document.querySelectorAll('.smile');
-            input.addEventListener('input', function () {
-              smiles.forEach(function (item, i) {
-                item.classList.remove('active');
-
-                if (input.value < 10000) {
-                  smiles[0].classList.add('active');
-                } else if (input.value > 10000 && input.value <= 20000) {
-                  smiles[1].classList.add('active');
-                } else if (input.value > 20000 && input.value <= 30000) {
-                  smiles[2].classList.add('active');
-                } else if (input.value > 30000 && input.value <= 40000) {
-                  smiles[3].classList.add('active');
-                } else if (input.value > 40000 && input.value <= 50000) {
-                  smiles[4].classList.add('active');
-                }
-              });
-            });
-          }
-
-          var stepTwoItems = document.querySelectorAll('.review__bottom-item');
-          stepTwoItems.forEach(function (item) {
-            var input = item.querySelector('.smile-input'),
-                li = item.querySelectorAll('.review-item-step-2'),
-                span = item.querySelector('.number-wrapper > span'),
-                svg = item.querySelector('svg'),
-                circle = item.querySelector('circle'),
-                numberWrapper = item.querySelector('.number-wrapper');
-            input.addEventListener('input', function () {
-              li.forEach(function (el, i) {
-                el.classList.remove('active');
-
-                if (input.value < 18000) {
-                  li[0].classList.add('active');
-                  span.innerHTML = '?';
-                  svg.style.display = 'none';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                } else if (input.value > 18000 && input.value < 28000) {
-                  li[1].classList.add('active');
-                  span.innerHTML = '0';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  svg.style.display = 'none';
-                } else if (input.value > 28000 && input.value < 38000) {
-                  li[2].classList.add('active');
-                  span.innerHTML = '1';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '130.5';
-                } else if (input.value > 38000 && input.value < 48000) {
-                  li[3].classList.add('active');
-                  span.innerHTML = '2';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '116';
-                } else if (input.value > 48000 && input.value < 58000) {
-                  li[4].classList.add('active');
-                  span.innerHTML = '3';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '101.5';
-                } else if (input.value > 58000 && input.value < 68000) {
-                  li[5].classList.add('active');
-                  span.innerHTML = '4';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '87';
-                } else if (input.value > 68000 && input.value < 78000) {
-                  li[6].classList.add('active');
-                  span.innerHTML = '5';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '72.5';
-                } else if (input.value > 78000 && input.value < 88000) {
-                  li[7].classList.add('active');
-                  span.innerHTML = '6';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '58';
-                } else if (input.value > 88000 && input.value < 98000) {
-                  li[8].classList.add('active');
-                  span.innerHTML = '7';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '43.5';
-                } else if (input.value > 98000 && input.value < 108000) {
-                  li[9].classList.add('active');
-                  span.innerHTML = '8';
-                  svg.style.display = 'block';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                  circle.style.strokeDashoffset = '29';
-                } else if (input.value > 108000 && input.value < 118000) {
-                  li[10].classList.add('active');
-                  span.innerHTML = '9';
-                  svg.style.display = 'block';
-                  circle.style.strokeDashoffset = '14.5';
-                  numberWrapper.style.border = '1px solid #D1DBE3';
-                } else if (input.value > 118000) {
-                  li[11].classList.add('active');
-                  span.innerHTML = '10';
-                  svg.style.display = 'none';
-                  numberWrapper.style.border = '2px solid #005DFF';
-                }
-              });
-            });
-          });
-          var content = document.querySelectorAll('.content');
-          var stepThreeActiveBlocks = document.querySelectorAll('.content-wrapper .active-block');
-          content.forEach(function (item, n) {
-            var notBefore = 0;
-            var q = item.querySelectorAll('.q');
-            q.forEach(function (elem, i) {
-              var input = elem.querySelector('.smile-input'),
-                  li = elem.querySelectorAll('.review-item-step-3'),
-                  span = elem.querySelector('span'),
-                  btn = elem.querySelector('.next-btn'),
-                  h5 = elem.querySelector('h5');
-              input.addEventListener('input', function () {
-                li.forEach(function (el, i) {
-                  el.classList.remove('active');
-
-                  if (input.value < 18000) {
-                    li[0].classList.add('active');
-                    span.innerHTML = '?';
-                  } else if (input.value > 18000 && input.value < 28000) {
-                    li[1].classList.add('active');
-                    span.innerHTML = '0';
-                  } else if (input.value > 28000 && input.value < 38000) {
-                    li[2].classList.add('active');
-                    span.innerHTML = '1';
-                  } else if (input.value > 38000 && input.value < 48000) {
-                    li[3].classList.add('active');
-                    span.innerHTML = '2';
-                  } else if (input.value > 48000 && input.value < 58000) {
-                    li[4].classList.add('active');
-                    span.innerHTML = '3';
-                  } else if (input.value > 58000 && input.value < 68000) {
-                    li[5].classList.add('active');
-                    span.innerHTML = '4';
-                  } else if (input.value > 68000 && input.value < 78000) {
-                    li[6].classList.add('active');
-                    span.innerHTML = '5';
-                  } else if (input.value > 78000 && input.value < 88000) {
-                    li[7].classList.add('active');
-                    span.innerHTML = '6';
-                  } else if (input.value > 88000 && input.value < 98000) {
-                    li[8].classList.add('active');
-                    span.innerHTML = '7';
-                  } else if (input.value > 98000 && input.value < 108000) {
-                    li[9].classList.add('active');
-                    span.innerHTML = '8';
-                  } else if (input.value > 108000 && input.value < 118000) {
-                    li[10].classList.add('active');
-                    span.innerHTML = '9';
-                  } else if (input.value > 118000) {
-                    li[11].classList.add('active');
-                    span.innerHTML = '10';
-                  }
-                });
-              });
-              elem.setAttribute('q-num', i);
-              h5.addEventListener('click', function () {
-                q.forEach(function (trig) {
-                  trig.classList.remove('active');
-                });
-                elem.classList.add('active');
-              });
-              btn.addEventListener('click', function () {
-                var nextBtn = document.querySelector('.next-btn-bottom');
-                notBefore += 1;
-                elem.classList.remove('active');
-
-                if (!q[i + 1]) {} else {
-                  q[i + 1].classList.remove('before');
-                  q[i + 1].classList.add('active');
-                }
-
-                if (notBefore === q.length) {
-                  nextBtn.disabled = false;
-                }
-              });
-            });
-          });
-          var stepThreeItems = document.querySelectorAll('.step-3-item');
-          var btn = document.querySelector('.next-btn-bottom');
-          stepThreeItems.forEach(function (item, i) {
-            btn.addEventListener('click', function () {
-              btn.disabled = true;
-
-              if (btn.classList.contains('step-2') && stepThreeItems[i + 1].classList.contains('active')) {
-                btn.classList.remove('step-2');
-                btn.classList.add('step-3');
-                stepThreeItems[i + 1].classList.remove('active');
-                stepThreeItems[i + 1].classList.add('pre-back');
-                stepThreeItems[i + 2].classList.add('active');
-                stepThreeItems[i + 2].classList.remove('pre-next');
-                var btnBlock = document.querySelector('.review__btn.step-3');
-                var next = btnBlock.querySelector('.next-btn-bottom');
-                var stop = btnBlock.querySelector('.stop');
-                var bonusBlock = stop.querySelector('.bonus-block');
-                var pic = bonusBlock.querySelector('picture');
-                var bonSpan = bonusBlock.querySelector('span');
-                next.style.display = 'none';
-                stop.style.display = 'flex';
-                bonusBlock.style.cssText = "\n                display: flex;\n                width: 112px;\n            ";
-                pic.style.cssText = "\n                margin-left: 20px;\n            ";
-                bonSpan.style.color = '#FF6E52';
-              }
-            });
-            btn.addEventListener('click', function () {
-              if (btn.classList.contains('step-1')) {
-                btn.classList.remove('step-1');
-                btn.classList.add('step-2');
-                item.classList.remove('active');
-                item.classList.add('back');
-                stepThreeItems[i + 1].classList.add('active');
-                stepThreeItems[i + 1].classList.remove('next');
-              }
-            });
-          });
-
-          if (document.body.clientWidth < 1098) {
-            var reviewBlock = document.querySelector('.review');
-            var stepOneNext = document.querySelector('.review__btn.step-1 .next');
-            var stepTwoNext = document.querySelector('.review__btn.step-2 .next');
-            var stepOneMid = document.querySelector('.review__mid-step-1.mob');
-            var stepTwoMid = document.querySelector('.review__mid-step-2.mob');
-            var stepThreeMid = document.querySelector('.review__mid-step-3.mob');
-            stepOneNext.addEventListener('click', function () {
-              stepOneMid.classList.remove('active');
-              stepTwoMid.classList.add('active');
-              reviewBlock.classList.add('step-2');
-            });
-            stepTwoNext.addEventListener('click', function () {
-              stepTwoMid.classList.remove('active');
-              stepThreeMid.classList.add('active');
-              reviewBlock.classList.remove('step-2');
-              reviewBlock.classList.add('step-3');
-            });
-          } else {
-            var _reviewBlock = document.querySelector('.review');
-
-            var _stepOneNext = document.querySelector('.review__btn.step-1 .next');
-
-            var _stepTwoNext = document.querySelector('.review__btn.step-2 .next');
-
-            var _stepOneMid = document.querySelector('.review__mid-step-1');
-
-            var _stepTwoMid = document.querySelector('.review__mid-step-2');
-
-            var _stepThreeMid = document.querySelector('.review__mid-step-3');
-
-            _stepOneNext.addEventListener('click', function () {
-              _stepOneMid.classList.remove('active');
-
-              _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-1-no-active.svg\">\n                <img src=\"/upload/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
-
-              _stepTwoMid.classList.add('active');
-
-              _reviewBlock.classList.add('step-2');
-
-              _stepTwoMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-2-active.svg\">\n                <img src=\"/upload/review/step-2-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n            <picture class=\"icon\">\n                <source srcset=\"/upload/review/step-2-icon.svg\">\n                <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n            </picture>\n            <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
-            });
-
-            _stepTwoNext.addEventListener('click', function () {
-              _stepTwoMid.classList.remove('active');
-
-              _stepTwoMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-2-no-active.svg\">\n        <img src=\"/upload/review/step-2-no-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-2-icon.svg\">\n            <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
-
-              _stepThreeMid.classList.add('active');
-
-              _reviewBlock.classList.remove('step-2');
-
-              _reviewBlock.classList.add('step-3');
-
-              _stepThreeMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-3-active.svg\">\n        <img src=\"/upload/review/step-3-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>3</span> \u041D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-3-icon.svg\">\n            <img src=\"/upload/review/step-3-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+600 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
-            });
->>>>>>> 92b98229f54397f11f2e5daac7b92a9110e231ca
           }
         });
       });
@@ -3113,12 +2749,8 @@ if (document.querySelector('.review') === null) {} else {
 
     var _stepThreeMid = document.querySelector('.review__mid-step-3');
 
-            var $hiddenForm = $(".reviews__form-top--hidden");
-            $(".pseudo__search,.pseudo__range,.text-js").mousedown(function() {
-              $(".reviews__form-top").addClass("active");
-              $hiddenForm.addClass("active");
-              $(".text-js").addClass("active");
-            }); // close form
+    _stepOneNext.addEventListener('click', function () {
+      _stepOneMid.classList.remove('active');
 
       _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"../img/review/step-1-no-active.svg\">\n                <img src=\"../img/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
 
@@ -3167,36 +2799,6 @@ jQuery(document).ready(function ($) {
       });
     }
   };
-              if ($value >= 2 && $value <= 3) {
-                $text.html("Низкий");
-                $text.css({
-                  color: "#FF5252"
-                });
-                $range.removeClass();
-                $range.addClass("red");
-              } else if ($value >= 4 && $value <= 6) {
-                $text.html("Средний");
-                $text.css({
-                  color: "#FFC85C"
-                });
-                $range.removeClass();
-                $range.addClass("yellow");
-              } else if ($value >= 7 && $value <= 10) {
-                $text.html("Высокий");
-                $text.css({
-                  color: "#31CB40"
-                });
-                $range.removeClass();
-                $range.addClass("green");
-              } else {
-                $text.html("Любой");
-                $text.css({
-                  color: "#93B6FF"
-                });
-                $range.removeClass();
-                $range.addClass("all");
-              }
-            }); // reviews__item add new review
 
   modalSelect();
 
@@ -3319,32 +2921,6 @@ jQuery(document).ready(function ($) {
   });
   $center__not_selected.on("click", "input:checkbox", function () {
     var $this = $(this);
-        /* WEBPACK VAR INJECTION */(function(jQuery, $) {jQuery(document).ready(function () {
-          $('.solutions-card__circles_item').on('click', function () {
-            $(this).removeClass('hide').addClass('show').siblings().removeClass('show').addClass('hide');
-          });
-          $('.contract__item').on('click', function () {
-            $(this).removeClass('no-active').addClass('active').siblings().removeClass('active').addClass('no-active');
-          });
-          $('.closed-card').on('click', function () {
-            $(this).parents('.solutions-card').addClass('hide');
-          });
-          $('.solutions-card__icon-plus').on('click', function () {
-            $(this).parents('.solutions-card').removeClass('hide');
-          });
-          $('body').on('click', '.select__head', function () {
-            if ($(this).hasClass('open')) {
-              $(this).removeClass('open');
-              $(this).next().fadeOut();
-            } else {
-              $('.select__head').removeClass('open');
-              $('.select__list').fadeOut();
-              $(this).addClass('open');
-              $(this).next().fadeIn();
-            }
-          });
-          $(document).mouseup(function (e) {
-            var div = $(".select__list");
 
     if ($this.is(':checked')) {
       var $parent = $this.parent();

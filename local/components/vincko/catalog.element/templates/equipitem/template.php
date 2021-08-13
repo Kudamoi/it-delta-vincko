@@ -398,7 +398,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <span>Черное</span>
                     </p>
                 </div>
-                <div class="h5 complect__slider-datchiki-title">Датчики, входящие в комплект:</div>
+                <div class="h5 complect__slider-datchiki-title">Датчики, входящие в комплект: <span class="red"><span class="num">0</span> шт</span> </div>
                 <div class="slick-slider-datchiki">
                     <? $i = 0; ?>
                     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
