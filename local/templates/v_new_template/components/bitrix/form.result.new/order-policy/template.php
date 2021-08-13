@@ -11,10 +11,18 @@ if (!CModule::IncludeModule("sale")) {
 }
 ?>
 <? if (!$USER->IsAuthorized()): ?>
-	<? $APPLICATION->IncludeComponent(
-		"bitrix:system.auth.authorize",
-		"",
-		array()
+	<?
+	$APPLICATION->IncludeComponent(
+		"bitrix:system.auth.form",
+		"popup",
+		array(
+			"REGISTER_URL" => "/ajax/profile-registration.php",
+			"FORGOT_URL"   => "/ajax/profile-forgot.php",
+			"PROFILE_URL"  => "/personal/",
+			"SHOW_ERRORS"  => "Y",
+			"TIMEOUT"      => "20",
+			"AUTH_URL"     => "/ajax/profile-auth.php",
+		)
 	); ?>
 <? else: ?>
 	<? if ($arResult["isFormNote"] == "Y"): ?>
@@ -206,7 +214,7 @@ if (!CModule::IncludeModule("sale")) {
 								<div class="form__section__content address-installment">
 									<?= $arResult["QUESTIONS"]["POLICY_ADDRESS"]["HTML_CODE"] ?>
 									<p><?= Loc::getMessage("FORM_POLICY_ADDRESS_NOT_POLICY") ?></p>
-									<div class="address-registration address-installment-other">
+									<div class="address-registration address-installment-other" style="<?=($arResult["VIEW_BLOCK"]["POLICY_ADDRESS"]?"display:block":"display:none")?>">
 										<?= $arResult["QUESTIONS"]["POLICY_CITY"]["HTML_CODE"] ?>
 										<?= $arResult["QUESTIONS"]["POLICY_STREET"]["HTML_CODE"] ?><br/>
 										<?= $arResult["QUESTIONS"]["POLICY_HOUSE"]["HTML_CODE"] ?>
@@ -238,33 +246,34 @@ if (!CModule::IncludeModule("sale")) {
 						</div>
 
 						<div class="form__content">
-								<div class="form__section">
-									<h4><?= Loc::getMessage("FORM_POLICY_PAY") ?></h4>
-									<div class="form__section__content payment-method">
-										<div class="payment-method-left">
-											<? foreach ($arResult["PAYMENT"] as $arPayment): ?>
-												<div class="radio-wrapper" id="card-radio">
-													<input type="radio" id="<?= $arPayment["ID"] ?>" name="PAYMENT"
-														   value="<?= $arPayment["ID"] ?>"/>
-													<label for="<?= $arPayment["ID"] ?>"></label>
-													<label for="<?= $arPayment["ID"] ?>"><?= $arPayment["NAME"] ?></label>
-												</div>
-											<? endforeach; ?>
-										</div>
+							<div class="form__section">
+								<h4><?= Loc::getMessage("FORM_POLICY_PAY") ?></h4>
+								<div class="form__section__content payment-method">
+									<div class="payment-method-left">
+										<? foreach ($arResult["PAYMENT"] as $arPayment): ?>
+											<div class="radio-wrapper" id="card-radio">
+												<input type="radio" id="<?= $arPayment["ID"] ?>" name="PAYMENT"
+													   value="<?= $arPayment["ID"] ?>"/>
+												<label for="<?= $arPayment["ID"] ?>"></label>
+												<label for="<?= $arPayment["ID"] ?>"><?= $arPayment["NAME"] ?></label>
+											</div>
+										<? endforeach; ?>
+									</div>
 
-										<div class="payment-method-right">
-											<div class="payment-method__card active">
-												<h4><?= GetMessage('FORM_POLICY_TOTAL') ?></h4>
-												<div class="payment-method__price"><?= $arResult["POLICY"]["PRICE"] ?> ₽</div>
+									<div class="payment-method-right">
+										<div class="payment-method__card active">
+											<h4><?= GetMessage('FORM_POLICY_TOTAL') ?></h4>
+											<div class="payment-method__price"><?= $arResult["POLICY"]["PRICE"] ?>₽
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="form__section form__pay-info">
-									<div class="form__section__content">
-										<p><?= Loc::getMessage("FORM_POLICY_PAY_INFO") ?></p>
-									</div>
+							</div>
+							<div class="form__section form__pay-info">
+								<div class="form__section__content">
+									<p><?= Loc::getMessage("FORM_POLICY_PAY_INFO") ?></p>
 								</div>
+							</div>
 
 						</div>
 					</div>
@@ -374,4 +383,4 @@ if (!CModule::IncludeModule("sale")) {
 			</form>
 		</section>
 	<? endif; ?>
-	<? endif; ?>
+<? endif; ?>
