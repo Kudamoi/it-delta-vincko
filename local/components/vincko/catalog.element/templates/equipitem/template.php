@@ -162,8 +162,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
         <div class="container up-top-slider-bg">
         <div class="top-slider-bg ">
             <picture>
-                <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
-                <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
+                <source srcset="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>">
+                <img src="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
             </picture>
         </div>
     </div>
