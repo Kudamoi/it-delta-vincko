@@ -2,6 +2,8 @@
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
+global $USER;
+
 /**
  * Bitrix component iblock.content (webgsite.ru)
  * Компонент для битрикс, работа с инфоблоком одностраничный вывод
@@ -15,7 +17,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 <main class="review">
     
     <div class="container">
-        <div class="breadcumbs">
+        <!-- <div class="breadcumbs">
             <nav>
                 <ul>
                     <li><a href="/">Главная </a></li>
@@ -24,8 +26,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <li><a href="">Оставить отзыв</a></li>
                 </ul>
             </nav>
-        </div>
-        <div class="reviews__form-top">
+        </div> -->
+
+        <!-- Эта версия фильтра временно не используется -->
+        <!-- <div class="reviews__form-top">
             <form>
                 <div class="pseudo__search">
                     <p class="text search-top-text">Оставить отзыв о другой компании</p>
@@ -279,8 +283,101 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <span class="close__btn-bottom close-js">Закрыть</span>
                 </div>
             </form>
+        </div> -->
+
+        <div class="rating-center__search">
+
+            <div class="rating-center__search_item item-one">
+                <div class="rating-center__search_item-title">
+                    Город
+                </div>
+                <div class="rating-center__search_form select-city">
+                    <button class="rating-center__search_form-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21L11.3254 21.7382L12 22.3546L12.6746 21.7382L12 21ZM12 21C12.6746 21.7382 12.6747 21.7381 12.6749 21.7379L12.6754 21.7374L12.677 21.736L12.6819 21.7315L12.6991 21.7156C12.7139 21.7019 12.7351 21.6822 12.7623 21.6567C12.8168 21.6057 12.8953 21.5314 12.9946 21.4358C13.1929 21.2447 13.4743 20.9681 13.811 20.6215C14.4833 19.9294 15.382 18.9526 16.2834 17.8165C17.1823 16.6834 18.0998 15.372 18.7964 14.0109C19.4871 12.6615 20 11.1878 20 9.75C20 7.6826 19.148 5.70756 17.6439 4.25718C16.141 2.80801 14.1102 2 12 2C9.88977 2 7.85897 2.80801 6.35612 4.25718C4.85203 5.70755 4 7.6826 4 9.75C4 11.1878 4.51291 12.6615 5.20357 14.0109C5.90021 15.372 6.8177 16.6834 7.7166 17.8165C8.61795 18.9526 9.51668 19.9294 10.189 20.6215C10.5257 20.9681 10.8071 21.2447 11.0054 21.4358C11.1047 21.5314 11.1832 21.6057 11.2377 21.6567C11.2649 21.6822 11.2861 21.7019 11.3009 21.7156L11.3181 21.7315L11.323 21.736L11.3246 21.7374L11.3251 21.7379C11.3253 21.7381 11.3254 21.7382 12 21ZM12 12.125C11.3255 12.125 10.6855 11.8663 10.2193 11.4166C9.75422 10.9682 9.5 10.3679 9.5 9.75C9.5 9.13209 9.75422 8.5318 10.2193 8.08336C10.6855 7.63373 11.3255 7.375 12 7.375C12.6745 7.375 13.3145 7.63373 13.7807 8.08336C14.2458 8.5318 14.5 9.13209 14.5 9.75C14.5 10.3679 14.2458 10.9682 13.7807 11.4166C13.3145 11.8663 12.6745 12.125 12 12.125Z"
+                                  stroke="#005DFF" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <div class="rating-center__search_form-input rating-center__search_form-select">
+                        <input type="text" data-pre-id="<?= $arResult['CITY_SELECTED']['ID']?>" data-id="<?= $arResult['CITY_SELECTED']['ID']?>" placeholder="<?= $arResult['CITY_SELECTED']['NAME'] ?>">
+                    </div>
+                    <div class="searchForm__modal">
+                        <div class="searchForm__modal_closed">
+                            <img src="/upload/rating/closed-icon.svg" alt="img">
+                        </div>
+                        <div class="searchForm__modal_input">
+                            <input type="text" id="filterCity" placeholder="Поиск по названию">
+                            <button>
+                                <img src="/upload/rating/search-icon.svg" alt="img">
+                            </button>
+                        </div>
+                        <div class="searchForm__modal_wrapper">
+                            <div class="searchForm__modal_topChek actived">
+                                <div class="searchForm__modal_item bottomChekItem">
+                                    <input type="checkbox" class="checkbox">
+                                    <span data-id="<?= $arResult['CITY_SELECTED']['ID']?>" class="itemText"><?= $arResult['CITY_SELECTED']['NAME'] ?></span>
+                                </div>
+                            </div>
+                            <div class="searchForm__modal_centerChek">
+                            </div>
+                            <div class="searchForm__modal_bottomChek">
+                                <? foreach ($arResult['CITIES'] as $item): ?>
+                                    <div class="searchForm__modal_item bottomChekItem">
+                                        <input type="checkbox" class="checkbox">
+                                        <span data-id="<?= $item['ID']?>" class="itemText"><?= $item['NAME'] ?></span>
+                                    </div>
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rating-center__search_item item-two">
+                <div class="rating-center__search_item-title">
+                    Найдите компании по названию
+                </div>
+                <div class="rating-center__search_form select-company">
+                    <button class="rating-center__search_form-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 21L16.7501 16.7425L21 21ZM19.1053 11.0526C19.1053 13.1883 18.2569 15.2365 16.7467 16.7467C15.2365 18.2569 13.1883 19.1053 11.0526 19.1053C8.91694 19.1053 6.86872 18.2569 5.35856 16.7467C3.8484 15.2365 3 13.1883 3 11.0526C3 8.91694 3.8484 6.86872 5.35856 5.35856C6.86872 3.8484 8.91694 3 11.0526 3C13.1883 3 15.2365 3.8484 16.7467 5.35856C18.2569 6.86872 19.1053 8.91694 19.1053 11.0526V11.0526Z"
+                                  stroke="#93B6FF" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+
+                    </button>
+                    <div class="rating-center__search_form-select">
+                        <input type="text" placeholder="Найти компанию">
+                    </div>
+                    <div class="searchForm__modal">
+                        <div class="searchForm__modal_closed">
+                            <img src="/upload/rating/closed-icon.svg" alt="img">
+                        </div>
+                        <div class="searchForm__modal_input">
+                            <input type="text" id="filterCity" placeholder="Поиск по названию">
+                            <button>
+                                <img src="/upload/rating/search-icon.svg" alt="img">
+                            </button>
+                        </div>
+                        <div class="searchForm__modal_wrapper">
+                            <div class="searchForm__modal_topChek active">
+                            </div>
+                            <div class="searchForm__modal_centerChek">
+                            </div>
+                            <div class="searchForm__modal_bottomChek">
+                                <? foreach ($arResult['CITY_COMPANIES'] as $item): ?>
+                                    <div class="searchForm__modal_item bottomChekItem">
+                                        <input type="checkbox" class="checkbox">
+                                        <span data-id="<?= $item['ID'] ?>" class="itemText"><?= $item['NAME'] ?></span>
+                                    </div>
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="review__massage bad">
+        <div class="review__massage <?=$USER->IsAuthorized() ? "" : "bad"?>" data-type="<?=$USER->IsAuthorized() ? "1" : "0"?>">
             <div class="review__massage-icon">
                 <picture>
                     <source srcset="/upload/review/massage-good.svg">
@@ -294,297 +391,301 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         <div class="review__top">
             <p>Оставьте отзыв о компании <br> <span><?=$arResult["COMPANY_NAME"]?></span></p>
         </div>
-        <div class="review__mid">
-            <div class="review__mid-step-1 step active">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-1-active.svg">
-                    <img src="/upload/review/step-1-active.svg" alt="good">
-                </picture>
-                <p><span>1</span> Общее впечатление</p>
-            </div>
-            <div class="review__mid-step-2 step">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-2-no-active.svg">
-                    <img src="/upload/review/step-2-no-active.svg" alt="good">
-                </picture>
-                <p><span>2</span> Всего 3 вопроса</p>
-                <picture class="icon">
-                    <source srcset="/upload/review/step-2-icon.svg">
-                    <img src="/upload/review/step-2-icon.svg" alt="good">
-                </picture>
-                <p class="bonus">500 бонусов</p>
-            </div>
-            <div class="review__mid-step-3 step">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-3-no-active.svg">
-                    <img src="/upload/review/step-3-no-active.svg" alt="good">
-                </picture>
-                <p><span>3</span> Немного подробнее</p>
-                <picture class="icon">
-                    <source srcset="/upload/review/step-3-icon.svg">
-                    <img src="/upload/review/step-3-icon.svg" alt="good">
-                </picture>
-                <p class="bonus">600 бонусов</p>
-            </div>
-        </div>
-        <div class="review__mid mobile">
-            <div class="review__mid-step-1 step mob active">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-1-active.svg">
-                    <img src="/upload/review/step-1-active.svg" alt="good">
-                </picture>
-                <p><span>1</span> Общее впечатление</p>
-            </div>
-            <div class="review__mid-step-2 mob step">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-1-active.svg">
-                    <img src="/upload/review/step-1-active.svg" alt="good">
-                </picture>
-                <p><span>2</span> Всего 3 вопроса</p>
-                <picture class="icon">
-                    <source srcset="/upload/review/step-2-icon.svg">
-                    <img src="/upload/review/step-2-icon.svg" alt="good">
-                </picture>
-                <p class="bonus">500</p>
-            </div>
-            <div class="review__mid-step-3 mob step">
-                <picture class="pic">
-                    <source srcset="/upload/review/step-1-active.svg">
-                    <img src="/upload/review/step-1-active.svg" alt="good">
-                </picture>
-                <p><span>3</span>По подробнее</p>
-                <picture class="icon">
-                    <source srcset="/upload/review/step-3-icon.svg">
-                    <img src="/upload/review/step-3-icon.svg" alt="good">
-                </picture>
-                <p class="bonus">600</p>
-            </div>
-        </div>
-
-        <div class="review__bottom step-1">
-            <div class="review__bottom-step-1">
-                <div class="review__bottom-step-1-left">
-                    <p>Общие впечатления <br> от сотрудничества с охранной <br> компанией</p>
-                    <div class="input-block">
-                        <ul>
-                            <li class="active smile">
-                                <picture>
-                                    <source srcset="/upload/review/smile-1.svg">
-                                    <img src="/upload/review/smile-1.svg" alt="good">
-                                </picture> 
-                            </li>
-                            <li class="smile">
-                                <picture>
-                                    <source srcset="/upload/review/smile-2.svg">
-                                    <img src="/upload/review/smile-2.svg" alt="good">
-                                </picture> 
-                            </li>
-                            <li class="smile"> 
-                                <picture>
-                                    <source srcset="/upload/review/smile-3.svg">
-                                    <img src="/upload/review/smile-3.svg" alt="good">
-                                </picture> 
-                            </li>
-                            <li class="smile">
-                                <picture>
-                                    <source srcset="/upload/review/smile-4.svg">
-                                    <img src="/upload/review/smile-4.svg" alt="good">
-                                </picture> 
-                            </li>
-                            <li class="smile">
-                                <picture>
-                                    <source srcset="/upload/review/smile-5.svg">
-                                    <img src="/upload/review/smile-5.svg" alt="good">
-                                </picture> 
-                            </li>
-                        </ul>
-                        <div class="pseudo__range-reivew">
-                            <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="50000" value="1">
-                        </div>
-                    </div>
-                    <p class="text-2">Насколько вы удовлетворены качеством <br> услуг, оказываемых охранной <br> компанией?</p>
-                    <div class="coment-block">
-                        <p>Расскажите подробнее о ситуации, благодаря которой Вы смогли оценить этот параметр</p>
-                        <textarea name="step-1-coment" placeholder="Комментарий"></textarea>
-                    </div>
-                </div>
-                <div class="review__bottom-step-1-right">
-                    <div class="picture"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="review__btn step-1">
-            <button class="add-review">Оставить отзыв</button>
-            <button class="next">Продолжить</button>
-            <div class="bonus-block">
-                <span>и получить</span>
-                <picture>
-                    <source srcset="/upload/review/step-2-icon.svg">
-                    <img src="/upload/review/step-2-icon.svg" alt="good">
-                </picture> 
-                <span>500</span>
-            </div>
-        </div>
-        <div class="review__bottom step-2">
-        <? foreach($arResult["SECTIONS"] as $elementPosition => $section): ?>
-            <div class="review__bottom-item <?=$elementPosition == 0 ? "first" : ""?>">
-                <div class="value-block">
-                    <svg height="58" width="58">
-                        <circle cx="28.5" cy="28.5" r="24" />
-                    </svg>
-                    <div class="number-wrapper">
-                        <span>?</span>
-                    </div>
-                    <div class="item-name"><?=$section["NAME"]?></div>
-                </div>
-                <ul>
-                    <li class="review-item-step-2 active">Не могу <br> оценить</li>
-                    <li class="review-item-step-2">0</li>
-                    <li class="review-item-step-2">1</li>
-                    <li class="review-item-step-2">2</li>
-                    <li class="review-item-step-2">3</li>
-                    <li class="review-item-step-2">4</li>
-                    <li class="review-item-step-2">5</li>
-                    <li class="review-item-step-2">6</li>
-                    <li class="review-item-step-2">7</li>
-                    <li class="review-item-step-2">8</li>
-                    <li class="review-item-step-2">9</li>
-                    <li class="review-item-step-2">10</li>
-                </ul>
-                <div class="pseudo__range-reivew">
-                    <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="130000" value="0">
-                </div>
-                <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
-                <div class="coment-block">
-                    <p><?=$section["~UF_TEXT_BEFORE_FIELD"]?></p>
-                    <textarea name="step-1-coment" placeholder="Комментарий"></textarea>
-                </div>
-            </div>
-        <? endforeach ?>
-        </div>
-        <div class="review__btn step-2">
-            <div class="step-2-massage">
-                <picture>
-                    <source srcset="/upload/review/massage-good.svg">
-                    <img src="/upload/review/massage-good" alt="good">
-                </picture>
-                <p>Выберите «<span>Не могу оценить</span>» если вы не сталкивались с каким-
-                    либо из параметров. Так вы формируете честный рейтинг.
-                </p>
-            </div>
-            <div class="add-review-block">
-                <button class="add-review">Оставить отзыв</button>
-                <div class="bonus-block">
-                    <picture>
-                        <source srcset="/upload/review/step-2-icon.svg">
-                        <img src="/upload/review/step-2-icon" alt="good">
+        <? if($arResult["COMPANY_NAME"]): ?>
+            <div class="review__mid">
+                <div class="review__mid-step-1 step active">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-1-active.svg">
+                        <img src="/upload/review/step-1-active.svg" alt="good">
                     </picture>
-                    <span>500</span>
+                    <p><span>1</span> Общее впечатление</p>
                 </div>
-            </div>
-            <div class="next-block">
-                <button class="next">Продолжить</button>
-                <div class="bonus-block">
-                    <picture>
-                        <source srcset="/upload/review/step-3-icon.svg">
+                <div class="review__mid-step-2 step">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-2-no-active.svg">
+                        <img src="/upload/review/step-2-no-active.svg" alt="good">
+                    </picture>
+                    <p><span>2</span> Всего 3 вопроса</p>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <picture class="icon">
+                        <source srcset="/upload/review/step-2-icon.svg">
                         <img src="/upload/review/step-2-icon.svg" alt="good">
-                    </picture> 
-                    <span>еще 600 бонусов</span>
-                    <span class="mob">600</span>
+                    </picture>
+                    <p class="bonus">500 бонусов</p> -->
                 </div>
-            </div>
-        </div>
-
-        <div class="review__bottom step-3">
-            <? foreach($arResult["SECTIONS"] as $section): ?>
-                <?++$i?>
-                <div class="step-3-item <?=$i == 1 ? "active" : ""?><?=$i == 2 ? "next" : ""?><?=$i == 3 ? "pre-next" : ""?>" >
-                    <div class="content">
-                    <? if($i !== 1): ?>
-                        <div class="content">
-                    <? endif ?>
-                        <div class="content-wrapper">
-                            <div class="left">
-                                <div class="number-block">
-                                    <div class="number"><span>7</span></div>
-                                    <p class="num-text"><?=$section["NAME"]?> <br> <span>Подробная оценка</span></p>
-                                </div>
-                                <div class="left-text">
-                                    <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <div class="block-q">
-                                    <ul class="list-q">
-                                        <? foreach($section["ITEMS"] as $item): ?>
-                                            <?++$k?>
-                                            <li class="q <?=$k == 1 ? "active" : "before"?>">
-                                                <div class="q-left">
-                                                    <h5><?=$item["NAME"]?></h5>
-                                                </div>
-                                                <div class="q-right">
-                                                    <span>7</span>
-                                                </div>
-                                                <div class="active-block">
-                                                    <p><?=$item["~PREVIEW_TEXT"]?></p>
-                                                    <ul>
-                                                        <li class="review-item-step-3">Не могу <br> оценить</li>
-                                                        <li class="review-item-step-3">0</li>
-                                                        <li class="review-item-step-3">1</li>
-                                                        <li class="review-item-step-3">2</li>
-                                                        <li class="review-item-step-3">3</li>
-                                                        <li class="review-item-step-3">4</li>
-                                                        <li class="review-item-step-3">5</li>
-                                                        <li class="review-item-step-3">6</li>
-                                                        <li class="review-item-step-3 active">7</li>
-                                                        <li class="review-item-step-3">8</li>
-                                                        <li class="review-item-step-3">9</li>
-                                                        <li class="review-item-step-3">10</li>
-                                                    </ul>
-                                                    <div class="pseudo__range-reivew">
-                                                        <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="130000" value="89143">
-                                                    </div>
-                                                    <div class="block-coment">
-                                                        <textarea name="coment"  placeholder="Комментарий"></textarea>
-                                                        <div class="next-btn">Далее</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        <? endforeach ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <? if($i !== 1): ?>
-                            </div>
-                        <? endif ?>
-                    </div>
-                </div>
-            <? endforeach?>
-        </div>
-        <div class="review__btn step-3 stop">
-            <div class="step-2-massage">
-                <picture>
-                    <source srcset="/upload/review/massage-good.svg">
-                    <img src="/upload/review/massage-good.svg" alt="good">
-                </picture>
-                <p>Выберите «<span>Не могу оценить</span>» если вы не сталкивались с каким-
-                    либо из параметров. Так вы формируете честный рейтинг.
-                </p>
-            </div>
-            <button class="next-btn-bottom step-1" disabled>Далее</button>
-            <div class="stop">
-                <button class="stop-btn">Завершить</button>
-                <div class="bonus-block">
-                    <picture>
+                <div class="review__mid-step-3 step">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-3-no-active.svg">
+                        <img src="/upload/review/step-3-no-active.svg" alt="good">
+                    </picture>
+                    <p><span>3</span> Немного подробнее</p>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <picture class="icon">
                         <source srcset="/upload/review/step-3-icon.svg">
                         <img src="/upload/review/step-3-icon.svg" alt="good">
                     </picture>
-                    <span>1 100</span>
+                    <p class="bonus">600 бонусов</p> -->
                 </div>
             </div>
-        </div>
+            <div class="review__mid mobile">
+                <div class="review__mid-step-1 step mob active">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-1-active.svg">
+                        <img src="/upload/review/step-1-active.svg" alt="good">
+                    </picture>
+                    <p><span>1</span> Общее впечатление</p>
+                </div>
+                <div class="review__mid-step-2 mob step">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-1-active.svg">
+                        <img src="/upload/review/step-1-active.svg" alt="good">
+                    </picture>
+                    <p><span>2</span> Всего 3 вопроса</p>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <picture class="icon">
+                        <source srcset="/upload/review/step-2-icon.svg">
+                        <img src="/upload/review/step-2-icon.svg" alt="good">
+                    </picture>
+                    <p class="bonus">500</p> -->
+                </div>
+                <div class="review__mid-step-3 mob step">
+                    <picture class="pic">
+                        <source srcset="/upload/review/step-1-active.svg">
+                        <img src="/upload/review/step-1-active.svg" alt="good">
+                    </picture>
+                    <p><span>3</span>По подробнее</p>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <picture class="icon">
+                        <source srcset="/upload/review/step-3-icon.svg">
+                        <img src="/upload/review/step-3-icon.svg" alt="good">
+                    </picture>
+                    <p class="bonus">600</p> -->
+                </div>
+            </div>
+
+            <div class="review__bottom step-1">
+                <div class="review__bottom-step-1">
+                    <div class="review__bottom-step-1-left">
+                        <p>Общие впечатления <br> от сотрудничества с охранной <br> компанией</p>
+                        <div class="input-block">
+                            <ul>
+                                <li class="active smile">
+                                    <picture>
+                                        <source srcset="/upload/review/smile-1.svg">
+                                        <img src="/upload/review/smile-1.svg" alt="good">
+                                    </picture> 
+                                </li>
+                                <li class="smile">
+                                    <picture>
+                                        <source srcset="/upload/review/smile-2.svg">
+                                        <img src="/upload/review/smile-2.svg" alt="good">
+                                    </picture> 
+                                </li>
+                                <li class="smile"> 
+                                    <picture>
+                                        <source srcset="/upload/review/smile-3.svg">
+                                        <img src="/upload/review/smile-3.svg" alt="good">
+                                    </picture> 
+                                </li>
+                                <li class="smile">
+                                    <picture>
+                                        <source srcset="/upload/review/smile-4.svg">
+                                        <img src="/upload/review/smile-4.svg" alt="good">
+                                    </picture> 
+                                </li>
+                                <li class="smile">
+                                    <picture>
+                                        <source srcset="/upload/review/smile-5.svg">
+                                        <img src="/upload/review/smile-5.svg" alt="good">
+                                    </picture> 
+                                </li>
+                            </ul>
+                            <div class="pseudo__range-reivew">
+                                <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="49999" value="1">
+                            </div>
+                        </div>
+                        <p class="text-2">Насколько вы удовлетворены качеством <br> услуг, оказываемых охранной <br> компанией?</p>
+                        <div class="coment-block">
+                            <p>Расскажите подробнее о ситуации, благодаря которой Вы смогли оценить этот параметр</p>
+                            <textarea name="step-1-coment" placeholder="Комментарий"></textarea>
+                        </div>
+                    </div>
+                    <div class="review__bottom-step-1-right">
+                        <div class="picture"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review__btn step-1">
+                <button class="add-review">Оставить отзыв</button>
+                <? if($USER->IsAuthorized()): ?>
+                    <button class="next">Продолжить</button>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <div class="bonus-block">
+                        <span>и получить</span>
+                        <picture>
+                            <source srcset="/upload/review/step-2-icon.svg">
+                            <img src="/upload/review/step-2-icon.svg" alt="good">
+                        </picture> 
+                        <span>500</span>
+                    </div> -->
+                <? endif ?>
+            </div>
+            <div class="review__bottom step-2">
+            <? foreach($arResult["SECTIONS"] as $elementPosition => $section): ?>
+                <div class="review__bottom-item <?=$elementPosition == 0 ? "first" : ""?>">
+                    <div class="value-block">
+                        <svg height="58" width="58">
+                            <circle cx="28.5" cy="28.5" r="24" />
+                        </svg>
+                        <div class="number-wrapper">
+                            <span>?</span>
+                        </div>
+                        <div class="item-name" id="<?=$section["CODE"]?>"><?=$section["NAME"]?></div>
+                    </div>
+                    <ul>
+                        <li class="review-item-step-2 active">Не могу <br> оценить</li>
+                        <li class="review-item-step-2">0</li>
+                        <li class="review-item-step-2">1</li>
+                        <li class="review-item-step-2">2</li>
+                        <li class="review-item-step-2">3</li>
+                        <li class="review-item-step-2">4</li>
+                        <li class="review-item-step-2">5</li>
+                    </ul>
+                    <div class="pseudo__range-reivew">
+                        <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="77999" value="0">
+                    </div>
+                    <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
+                    <div class="coment-block">
+                        <p><?=$section["~UF_TEXT_BEFORE_FIELD"]?></p>
+                        <textarea name="step-2-coment" placeholder="Комментарий"></textarea>
+                    </div>
+                </div>
+            <? endforeach ?>
+            </div>
+            <div class="review__btn step-2">
+                <div class="step-2-massage">
+                    <picture>
+                        <source srcset="/upload/review/massage-good.svg">
+                        <img src="/upload/review/massage-good" alt="good">
+                    </picture>
+                    <p>Выберите «<span>Не могу оценить</span>» если вы не сталкивались с каким-
+                        либо из параметров. Так вы формируете честный рейтинг.
+                    </p>
+                </div>
+                <div class="add-review-block">
+                    <button class="add-review">Оставить отзыв</button>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <div class="bonus-block">
+                        <picture>
+                            <source srcset="/upload/review/step-2-icon.svg">
+                            <img src="/upload/review/step-2-icon" alt="good">
+                        </picture>
+                        <span>500</span>
+                    </div> -->
+                </div>
+                <div class="next-block">
+                    <button class="next">Продолжить</button>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <div class="bonus-block">
+                        <picture>
+                            <source srcset="/upload/review/step-3-icon.svg">
+                            <img src="/upload/review/step-2-icon.svg" alt="good">
+                        </picture> 
+                        <span>еще 600 бонусов</span>
+                        <span class="mob">600</span>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="review__bottom step-3">
+                <? foreach($arResult["SECTIONS"] as $section): ?>
+                    <?++$i?>
+                    <div class="step-3-item <?=$i == 1 ? "active" : ""?><?=$i == 2 ? "next" : ""?><?=$i == 3 ? "pre-next" : ""?>" >
+                        <div class="content">
+                        <? if($i !== 1): ?>
+                            <div class="content">
+                        <? endif ?>
+                            <div class="content-wrapper">
+                                <div class="left">
+                                    <div class="number-block">
+                                        <div class="number" id="<?=$section["CODE"]?>"><span>?</span></div>
+                                        <p class="num-text"><?=$section["NAME"]?> <br> <span>Подробная оценка</span></p>
+                                    </div>
+                                    <div class="left-text">
+                                        <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="block-q">
+                                        <ul class="list-q">
+                                            <? foreach($section["ITEMS"] as $item): ?>
+                                                <?++$k?>
+                                                <li class="q <?=$k == 1 ? "active" : "before"?>">
+                                                    <div class="q-left">
+                                                        <h5 data-id="<?=$item["ID"]?>"><?=$item["NAME"]?></h5>
+                                                    </div>
+                                                    <div class="q-right">
+                                                        <span>?</span>
+                                                    </div>
+                                                    <div class="active-block">
+                                                        <p><?=$item["~PREVIEW_TEXT"]?></p>
+                                                        <ul>
+                                                            <li class="review-item-step-3 active">Не могу <br> оценить</li>
+                                                            <li class="review-item-step-3">0</li>
+                                                            <li class="review-item-step-3">1</li>
+                                                            <li class="review-item-step-3">2</li>
+                                                            <li class="review-item-step-3">3</li>
+                                                            <li class="review-item-step-3">4</li>
+                                                            <li class="review-item-step-3">5</li>
+                                                        </ul>
+                                                        <div class="pseudo__range-reivew">
+                                                            <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="77999" value="0">
+                                                        </div>
+                                                        <div class="block-coment">
+                                                            <textarea name="coment"  placeholder="Комментарий"></textarea>
+                                                            <div class="next-btn">Далее</div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <? endforeach ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <? if($i !== 1): ?>
+                                </div>
+                            <? endif ?>
+                        </div>
+                    </div>
+                <? endforeach?>
+            </div>
+            <div class="review__btn step-3 stop">
+                <div class="step-2-massage">
+                    <picture>
+                        <source srcset="/upload/review/massage-good.svg">
+                        <img src="/upload/review/massage-good.svg" alt="good">
+                    </picture>
+                    <p>Выберите «<span>Не могу оценить</span>» если вы не сталкивались с каким-
+                        либо из параметров. Так вы формируете честный рейтинг.
+                    </p>
+                </div>
+                <button class="next-btn-bottom step-1" disabled>Далее</button>
+                <div class="stop">
+                    <button class="stop-btn">Завершить</button>
+                    <!-- Временно отключил блок, так как не работает функционал бонусов -->
+                    <!-- <div class="bonus-block">
+                        <picture>
+                            <source srcset="/upload/review/step-3-icon.svg">
+                            <img src="/upload/review/step-3-icon.svg" alt="good">
+                        </picture>
+                        <span>1 100</span>
+                    </div> -->
+                </div>
+            </div>
+        <? else: ?>
+            <p>Выберите компанию, которой вы хотите оставить отзыв</p>
+        <? endif ?>
     </div>
 </main>
 
