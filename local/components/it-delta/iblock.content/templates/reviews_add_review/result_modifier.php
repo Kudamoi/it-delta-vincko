@@ -58,11 +58,15 @@ $dbResSect = CIBlockSection::GetList(
     array("SORT"=>"ASC"),
     array("ACTIVE"=>"Y", "IBLOCK_ID" => 46),
     false,
-    array("UF_DESCRIPTION_FOR_REVIEWS", "UF_TEXT_BEFORE_FIELD"),
+    array("ID", "CODE", "NAME", "UF_DESCRIPTION_FOR_REVIEWS", "UF_TEXT_BEFORE_FIELD"),
     false
 );
 while($sectRes = $dbResSect->GetNext()){
-   $arSections[$sectRes['ID']] = $sectRes;
+    if($sectRes["CODE"] !== "obshcheye-vpechatleniye"){
+        $arSections[$sectRes['ID']] = $sectRes;
+    }else{
+        $mainSection = $sectRes;
+    }
 }
 //прикрепляем элементы к разделам
 foreach($arResult["ITEMS"] as $key => $arItem) {
@@ -75,8 +79,5 @@ $arResult["CITY_ID"] = intval($_GET["city"]);
 $arResult["SECTIONS"] = $arSections;
 $arResult['CITY_COMPANIES'] = $arrCompany;
 $arResult['CITIES'] = $arrCities;
-
-// echo "<pre>";
-// print_r($arResult);
-// echo "</pre>";
+$arResult["MAIN_SECTION"] = $mainSection;
 ?>
