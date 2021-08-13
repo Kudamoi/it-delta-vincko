@@ -13,7 +13,6 @@ $(document).ready(function () {
 	var value = $('input[name="radio"]:checked').val();
 
 	$("[name='web_form_apply']").click(function(){
-		alert();
 		$(this).parents("section").find("form").submit();
 	})
 

@@ -21,6 +21,7 @@ $(document).ready(function () {
 	});
 
 	$form.find("[name='USER_PHONE_NUMBER'],[name='USER_EMAIL']").keyup(function () {
+		removeError();
 		if ($(this).inputmask("isComplete")) {
 			btnActive($(this).parents("form").find("[name='send_account_info']"));
 		}
@@ -64,8 +65,8 @@ console.log($form.serialize() + "&" + btnSerialize);
 						}else{
 								classes = "popup__form--mail";
 						}
-						$(".popup").find(".js-forgot-pwd").show();
-						$form.find("popup__form."+classes+".js-forgot-pwd").css("display","grid");
+						$(".popup").find(".js-forgot-pwd:not(form .js-forgot-pwd)").show();
+						$form.find(".popup__form."+classes+".js-forgot-pwd").css("display","grid");
 						var formAction = $form.attr("action").split("?"),
 							formActionChange = formAction[0] + "?forgot_password=yes";
 						$form.attr("action", formActionChange);
@@ -78,26 +79,32 @@ console.log($form.serialize() + "&" + btnSerialize);
 				} else {
 					removeError();
 					sendCodeFunc($form.parents(".popup"), $btn.attr("data-switcher"));
+
 					if( $btn.attr("name") == 'code_check_submit_button') {
 						$(".popup").find(".js-change-pwd").show();
 						$form.find(".js-change-pwd").css("display","flex");
 						$(".popup").find(".js-forgot-pwd").hide();
-						$form.find(".sms_code").show();
+						$btn.parent().find(".sms_code").show();
 
 					}else if ($btn.attr("name") == 'change_pwd'){
-						$(".js-modal-auth").trigger("click");
+						$(".js-in-modal.js-modal-auth").trigger("click");
+
 					}else{
-						$("[name='USER_CHECKWORD_EMAIL'], [name='USER_CHECKWORD_SMS'],[name='USER_CHECKWORD']").removeAttr("disabled");
+						if($btn.attr("data-switcher") == 'mail'){
+							$btn.parents(".popup__main").find(".js-info-mail").show();
+							$btn.parent().find(".popup__success").css("display", "flex");
+						}else {
+							$("[name='USER_CHECKWORD_SMS'],[name='USER_CHECKWORD']").removeAttr("disabled");
 
-						var formAction = $form.attr("action").split("?"),
-							formActionChange = formAction[0] + "?change_password=yes";
+							var formAction = $form.attr("action").split("?"),
+								formActionChange = formAction[0] + "?change_password=yes";
 
-						$form.attr("action", formActionChange);
+							$form.attr("action", formActionChange);
 
-						$form.find("[name='TYPE']").val("CHANGE_PWD");
+							$form.find("[name='TYPE']").val("CHANGE_PWD");
 
-						$form.parents(".popup").addClass("popup--new-pass");
-
+							$form.parents(".popup").addClass("popup--new-pass");
+						}
 					}
 
 
@@ -122,7 +129,6 @@ console.log($form.serialize() + "&" + btnSerialize);
 			"[name='USER_PHONE_NUMBER']," +
 			"[name='USER_EMAIL']"+
 			"[name='USER_CHECKWORD_SMS']," +
-			"[name='USER_CHECKWORD_EMAIL']," +
 			"[name='USER_CHECKWORD']").val("");
 
 		desroySendCode($form);

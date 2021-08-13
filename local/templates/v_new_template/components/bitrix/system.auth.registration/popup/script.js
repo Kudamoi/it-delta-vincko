@@ -59,8 +59,7 @@ $(document).ready(function () {
 						});*/
 					}
 					if($btn.attr("name") == "Register") {
-						$(".js-modal-auth").trigger("click");
-						//location.reload();
+						$(".js-in-modal.js-modal-auth").trigger("click");
 					}
 				}
 			},
@@ -103,51 +102,6 @@ $(document).ready(function () {
 			btnUnActive($form.find(".send-message-btn"));
 		}
 	});
-
-	/*
-		$(".js-sms").click(function () {
-			alert();
-			if(!$(this).hasClass("grey-border-button--active")){
-				//return false;
-			}
-			var $form = $(this).parents("form");
-
-
-			$.ajax({
-				url: $form.attr("action"),
-				method: 'POST',
-				data: $form.serialize(),
-				dataType: 'json',
-				success: function (res) {
-					console.log(res);
-					if (res.TYPE == 'ERROR') {
-						if (res.FIELD > '') {
-							var $errorBlock = $('[data-field="' + res.FIELD + '"]');
-							var $parent = $errorBlock.parent();
-							$(".info-popup__text").empty();
-							$parent.addClass("unknown");
-							$errorBlock.find('.info-popup__text').text(res.MESSAGE);
-							$form.find(".popup__wait").hide();
-							$form.find(".popup__code").hide();
-							$form.find(".js-sms").show();
-						} else {
-							$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + res.MESSAGE + "</p>");
-						}
-					} else {
-						$(".error").remove();
-						$(".unknown").removeClass("unknown");
-						$form.find("[name='SMS_CODE']").after('<input type="hidden" name="SIGNED_DATA" value="' + res.SIGNED_DATA + '">');
-					}
-				},
-				error: function (error) {
-					console.log(error);
-				}
-			});
-
-	});*/
-
-
-
 });
 
 

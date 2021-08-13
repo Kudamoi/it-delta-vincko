@@ -134,10 +134,10 @@ $password = Vincko\Auth::generatePassword();
 
 
 						<div class="popup__wait">
-							<div class="popup__wait-time">
+							<div class="popup__wait-time" data-interval="<?=$arResult["PHONE_CODE_RESEND_INTERVAL"]?>">
 								<?= Loc::getMessage("REG_RE_TIME") ?>
 								<span class="popup__wait-num">
-                                 <?= $arParams["TIMEOUT"] ?>
+                                 <?=$arResult["PHONE_CODE_RESEND_INTERVAL"]?>
                             </span>
 								<?= Loc::getMessage("REG_TIME_UNIT") ?>
 							</div>
@@ -217,9 +217,9 @@ $password = Vincko\Auth::generatePassword();
                             </svg>
 
                         </span>
-						<?= Loc::getMessage("REG_AGREEMENT") ?>
+
 					</label>*/?>
-						<div style="height: 150px;"></div>
+						<div style="height: 150px;" class="remember-me"><?= Loc::getMessage("REG_AGREEMENT") ?></div>
 				</div>
 			</div>
 			<div class="popup__bottom">
