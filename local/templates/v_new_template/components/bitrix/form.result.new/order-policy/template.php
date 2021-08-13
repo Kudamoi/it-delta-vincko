@@ -24,19 +24,22 @@ if (!CModule::IncludeModule("sale")) {
 	<? else: ?>
 
 		<section class="installment insurance-policy order">
+			<?= $arResult["FORM_HEADER"] ?>
+			<input type="hidden" name="form_hidden_<?= $arResult["QUESTIONS"]["POLICY_ID"]["STRUCTURE"][0]["ID"] ?>"
+				   value="<?= $arResult["POLICY_ID"] ?>"/>
 			<div class="installment__left-column">
 				<h2 class="installment__page-title"><?= $arParams["TITLE"] ?></h2>
 
 				<div class="short-ins short-ins-mobile" id="fix-card">
 					<div class="short-ins__item products__item">
 						<picture class="products__head short-ins__head hidden">
-							<img src="<?= $arParams[" POLICY"]["IMG"] ?>" alt="product-head">
+							<img src="<?= $arResult["POLICY"]["IMG"] ?>" alt="product-head">
 						</picture>
 
 						<div class="products__name">
 							<div class="products__gray"><?= $arResult["POLICY"]["INSURANCE"]["NAME"] ?></div>
 							<div class="h3 products__title">«<?= $arResult["POLICY"]["NAME"] ?>»</div>
-							<div class="price hidden"><span><?= GetMessage('FORM_POLICY_TOTAL') ?></span>
+							<div class="price"><span><?= GetMessage('FORM_POLICY_TOTAL') ?></span>
 								<span><?= $arResult["POLICY"]["PRICE"] ?> ₽</span></div>
 						</div>
 						<div class="ready-pack__details">
@@ -60,7 +63,7 @@ if (!CModule::IncludeModule("sale")) {
 						<? endif; ?>
 
 						<? if (!empty($arResult["POLICY"]["PAYMENT_OPTIONS"])): ?>
-							<div class="products__payment">
+							<div class="products__payment  hidden">
 								<div class="products__gray">
 									<?= GetMessage('FORM_POLICY_OPTIONS_PAY') ?>
 								</div>
@@ -132,11 +135,8 @@ if (!CModule::IncludeModule("sale")) {
 						</div>
 					</div>
 				</div>
-				<?= $arResult["FORM_HEADER"] ?>
-				<input type="hidden" name="form_checkbox_AGREEMENT[]" data-field="AGREEMENT" value="37" disabled>
-				<input type="hidden" name="web_form_apply"value="1">
-				<input type="hidden" name="form_hidden_<?= $arResult["QUESTIONS"]["POLICY_ID"]["STRUCTURE"][0]["ID"] ?>"
-					   value="<?= $arResult["POLICY_ID"] ?>"/>
+
+
 				<div class="forms">
 					<div class="form" id="form-1">
 						<div class="h4 form__title">
@@ -270,7 +270,7 @@ if (!CModule::IncludeModule("sale")) {
 					</div>
 				</div>
 
-				</form>
+
 			</div>
 			<div class="installment__right-column">
 				<div class="short-ins ">
@@ -371,7 +371,7 @@ if (!CModule::IncludeModule("sale")) {
 							value="1" disabled><?= $arResult["arForm"]["BUTTON"] ?></button>
 				</div>
 			</div>
-
+			</form>
 		</section>
 	<? endif; ?>
 	<? endif; ?>

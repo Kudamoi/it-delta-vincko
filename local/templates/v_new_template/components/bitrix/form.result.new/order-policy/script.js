@@ -12,13 +12,8 @@ $(document).ready(function () {
 
 	var value = $('input[name="radio"]:checked').val();
 
-	$("[name='web_form_apply']").click(function(){
-		alert();
-		$(this).parents("section").find("form").submit();
-	})
-
 	$(".js-check-form-valid").click(function (e) {
-		$("input[data-field='AGREEMENT']").prop("checked", true).removeAttr("disabled");
+		$("input[data-field='AGREEMENT']").prop("checked", true);
 
 		var $form = $(this).parents("form"),
 			$error = $(this).parents("form").find(".error_message"),
@@ -56,13 +51,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$("input[data-field='AGREEMENT']").change(function(){
-		if($(this).prop("checked")){
-			$("form input[data-field='AGREEMENT']").removeAttr("disabled");
-		}else{
-			$("form input[data-field='AGREEMENT']").attr("disabled","disabled");
-		}
-	});
 
 	$("[name='PAYMENT']").change(function(){
 			$(this).parents('section').find("[name='web_form_apply']").removeAttr("disabled");
