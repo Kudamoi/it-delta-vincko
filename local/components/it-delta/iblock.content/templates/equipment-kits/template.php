@@ -171,7 +171,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     <select name="solutions__bottom_column-select"
                                                             class="solutions__bottom_column-select">
                                                         <option selected value="12">12 мес.</option>
-                                                        <option value="6">6 мес.</option>
+                                                        <?/*<option value="6">6 мес.</option>*/?>
                                                     </select>
                                                     <p>по</p>
                                                     <div class="solutions__bottom_column-price">
