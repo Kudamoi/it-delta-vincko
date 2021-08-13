@@ -31,11 +31,11 @@ $(document).ready(function () {
 						if ($domClick.attr('value') > ''){
 							$domClick.parents("form").submit();
 						}else{
-							//document.location.href = $domClick.attr("href");
+							document.location.href = $domClick.attr("href");
 							//location.reload();
 						}
 					}else{
-						//location.reload();
+						location.reload();
 					}
 
 				}
