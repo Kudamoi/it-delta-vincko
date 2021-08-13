@@ -329,7 +329,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <? endif; ?>
                                     <div class="solutions-card__info-bottom">
                                         <div class="solutions-card__info-tech">
-                                            <a href="#gotovoe__reshenie-main">Технические характеристики</a>
+                                            <a href="/equipment-kits/<?= $arResult['ALL_LIST_COMPLECTS_IN_PACKAGE'][$currentComplectIndex]['CODE'] ?>/#gotovoe__reshenie-main">Технические характеристики</a>
                                         </div>
 
                                         <div class="solutions-card__info-switch">
