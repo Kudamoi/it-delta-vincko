@@ -1500,7 +1500,7 @@
             $(this).next().css('display', 'block');
           });
           $('.rating-center__search_form-select').on('click', function () {
-            $('.searchForm__modal').fadeIn(100);
+            $(this).closest('.rating-center__search_form').find('.searchForm__modal').fadeIn(100);
           });
           $('.searchForm__modal_closed').on('click', function () {
             $('.searchForm__modal').fadeOut(100);
@@ -2150,6 +2150,7 @@
               if (btn.classList.contains('step-2') && stepThreeItems[i + 1].classList.contains('active')) {
                 btn.classList.remove('step-2');
                 btn.classList.add('step-3');
+                console.log(i);
                 stepThreeItems[i + 1].classList.remove('active');
                 stepThreeItems[i + 1].classList.add('pre-back');
                 stepThreeItems[i + 2].classList.add('active');

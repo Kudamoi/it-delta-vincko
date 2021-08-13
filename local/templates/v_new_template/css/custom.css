@@ -13,7 +13,11 @@
 .how__useful .open__for-items .top-block-useful {
     display: flex;
 }
-
+.searchForm__modal_topChek.actived {
+    border-bottom: 1px solid #D1DBE3;
+    padding: 16px 0 6px 0;
+    display: block;
+}
 .how__useful .open__for-items .top-block-useful .top-block-useful-title {
     margin-left: 25px;
     display: flex;
@@ -77,6 +81,9 @@
 
 .t-c-gray {
     color: #818181 !important;
+}
+.link-item.t-c-gray:after {
+    background-color:#818181!important;
 }
 .t-c-green {
     color: #35A34A!important;
@@ -208,6 +215,9 @@
 }
 .rating-block .rating-help-window .block-rating-help-item .content-top-block-rating-help-item ul li {
     margin-left: 20px;
+}
+.rating-block .searchForm__modal_bottomChek {
+    width: 100%;
 }
 .rating-center .itemRating-open__left_info .rating-help-window .block-rating-help-item .content-top-block-rating-help-item {
     font-family: Gilroy,sans-serif;
@@ -437,9 +447,11 @@ a.item__content-company-not {
 .rating-center__item-wrapper.item-rating-active {
     min-height: 300px;
 }
+.rating-center__item-wrapper.item-rating-hide.item-rating-active,
 .rating-center__item-wrapper.item-rating-hide.reviews-non.item-rating-active,
 .rating-center .item-rating-active {
     height: max-content;
+    overflow: initial;
 }
 .rating-center .itemRating-open__tab .content-tab .tabs-content_active {
     height: unset;
