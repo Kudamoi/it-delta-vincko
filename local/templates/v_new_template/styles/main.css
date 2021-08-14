@@ -11258,8 +11258,8 @@ html {
   height: 48px;
   background-color: #005EFF;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   position: absolute;
   top: 47%;
