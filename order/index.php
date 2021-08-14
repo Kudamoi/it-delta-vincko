@@ -56,7 +56,7 @@ $curStep = 1;
         }
 
     </style>
-<? // УБРАТЬ БЛОК ПРИ ПЕРЕНОСЕ НА БОЙ ?>
+<? /*
 <div id="test" style="cursor:pointer" xmlns="http://www.w3.org/1999/html">Заполнить тестовыми данными</div>
 <script>
     $(document).ready(function () {
@@ -92,7 +92,7 @@ $curStep = 1;
 
     })
 </script>
-<?// УБРАТЬ БЛОК ПРИ ПЕРЕНОСЕ НА БОЙ?>
+*/?>
 
 <?if(isset($_GET['ORDER_ID'])):?>
     <?$APPLICATION->IncludeComponent(
