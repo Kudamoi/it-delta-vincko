@@ -3133,6 +3133,8 @@ jQuery(document).ready(function ($) {
     $(this).parents('.solutions-card').removeClass('hide');
   });
   $('.select').on('click', '.select__head', function () {
+    console.log("select clicked");
+
     if ($(this).hasClass('open')) {
       $(this).removeClass('open');
       $(this).next().fadeOut();
