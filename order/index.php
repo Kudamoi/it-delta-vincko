@@ -830,6 +830,7 @@ $curStep = 1;
                               fill="#A0A0A0"/>
                     </svg>
                 </label>
+                <?if($policyObj->active):?>
                 <input type="checkbox" name="view-agree" id="view-agree">
                 <p class="installment__rules-text">
                     Я даю согласие САО «ВСК», находящемуся по адресу 121552, г. Москва, ул. Островная, д. 4, на
@@ -852,7 +853,7 @@ $curStep = 1;
                 <label for="agreement" class="installment__rules-agreement">
                     Я даю согласие и подтверждаю достоверность указанных данных
                 </label>
-
+                <?endif;?>
                 <label for="view-agree-two" class="installment__rules-mobile" id="label-view-agree-two">
                     <span><span class="show">Показать</span><span class="hide">Скрыть</span> текст с условиями обработки данных и договором оферты</span>
                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
