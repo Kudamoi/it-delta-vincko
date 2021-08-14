@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+	$(".b-inputTextBox").keydown(function(event){
+		var inputValue = event.which;
+		// allow letters, whitespaces and backspace only.
+		if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0 && inputValue != 8)) {
+			event.preventDefault();
+		}
+	});
 	$(".js-bonuce").click(function () {
 		$(".header__popup").removeClass("hidden");
 		return false;
@@ -253,5 +260,3 @@ function sendAjaxForm(result_form, ajax_form, url) {
 
 
 }
-
-

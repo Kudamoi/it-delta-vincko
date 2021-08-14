@@ -436,7 +436,7 @@ $curStep = 1;
                                            id="passport">
                                     <input class="js-check-valid-field date" type="text" name="passportData[date]" placeholder="Дата выдачи *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"><br>
-                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field text-field">
+                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field b-inputTextBox">
                                     <input class="js-check-valid-field" type="text" name="passportData[code]" placeholder="Код подразделения *" id="code">
                                     <input class="js-check-valid-field" type="text" name="passportData[inn]" placeholder="ИНН" id="inn">
                                 </div>
@@ -809,7 +809,7 @@ $curStep = 1;
                         <?endif;?>
                     </div>
                     <div class="short-rd__footer">
-                        <a onclick="window.history.back();" href="" class="short-rd-another">
+                        <a onclick="window.history.back();" href="#" class="short-rd-another">
                             <svg width="14" height="12" viewBox="0 0 14 12" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
