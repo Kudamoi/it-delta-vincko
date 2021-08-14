@@ -436,7 +436,7 @@ $curStep = 1;
                                            id="passport">
                                     <input class="js-check-valid-field date" type="text" name="passportData[date]" placeholder="Дата выдачи *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"><br>
-                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field b-inputTextBox">
+                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field text-field">
                                     <input class="js-check-valid-field" type="text" name="passportData[code]" placeholder="Код подразделения *" id="code">
                                     <input class="js-check-valid-field" type="text" name="passportData[inn]" placeholder="ИНН" id="inn">
                                 </div>
@@ -448,7 +448,7 @@ $curStep = 1;
                                            class="address-field js-check-valid-field">
                                     <input type="text" name="addressRegistration[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                     <input type="text" name="addressRegistration[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                    <input type="text" name="addressRegistration[housing]" placeholder="Корпус" class="js-check-valid-field house-field">
+                                    <input type="text" name="addressRegistration[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                     <input type="text" name="addressRegistration[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                     <input class="js-check-valid-field date" type="text" name="addressRegistration[date]" placeholder="Дата регистрации *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -463,7 +463,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="addressResidense[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="addressResidense[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field house-field">
+                                        <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="addressResidense[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input class="js-check-valid-field date" type="text" name="addressResidense[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -496,7 +496,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="policyOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="policyOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field house-field">
+                                        <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="policyOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input class="js-check-valid-field date" type="text" name="policyOtherAddress[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -592,7 +592,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="deliveryOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="deliveryOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="deliveryOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field house-field">
+                                        <input type="text" name="deliveryOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="deliveryOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input type="text" name="deliveryOtherAddress[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>

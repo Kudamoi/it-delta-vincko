@@ -978,15 +978,15 @@ jQuery(document).ready(function ($) {
   }
 
   $('.text-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-]+",
+    regex: "[A-ZА-Яa-zа-я- ]+",
     showMaskOnHover: false
   });
   $('.address-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,:]+",
+    regex: "[A-ZА-Яa-zа-я-.,: ]+",
     showMaskOnHover: false
   });
   $('.street-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,:/]+",
+    regex: "[A-ZА-Яa-zа-я-.,:/ ]+",
     showMaskOnHover: false
   });
   $('.house-field').inputmask({
