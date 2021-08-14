@@ -567,6 +567,7 @@ $curStep = 1;
                                     </span>
                                 </div>
                                 <div class="form__section__content address-installment">
+                                    <?if($policyObj->active):?>
                                     <div class="radio-wrapper">
                                         <input checked type="radio" name="delivery-address-installment" value="0"
                                                id="permanent-delivery">
@@ -579,7 +580,8 @@ $curStep = 1;
                                         <label for="actual-delivery"></label>
                                         <label for="actual-delivery">Совпадает с адресом фактического проживания</label>
                                     </div>
-                                    <input type="radio" name="delivery-address-installment" value="1" id="other-delivery">
+                                    <?endif;?>
+                                    <input <?=$policyObj->active ? '' : 'checked'?> type="radio" name="delivery-address-installment" value="1" id="other-delivery">
                                     <label for="other-delivery"></label>
                                     <label for="other-delivery">Указать другой адрес</label>
                                     <div class="input-address">
