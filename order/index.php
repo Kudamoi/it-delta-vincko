@@ -637,13 +637,12 @@ $curStep = 1;
                                             <label for="card">Картой онлайн</label>
                                         </div>
                                         <div class="radio-wrapper" id="installment-radio">
-                                            <input type="radio" name="payment-method" value="10"
+                                            <input type="radio" name="payment-method" value="11"
                                                    id="installment">
                                             <label for="installment"></label>
                                             <label for="installment">Рассрочка без процентов ПАО Сбербанк</label>
                                         </div>
                                     </div>
-
                                     <div class="payment-method-right">
                                         <div class="payment-method__card active">
                                             <h4>Всего</h4>
@@ -810,7 +809,7 @@ $curStep = 1;
                         <?endif;?>
                     </div>
                     <div class="short-rd__footer">
-                        <a href="" class="short-rd-another">
+                        <a onclick="window.history.back();" href="" class="short-rd-another">
                             <svg width="14" height="12" viewBox="0 0 14 12" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
