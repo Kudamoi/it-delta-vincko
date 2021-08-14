@@ -866,12 +866,12 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
 
                             </div>
-                            <div class="solutions-card__substrate_bottom present">
+                            <div class="solutions-card__substrate_bottom <?/*present*/?>">
                                 <? foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item): ?>
-                                    <? if (!empty($item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'])): ?>
+                                    <? if (!empty($item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['BASE_PRICE'])): ?>
                                         <p class="solutions-card__substrate_bottom-text">
                                             Всего
-                                            <span><?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> ₽</span>
+                                            <span><?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['BASE_PRICE'] ?> ₽</span>
                                         </p>
 
                                         <div id="policy-price"
@@ -879,7 +879,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                              data-policy-disc-price="<?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?>"
                                              data-policy-id="<?= $currentPolicyIndex ?>"
                                              class="solutions-card__substrate_bottom-price">
-                                            В подарок
+                                            <?/*В подарок*/?>
+                                            <span><?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> ₽</span>
                                         </div>
                                     <? endif; ?>
                                 <? endforeach; ?>
