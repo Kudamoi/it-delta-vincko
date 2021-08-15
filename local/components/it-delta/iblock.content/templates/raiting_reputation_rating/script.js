@@ -18,6 +18,16 @@ function change(num) {
     })
 }
 $(document).ready(function () {
+
+    $('input.rating-home').on('click', function(){
+        console.log("tr");
+        if($(this).attr("checked") == 'checked') {
+            $(this).removeAttr('checked');
+        } else {
+            $(this).attr('checked', 'checked')
+        }
+    });
+
     let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
     const config = {
         attributes: true,
@@ -43,7 +53,6 @@ $(document).ready(function () {
                 if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
                 let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
                     $('.rating-center__items-wrapper .rating-center__item_wrappers[data-id='+companyID+']').click();
-                    console.log($('.rating-center__items-wrapper .rating-center__item_wrappers[data-id='+companyID+']').offset().top);
                     let offset = $('.rating-center__items-wrapper .itemRating-open[data-id='+companyID+']').offset().top
                     $('html').animate({
                             scrollTop: offset
@@ -56,14 +65,28 @@ $(document).ready(function () {
         observerCompany.observe(targetCompany, config);
 
 
+    $('.rating-center__items_top-right-help #pseudo__range').change(function() {
+    $.ajax({
+                type: 'post',
+                url: '/ajax/raiting/filter.php',
+                data: {'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
+                response: 'html',
+                success: function(data) {
+                    $('.rating-center__items-wrapper-block').html(data);
+                    $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
+                }
+            })
+    })
     $('.rating-center__items_top-btns-item').on('click','input[type="radio"].rating-home', function() {
-        $.ajax({
-            url: '/ajax/raiting/filter.php',
-            data: {'test': 'test'},
-            type: 'html',
-            success: function(data) {
-                $('.rating-center__items-wrapper').html(data);
 
+        $.ajax({
+            type: 'post',
+            url: '/ajax/raiting/filter.php',
+            data: {'OBJECT': $(this).attr('id'), 'MARK':  $('.rating-center__items_top-right-help #pseudo__range').val()},
+            response: 'html',
+            success: function(data) {
+                $('.rating-center__items-wrapper-block').html(data);
+                $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
             }
         })
 

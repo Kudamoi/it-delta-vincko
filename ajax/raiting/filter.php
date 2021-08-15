@@ -1,8 +1,25 @@
 <?
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/main/include/prolog_before.php");
+
+$APPLICATION->ShowAjaxHead();
+$mark = $_POST['MARK'];
+if($mark <2) {
+    $min = 0;
+    $max = 5;
+} elseif ($mark < 4) {
+    $min = 0;
+    $max = 1.7;
+} elseif ($mark < 7) {
+    $min = 1.8;
+    $max = 3.3;
+} else {
+    $min = 3.4;
+    $max = 5;
+}
 $dbchops = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
+    array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"], "PROPERTY_CH_TYPE" => $_POST['OBJECT'], ">=PROPERTY_CH_RATING_SUM" => $min,"<=PROPERTY_CH_RATING_SUM" => $max),
     false,
     false,
     array("ID")
