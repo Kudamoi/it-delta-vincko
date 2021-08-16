@@ -3,6 +3,31 @@
 //    print_r($arResult);
 //echo "</pre>";
 
+//Получаем всех пользователей
+$order = array('sort' => 'asc');
+$tmp = 'sort'; // параметр проигнорируется методом, но обязан быть
+$paramUser = array("ID");
+$rsUsers = CUser::GetList($order, $tmp);
+while ($user = $rsUsers->GetNext()) {
+    $arrUsers[$user['ID']]['ID'] = $user['ID'];
+    $arrUsers[$user['ID']]['NAME'] = $user['NAME'];
+}
+//Получаем все отзывы
+$reviews = CIBlockElement::GetList(array('PROPERTY_R_RATING_SUM' => 'DESC'), array("IBLOCK_CODE" => 'otzyvy', "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PROPERTY_R_RATING_SUM", "PROPERTY_R_COMMENT", "PROPERTY_R_USER_NAME", "PROPERTY_R_CHOP", "PROPERTY_R_USER_ID"));
+
+while ($review = $reviews->GetNext()) {
+    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['ID'] = $review["ID"];
+    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['NAME'] = !empty($review['PROPERTY_R_USER_ID_VALUE']) ? $arrUsers[$review['PROPERTY_R_USER_ID_VALUE']]['NAME'] : $review["PROPERTY_R_USER_NAME_VALUE"];
+    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['COMMENT'] = $review['~PROPERTY_R_COMMENT_VALUE']['TEXT'];
+}
+//Получаем честный договор и кладем его в массив
+$contract = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'contract', "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PROPERTY_CONTRACT"));
+
+while ($cont = $contract->GetNext()) {
+    $arrContract['ID'] = $cont["ID"];
+    $arrContract['NAME'] = $cont["NAME"];
+    $arrContract['SRC'] = CFile::GetPath($cont["PROPERTY_CONTRACT_VALUE"]);
+}
 
 //Собираем компании ВСЕ
 $companies = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 8, "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PROPERTY_CH_CONFIRMED"));
@@ -19,7 +44,7 @@ $statusCompanies = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 49, "AC
 while ($status = $statusCompanies->GetNext()) {
     $arrStatus[$status["ID"]]['ID'] = $status["ID"];
     $arrStatus[$status["ID"]]['NAME'] = $status["NAME"];
-    $arrStatus[$status["ID"]]['PICTURE'] = CFile::GetPath($status["PREVIEW_PICTURE"]);;
+    $arrStatus[$status["ID"]]['PICTURE'] = CFile::GetPath($status["PREVIEW_PICTURE"]);
 }
 
 //Собираем всех производителей
@@ -63,11 +88,14 @@ else:
     endforeach;
 endif;
 
+$pos = 1;
 foreach ($arResult['ITEMS'] as $item):
 //    if ($arResult['CITY_SELECTED']['ID'] == $item['PROPERTIES']['CITY_ID']['VALUE']):
     $newArrItem[$item['ID']]['CODE'] = $item['CODE'];
     $newArrItem[$item['ID']]['ID'] = $item['ID'];
     $newArrItem[$item['ID']]['NAME'] = $item['NAME'];
+    $newArrItem[$item['ID']]['POSITION'] = $pos++;
+    $newArrItem[$item['ID']]['CH_TYPE'] = $item['PROPERTIES']['CH_TYPE']['VALUE'];
     $newArrItem[$item['ID']]['CITY'] = $arrCities[$item['PROPERTIES']['CITY_ID']['VALUE']];
     $newArrItem[$item['ID']]['CH_RATING_SUM'] = $item['PROPERTIES']['CH_RATING_SUM']['VALUE'];
     $newArrItem[$item['ID']]['CH_RATING_ZABOTA'] = $item['PROPERTIES']['CH_RATING_ZABOTA']['VALUE'];
@@ -84,6 +112,7 @@ foreach ($arResult['ITEMS'] as $item):
     $newArrItem[$item['ID']]['SERVICES_APPARTAMENT'] = $item['PROPERTIES']['SERVICES_APPARTAMENT']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['SERVICES_COMMERCE'] = $item['PROPERTIES']['SERVICES_COMMERCE']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['DESCRIPTION_COMMERCE'] = $item['PROPERTIES']['DESCRIPTION_COMMERCE']['~VALUE']['TEXT'];
+    $newArrItem[$item['ID']]['REVIEWS'] = $arrReviews[$item['ID']];
     foreach ($item['PROPERTIES']['MANUFACTURERS']['VALUE'] as $manufacture):
         $newArrItem[$item['ID']]['MANUFACTURERS'][$manufacture] = $arrManufactures[$manufacture];
     endforeach;
@@ -101,7 +130,12 @@ while ($company = $companies->GetNext()) {
 
 //Собираем данные в результирующий массив
 
+$arResult['CONTRACT'] = $arrContract;
 $arResult['OBJECTS'] = $arrObj;
 $arResult['CITY_COMPANIES'] = $arrCompany;
 $arResult['CITIES'] = $arrCities;
 $arResult['ITEMS'] = $newArrItem;
+
+//echo "<pre>";
+//    print_r($arResult);
+//echo "</pre>";

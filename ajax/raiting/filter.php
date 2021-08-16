@@ -1,25 +1,43 @@
-<?
-
-require_once($_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/main/include/prolog_before.php");
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/main/include/prolog_before.php");
 
 $APPLICATION->ShowAjaxHead();
+
+
+$arSelect = array("IBLOCK_ID" => 9, "ACTIVE" => "Y");
+
 $mark = $_POST['MARK'];
 if($mark <2) {
-    $min = 0;
-    $max = 5;
+
 } elseif ($mark < 4) {
-    $min = 0;
-    $max = 1.7;
+
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 1.7;
 } elseif ($mark < 7) {
-    $min = 1.8;
-    $max = 3.3;
+    $arSelect[">=PROPERTY_CH_RATING_SUM"] = 1.8;
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 3.3;
 } else {
-    $min = 3.4;
-    $max = 5;
+    $arSelect[">=PROPERTY_CH_RATING_SUM"] = 3.4;
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 5;
 }
+
+
+
+
+if(isset($_POST['COMPANY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_POST['COMPANY'];
+} elseif (isset($_GET['COMPANY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_GET['COMPANY'];
+}
+if(isset($_POST['OBJECT'])) {
+    $arSelect['PROPERTY_CH_TYPE'] = $_POST['OBJECT'];
+}
+
+//if(isset($_POST['MARK'])) {
+//    $arSelect[">=PROPERTY_CH_RATING_SUM"] = $min;
+//    $arSelect["<=PROPERTY_CH_RATING_SUM"] = $max;
+//}
 $dbchops = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"], "PROPERTY_CH_TYPE" => $_POST['OBJECT'], ">=PROPERTY_CH_RATING_SUM" => $min,"<=PROPERTY_CH_RATING_SUM" => $max),
+    $arSelect,
     false,
     false,
     array("ID")
@@ -47,7 +65,7 @@ $APPLICATION->IncludeComponent(
         "PAGE_ELEMENT_COUNT" => "10",
         "RAND_ELEMENTS" => "N",
         "SORT_BY1" => "PROPERTY_69",
-        "SORT_BY2" => "SORT",
+        "SORT_BY2" => "NAME",
         "SORT_ORDER1" => "DESC",
         "SORT_ORDER2" => "ASC",
         "COMPONENT_TEMPLATE" => "raiting_reputation_rating"

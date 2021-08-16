@@ -310,7 +310,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         <div class="rating-center__items_top-btns">
                             <?foreach ($arResult['OBJECTS'] as $object):?>
                                 <div class="rating-center__items_top-btns-item">
-                                    <input class="rating-home" type="radio" id="<?=$object['ID']?>" name="rating-home">
+                                    <input class="rating-home" type="radio" onclick="clickRadio(this)" id="<?=$object['ID']?>" name="rating-home">
                                     <label for="<?=$object['ID']?>">
                                         <?=$object['SVG']?>
                                         <?=$object['NAME']?>
@@ -566,29 +566,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
             </div>
             <div class="rating-center__items-wrapper-block">
 
-                <?
-                $APPLICATION->IncludeComponent(
-                    "it-delta:iblock.content",
-                    "rating_reputation_rating_filter",
-                    array(
-                        "ACTIVE_DATE" => "N",
-                        "ADD_CACHE_STRING" => "",
-                        "CACHE_TIME" => "0",
-                        "CACHE_TYPE" => "A",
-                        "FILTER_NAME" => 'arrFilter',
-                        "IBLOCK_ID" => "9",
-                        "IBLOCK_TYPE" => "chop",
-                        "PAGE_ELEMENT_COUNT" => "10",
-                        "RAND_ELEMENTS" => "N",
-                        "SORT_BY1" => "PROPERTY_69",
-                        "SORT_BY2" => "SORT",
-                        "SORT_ORDER1" => "DESC",
-                        "SORT_ORDER2" => "ASC",
-                        "COMPONENT_TEMPLATE" => "rating_reputation_rating_filter"
-                    ),
-                    false
-                );
-                ?>
+
             </div>
         </div>
     </div>

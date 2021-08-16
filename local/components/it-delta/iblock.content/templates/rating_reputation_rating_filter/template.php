@@ -13,7 +13,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  */
 ?>
 <div class="rating-center__items-wrapper">
-    <? $i = isset($_GET['PAGEN_2']) ? $_GET['PAGEN_2'] * 10 - 9 : 1;
+    <?
     foreach ($arResult['ITEMS'] as $item): ?>
         <div class="rating-center__item-wrapper <?= str_replace('.', ',', sprintf("%01.1f", $item['CH_RATING_SUM'])) == '0,0' ? ' item-rating-hide' : ''; ?>">
             <div class="rating-center__item">
@@ -25,7 +25,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </svg>
                     </div>
                     <div class="rating-center__item_num">
-                        <?= $i ?>
+                        <?= $item['POSITION'] ?>
                     </div>
                     <div class="rating-center__item_name">
                         <?= $item['CHOP_ID']['NAME'] ?>
@@ -52,7 +52,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 <div class="itemRating-open__top">
                     <div class="itemRating-open__left_top">
                         <div class="itemRating-open__left_num">
-                            <span class="num"><?= $i++ ?></span> <span>в Рейтинге</span>
+                            <span class="num"><?= $item['POSITION'] ?></span> <span>в Рейтинге</span>
                             <p>г. <?= $arResult['CITY_SELECTED']['NAME'] ?></p>
                         </div>
                         <div class="itemRating-open__left_endorsements <? if ($item['STATUS_COMPANY']['ID'] == 1497): echo 't-c-green'; elseif ($item['STATUS_COMPANY']['ID'] == 1498): echo 't-c-yellow-d'; else: echo 't-c-gray'; endif; ?>">
@@ -188,9 +188,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                         <div class="info-block-bottom">
                                             <div class="links-contract">
-                                                <a class="link-item<?= $item['HONEST_CONTRACT'] == 'Y' ? '' : ' t-c-gray' ?>">vincko:
+                                                <a class="link-item<?= $item['HONEST_CONTRACT'] == 'Y' ? '' : ' t-c-gray' ?>" <?= $item['HONEST_CONTRACT'] == 'Y' ? 'target=\'_blank\' href=\'' . $arResult['CONTRACT']['SRC'] . '\'' : ''; ?>>vincko:
                                                     Честный договор</a>
-                                                <a class="link-item<?= $item['HONEST_CONTRACT'] == 'Y' ? ' t-c-gray' : '' ?>" <?= $item['HONEST_CONTRACT'] == 'Y' ? '' : 'href=\'' . $item['CONTRACT'] . '\' target=\'_blank\'' ?>>Договор
+                                                <a class="link-item<?= empty($item['CONTRACT']) ? ' t-c-gray' : '' ?>" <?= empty($item['CONTRACT']) ? '' : 'href=\'' . $item['CONTRACT'] . '\' target=\'_blank\'' ?>>Договор
                                                     охранной компании</a>
                                             </div>
                                             <div class="text-descrip t-c-gray">
@@ -337,14 +337,16 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                             <div class="itemRating-open__left_bottom">
                                 <div class="itemRating-open__left_bottom-mobilLinks">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
+                                    <a href="#">Читать все <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                                     <span class="closed-card">Закрыть карточку</span>
                                 </div>
                                 <div class="itemRating-open__left_bottom-btns">
-                                    <a href="#" class="itemRating-open__left_bottom-btn">
+                                    <a href="/norating/?company=<?= $item['ID'] ?>"
+                                       class="itemRating-open__left_bottom-btn">
                                         к компании
                                     </a>
-                                    <a href="#" class="itemRating-open__left_bottom-btn">
+                                    <a href="/packages/?company=<?= $item['ID'] ?>"
+                                       class="itemRating-open__left_bottom-btn">
                                         Заказать услуги
                                     </a>
                                 </div>
@@ -370,7 +372,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         vincko:</a> на услуги этой компании.
                                 </div>
                                 <div class="itemRating-open__left_text-mobilLinks">
-                                    <a href="#">Читать все <span>32</span> отзыва</a>
+                                    <a href="#">Читать все <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                                     <span class="closed-card">Закрыть карточку</span>
                                 </div>
                             </div>
@@ -378,99 +380,51 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     </div>
                     <div class="itemRating-open__right">
                         <div class="itemRating-open__right_top">
-                            <a href="#">Читать все <span>32</span> отзыва</a>
+                            <a href="/reviews/?COMPANY=<?= $item['ID'] ?>">Читать все
+                                <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                         </div>
                         <div class="itemRating-open__right_wrapper">
                             <div class="swiper-container mySwiper">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="itemRating-open__review">
-                                            <div class="itemRating-open__review_top">
-                                                <div class="itemRating-open__review_top-icon">
-                                                    <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                         alt="img">
+                                    <? $i = 0;
+                                    foreach ($item['REVIEWS'] as $review): $i++; ?>
+                                        <div class="swiper-slide">
+                                            <div class="itemRating-open__review">
+                                                <div class="itemRating-open__review_top">
+                                                    <div class="itemRating-open__review_top-icon">
+                                                        <img src="/upload/rating/itemRating-open__review_top-icon.svg"
+                                                             alt="img">
+                                                    </div>
+                                                    <div class="itemRating-open__review_top-text">
+                                                        <span class="name"><?= $review['NAME'] ?></span>
+                                                        <span class="city">Ростов-на-Дону</span>
+                                                        <span class="buyer">покупатель</span>
+                                                        <img src="/upload/rating/icon-info.svg" alt="img">
+                                                    </div>
                                                 </div>
-                                                <div class="itemRating-open__review_top-text">
-                                                    <span class="name">Владимир С.</span>
-                                                    <span class="city">Ростов-на-Дону</span>
-                                                    <span class="buyer">покупатель</span>
-                                                    <img src="/upload/rating/icon-info.svg" alt="img">
+                                                <div class="itemRating-open__review_bottom">
+                                                    <span>Комментарий пользователя:</span>
+                                                    <?= $review['COMMENT'] ?>
+                                                    <? if (!empty($review['COMMENT'])): ?>
+                                                        <button onclick="location.href='/reviews/?COMPANY=<?= $item['ID'] ?>&REVIEW=<?= $review['ID'] ?>'">
+                                                            Читать далее
+                                                        </button>
+                                                    <? else: ?>
+                                                        <p>Пользователь не оставил комментарий</p>
+                                                    <? endif; ?>
                                                 </div>
-                                            </div>
-                                            <div class="itemRating-open__review_bottom">
-                                                <span>Комментарий пользователя:</span>
-                                                Lorem Ipsum является стандартной "рыбой" для текстов на
-                                                латинице
-                                                с
-                                                начала XVI века. В то время некий безымянный печатник
-                                                создал большую коллекцию размеров и форм шрифтов, используя
-                                                Lorem
-                                                Ipsum для распечатки образц...
-                                                <button>Читать далее</button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="itemRating-open__review">
-                                            <div class="itemRating-open__review_top">
-                                                <div class="itemRating-open__review_top-icon">
-                                                    <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                         alt="img">
-                                                </div>
-                                                <div class="itemRating-open__review_top-text">
-                                                    <span class="name">Владимир С.</span>
-                                                    <span class="city">Ростов-на-Дону</span>
-                                                    <span class="buyer">покупатель</span>
-                                                    <img src="/upload/rating/icon-info.svg" alt="img">
-                                                </div>
-                                            </div>
-                                            <div class="itemRating-open__review_bottom">
-                                                <span>Комментарий пользователя:</span>
-                                                Lorem Ipsum является стандартной "рыбой" для текстов на
-                                                латинице
-                                                с
-                                                начала XVI века. В то время некий безымянный печатник
-                                                создал большую коллекцию размеров и форм шрифтов, используя
-                                                Lorem
-                                                Ipsum для распечатки образц...
-                                                <button>Читать далее</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="itemRating-open__review">
-                                            <div class="itemRating-open__review_top">
-                                                <div class="itemRating-open__review_top-icon">
-                                                    <img src="/upload/rating/itemRating-open__review_top-icon.svg"
-                                                         alt="img">
-                                                </div>
-                                                <div class="itemRating-open__review_top-text">
-                                                    <span class="name">Владимир С.</span>
-                                                    <span class="city">Ростов-на-Дону</span>
-                                                    <span class="buyer">покупатель</span>
-                                                    <img src="/upload/rating/icon-info.svg" alt="img">
-                                                </div>
-                                            </div>
-                                            <div class="itemRating-open__review_bottom">
-                                                <span>Комментарий пользователя:</span>
-                                                Lorem Ipsum является стандартной "рыбой" для текстов на
-                                                латинице
-                                                с
-                                                начала XVI века. В то время некий безымянный печатник
-                                                создал большую коллекцию размеров и форм шрифтов, используя
-                                                Lorem
-                                                Ipsum для распечатки образц...
-                                                <button>Читать далее</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <? if ($i == 3):break;endif;endforeach; ?>
                                 </div>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
+                        <br>
                         <div class="itemRating-open__right_bottom">
-                            <a class="itemRating-open__right_bottom-btn" href="/reviews/">Оставить свой
+                            <a class="itemRating-open__right_bottom-btn" href="/reviews/?COMPANY=<?= $item['ID'] ?>">Оставить
+                                свой
                                 отзыв</a>
                             <div class="itemRating-open__right_bottom-text">
                                 <span>источник</span>
