@@ -34,3 +34,10 @@
 .form__section__content.address-installment .address-installment-other{
     display: none;
 }
+
+.form input.form_date {
+    background-image: url("/local/templates/v_new_template/img/installment/calendar.svg");
+    background-repeat: no-repeat;
+    background-position-y: 16px;
+    background-position-x: 179px;
+}

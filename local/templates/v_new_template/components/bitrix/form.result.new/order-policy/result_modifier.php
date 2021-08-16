@@ -72,12 +72,12 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 						$id = $arAnsw["ID"];
 					}
 					if ($FIELD_SID == 'GENDER') {
-						$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= '<input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($value ?? $i == 0 ? " checked" : "") . '>
+						$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= '<input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($value ? $value : ($i == 0 ? " checked" : $i)) . '>
 																	<label for="' . $id . '"></label>
 																	<label for="' . $id . '">' . $arAnsw["MESSAGE"] . '</label>';
 					} else {
 						$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] .= ($id != "other" ? '  <div class="radio-wrapper">' : '') . '
-                                        <input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($value ?? $i == 0 ? " checked" : "") . '>
+                                        <input type="radio"  id="' . $id . '" name="' . $name . '" value="' . $arAnsw["ID"] . '" ' . ($value ? $value : ($i == 0 ? " checked" : $i)) . '>
                                         <label for="' . $id . '"></label>
                                         <label for="' . $id . '">' . $arAnsw["MESSAGE"] . '</label>
                                    ' . ($id != "other" ? ' </div>' : '');
@@ -90,7 +90,7 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
 				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '
-				<input' . $value . ' data-field="' . $FIELD_SID . '" type="text" class="date js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" onclick="BX.calendar({node: this, value: \'' . date('d.m.Y') . '\',field: this, bTime: false});">
+				<input' . $value . ' data-field="' . $FIELD_SID . '" type="text" class="form_date js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" onclick="BX.calendar({node: this, value: \'' . date('d.m.Y') . '\',field: this, bTime: false});" autocomplete="off">
 				';
 				break;
 			case "email":
