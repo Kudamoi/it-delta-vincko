@@ -54,23 +54,23 @@ $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
     );?>
 
     <?
-    $dbchops = CIBlockElement::GetList(
-        array(),
-        array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
-        false,
-        false,
-        array("ID")
-    );
-    while ($chop = $dbchops->GetNext()) {
-        $chopList[] = $chop["ID"];
+    if(isset($_COOKIE["selected_city"])){
+        $dbchops = CIBlockElement::GetList(
+            array(),
+            array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
+            false,
+            false,
+            array("ID")
+        );
+        while ($chop = $dbchops->GetNext()) {
+            $raitingFilter["ID"][] = $chop["ID"];
+        }
+    }else{
+        $raitingFilter = array(
+            "ID" => -1
+        );
     }
     
-    $raitingFilter = array(
-        "ID" => $chopList
-    );
-    
-    empty($raitingFilter['ID'])? $raitingFilter['ID'] = -1:'';
-
     $APPLICATION->IncludeComponent(
         "it-delta:iblock.content", 
         "main_reputation_rating", 

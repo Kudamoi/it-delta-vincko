@@ -10,7 +10,7 @@
             </div>
             <div class="safe__pay_left-img">
                 <picture>
-                    <source type="image/webp" srcset="/upload/first__page/save_mony_bg.png">
+                    <source type="image/webp" srcset="/upload/first__page/save_mony_bg.webp">
                     <source type="image/png" srcset="/upload/first__page/save_mony_bg.png">
                     <img src="/upload/first__page/save_mony_bg.png" alt="img" loading="lazy">
                 </picture>
