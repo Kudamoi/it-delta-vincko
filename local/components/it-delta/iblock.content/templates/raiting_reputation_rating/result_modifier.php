@@ -1,8 +1,4 @@
 <?php
-//echo "<pre>";
-//    print_r($arResult);
-//echo "</pre>";
-
 
 $dbchops = CIBlockElement::GetList(
     array(),
@@ -113,13 +109,9 @@ while ($company = $companies->GetNext()) {
     $arrCompany[$arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']]["ID"]] = $arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']];
 }
 
-
 //Собираем данные в результирующий массив
 
 $arResult['OBJECTS'] = $arrObj;
 $arResult['CITY_COMPANIES'] = $arrCompany;
 $arResult['CITIES'] = $arrCities;
 $arResult['ITEMS'] = $newArrItem;
-//echo "<pre>";
-//print_r($arResult);
-//echo "</pre>";
