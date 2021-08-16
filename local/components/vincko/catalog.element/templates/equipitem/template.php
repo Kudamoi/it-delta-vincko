@@ -161,8 +161,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
     <div class="container up-top-slider-bg">
         <div class="top-slider-bg ">
             <picture>
-                <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
-                <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
+                <source srcset="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>">
+                <img src="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
             </picture>
         </div>
     </div>
@@ -616,42 +616,6 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <div class="solutions-card__subtitle">
                                     Выберите Вариант
-
-                                    <div class="products__info">
-                                        <div class="products__info-sign">
-                                            <picture><img
-                                                        src="<?= SITE_TEMPLATE_PATH ?>/img/insurance/product-info.svg"
-                                                        alt="info"></picture>
-                                        </div>
-                                        <div class="products__text-container">
-                                            <div class="products__info-text">
-                                                <div class="h4"> Принимается на страхование следующее движимое
-                                                    (домашнее) имущество:
-                                                </div>
-
-                                                <p>под домашним имуществом, принимаемым на страхование в рамках
-                                                    настоящего договора, понимается движимое имущество, не имеющие
-                                                    особой (культурной, художественной, исторической и т.п.)
-                                                    ценности: мебель, предметы интерьера, ковры; теле-, аудио- и
-                                                    видеоаппаратура; бытовая и вычислительная техника; осветительные
-                                                    приборы (люстры, светильники и т.п.); посуда; одежда и
-                                                    обувь.</p>
-
-                                                <div class="h4">Не принимается на страхование следующее движимое
-                                                    (домашнее) имущество:
-                                                </div>
-
-                                                <p>изделия из меха и кожи, изделия из драгоценных металлов или из
-                                                    драгоценных камней; книги, коллекции марок, монет, рисунков,
-                                                    картин, скульптур, иные произведения искусства; предметы
-                                                    религиозного культа; технические носители информации; средства
-                                                    мототранспорта, квадрои гидроциклы, снегоходы, мопеды и лодки;
-                                                    малогабаритные строительные, сельскохозяйственные машины;
-                                                    садовый инвентарь, строительные инструменты, а также иное
-                                                    имущество в соответствии с п. 3.5 Правил № 100</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="solutions-card__circles">
                                     <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
@@ -758,7 +722,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     </div>
                                     <div class="solutions-card__top_text">
                                         <div class="h4 solutions-card__top_text-title">
-                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?>
+                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?>
                                         </div>
                                         <div class="itemRating-open__left_deal">
                                             <a href="#guarantee">Безопасная сделка</a>
@@ -791,7 +755,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy-top">
                                                                 <span class="font-weight policy-title">
                                                                     Компания “ <span
-                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?></span> ”
+                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?></span> ”
                                                                 </span>
                                                                     </div>
                                                                 </div>
@@ -1431,7 +1395,7 @@ $data = [
             'title' => 'Комплект оборудования',
             'name1' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['NAME'],
             'name2' => $arResult['NAME'],
-            'gift' => 'доставка/монтаж в подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $complectPrice,
             'old_sum' => $complectOldPrice,
@@ -1442,9 +1406,9 @@ $data = [
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22 ,23,24)) ? 'а' : 'ев') . ' обслуживания',
-            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'],
             'months_count' => $currentSubscriptionFeeMonthsCount,
-            'gift' => '1 мес. в подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $subscriptionFeePrice,
             'old_sum' => $subscriptionFeeOldPrice
@@ -1455,7 +1419,7 @@ $data = [
             'name1' => 'при наступлении страхового случая',
             'name2' => $currentPolicyMaxPrice . ' руб',
             'policy_name' => $policy_name,
-            'gift' => 'подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $policyPrice,
             'old_sum' => $policyOldPrice
