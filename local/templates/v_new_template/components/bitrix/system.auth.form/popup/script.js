@@ -34,7 +34,10 @@ $(document).ready(function () {
 							//document.location.href = $domClick.attr("href");
 							//location.reload();
 							//$domClick.trigger("click");
-							window.itdBasket.handleBuy($domClick.attr('data-payment'));
+							var paymentMethod = $domClick.attr('data-payment')
+							if (typeof paymentMethod !== 'undefined' && paymentMethod !== false) {
+								window.itdBasket.handleBuy(paymentMethod);
+							}
 						}
 					}else{
 						//location.reload();
