@@ -1,8 +1,30 @@
-<?
-require_once($_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/main/include/prolog_before.php");
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/main/include/prolog_before.php");
+
+$APPLICATION->ShowAjaxHead();
+
+$arSelect = array("IBLOCK_ID" => 9, "ACTIVE" => "Y");
+
+$mark = $_POST['MARK'];
+if($mark >= 2 && $mark < 4) {
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 1.7;
+} elseif ($mark < 7) {
+    $arSelect[">=PROPERTY_CH_RATING_SUM"] = 1.8;
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 3.3;
+} else {
+    $arSelect[">=PROPERTY_CH_RATING_SUM"] = 3.4;
+    $arSelect["<=PROPERTY_CH_RATING_SUM"] = 5;
+}
+
+if(isset($_REQUEST['COMPANY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_REQUEST['COMPANY'];
+}
+if(isset($_POST['OBJECT'])) {
+    $arSelect['PROPERTY_CH_TYPE'] = $_POST['OBJECT'];
+}
+
 $dbchops = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
+    $arSelect,
     false,
     false,
     array("ID")
@@ -30,7 +52,7 @@ $APPLICATION->IncludeComponent(
         "PAGE_ELEMENT_COUNT" => "10",
         "RAND_ELEMENTS" => "N",
         "SORT_BY1" => "PROPERTY_69",
-        "SORT_BY2" => "SORT",
+        "SORT_BY2" => "NAME",
         "SORT_ORDER1" => "DESC",
         "SORT_ORDER2" => "ASC",
         "COMPONENT_TEMPLATE" => "raiting_reputation_rating"
