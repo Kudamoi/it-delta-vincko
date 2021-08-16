@@ -8,13 +8,21 @@ $arResult['CURRENT_CITY'] = CIBlockElement::GetList(
     array('NAME', 'ID')
 )->GetNext();
 
-$companies = CIBlockElement::GetList(
+$companiesCity = CIBlockElement::GetList(
     array("SORT" => "ASC"),
     array("ACTIVE" => "Y", "IBLOCK_ID" => '9', 'PROPERTY_CITY_ID' => $arResult['CURRENT_CITY']['ID']),
     false,
     false,
-    array('NAME', 'ID')
+    array('NAME', 'ID', 'PROPERTY_CHOP_ID')
 );
-while ($company =$companies->fetch()) {
+while ($companyCity = $companiesCity->fetch()) {
+    $company = CIBlockElement::GetList(
+        array("SORT" => "ASC"),
+        array("ACTIVE" => "Y", "IBLOCK_ID" => '8', 'ID' => $companyCity["PROPERTY_CHOP_ID_VALUE"]),
+        false,
+        false,
+        array('NAME', 'ID')
+    )->fetch();
+
     $arResult['COMPANIES'][] = $company;
 }
