@@ -1,5 +1,4 @@
 div.title-search-result {
-	border:1px solid #c6c6c6;
 	display:none;
 	overflow:hidden;
 	z-index:205;
@@ -111,4 +110,8 @@ p.title-search-preview {
 }
 div.title-search-result td.title-search-price span {
 	font-size: 26px;
+}
+
+.searchForm__modal_item.bottomChekItem {
+	margin-bottom: 10px;
 }

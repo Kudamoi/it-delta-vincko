@@ -62,6 +62,7 @@ $Asset = Asset::getInstance();
 <header class="header">
 	<div class="header__popup popup hidden">
 		<div class="popup__wall"></div>
+		
 		<div class="header-popup__content popup__content">
 			<div class="header-popup__close popup__close">
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,6 +82,7 @@ $Asset = Asset::getInstance();
 				рейтинг и узнайте о всех преимуществах работы с vincko:</p>
 			<button class="blue-button header-popup__button">Понятно</button>
 		</div>
+
 	</div>
 	<div class="header__top container">
 		<div class="header__top-left__block">
@@ -277,7 +279,7 @@ $Asset = Asset::getInstance();
                         </span>
 
                     <span class="header__submenu-question-yes">Да</span>
-                    <a class="header__submenu-question-no">Нет, выбрать другой</a>
+                    <a data-modal-target="#header__top-info" class="header__submenu-question-no">Нет, выбрать другой</a>
 
                 </div>
 

@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-	$(".js-bonuce").click(function(){
+	$(".js-bonuce").click(function(e){
+		e.preventDefault();
 		$(".header__popup").removeClass("hidden");
 	});
 $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
@@ -229,6 +230,14 @@ $("#ajax_form_callback_btn").on('click',function(){
 		$(".popup--forget").removeClass("hidden");
 	});
 
+	$(".footer_bottom-js").on("click", function(){
+		$("#input_phone").focus();
+	});
+
+	$(".header__top-search .input__control").on("click", function(){
+		$(".searchForm__modal").css({'display': 'block'});
+		$(".searchForm__modal .searchForm__modal_input").focus();
+	});
 
 	// $('form').submit(function(){
 	// 	$.ajax({
@@ -248,10 +257,6 @@ $("#ajax_form_callback_btn").on('click',function(){
 	//
 	// });
 	/* Article FructCode.com */
-
-
-
-
 });
 //функция оформления заказа
 function sendAjaxForm(result_form, ajax_form, url) {

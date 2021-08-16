@@ -18,7 +18,7 @@ if ($arResult['AUTHORIZED'])
 
         <div class="present">
                         <span class="text">
-                            <span class="number">10 000</span>бонусов
+                            <span class="number">0</span>бонусов
                         </span>
 
             <span class="icon">
