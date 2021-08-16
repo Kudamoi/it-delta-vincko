@@ -71,11 +71,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="ready-pack__items">
                             <? foreach ($section['EQUIPMENT-KITS'] as $item): ?>
-<!--                            --><?//if($_SERVER['REMOTE_ADDR'] == '46.147.123.63'):?>
-<!--                            <pre>-->
-<!--                                --><?//print_r($item)?>
-<!--                            </pre>-->
-<!--                            --><?//endif;?>
+                                <!--                            --><? //if($_SERVER['REMOTE_ADDR'] == '46.147.123.63'):?>
+                                <!--                            <pre>-->
+                                <!--                                --><? //print_r($item)?>
+                                <!--                            </pre>-->
+                                <!--                            --><? //endif;?>
                                 <div class="ready-pack__item">
                                     <div class="ready-pack__top">
                                         <picture>
@@ -152,10 +152,28 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             </div>
 
                                             <div class="ready-pack__bottom-result">
-                                                <span class="currently-price"><?= empty($item['DISCOUNT_PRICE']) ? number_format($item['CATALOG_PRICE_1'], 0, ',', ' ') : number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?></span> <span>₽</span>
-                                                <span class="ready-pack__bottom-or">
+                                                <div style="display: flex; flex-direction: column">
+                                                    <? if ($item['DISCOUNT_PRICE']!=$item['CATALOG_PRICE_1']): ?>
+                                                    <div class="solutions__bottom_column-oldprice">
+                                                        <span class="solutions__bottom_column-oldprice"><?=number_format($item['CATALOG_PRICE_1'], 0, ',', ' ')?> </span><span>₽</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="currently-price"><?=number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> </span><span>₽</span>
+                                                        <span class="ready-pack__bottom-or">
                                     или
                                 </span>
+                                                    </div>
+                                                    <? else: ?>
+                                                    <div>
+                                                    <span class="currently-price"><?=number_format($item['CATALOG_PRICE_1'], 0, ',', ' ')?> </span><span>₽</span>
+                                                        <span class="ready-pack__bottom-or">
+                                    или
+                                </span>
+                                                    </div>
+                                                    <? endif; ?>
+
+                                                </div>
+
                                             </div>
                                         </div>
 
@@ -171,7 +189,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     <select name="solutions__bottom_column-select"
                                                             class="solutions__bottom_column-select">
                                                         <option selected value="12">12 мес.</option>
-                                                        <option value="6">6 мес.</option>
+                                                        <? /*<option value="6">6 мес.</option>*/ ?>
                                                     </select>
                                                     <p>по</p>
                                                     <div class="solutions__bottom_column-price">

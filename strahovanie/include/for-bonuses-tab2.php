@@ -90,7 +90,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>
 	<div class="item">
@@ -139,7 +139,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>
 	<div class="item">
@@ -188,7 +188,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>
 	<div class="item">
@@ -237,7 +237,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>
 	<div class="item">
@@ -286,7 +286,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>
 	<div class="item">
@@ -335,7 +335,7 @@
 			</div>
 		</div>
 		<div class="item__bottom">
-			<a href="" class="button">Перейти к оборудованию</a>
+			<a href="" class="button js-bonuce">Перейти к оборудованию</a>
 		</div>
 	</div>s
 </div>

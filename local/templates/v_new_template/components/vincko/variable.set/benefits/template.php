@@ -18,7 +18,7 @@
 		<div class="desc">
 			<?=$arParams["DESCRIPTION_RIGHT"]?>
 		</div>
-		<a class="blue-button benefits__get-bonuses">
+		<a class="blue-button benefits__get-bonuses js-bonuce">
 			<?=$arParams["BUTTON_RIGHT"]?>
 		</a>
 		<picture class="benefits__gift">

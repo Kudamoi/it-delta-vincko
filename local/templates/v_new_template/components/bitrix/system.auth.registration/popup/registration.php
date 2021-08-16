@@ -85,6 +85,8 @@ $password = Vincko\Auth::generatePassword();
 */?>
 					<div class="popup__form popup__form--phone popup__form-mod--phone">
 						<div class="popup__form-title">
+
+
 							<div class="info-popup-2">
 								<div class="info-popup-2__wrapper">
 									<div class="info-popup-2__sign">
@@ -132,10 +134,10 @@ $password = Vincko\Auth::generatePassword();
 
 
 						<div class="popup__wait">
-							<div class="popup__wait-time">
+							<div class="popup__wait-time" data-interval="<?=$arResult["PHONE_CODE_RESEND_INTERVAL"]?>">
 								<?= Loc::getMessage("REG_RE_TIME") ?>
 								<span class="popup__wait-num">
-                                 <?= $arParams["TIMEOUT"] ?>
+                                 <?=$arResult["PHONE_CODE_RESEND_INTERVAL"]?>
                             </span>
 								<?= Loc::getMessage("REG_TIME_UNIT") ?>
 							</div>
@@ -146,7 +148,9 @@ $password = Vincko\Auth::generatePassword();
 
 
 						<button name="code_submit_button"
-								class="grey-border-button grey-border-button--unactive send-message-btn" value="1"
+								class="grey-border-button grey-border-button--unactive send-message-btn"
+								value="1"
+								data-switcher="phone"
 								disabled>
 							<?= Loc::getMessage("REG_SMS") ?>
 						</button>
@@ -161,9 +165,9 @@ $password = Vincko\Auth::generatePassword();
 						</div>
 
 						<div class="sms_code">
-							<input type="text" name="SMS_CODE" data-field="SMS_CODE" placeholder="Код из SMS" class="popup__code" disabled
+							<input type="text" name="SMS_CODE" data-field="CHECKWORD" placeholder="Код из SMS" class="popup__code" disabled
 								   autocomplete="off">
-								<div class="info-popup info-popup--unknown" data-field="SMS_CODE">
+								<div class="info-popup info-popup--unknown" data-field="CHECKWORD">
 									<div class="info-popup__wrapper">
 										<div class="info-popup__sign">
 											<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -213,13 +217,13 @@ $password = Vincko\Auth::generatePassword();
                             </svg>
 
                         </span>
-						<?= Loc::getMessage("REG_AGREEMENT") ?>
+
 					</label>*/?>
-						<div style="height: 150px;"></div>
+						<div style="height: 150px;" class="remember-me"><?= Loc::getMessage("REG_AGREEMENT") ?></div>
 				</div>
 			</div>
 			<div class="popup__bottom">
-				<button disabled class="blue-button btn-registration btn-registration--unactive" value="1" name="Register" disabled>
+				<button class="blue-button btn-registration" value="1" name="Register">
 					<?= Loc::getMessage("REG_BTN_REG") ?>
 				</button>
 

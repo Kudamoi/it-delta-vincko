@@ -23,7 +23,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
         <ul class="open__for-items">
             <?foreach ($arResult['ITEMS'] as $item):?>
             <li class="open__for-item">
-                <a href="<?=$item['CODE']?>">
+                <a class="<?=$item['PROPERTIES']['CUSTOM_CLASS']['VALUE']?>" href="<?=$item['CODE']?>">
                     <p class="top">
                         <span class="icon">
                             <picture>

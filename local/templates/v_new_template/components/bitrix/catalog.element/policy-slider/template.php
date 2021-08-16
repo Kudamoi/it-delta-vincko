@@ -55,7 +55,7 @@ $this->setFrameMode(true);
 						</div>
 					</div>
 				</div>
-				<a href="" class="blue-border-button button">получить бонусы</a>
+				<a href="" class="blue-border-button button js-bonuce">получить бонусы</a>
 			</div>
 		</div>
 		<? endforeach;?>
