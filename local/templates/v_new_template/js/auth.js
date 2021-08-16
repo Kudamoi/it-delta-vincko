@@ -270,7 +270,7 @@ function btnUnActive($btn) {
 }
 
 $(document).ready(function () {
-	$(".js-modal").on("click", (function (event) {
+	$('body').on("click",".js-modal", (function (event) {
 		$(".js-modal").removeClass("js-event");
 		$(this).addClass("js-event");
 		load_modal($(this));

@@ -252,5 +252,5 @@ function sendAjaxForm(result_form, ajax_form, url) {
 	});
 
 
-}Q
+}
 

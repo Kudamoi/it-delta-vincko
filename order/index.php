@@ -18,6 +18,7 @@ $complectObj = $orderItems[0];
 $subscriptionFeeObj = $orderItems[1];
 $policyObj = $orderItems[2];
 $totalObj = $orderData['total'];
+$paymentMethodObj = $orderData['paymentMethod'];
 if($_GET['itd']=='y')
 {
     echo '<pre>';
@@ -424,7 +425,7 @@ $curStep = 1;
                                            class="date js-check-valid-field">
                                     <input type="text" name="policyContactInfo[place]" placeholder="Место рождения *"
                                            class="address-field js-check-valid-field"><br>
-                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[email]" placeholder="E-mail *" id="email-field"><br>
+                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[email]" placeholder="E-mail *"><br>
                                     <input class="js-check-valid-field" type="text" name="policyContactInfo[phone]" placeholder="Телефон *" id="phone-field">
                                 </div>
                             </div>
@@ -553,7 +554,7 @@ $curStep = 1;
                                         <input type="text" name="contactData[name]" placeholder="Имя *" class="js-check-valid-field text-field">
                                         <input type="text" name="contactData[patronomic]" placeholder="Отчество" class="js-check-valid-field text-field">
                                         <br>
-                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="js-check-valid-field email-field"><br>
+                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="js-check-valid-field"><br>
                                         <input type="text" name="contactData[phone]" placeholder="Телефон *" class="js-check-valid-field phone-field">
                                     </div>
                                 </div>
@@ -632,13 +633,13 @@ $curStep = 1;
                                 <div class="form__section__content payment-method">
                                     <div class="payment-method-left">
                                         <div class="radio-wrapper" id="card-radio">
-                                            <input type="radio" name="payment-method" value="10" id="card" checked>
+                                            <input type="radio" name="payment-method" value="10" id="card" <?=$paymentMethodObj=='installment' ? '' : 'checked'?>>
                                             <label for="card"></label>
                                             <label for="card">Картой онлайн</label>
                                         </div>
                                         <div class="radio-wrapper" id="installment-radio">
                                             <input type="radio" name="payment-method" value="11"
-                                                   id="installment">
+                                                   id="installment" <?=$paymentMethodObj=='installment' ? 'checked' : ''?>>
                                             <label for="installment"></label>
                                             <label for="installment">Рассрочка без процентов ПАО Сбербанк</label>
                                         </div>

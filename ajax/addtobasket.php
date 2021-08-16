@@ -4,7 +4,7 @@ use Bitrix\Main\Application;
 
 $request = Application::getInstance()->getContext()->getRequest();
 
-if ($request->isPost()) {
+if ($request->isPost() && $GLOBALS['USER']->isAuthorized()) {
 
     $data = json_decode($request->getPost('data'));
     $session = \Bitrix\Main\Application::getInstance()->getSession();

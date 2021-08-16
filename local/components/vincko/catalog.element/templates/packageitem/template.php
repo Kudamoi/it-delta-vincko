@@ -1101,7 +1101,8 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
-    'subscribe_sum' => 0
+    'subscribe_sum' => 0,
+    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized()
 ];
 
 ?>
