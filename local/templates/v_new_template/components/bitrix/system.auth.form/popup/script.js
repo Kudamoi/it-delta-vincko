@@ -33,9 +33,10 @@ $(document).ready(function () {
 						}else{
 							//document.location.href = $domClick.attr("href");
 							//location.reload();
+							$domClick.trigger("click");
 						}
 					}else{
-						//location.reload();
+						location.reload();
 					}
 
 				}
