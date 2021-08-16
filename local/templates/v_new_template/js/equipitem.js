@@ -210,10 +210,13 @@ $('.modal-slider').on('swipe', function (event) {
         }
     });
 });
-$('.slick-slider-datchiki').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-    $('.info').removeClass("vis");
-    $('[data-slider-info="' + nextSlide + '"]').addClass('vis');
-    console.log(nextSlide);
+$('.slick-slider-datchiki').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    console.log(slick);
+    if(!slick.$nextArrow[0].classList.contains("arrow-next-mini")){
+        $('.info').removeClass("vis");
+        $('[data-slider-info="'+nextSlide+'"]').addClass('vis');
+        console.log(nextSlide);
+    }
 });
 $(".complect .subscribe .blue-button").on("click", function () {
     $(".subscribe").addClass("subscribe-ordered");

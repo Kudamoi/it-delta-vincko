@@ -986,7 +986,7 @@ jQuery(document).ready(function ($) {
     showMaskOnHover: false
   });
   $('.street-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,:/]+",
+    regex: "[A-ZА-Яa-zа-я1-9-.,:/]+",
     showMaskOnHover: false
   });
   $('.house-field').inputmask({
@@ -994,7 +994,7 @@ jQuery(document).ready(function ($) {
     showMaskOnHover: false
   });
   $('.housing-field').inputmask({
-    regex: "[1-9A-ZА-Яa-zа-я-]+",
+    regex: "[A-ZА-Яa-zа-я1-9-]+",
     showMaskOnHover: false
   });
   $('.flat-field').inputmask({
@@ -1801,13 +1801,13 @@ for (var i = 0; i < btns_modals.length; i++) {
   }
 
   if ($(".profile__c-main--all-orders").find('.profile__c-main-block').length === 0) {
-    $(".profile__c-main--all-orders .profile__empty").addClass("show");
+    $(".profile__c-main--all-orders .empty").addClass("show");
   }
 
   ;
 
   if ($(".profile__c-main--personal-requests").find('.profile__c-main-request').length === 0) {
-    $(".profile__c-main--personal-requests .profile__empty").addClass("show");
+    $(".profile__c-main--personal-requests .empty").addClass("show");
   }
 
   ;
