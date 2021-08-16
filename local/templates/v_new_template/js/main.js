@@ -1827,30 +1827,30 @@ for (var i = 0; i < btns_modals.length; i++) {
   $('.rating-center__items_top-btn').on('click', function () {
     $(this).addClass('act').siblings().removeClass('act');
   });
-  $('.rating-center__item').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.rating-center__item', function () {
     var itemRating = $(this).parent('.rating-center__item-wrapper').find('.itemRating-open');
     $(this).parent().addClass('item-rating-active');
     $(itemRating).addClass('show');
   });
-  $('.itemRating-open__closed').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.itemRating-open__closed', function () {
     $(this).parent().removeClass('show');
     $(this).parents('.rating-center__item-wrapper').removeClass('item-rating-active');
   });
-  $('.closed-card').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.closed-card', function () {
     $('.itemRating-open').removeClass('show');
     $('.rating-center__item-wrapper').removeClass('item-rating-active');
   });
-  $('.tab-one').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-one', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-one').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
   });
-  $('.tab-two').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-two', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-two').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
   });
-  $('.tab-three').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-three', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-three').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
