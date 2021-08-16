@@ -4,19 +4,22 @@ $APPLICATION->ShowAjaxHead();
 
 $arSelect = array("IBLOCK_ID" => 9, "ACTIVE" => "Y");
 
-$mark = $_POST['MARK'];
+$mark = (float) $_POST['MARK'];
+
 if($mark >= 2 && $mark < 4) {
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 1.7;
-} elseif ($mark < 7) {
+} elseif ($mark >= 4 && $mark < 7) {
     $arSelect[">=PROPERTY_CH_RATING_SUM"] = 1.8;
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 3.3;
-} else {
+} elseif ($mark > 7) {
     $arSelect[">=PROPERTY_CH_RATING_SUM"] = 3.4;
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 5;
 }
 
-if(isset($_REQUEST['COMPANY'])) {
-    $arSelect["PROPERTY_CITY_ID"] = $_REQUEST['COMPANY'];
+if(isset($_POST['COMPANY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_POST['COMPANY'];
+} elseif (isset($_GET['COMPANY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_GET['COMPANY'];
 }
 if(isset($_POST['OBJECT'])) {
     $arSelect['PROPERTY_CH_TYPE'] = $_POST['OBJECT'];
