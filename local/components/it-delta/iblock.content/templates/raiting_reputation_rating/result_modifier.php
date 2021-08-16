@@ -83,7 +83,7 @@ endforeach;
 $cities = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 20, "ACTIVE" => "Y"), false, false, array("ID", "NAME"));
 $checkCityArr = false;
 while ($city = $cities->GetNext()) {
-    $checkCityArr = $city["ID"] == $_COOKIE["selected_city"];
+    $checkCityArr = ($city["ID"] == $_COOKIE["selected_city"]);
     $arrCities[$city["ID"]]['ID'] = $city["ID"];
     $arrCities[$city["ID"]]['NAME'] = $city["NAME"];
 }

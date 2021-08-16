@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Заявка на индивидуальную охрану");
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/css/zayavka_styles.css");
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/css/zayavka_mobile.css");
 ?>
 
 

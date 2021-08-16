@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Выбор охранной организации");
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/css/zayavka_styles.css");
+$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . "/css/zayavka_mobile.css");
 ?>
 <?global $arChopFilter;
 $arChopFilter["PROPERTY_CITY_ID"] = intval($GLOBALS["GEOCITY"]["ID"]);
