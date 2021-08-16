@@ -33,7 +33,8 @@ $(document).ready(function () {
 						}else{
 							//document.location.href = $domClick.attr("href");
 							//location.reload();
-							$domClick.trigger("click");
+							//$domClick.trigger("click");
+							window.itdBasket.handleBuy($domClick.attr('data-payment'));
 						}
 					}else{
 						//location.reload();
