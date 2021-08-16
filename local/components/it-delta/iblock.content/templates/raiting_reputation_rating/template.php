@@ -13,7 +13,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  */
 ?>
 
-<div class="container rating-block">
+<div class="container rating-block" id="rating">
     <div class="rating-center" id="rating-center">
         <div class="rating-block-top">
             <div class="rating-center__title">

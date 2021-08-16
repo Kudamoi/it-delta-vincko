@@ -1,4 +1,4 @@
 <div class="footer__top-service">
     <span>Служба заботы о клиентах</span>
-    <a href="tel:88000000000">8 800 000 00 00</a>
+    <a href="tel:+79094156530">+7 (909) 415-65-30</a>
 </div>
