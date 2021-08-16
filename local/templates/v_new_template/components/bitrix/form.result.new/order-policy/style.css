@@ -1,0 +1,36 @@
+.insurance-policy.order form{display:contents}
+.order .short-ins-mobile .products__head.hidden{
+    display: block;
+    float: left;
+}
+.order .short-ins-mobile .products__name{
+    display: block;
+    overflow: hidden;
+}
+.error_message {
+    display: none
+}
+.form input.error[type=text]{border: 1px solid #ff5252;}
+.error_message,.error {
+    color: #ff5252;
+}
+
+.error::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ff5252;
+}
+
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ff5252;
+}
+
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ff5252;
+}
+
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ff5252;
+}
+
+.form__section__content.address-installment .address-installment-other{
+    display: none;
+}

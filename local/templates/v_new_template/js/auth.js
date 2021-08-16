@@ -1,8 +1,7 @@
 function timer(parent) {
 	parent.find(".popup__wait-time").css("display", "block");
 	parent.find(".popup__wait").css("display", "block");
-
-	let _Seconds = 20,
+	let _Seconds = (parent.find(".popup__wait-time").attr("data-interval")?? 60 ),
 		int;
 	parent.find('.popup__wait-num').text(_Seconds); // выводим получившееся значение в блок
 
@@ -17,25 +16,7 @@ function timer(parent) {
 		}
 	}, 1000);
 }
-/*
-function regShowBtn(regNumber) {
-	let parent = $(".popup--registration");
-	let texts = 1;
-	parent.find(".text-field").each(function (index) {
-		if (!$(this).inputmask("isComplete")) {
-			texts = 0
-		}
-	});
 
-	if (texts == 1 && regNumber == 1 && $("#agree")[0].checked) {
-		parent.find(".btn-registration").removeClass("btn-registration--unactive");
-	} else {
-		parent.find(".btn-registration").addClass("btn-registration--unactive");
-
-	}
-
-}
-*/
 function regShowBtn(){}
 function showBtn(selector, parent, switcher) {
 
@@ -73,22 +54,20 @@ function schowBtnSendCode($form){
 }
 
 function sendCodeFunc(parent, switcher) {
-	parent.find((".popup__form--" + switcher + " .grey-border-button")).css("display", "none");
-	parent.find((".popup__form--" + switcher + " .popup__code")).css("display", "block");
-
-	let parent1 = parent.find(".popup__form--" + switcher);
-
-	const input1 = parent1.find("." + switcher + "-input");
-	//input1.prop('readOnly', true);
-
-	timer(parent1);
+	parent.find(".popup__form--" + switcher + " .grey-border-button").css("display", "none");
+	parent.find(".popup__form--" + switcher + " .popup__code").css("display", "block");
+	parent.find(".popup__form--" + switcher + " .sms_code").show();
+	if(parent.find(".popup__form--" + switcher + " .popup__wait-time").length > 0) {
+		timer(parent.find(".popup__form--" + switcher));
+	}
 }
 
 function desroySendCode($form){
 	$form.find(".popup__send-code, .popup__code,  .popup__wait-repeat").css("display", "none");
 	$form.find(".popup__wait").css("opacity", "0")
 	$form.find(".popup__wait-time").css("display", "block")
-	$form.find(".popup__success").css("display", "flex");
+	$form.find(".popup__success").css("display", "none");
+	$form.find(".js-info-mail").css("display", "none");
 	$form.find(".sms_code").hide();
 	$form.find(".send-message-btn").show();
 	btnUnActive($form.find(".send-message-btn"));
@@ -102,17 +81,20 @@ function viewPopap($form) {
 	}));
 
 	$form.find(".pass-input").inputmask({
-		regex: "[1-9A-Za-z!@$%^&*()_+-]{8,}",
+		regex: "[0-9A-Za-z!@$%^&*()_+-]{8,}",
 		showMaskOnHover: false,
 	});
 
-
-	$form.find(".popup__code").inputmask("999999", {
-		completed: function () {
-			$(this).parents("form").find(".popup__send-code").css("display", "grid");
-
+	$form.find(".popup__code").keyup(function(){
+		var $form = $(this).parents("form");
+		if ($(this).inputmask("isComplete")) {
+			$form.find(".popup__send-code").css("display", "grid");
+		}else{
+			$form.find(".popup__send-code").css("display", "none");
 		}
 	});
+
+	$form.find(".popup__code").inputmask("999999");
 
 	$form.find(".phone-input").inputmask("+7(999) 999-9999", {
 		completed: function () {
@@ -143,6 +125,7 @@ function viewPopap($form) {
 			$input.attr("type", "password");
 			$input.attr("data-view", 0);
 		}
+		return false;
 	});
 
 	$form.find(".popup__wait-repeat").on("click", function () {
@@ -151,9 +134,7 @@ function viewPopap($form) {
 		timer($form);
 	});
 
-	$form.find(".popup__send-code").on("click", function () {
-		schowBtnSendCode($form);
-	});
+
 
 	$(".popup__close,.popup__wall").on("click", function () {
 		closePopup();
@@ -165,6 +146,9 @@ function closePopup() {
 	$(".js-event").removeAttr("data-ajax-stop");
 }
 
+function hideHelp(pthis){
+	pthis.unknown
+}
 
 function clickModal() {
 }
@@ -219,9 +203,26 @@ function ajaxError($form, message, field = "") {
 		} else {
 			$errorBlock.find('.info-popup__text').text(message);
 		}
+		setTimeout(function () {
+			$parent.find('.info-popup__text').hide();
+		}, 1000);
+		$parent.find(".info-popup__sign").find("svg").mouseenter(function(){
+			$(this).parents(".info-popup").find('.info-popup__text').show();
+		}).mouseleave(function(){
+			$(this).parents(".info-popup").find('.info-popup__text').hide();
+		})
 	} else {
 		$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + message + "</p>");
 	}
+}
+
+function sendCodeFuncDestroy($form) {
+	$form.find(".popup__send-code, .popup__code,  .popup__wait-repeat").show();
+	$form.find(".popup__wait").css("opacity", "1")
+	$form.find(".popup__wait-time").css("display", "none")
+	$form.find(".popup__success").css("display", "none");
+	$form.find(".popup--forget .popup__bottom .blue-button").removeClass("blue-button--active");
+	$form.find(".popup--forget .popup__bottom .blue-button").addClass("blue-button--unactive");
 }
 
 function removeError(){
@@ -240,6 +241,7 @@ function changePass($form,$phis,pass,pass_confirm){
 	}else {
 		$phis.attr("data-complete", 0);
 	}
+
 	if($(pass).attr("data-complete") == 1 && $(pass_confirm).attr("data-complete") == 1){
 		btnActive($form.find(".js-btn-disabled"));
 	}else{

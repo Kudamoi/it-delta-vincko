@@ -66,6 +66,7 @@ $res = CIBlockSection::GetList(
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
+    $arResult['PACKAGE_GROUP']['PICTURE'] = CFile::ResizeImageGet($arFields['PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
 if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
 {
@@ -153,8 +154,10 @@ $arSKU = CCatalogSKU::getOffersList(
 //получаем все элементы ИБ Компания-Город
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds)
-
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
+    false,
+    false,
+    array("*","PROPERTY_CHOP_ID.NAME")
 );
 while ($arFields = $res->Fetch()) {
 

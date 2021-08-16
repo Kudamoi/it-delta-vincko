@@ -21,24 +21,8 @@ $(document).ready(function () {
 			success: function (res) {
 				console.log(res);
 				if (res.TYPE == 'ERROR') {
-					$(".error").remove();
-					$(".unknown").removeClass("unknown");
-					$(".info-popup__text").empty();
-					if (res.FIELD > '') {
-						var $errorBlock = $('[data-field="' + res.FIELD + '"]');
-						var $parent = $errorBlock.parent();
-						$parent.addClass("unknown");
-						$('[name="' + res.FIELD + '"]').show();
-						if (res.FIELD == "USER_PASSWORD"){
-							$('[name="' + res.FIELD + '"]')
-								.attr("type","text").val("").attr("placeholder",res.MESSAGE)
-								.parent().addClass("unknown");
-						}else {
-							$errorBlock.find('.info-popup__text').text(res.MESSAGE);
-						}
-					} else {
-						$form.find(".popup__main").after("<p class='error' style='grid-column: 1/3; color: red'>" + res.MESSAGE + "</p>");
-					}
+						ajaxError($form, res.MESSAGE, res.FIELD);
+
 				} else {
 					$(".unknown").removeClass("unknown");
 					$(".info-popup").remove();
@@ -48,7 +32,8 @@ $(document).ready(function () {
 							$domClick.parents("form").submit();
 						}else{
 							//document.location.href = $domClick.attr("href");
-							location.reload();
+							//location.reload();
+							$domClick.trigger("click");
 						}
 					}else{
 						location.reload();

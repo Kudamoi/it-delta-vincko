@@ -20,14 +20,6 @@
 		<button class="blue-button header-popup__button">Понятно</button>
 	</div>
 </div>
-<?//$APPLICATION->IncludeComponent("bitrix:system.auth.form","popup",Array(
-//		"REGISTER_URL" => "register.php",
-//		"FORGOT_PASSWORD_URL" => "",
-//		"PROFILE_URL" => "profile.php",
-//		"SHOW_ERRORS" => "Y",
-//		"AJAX_MODE" => "Y"
-//	)
-//);?>
 <footer class="footer">
     <div class="container">
         <div class="footer__top">
@@ -42,6 +34,7 @@
                             "EDIT_TEMPLATE" => "",
                             "PATH" => "/include/logo_footer.php"
                         )
+
                     ); ?>
                 </a>
             </div>
@@ -106,7 +99,7 @@
 <!--        <div class="footer__top-logo">-->
 <!--            -->
 <!--        </div>-->
-<!--        --><?// $APPLICATION->IncludeComponent(
+<!--        --><? // $APPLICATION->IncludeComponent(
 //            "bitrix:main.include",
 //            "",
 //            array(
@@ -118,7 +111,7 @@
 //        ); ?>
 <!--    </div>-->
 <!--    <div class="footer__bottom">-->
-<!--        --><?//$APPLICATION->IncludeComponent(
+<!--        --><? //$APPLICATION->IncludeComponent(
 //            "bitrix:menu",
 //            "desc_bottom",
 //            Array(
@@ -135,7 +128,7 @@
 //            )
 //        );?>
 <!---->
-<!--        --><?// $APPLICATION->IncludeComponent(
+<!--        --><? // $APPLICATION->IncludeComponent(
 //            "bitrix:main.include",
 //            "",
 //            array(
@@ -146,7 +139,7 @@
 //            )
 //        ); ?>
 <!--    </div>-->
-<!--    --><?// $APPLICATION->IncludeComponent(
+<!--    --><? // $APPLICATION->IncludeComponent(
 //        "bitrix:main.include",
 //        "",
 //        array(
@@ -157,15 +150,6 @@
 //        )
 //    ); ?>
 <!--</footer>-->
-
-<script src="<?=SITE_TEMPLATE_PATH?>/js/site.js"></script>
-<script src="<?=SITE_TEMPLATE_PATH?>/js/main.js"></script>
-<script src="<?=SITE_TEMPLATE_PATH?>/js/polina.js"></script>
-<script src="<?=SITE_TEMPLATE_PATH?>/js/custom.js"></script>
-
-<script src="<?=SITE_TEMPLATE_PATH?>/site.js?v=14"></script>
-
-
 </body>
 
 </html>

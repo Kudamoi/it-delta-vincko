@@ -52,7 +52,7 @@ $res = CIBlockElement::GetList(
     false,
     false,
     array("ID", "*", "PROPERTY_CO_CLASS_REF", "PROPERTY_P_COMPLECT", "IBLOCK_SECTION_ID","PROPERTY_P_COMPLECT_WITH",
-        "PROPERTY_P_ABONENTPLATA_WITH","PROPERTY_P_STRAHOVKA_WITH")
+        "PROPERTY_P_ABONENTPLATA_WITH","PROPERTY_P_STRAHOVKA_WITH","PROPERTY_P_BONUSES")
 );
 
 while ($arFields = $res->Fetch()) {
@@ -76,6 +76,7 @@ $parentPackageGroupId = $arResult['COMPLECT_PARENT_PACKAGE']['IBLOCK_SECTION_ID'
 $res = CIBlockSection::GetByID($parentPackageGroupId);
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
+    $arResult['PACKAGE_GROUP']['PICTURE'] = CFile::ResizeImageGet($arFields['PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
 //получаем все готовые решения из группы
 $res = CIBlockElement::GetList(
@@ -138,8 +139,10 @@ $arSKU = CCatalogSKU::getOffersList(
 //получаем все элементы ИБ Компания-Город
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds)
-
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
+    false,
+    false,
+    array("*","PROPERTY_CHOP_ID.NAME")
 );
 while ($arFields = $res->Fetch()) {
 

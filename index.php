@@ -1,6 +1,4 @@
 <?
-define("PROD", false);
-
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Vincko - первый федеральный маркетплейс охраны");
 $APPLICATION->SetPageProperty("keywords", "охранные предприятия, оборудование для охраны дома и офиса");
@@ -30,28 +28,26 @@ $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
             "SORT_ORDER2" => "ASC"
         )
     );?>
-    
-    <?$APPLICATION->IncludeComponent(
-        "it-delta:iblock.content", 
-        "main_open_for", 
+
+    <? $APPLICATION->IncludeComponent(
+        "it-delta:iblock.content",
+        "rating_open_for_yourself",
         array(
             "ACTIVE_DATE" => "N",
             "ADD_CACHE_STRING" => "",
             "CACHE_TIME" => "0",
             "CACHE_TYPE" => "A",
             "FILTER_NAME" => "arrFilter1",
-            "IBLOCK_ID" => "42",
-            "IBLOCK_TYPE" => "references",
-            "PAGE_ELEMENT_COUNT" => "6",
+            "IBLOCK_ID" => "47",
+            "IBLOCK_TYPE" => "Articles",
+            "PAGE_ELEMENT_COUNT" => "10",
             "RAND_ELEMENTS" => "N",
-            "SORT_BY1" => "SORT",
+            "SORT_BY1" => "ACTIVE_FROM",
             "SORT_BY2" => "SORT",
-            "SORT_ORDER1" => "ASC",
-            "SORT_ORDER2" => "ASC",
-            "COMPONENT_TEMPLATE" => "main_open_for"
-        ),
-        false
-    );?>
+            "SORT_ORDER1" => "DESC",
+            "SORT_ORDER2" => "ASC"
+        )
+    ); ?>
 
     <?$APPLICATION->IncludeComponent(
         "it-delta:iblock.content", 

@@ -3,11 +3,12 @@ $(document).ready(function () {
 	$(".js-bonuce").click(function(e){
 		e.preventDefault();
 		$(".header__popup").removeClass("hidden");
+		return false;
 	});
-$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
+	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 
 	$("#b-add-order").click(
-		function(){
+		function () {
 			sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
 			return false;
 		}
@@ -15,12 +16,12 @@ $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 	$("#b-equipitem-current").on('click', '.js-refresh-equipitem-data-ajax', function () {
 		let slug = $(this).data("slug");
 		const pageUrl = '/equipment-kits/';
-		history.pushState(null, null, pageUrl+slug+'/');
+		history.pushState(null, null, pageUrl + slug + '/');
 		$.ajax({
 			url: "/ajax/equipitem.php",
 			type: "POST",
 			dataType: "html",
-			data: {'ELEMENT_CODE':slug},
+			data: {'ELEMENT_CODE': slug},
 			success: function (data) {
 				$('#b-equipitem-current').html(data)
 			}
@@ -29,12 +30,12 @@ $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 	$("#b-packageitem-current").on('click', '.js-refresh-packageitem-data-ajax', function () {
 		let slug = $(this).data("slug");
 		const pageUrl = '/packages/';
-		history.pushState(null, null, pageUrl+slug+'/');
+		history.pushState(null, null, pageUrl + slug + '/');
 		$.ajax({
 			url: "/ajax/packageitem.php",
 			type: "POST",
 			dataType: "html",
-			data: {'ELEMENT_CODE':slug},
+			data: {'ELEMENT_CODE': slug},
 			success: function (data) {
 				$('#b-packageitem-current').html(data)
 			}
@@ -42,44 +43,45 @@ $('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 	});
 
 
-
 	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 
-$("#ajax_form_callback_btn").on('click',function(){
-		$.ajax({
-                url: '/ajax/callback_reg.php',
-                type: "POST",
-                dataType: "html",
-                data: $("#ajax_form_callback").serialize(),
-                success: function(response) {
-                if(response=='errEnt') {
-                    $('#back_call').append('<div id="js-callback-error" style="text-align: center;   color: red;margin-top: 30px; "class="">Поля не до конца заполнены, заполните их до конца и повторите снова</div>');
-                    setTimeout(function() { $("#js-callback-error").hide('fast'); }, 2000);
-                } else {
-                let html = '<div id="js-callback-ok" class=""><div class="callback__title">Заявка принята!</div><div class="callback__description">В ближайшее время с Вами свяжутся наши менеджеры</div></div>'
-                       $('#back_call').html(html);
-                }
+	$("#ajax_form_callback_btn").on('click', function () {
+			$.ajax({
+				url: '/ajax/callback_reg.php',
+				type: "POST",
+				dataType: "html",
+				data: $("#ajax_form_callback").serialize(),
+				success: function (response) {
+					if (response == 'errEnt') {
+						$('#back_call').append('<div id="js-callback-error" style="text-align: center;   color: red;margin-top: 30px; "class="">Поля не до конца заполнены, заполните их до конца и повторите снова</div>');
+						setTimeout(function () {
+							$("#js-callback-error").hide('fast');
+						}, 2000);
+					} else {
+						let html = '<div id="js-callback-ok" class=""><div class="callback__title">Заявка принята!</div><div class="callback__description">В ближайшее время с Вами свяжутся наши менеджеры</div></div>'
+						$('#back_call').html(html);
+					}
 
-               	},
-               	error: function(response) {
-               	                   	let html = '<div id="js-callback-ok" class=""><div class="callback__title">Ошибка!</div><div class="callback__description">Данные не отправлены. Сообщите об этом администратору!</div></div>'
-               	$('#back_call').html(html);
-               	}
-                });
+				},
+				error: function (response) {
+					let html = '<div id="js-callback-ok" class=""><div class="callback__title">Ошибка!</div><div class="callback__description">Данные не отправлены. Сообщите об этом администратору!</div></div>'
+					$('#back_call').html(html);
+				}
+			});
 		}
 	);
-	$('.ready-pack__item').each(function(){
+	$('.ready-pack__item').each(function () {
 		let currentlyPrice = Number($(this).find('.ready-pack__bottom .ready-pack__bottom-result .currently-price').html().replace(/\s/g, ''));
-		$(this).find('.ready-pack__bottom .solutions__bottom_column-price').html(Math.ceil(currentlyPrice/12)+' ₽');
+		$(this).find('.ready-pack__bottom .solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 	})
-	$('.solutions__bottom_column-select').on('change', function() {
+	$('.solutions__bottom_column-select').on('change', function () {
 		let currentlyPrice = Number($(this).closest('.ready-pack__bottom').find('.currently-price').html().replace(/\s/g, ''));
-		$(this).closest('.ready-pack__bottom').find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice/$(this).val())+' ₽');
+		$(this).closest('.ready-pack__bottom').find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / $(this).val()) + ' ₽');
 	})
-	$('.solutions__bottom_right').each(function(){
+	$('.solutions__bottom_right').each(function () {
 
-		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽','').replace('&nbsp;', ''));
-		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice/12)+' ₽');
+		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
+		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 
 	})
 
@@ -258,39 +260,38 @@ $("#ajax_form_callback_btn").on('click',function(){
 	// });
 	/* Article FructCode.com */
 });
+
 //функция оформления заказа
 function sendAjaxForm(result_form, ajax_form, url) {
 
-		$error = $("#"+ajax_form).find(".form__required"),
-		top1 = $("#"+ajax_form).position().top,
+	$error = $("#" + ajax_form).find(".form__required"),
+		top1 = $("#" + ajax_form).position().top,
 		class_name = "error";
 
 	$('.js-check-valid-field').removeClass(class_name);
 
 	$.ajax({
-		url:     url, //url страницы
-		type:     "POST", //метод отправки
+		url: url, //url страницы
+		type: "POST", //метод отправки
 		dataType: "html", //формат данных
-		data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
-		success: function(response) { //Данные отправлены успешно
+		data: $("#" + ajax_form).serialize(),  // Сеарилизуем объект
+		success: function (response) { //Данные отправлены успешно
 			response = $.parseJSON(response);
-			if(response.type=='error')
-			{
+			if (response.type == 'error') {
 
-					$('html').scrollTop(top1);
-					$error.show();
-					$.each(response.msg, function (i, value) {
-						$('input[name="'+value+'"]').addClass('error');
-					});
+				$('html').scrollTop(top1);
+				$error.show();
+				$.each(response.msg, function (i, value) {
+					$('input[name="' + value + '"]').addClass('error');
+				});
 
 
 				//$('#b-form-order-ajax-errors').html("<style>.messages{margin-bottom: 20px;}</style><span style='color: red;font-size: 1.2em;'>" + response.msg + "</span>");
-			} else
-			if (response.type=='ok') {
+			} else if (response.type == 'ok') {
 				window.location.href = response.url;
 			}
 		},
-		error: function(response) { // Данные не отправлены
+		error: function (response) { // Данные не отправлены
 			$('#b-form-order-ajax-errors').html('Ошибка. Данные не отправлены.');
 		}
 	});
