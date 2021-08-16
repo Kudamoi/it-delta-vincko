@@ -135,6 +135,20 @@ $arSKU = CCatalogSKU::getOffersList(
     array('ID', 'NAME', 'CODE','CATALOG_GROUP_1','PROPERTY_APTP_MESYAC'),
     array()
 );
+//получим честный договор
+$res = CIBlockElement::GetList(
+    array("SORT" => "ASC"),
+    array("ACTIVE" => "Y", "IBLOCK_CODE" => "contract"),
+    false,
+    false,
+    array("ID","*","PROPERTY_CONTRACT")
+);
+while ($arFields = $res->Fetch()) {
+
+    $arResult['FAIR_CONTRACT'] = $arFields;
+    $arResult['FAIR_CONTRACT']['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_CONTRACT_VALUE']);
+
+}
 
 //получаем все элементы ИБ Компания-Город
 $res = CIBlockElement::GetList(
@@ -142,11 +156,12 @@ $res = CIBlockElement::GetList(
     array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
     false,
     false,
-    array("*","PROPERTY_CHOP_ID.NAME")
+    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT", "PROPERTY_CHOP_ID.NAME")
 );
 while ($arFields = $res->Fetch()) {
 
      $arResult['ALL_LIST_COMPANY_CITY'][$arFields['ID']] = $arFields;
+     $arResult['ALL_LIST_COMPANY_CITY'][$arFields['ID']]['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_CONTRACT_VALUE']);
 
 }
 
