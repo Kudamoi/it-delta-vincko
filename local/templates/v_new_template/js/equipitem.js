@@ -1,3 +1,7 @@
+$(".complect__slider-datchiki-title .num").text($(".slick-slider-datchiki").find(".slide").length)
+console.log("len" + $(".slick-slider-datchiki").find(".slide").length);
+
+
 var colorOnClick = function colorOnClick(allEl, el, text) {
     el.addEventListener('click', function () {
         allEl.forEach(function (item) {
@@ -56,7 +60,7 @@ $('.slick-slider-datchiki').slick({
     centerMode: true,
     arrows: true,
     centerPadding: '60px',
-    slidesToShow: 5,
+    slidesToShow: 1,
     prevArrow: '<div class="arrow-prev arrow"><img src="../img/cartochka/prew.svg"></div>',
     nextArrow: '<div class="arrow-next arrow"><img src="../img/cartochka/next.svg"></div>',
     infinity: true
