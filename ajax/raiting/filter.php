@@ -11,7 +11,7 @@ if($mark >= 2 && $mark < 4) {
 } elseif ($mark >= 4 && $mark < 7) {
     $arSelect[">=PROPERTY_CH_RATING_SUM"] = 1.8;
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 3.3;
-} elseif ($mark > 7) {
+} elseif ($mark >= 7) {
     $arSelect[">=PROPERTY_CH_RATING_SUM"] = 3.4;
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 5;
 }
