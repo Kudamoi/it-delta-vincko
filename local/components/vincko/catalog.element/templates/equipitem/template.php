@@ -891,7 +891,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                         <span><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> ₽</span>
                                                     </div>
                                                 </div>
-                                                <div class="contract__item_bottom">
+                                                <?/*<div class="contract__item_bottom">
                                                     <div class="contract__item_bottom-row">
                                                         <span>В подарок:</span>
                                                     </div>
@@ -899,7 +899,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                         <span>Страхование имущества на</span><span class="present">600 000
                                                     руб.</span>
                                                     </div>
-                                                </div>
+                                                </div>*/?>
                                             </div>
                                         <? endforeach; ?>
                                     </div>
