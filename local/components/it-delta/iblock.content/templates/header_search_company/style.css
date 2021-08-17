@@ -1,0 +1,33 @@
+.searchForm__modal_item.bottomChekItem {
+	margin-bottom: 10px;
+}
+
+.searchForm__modal {
+	width: 100%;
+    height: auto;
+}
+
+.searchForm__modal_input {
+	width: 100%;
+}
+.searchForm__modal_wrapper {
+	height: auto;
+}
+
+.searchForm__modal_bottomChek {
+	width: 100%;
+    overflow-x: scroll;
+    height: 300px;
+}
+
+.searchForm__modal_wrapper {
+    overflow-y: inherit;
+}
+
+.searchForm__modal_centerChek {
+    width: 100%;
+}
+
+.searchForm__modal_topChek {
+    width: 100%;
+}
