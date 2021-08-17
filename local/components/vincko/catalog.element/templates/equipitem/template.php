@@ -1502,7 +1502,8 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
-    'subscribe_sum' => 0
+    'subscribe_sum' => 0,
+    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized()
 ];
 
 ?>
@@ -1515,7 +1516,7 @@ $data = [
             target: document.getElementById('b-vincko-basket-component'),
             props: data,
         });
-
+        window.itdBasket = itd_basket;
         function updateBasket(data) {
             data.sum = 0;
             data.old_sum = 0;

@@ -33,7 +33,11 @@ $(document).ready(function () {
 						}else{
 							//document.location.href = $domClick.attr("href");
 							//location.reload();
-							$domClick.trigger("click");
+							//$domClick.trigger("click");
+							var paymentMethod = $domClick.attr('data-payment')
+							if (typeof paymentMethod !== 'undefined' && paymentMethod !== false) {
+								window.itdBasket.handleBuy(paymentMethod);
+							}
 						}
 					}else{
 						location.reload();
