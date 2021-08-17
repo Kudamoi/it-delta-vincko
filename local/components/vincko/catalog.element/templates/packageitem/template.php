@@ -308,7 +308,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </div>
                             <div class="solutions-card__circles">
                                 <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
-                                    <? if (!empty($arResult['PACKAGES_SLUGS'][$key])): ?>
+                                    <? if (!empty($arResult['PACKAGES_SLUGS'][$key]) && !empty($arResult['PACKAGES_SLUGS'][$key]['SLUG'])): ?>
                                         <div data-slug="<?= $arResult['PACKAGES_SLUGS'][$key]['SLUG'] ?>"
                                              class="js-refresh-packageitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
                                             <div class="solutions-card__circles_item-icon">
