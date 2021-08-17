@@ -54,19 +54,9 @@ $(document).ready(function () {
         }
     });
 
-    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
     const config = {
         attributes: true,
     };
-    const callback = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
-
-            }
-        }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetCity, config);
 
     let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
         const callbackCompany = function(mutationsList, observer) {

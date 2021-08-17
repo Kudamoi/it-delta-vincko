@@ -114,26 +114,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     </div>
                                 </div>
                                 <a class="link-item" href="#how__useful">Читать подробнее</a>
-
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
                 <div class="rating-center__subtitle_text">
                     При заказе услуг компаний с определенными статусами<br> <a href="#how__useful" class="link-item">vincko:
                         дарит подарки и скидки</a>
                 </div>
-
             </div>
-
         </div>
-
         <div class="rating-center__search">
-
             <div class="rating-center__search_item item-one">
                 <div class="rating-center__search_item-title">
                     Город
@@ -179,7 +170,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     </div>
                 </div>
             </div>
-
             <div class="rating-center__search_item item-two">
                 <div class="rating-center__search_item-title">
                     Найдите компании по названию
@@ -190,7 +180,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             <path d="M21 21L16.7501 16.7425L21 21ZM19.1053 11.0526C19.1053 13.1883 18.2569 15.2365 16.7467 16.7467C15.2365 18.2569 13.1883 19.1053 11.0526 19.1053C8.91694 19.1053 6.86872 18.2569 5.35856 16.7467C3.8484 15.2365 3 13.1883 3 11.0526C3 8.91694 3.8484 6.86872 5.35856 5.35856C6.86872 3.8484 8.91694 3 11.0526 3C13.1883 3 15.2365 3.8484 16.7467 5.35856C18.2569 6.86872 19.1053 8.91694 19.1053 11.0526V11.0526Z"
                                   stroke="#93B6FF" stroke-width="2" stroke-linecap="round"/>
                         </svg>
-
                     </button>
                     <div class="rating-center__search_form-select">
                         <input type="text" placeholder="Найти компанию">
@@ -222,7 +211,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="rating-center__items">
             <div class="rating-center__items_top">
@@ -342,7 +330,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                                     <div class="top-block-rating-help-item" style="color:#000000;">
                                         <div class="top-block-rating-help-item-title">
-                                            <span class="t-c-blue">Репутационный рейтинг</span><br>охранных компаний
+                                            <span class="t-c-blue">Репутационный рейтинг</span><span>охранных компаний</span>
                                         </div>
                                     </div>
                                     <div class="content-top-block-rating-help-item border-bottom">
@@ -439,12 +427,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         отражают качество предоставляемых услуг
                                         <a class="link-item" href="#how__useful">Подробнее о статусах компаний</a>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
-
                         <div class="rating-center__items_top-btns">
                             <div class="pseudo__range">
                                 <p class="text"><span
@@ -454,11 +439,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                        class="all">
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
             <div class="rating-center__items_top title-change">
                 <div class="rating-center__items_top-title title-act">
                     <span>Показан рейтинг</span>
@@ -565,8 +548,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 </div>
             </div>
             <div class="rating-center__items-wrapper-block">
-
-
             </div>
         </div>
     </div>

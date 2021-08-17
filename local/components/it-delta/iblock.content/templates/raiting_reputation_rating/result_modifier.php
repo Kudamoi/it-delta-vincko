@@ -1,5 +1,30 @@
 <?php
 
+//Получаем все города
+$cities = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 20, "ACTIVE" => "Y"), false, false, array("ID", "NAME"));
+$checkCityArr = false;
+while ($city = $cities->GetNext()) {
+    $city["ID"] == $_COOKIE["selected_city"] ? $checkCityArr = true : '';
+    $arrCities[$city["ID"]]['ID'] = $city["ID"];
+    $arrCities[$city["ID"]]['NAME'] = $city["NAME"];
+}
+
+//Определяем ГП и записываем его в результирующий массив
+if (!empty($_COOKIE["selected_city"]) && $checkCityArr):
+
+    $arResult['CITY_SELECTED']['ID'] = $arrCities[$_COOKIE["selected_city"]]['ID'];
+    $arResult['CITY_SELECTED']['NAME'] = $arrCities[$_COOKIE["selected_city"]]['NAME'];
+else:
+
+    foreach ($arrCities as $city):
+        $_COOKIE["selected_city"] = $city['ID'];
+        $arResult['CITY_SELECTED']['ID'] = $city['ID'];
+        $arResult['CITY_SELECTED']['NAME'] = $city['NAME'];
+        break;
+    endforeach;
+endif;
+
+//Cоздаем фильтр для рейтинга
 $dbchops = CIBlockElement::GetList(
     array(),
     array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]),
@@ -54,6 +79,8 @@ while ($obj = $objects->GetNext()) {
     $arrObj[$obj["ID"]]['SVG'] = $obj['~PROPERTY_SVG_PICTURE_VALUE']['TEXT'];
 }
 
+
+
 foreach ($arResult['ITEMS'] as $item):
     $newArrItem[$item['ID']]['CODE'] = $item['CODE'];
     $newArrItem[$item['ID']]['ID'] = $item['ID'];
@@ -79,28 +106,6 @@ foreach ($arResult['ITEMS'] as $item):
 endforeach;
 
 
-//Получаем все города
-$cities = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 20, "ACTIVE" => "Y"), false, false, array("ID", "NAME"));
-$checkCityArr = false;
-while ($city = $cities->GetNext()) {
-    $checkCityArr = ($city["ID"] == $_COOKIE["selected_city"]);
-    $arrCities[$city["ID"]]['ID'] = $city["ID"];
-    $arrCities[$city["ID"]]['NAME'] = $city["NAME"];
-}
-
-//Определяем ГП и записываем его в результирующий массив
-if (!empty($_COOKIE["selected_city"]) && $checkCityArr):
-    $arResult['CITY_SELECTED']['ID'] = $arrCities[$_COOKIE["selected_city"]]['ID'];
-    $arResult['CITY_SELECTED']['NAME'] = $arrCities[$_COOKIE["selected_city"]]['NAME'];
-else:
-
-    foreach ($arrCities as $city):
-        $_COOKIE["selected_city"] = $city['ID'];
-        $arResult['CITY_SELECTED']['ID'] = $city['ID'];
-        $arResult['CITY_SELECTED']['NAME'] = $city['NAME'];
-        break;
-    endforeach;
-endif;
 
 //Собираем компании города
 $companies = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]), false, false, array("ID", "NAME", "PROPERTY_CHOP_ID"));
