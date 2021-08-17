@@ -2,7 +2,9 @@
 
 <ul class="reviews__items">
     <? foreach ($arResult['rows'] as $row): ?>
-    
+    <?echo "<pre>";
+        print_r($row);
+    echo "</pre>";?>
         <? $currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']; ?>
         <li class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
             <div class="reviews__item-left">

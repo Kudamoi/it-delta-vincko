@@ -306,13 +306,11 @@
             </a>
         </div>
         <div class="sort__form">
-            <form>
                 <select data-select-sort class="sort__form-select-js">
                     <option value="0" hidden>Сортировка не выбрана</option>
                     <option value="1">Сначала положительные</option>
                     <option value="2">Сначала отрицательные</option>
                 </select>
-            </form>
         </div>
     </div>
 
