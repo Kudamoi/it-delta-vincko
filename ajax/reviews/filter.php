@@ -15,8 +15,8 @@ $entity = HL\HighloadBlockTable::compileEntity($hlblock);
 $entity_data_class = $entity->getDataClass();
 
 $arSelect = array("UF_CITY_ID" => $_COOKIE['selected_city']);
-if(isset($_POST['MARK'])) {
-    $mark = (float)$_POST['MARK'];
+if(isset($_REQUEST['MARK'])) {
+    $mark = (float)$_REQUEST['MARK'];
 
     if ($mark >= 2 && $mark < 4) {
         $arSelect["<=UF_ALLSCORE_REVIEW_SCORE"] = 1;
@@ -28,11 +28,11 @@ if(isset($_POST['MARK'])) {
         $arSelect["<=UF_ALLSCORE_REVIEW_SCORE"] = 5;
     }
 }
-if(isset($_POST['COMPANY'])) {
-    $arSelect['UF_CHOP_ID'] = $_POST['COMPANY'];
+if(isset($_REQUEST['COMPANY'])) {
+    $arSelect['UF_CHOP_ID'] = $_REQUEST['COMPANY'];
 }
-if(isset($_POST['SORT'])) {
-    $sort = $_POST['SORT'];
+if(isset($_REQUEST['SORT'])) {
+    $sort = $_REQUEST['SORT'];
     if ($sort == 0) {
         $sortF = '';
         $sortED = '';

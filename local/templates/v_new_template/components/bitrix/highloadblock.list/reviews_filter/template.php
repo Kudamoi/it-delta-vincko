@@ -2,9 +2,6 @@
 
 <ul class="reviews__items">
     <? foreach ($arResult['rows'] as $row): ?>
-    <?echo "<pre>";
-        print_r($row);
-    echo "</pre>";?>
         <? $currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']; ?>
         <li class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
             <div class="reviews__item-left">
@@ -40,25 +37,25 @@
                 </div>
                 <div class="reviews__item__body">
                     <div class="reviews__item__body--top">
-                        <? if (!empty($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'])): ?>
+                        <? if ($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] != '&nbsp;'): ?>
                             <span>Общее впечатление: </span>
                             <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
                         <? endif; ?>
                     </div>
                     <div class="reviews__item__body--center">
-                        <? if (!empty($row['UF_CUSTOMER_FOCUS_COMMENT'])): ?>
+                        <? if ($row['UF_CUSTOMER_FOCUS_COMMENT'] != '&nbsp;'): ?>
                             <span>Клиентоориентированность: </span>
-                            <p><?= $row['UF_CUSTOMER_FOCUS_COMMENT'] ?></p>
+                            <p><?= $row['UF_CUSTOMER_FOCUS_COMMENT']?></p>
                         <? endif; ?>
-                        <? if (!empty($row['UF_SECURITY_SCORE_COMMENT'])): ?>
+                        <? if ($row['UF_SECURITY_SCORE_COMMENT'] != '&nbsp;'): ?>
                             <span>Безопасность: </span>
                             <p><?= $row['UF_SECURITY_SCORE_COMMENT'] ?></p>
                         <? endif; ?>
-                        <? if (!empty($row['UF_COMFORT_SCORE_COMMENT'])): ?>
+                        <? if ($row['UF_COMFORT_SCORE_COMMENT'] != '&nbsp;'): ?>
                             <span>Комфорт: </span>
                             <p><?= $row['UF_COMFORT_SCORE_COMMENT'] ?></p>
                         <? endif; ?>
-                        <? if (!empty($arResult['ReviewsScores'])): ?>
+                        <? if ($arResult['ReviewsScores'] != '&nbsp;'): ?>
                             <? foreach ($arResult['ReviewsScores'] as $reviewsScore): ?>
                                 <? if ($row['ID'] == $reviewsScore['UF_REVIEW_ID']): ?>
                                     <span><?= $arResult['CRITERIA_QUESTIONS'][$reviewsScore['UF_QUESTION_ID']]['NAME'] ?></span>
@@ -134,23 +131,29 @@
 <div class="reviews__form-bottom">
     <div class="reviews__form-bottom--left"><span class="icon"><svg width="10" height="7" viewBox="0 0 10 7"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
+                <path
                             d="M4.9988 1.13553L8.91021 5.05793C9.15916 5.30745 9.15916 5.71199 8.91021 5.96138C8.66149 6.21079 8.25809 6.21079 8.00939 5.96138L4.54839 2.49065L1.08752 5.96128C0.838695 6.21069 0.435335 6.21069 0.186615 5.96128C-0.0622052 5.71187 -0.0622052 5.30734 0.186615 5.05783L4.09809 1.13543C4.22251 1.01072 4.3854 0.948437 4.54837 0.948437C4.71143 0.948437 4.87444 1.01084 4.9988 1.13553Z"
                             fill="#A0A0A0"/>
-                    </svg></span>
+                    </svg>
+        </span>
         <a class="text return_to_filter-js" href="#reviews__form">Подняться к фильтрам</a>
     </div>
     <div class="reviews__form-bottom--right">
-        <ul class="pagination">
-            <li><a href="" class="prev">0</a></li>
-            <li><span class="active">1</span></li>
-            <li><a href="">2</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="" class="next">8</a></li>
-        </ul>
+
+        <?php
+$APPLICATION->IncludeComponent(
+    'bitrix:main.pagenavigation',
+    'custom',
+    array(
+        'NAV_OBJECT' => $arResult['nav_object'],
+        'SEF_MODE' => 'N',
+    ),
+    false
+);?>
     </div>
 </div>
+<?php
+if ($arParams['ROWS_PER_PAGE'] > 0):
+
+endif;
+?>

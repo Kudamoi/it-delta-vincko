@@ -191,4 +191,18 @@ $(document).ready(function () {
         })
     })
 
-})
+    $('.reviews-item-wrapper-block').on('click', '.reviews__form-bottom--right .pagination a', function() {
+            let company = null;
+            company = $('.reviews__form-top--result .result__tabs .result__tab-item.active').attr('data-id');
+            $.ajax({
+                type: 'get',
+                url: '/ajax/reviews/filter.php',
+                data: {'COMPANY': company, 'MARK':  $('#pseudo__range').val(), 'SORT': $('.sort__form .sort__form-select-js').val(), 'page': $(this).attr('data-href')},
+                response: 'html',
+                success: function(data) {
+                    $('.reviews-item-wrapper-block').html(data);
+                }
+            })
+    });
+
+});

@@ -425,6 +425,24 @@
 .reviews__form-send_btn .sort__form select, .reviews__form-send_btn .sort__form .choices__inner .choices__list {
     width: unset;
 }
+.rating-center__filter-block {
+    display: flex;
+    justify-content: space-between;
+}
+.rating-center__filter-block .rating-center__search {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+}
+.rating-center__filter-block .rating-center__search .rating-center__search_item:first-child {
+    max-width: 300px;
+}
+.rating-center__filter-block .rating-center__search .rating-center__search_item:last-child {
+    max-width: 494px;
+}
+.rating-center__filter-block .rating-center__items_top .rating-center__items_top-right-help {
+    width: unset;
+}
 @media (max-width: 1100px) {
     .rating-center__items_top {
         flex-wrap: wrap;
