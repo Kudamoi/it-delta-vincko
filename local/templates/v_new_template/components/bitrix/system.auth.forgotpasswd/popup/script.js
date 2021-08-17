@@ -45,15 +45,20 @@ $(document).ready(function () {
 	$form.submit(function () {
 		var $form = $(this),
 			$btn = $(document.activeElement),
-			btnSerialize = $btn.attr("name") + "=" + $btn.val();
-console.log($form.serialize() + "&" + btnSerialize);
+			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
+			action = $form.attr("action");
+		if($btn.attr("name") == "code_check_submit_button"){
+			action = "/ajax/check_code.php";
+		}
+		console.log(action);
 		$.ajax({
-			url: $form.attr("action"),
+			url: action,
 			method: 'POST',
 			data: $form.serialize() + "&" + btnSerialize,
 			dataType: 'json',
 			success: function (res) {
 				console.log(res);
+				var formAction = $form.attr("action").split("?");
 				if (res.TYPE == 'ERROR') {
 					ajaxError($form, res.MESSAGE, res.FIELD);
 					if($btn.attr("name") =='change_pwd' && res.FIELD == "CHECKWORD"){
@@ -67,8 +72,8 @@ console.log($form.serialize() + "&" + btnSerialize);
 						}
 						$(".popup").find(".js-forgot-pwd:not(form .js-forgot-pwd)").show();
 						$form.find(".popup__form."+classes+".js-forgot-pwd").css("display","grid");
-						var formAction = $form.attr("action").split("?"),
-							formActionChange = formAction[0] + "?forgot_password=yes";
+
+						var formActionChange = formAction[0] + "?forgot_password=yes";
 						$form.attr("action", formActionChange);
 						$form.find("[name='TYPE']").val("SEND_PWD");
 					}
@@ -78,32 +83,32 @@ console.log($form.serialize() + "&" + btnSerialize);
 					}
 				} else {
 					removeError();
-					sendCodeFunc($form.parents(".popup"), $btn.attr("data-switcher"));
 
 					if( $btn.attr("name") == 'code_check_submit_button') {
+						// успех при отправки кода
+						var formActionChange = formAction[0] + "?change_password=yes";
 						$(".popup").find(".js-change-pwd").show();
 						$form.find(".js-change-pwd").css("display","flex");
 						$(".popup").find(".js-forgot-pwd").hide();
-						$btn.parent().find(".sms_code").show();
+
+
+						$form.attr("action", formActionChange);
+						$form.find("[name='TYPE']").val("CHANGE_PWD");
+						$form.parents(".popup").addClass("popup--new-pass");
 
 					}else if ($btn.attr("name") == 'change_pwd'){
+						// успех при изменении пароля
 						$(".js-in-modal.js-modal-auth").trigger("click");
 
-					}else{
+					}else if ( $btn.attr("name") =='send_account_info'){
+						// событие отправки смс
 						if($btn.attr("data-switcher") == 'mail'){
 							$btn.parents(".popup__main").find(".js-info-mail").show();
 							$btn.parent().find(".popup__success").css("display", "flex");
 						}else {
+							$btn.parent().find(".sms_code").show();
 							$("[name='USER_CHECKWORD_SMS'],[name='USER_CHECKWORD']").removeAttr("disabled");
-
-							var formAction = $form.attr("action").split("?"),
-								formActionChange = formAction[0] + "?change_password=yes";
-
-							$form.attr("action", formActionChange);
-
-							$form.find("[name='TYPE']").val("CHANGE_PWD");
-
-							$form.parents(".popup").addClass("popup--new-pass");
+							sendCodeFunc($form.parents(".popup"), $btn.attr("data-switcher"));
 						}
 					}
 

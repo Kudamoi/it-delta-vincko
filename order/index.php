@@ -18,6 +18,7 @@ $complectObj = $orderItems[0];
 $subscriptionFeeObj = $orderItems[1];
 $policyObj = $orderItems[2];
 $totalObj = $orderData['total'];
+$paymentMethodObj = $orderData['paymentMethod'];
 if($_GET['itd']=='y')
 {
     echo '<pre>';
@@ -56,7 +57,7 @@ $curStep = 1;
         }
 
     </style>
-<? // УБРАТЬ БЛОК ПРИ ПЕРЕНОСЕ НА БОЙ ?>
+<? /*
 <div id="test" style="cursor:pointer" xmlns="http://www.w3.org/1999/html">Заполнить тестовыми данными</div>
 <script>
     $(document).ready(function () {
@@ -92,7 +93,7 @@ $curStep = 1;
 
     })
 </script>
-<?// УБРАТЬ БЛОК ПРИ ПЕРЕНОСЕ НА БОЙ?>
+*/?>
 
 <?if(isset($_GET['ORDER_ID'])):?>
     <?$APPLICATION->IncludeComponent(
@@ -424,7 +425,7 @@ $curStep = 1;
                                            class="date js-check-valid-field">
                                     <input type="text" name="policyContactInfo[place]" placeholder="Место рождения *"
                                            class="address-field js-check-valid-field"><br>
-                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[email]" placeholder="E-mail *" id="email-field"><br>
+                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[email]" placeholder="E-mail *"><br>
                                     <input class="js-check-valid-field" type="text" name="policyContactInfo[phone]" placeholder="Телефон *" id="phone-field">
                                 </div>
                             </div>
@@ -448,7 +449,7 @@ $curStep = 1;
                                            class="address-field js-check-valid-field">
                                     <input type="text" name="addressRegistration[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                     <input type="text" name="addressRegistration[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                    <input type="text" name="addressRegistration[housing]" placeholder="Корпус" class="js-check-valid-field text-field">
+                                    <input type="text" name="addressRegistration[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                     <input type="text" name="addressRegistration[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                     <input class="js-check-valid-field date" type="text" name="addressRegistration[date]" placeholder="Дата регистрации *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -463,7 +464,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="addressResidense[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="addressResidense[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field text-field">
+                                        <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="addressResidense[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input class="js-check-valid-field date" type="text" name="addressResidense[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -496,7 +497,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="policyOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="policyOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field text-field">
+                                        <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="policyOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input class="js-check-valid-field date" type="text" name="policyOtherAddress[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
@@ -553,7 +554,7 @@ $curStep = 1;
                                         <input type="text" name="contactData[name]" placeholder="Имя *" class="js-check-valid-field text-field">
                                         <input type="text" name="contactData[patronomic]" placeholder="Отчество" class="js-check-valid-field text-field">
                                         <br>
-                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="js-check-valid-field email-field"><br>
+                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="js-check-valid-field"><br>
                                         <input type="text" name="contactData[phone]" placeholder="Телефон *" class="js-check-valid-field phone-field">
                                     </div>
                                 </div>
@@ -567,6 +568,7 @@ $curStep = 1;
                                     </span>
                                 </div>
                                 <div class="form__section__content address-installment">
+                                    <?if($policyObj->active):?>
                                     <div class="radio-wrapper">
                                         <input checked type="radio" name="delivery-address-installment" value="0"
                                                id="permanent-delivery">
@@ -579,7 +581,8 @@ $curStep = 1;
                                         <label for="actual-delivery"></label>
                                         <label for="actual-delivery">Совпадает с адресом фактического проживания</label>
                                     </div>
-                                    <input type="radio" name="delivery-address-installment" value="1" id="other-delivery">
+                                    <?endif;?>
+                                    <input <?=$policyObj->active ? '' : 'checked'?> type="radio" name="delivery-address-installment" value="1" id="other-delivery">
                                     <label for="other-delivery"></label>
                                     <label for="other-delivery">Указать другой адрес</label>
                                     <div class="input-address">
@@ -590,7 +593,7 @@ $curStep = 1;
                                                class="js-check-valid-field address-field">
                                         <input type="text" name="deliveryOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
                                         <input type="text" name="deliveryOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
-                                        <input type="text" name="deliveryOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field text-field">
+                                        <input type="text" name="deliveryOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="deliveryOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input type="text" name="deliveryOtherAddress[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>
@@ -630,18 +633,17 @@ $curStep = 1;
                                 <div class="form__section__content payment-method">
                                     <div class="payment-method-left">
                                         <div class="radio-wrapper" id="card-radio">
-                                            <input type="radio" name="payment-method" value="10" id="card" checked>
+                                            <input type="radio" name="payment-method" value="10" id="card" <?=$paymentMethodObj=='installment' ? '' : 'checked'?>>
                                             <label for="card"></label>
                                             <label for="card">Картой онлайн</label>
                                         </div>
                                         <div class="radio-wrapper" id="installment-radio">
-                                            <input type="radio" name="payment-method" value="10"
-                                                   id="installment">
+                                            <input type="radio" name="payment-method" value="11"
+                                                   id="installment" <?=$paymentMethodObj=='installment' ? 'checked' : ''?>>
                                             <label for="installment"></label>
                                             <label for="installment">Рассрочка без процентов ПАО Сбербанк</label>
                                         </div>
                                     </div>
-
                                     <div class="payment-method-right">
                                         <div class="payment-method__card active">
                                             <h4>Всего</h4>
@@ -808,7 +810,7 @@ $curStep = 1;
                         <?endif;?>
                     </div>
                     <div class="short-rd__footer">
-                        <a href="" class="short-rd-another">
+                        <a onclick="window.history.back();" href="#" class="short-rd-another">
                             <svg width="14" height="12" viewBox="0 0 14 12" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -830,6 +832,7 @@ $curStep = 1;
                               fill="#A0A0A0"/>
                     </svg>
                 </label>
+                <?if($policyObj->active):?>
                 <input type="checkbox" name="view-agree" id="view-agree">
                 <p class="installment__rules-text">
                     Я даю согласие САО «ВСК», находящемуся по адресу 121552, г. Москва, ул. Островная, д. 4, на
@@ -852,7 +855,7 @@ $curStep = 1;
                 <label for="agreement" class="installment__rules-agreement">
                     Я даю согласие и подтверждаю достоверность указанных данных
                 </label>
-
+                <?endif;?>
                 <label for="view-agree-two" class="installment__rules-mobile" id="label-view-agree-two">
                     <span><span class="show">Показать</span><span class="hide">Скрыть</span> текст с условиями обработки данных и договором оферты</span>
                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

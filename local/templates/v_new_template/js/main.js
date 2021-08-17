@@ -978,15 +978,15 @@ jQuery(document).ready(function ($) {
   }
 
   $('.text-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-]+",
+    regex: "[A-ZА-Яa-zа-я- ]+",
     showMaskOnHover: false
   });
   $('.address-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,:]+",
+    regex: "[A-ZА-Яa-zа-я-.,: ]+",
     showMaskOnHover: false
   });
   $('.street-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я1-9-.,:/]+",
+    regex: "[A-ZА-Яa-zа-я1-9-.,:/ ]+",
     showMaskOnHover: false
   });
   $('.house-field').inputmask({
@@ -1980,20 +1980,17 @@ for (var i = 0; i < btns_modals.length; i++) {
     $(this).next().css('display', 'block');
   });
   $('.rating-center__search_form-select').on('click', function () {
-    $('.searchForm__modal').fadeIn(100);
+    $(this).closest('.rating-center__search_form').find('.searchForm__modal').fadeIn(100);
   });
   $('.searchForm__modal_closed').on('click', function () {
-    $('.searchForm__modal').fadeOut(100);
+    $(this).closest('.rating-center__search_form').find('.searchForm__modal').fadeOut(100);
   });
-  var $bottomModalItem = $('.bottomChekItem');
-  var $topModalItem = $('.topChekItem');
-  $bottomModalItem.on('click', function () {
+  $('.searchForm__modal_wrapper').on('click', '.bottomChekItem', function () {
     $(this).clone().prependTo('.searchForm__modal_topChek').removeClass('bottomChekItem').addClass('topChekItem');
     $('.searchForm__modal_topChek').addClass('active');
   });
-  $topModalItem.on('click', function () {
+  $('.searchForm__modal_wrapper').on('click', '.topChekItem', function () {
     $(this).prependTo('.searchForm__modal_bottomChek').removeClass('topChekItem').addClass('bottomChekItem');
-    console.log('true');
   });
   var $test = $('.searchForm__modal_topChek').find('.topChekItem');
 
@@ -3036,21 +3033,14 @@ jQuery(document).ready(function ($) {
     });
   }); // reviews__form-top--result
 
-  var $result__tab_item = $(".result__tab-item");
-  $result__tab_item.each(function () {
-    var $this = $(this);
-    $this.on("click", function () {
-      $result__tab_item.removeClass("active");
-      $result__tab_item.children().show();
-      $this.addClass("active");
-      $this.children().hide(); // $this.on("mouseover", function () {
-      //     $this.children().show()
-      //     $this.removeClass("active")
-      // })
-    });
-    $(".delete_btn-js").on("click", function () {
-      $(this).closest($result__tab_item).remove();
-    });
+  $('.result__tabs').on('click', '.result__tab-item', function () {
+    $('.result__tab-item').removeClass("active");
+    $('.result__tab-item').children().show();
+    $(this).addClass("active");
+    $(this).children().hide();
+  });
+  $('.result__tabs').on("click", ".delete_btn-js", function () {
+    $(this).closest('.result__tab-item').remove();
   });
   $(".result__tabs--pseudo").on("click", function (e) {
     e.preventDefault();
