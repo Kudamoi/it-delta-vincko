@@ -4,6 +4,7 @@
 
     <!-- form--top -->
     <h2>Узнаем, что говорят люди об охранных компаниях</h2>
+    <div class="rating-center__filter-block">
     <div class="rating-center__search rating-block">
         <div class="rating-center__search_item item-one">
             <div class="rating-center__search_item-title">
@@ -102,7 +103,7 @@
             </div>
             <div class="rating-center__items_top-right-help">
                 <div class="rating-center__items_top-center t-c-gray">
-                    <div class="rating-center__items_top-name rating-check-window">Смотреть в рейтинге у кого купить
+                    <!--<div class="rating-center__items_top-name rating-check-window">Смотреть в рейтинге у кого купить
                         охрану для
                         <span class="icon-open-info-block">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -150,7 +151,7 @@
                             </div>
                         <? endforeach; ?>
 
-                    </div>
+                    </div>-->
                 </div>
                 <div class="rating-center__items_top-right t-c-gray rating-check-window">
                     <div class="rating-center__items_top-name">Показать компании с оценкой <span
@@ -287,7 +288,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <div class="reviews__form-top--result">
         <ul class="result__tabs">
 
