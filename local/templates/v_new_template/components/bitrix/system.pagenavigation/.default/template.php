@@ -26,7 +26,7 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?" . $arResult["N
 
     <? if ($arResult["NavPageNomer"] > 1): ?>
         <a href="<?= $arResult["sUrlPath"] ?>?<?= $strNavQueryString ?>PAGEN_<?= $arResult["NavNum"] ?>=<?= ($arResult["NavPageNomer"] - 1) ?>#rating-center"
-           class="rating-center__items_bottom-arrow"><img src="/upload/rating/pagin-arrow-left.svg" alt="img"></a>
+           class="rating-center__items_bottom-arrow" data-href="<?=$arResult["NavPageNomer"] - 1?>"><img src="/upload/rating/pagin-arrow-left.svg" alt="img"></a>
     <? else: ?>
         <a style="pointer-events: none" class="rating-center__items_bottom-arrow"><img
                     src="/upload/rating/pagin-arrow-left.svg" alt="img"></a>
@@ -39,7 +39,7 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?" . $arResult["N
             <? elseif ($arResult["nStartPage"] == 1 && $arResult["bSavePage"] == false): ?>
                 <a href="<?= $arResult["sUrlPath"] ?><?= $strNavQueryStringFull ?>#rating-center"><?= $arResult["nStartPage"] ?></a>
             <? else: ?>
-                <a href="<?= $arResult["sUrlPath"] ?>?<?= $strNavQueryString ?>PAGEN_<?= $arResult["NavNum"] ?>=<?= $arResult["nStartPage"] ?>#rating-center"><?= $arResult["nStartPage"] ?></a>
+                <a href="<?= $arResult["sUrlPath"] ?>?<?= $strNavQueryString ?>PAGEN_<?= $arResult["NavNum"] ?>=<?= $arResult["nStartPage"] ?>#rating-center" data-href="<?= $arResult["nStartPage"] ?>"><?= $arResult["nStartPage"] ?></a>
             <? endif ?>
             <? $arResult["nStartPage"]++ ?>
         <? endwhile ?>
@@ -48,7 +48,7 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?" . $arResult["N
     </div>
     <? if ($arResult["NavPageNomer"] < $arResult["NavPageCount"]): ?>
         <a href="<?= $arResult["sUrlPath"] ?>?<?= $strNavQueryString ?>PAGEN_<?= $arResult["NavNum"] ?>=<?= ($arResult["NavPageNomer"] + 1) ?>#rating-center"
-           class="rating-center__items_bottom-arrow"><img src="/upload/rating/pagin-arrow-right.svg" alt="img"></a>
+           class="rating-center__items_bottom-arrow" data-href="<?=$arResult["NavPageNomer"] + 1?>"><img src="/upload/rating/pagin-arrow-right.svg" alt="img"></a>
     <? else: ?>
         <a style="pointer-events: none" href="#rating-center"
            class="rating-center__items_bottom-arrow"><img src="/upload/rating/pagin-arrow-right.svg" alt="img"></a>

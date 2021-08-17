@@ -1,1479 +1,326 @@
-<?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-if ($_GET['itd'] == 'y') {
-    echo '<pre>';
-    print_r($arResult);
-    echo '</pre>';
-    die();
-}
-?>
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
 <section id="reviews__form" class="reviews__form">
 
     <!-- form--top -->
     <h2>Узнаем, что говорят люди об охранных компаниях</h2>
-    <div class="reviews__form-top">
-        <form>
-            <div class="pseudo__search">
-                <p class="text">Найдите компании по названию</p>
-                <input type="text" class="form__control" placeholder="Найти компанию">
+    <div class="rating-center__search rating-block">
+        <div class="rating-center__search_item item-one">
+            <div class="rating-center__search_item-title">
+                Город
             </div>
-            <div class="pseudo__range">
-                <p class="text">Найдите компании по рейтингу <span class="pseudo__range-text__select">Все</span></p>
-                <input type="range" id="pseudo__range" min="0" max="10" step="1" value="1">
-            </div>
-            <div class="reviews__form-top--hidden ">
-                <div class="close__btn-top close-js">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                fill="#005DFF"/>
+            <div class="rating-center__search_form select-city">
+                <button class="rating-center__search_form-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21L11.3254 21.7382L12 22.3546L12.6746 21.7382L12 21ZM12 21C12.6746 21.7382 12.6747 21.7381 12.6749 21.7379L12.6754 21.7374L12.677 21.736L12.6819 21.7315L12.6991 21.7156C12.7139 21.7019 12.7351 21.6822 12.7623 21.6567C12.8168 21.6057 12.8953 21.5314 12.9946 21.4358C13.1929 21.2447 13.4743 20.9681 13.811 20.6215C14.4833 19.9294 15.382 18.9526 16.2834 17.8165C17.1823 16.6834 18.0998 15.372 18.7964 14.0109C19.4871 12.6615 20 11.1878 20 9.75C20 7.6826 19.148 5.70756 17.6439 4.25718C16.141 2.80801 14.1102 2 12 2C9.88977 2 7.85897 2.80801 6.35612 4.25718C4.85203 5.70755 4 7.6826 4 9.75C4 11.1878 4.51291 12.6615 5.20357 14.0109C5.90021 15.372 6.8177 16.6834 7.7166 17.8165C8.61795 18.9526 9.51668 19.9294 10.189 20.6215C10.5257 20.9681 10.8071 21.2447 11.0054 21.4358C11.1047 21.5314 11.1832 21.6057 11.2377 21.6567C11.2649 21.6822 11.2861 21.7019 11.3009 21.7156L11.3181 21.7315L11.323 21.736L11.3246 21.7374L11.3251 21.7379C11.3253 21.7381 11.3254 21.7382 12 21ZM12 12.125C11.3255 12.125 10.6855 11.8663 10.2193 11.4166C9.75422 10.9682 9.5 10.3679 9.5 9.75C9.5 9.13209 9.75422 8.5318 10.2193 8.08336C10.6855 7.63373 11.3255 7.375 12 7.375C12.6745 7.375 13.3145 7.63373 13.7807 8.08336C14.2458 8.5318 14.5 9.13209 14.5 9.75C14.5 10.3679 14.2458 10.9682 13.7807 11.4166C13.3145 11.8663 12.6745 12.125 12 12.125Z"
+                              stroke="#005DFF" stroke-width="2"/>
                     </svg>
+                </button>
+                <div class="rating-center__search_form-input rating-center__search_form-select">
+                    <input type="text" data-pre-id="<?= $arResult['CITY_SELECTED']['ID'] ?>"
+                           data-id="<?= $arResult['CITY_SELECTED']['ID'] ?>"
+                           placeholder="<?= $arResult['CITY_SELECTED']['NAME'] ?>">
                 </div>
-                <div class="left">
-                    <p>Город</p>
-                    <div class="left__filter_city">
-                        <input id="filter_city-js" type="text" placeholder="Введите город" value="">
+                <div class="searchForm__modal cities-select">
+                    <div class="searchForm__modal_closed">
+                        <img src="/upload/rating/closed-icon.svg" alt="img">
                     </div>
-                    <div>
-                        <ul class="left__filter_city-items">
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Москва</span>
-                                </label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Орел</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Воркута</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Новосибирск</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Севастополь</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Ростов-на-Дону</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Пенза</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Петропавловск-Камчатский</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Алупка</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Алушта</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Симферополь</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Таганрг</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Псков</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Звенигород</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Рига</span></label></li>
-                            <li><label>
-                                    <input type="checkbox">
-                                    <span class="text">Рим</span></label></li>
-                        </ul>
+                    <div class="searchForm__modal_input">
+                        <input type="text" id="filterCity" placeholder="Поиск по названию">
+                        <button>
+                            <img src="/upload/rating/search-icon.svg" alt="img">
+                        </button>
+                    </div>
+                    <div class="searchForm__modal_wrapper">
+                        <div class="searchForm__modal_topChek actived">
+                            <div class="searchForm__modal_item bottomChekItem">
+                                <input type="checkbox" class="checkbox">
+                                <span data-id="<?= $arResult['CITY_SELECTED']['ID'] ?>"
+                                      class="itemText"><?= $arResult['CITY_SELECTED']['NAME'] ?></span>
+                            </div>
+                        </div>
+                        <div class="searchForm__modal_centerChek">
+                        </div>
+                        <div class="searchForm__modal_bottomChek">
+                            <? foreach ($arResult['CITIES'] as $item): ?>
+                                <div class="searchForm__modal_item bottomChekItem">
+                                    <input type="checkbox" class="checkbox">
+                                    <span data-id="<?= $item['ID'] ?>" class="itemText"><?= $item['NAME'] ?></span>
+                                </div>
+                            <? endforeach; ?>
+                        </div>
                     </div>
                 </div>
-                <div class="center">
-                    <p>Компании, которые есть в <a href="">Рейтинге Репутаций</a></p>
-                    <div class="center__overflow">
-                        <div class="center__selected">
-                            <span>Выбраны</span>
-                        </div>
-                        <div class="center__top_in">
-                            <span>Топ-3</span>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">4</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Сальса Чача Классно</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">10</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Василиск Секьюрити</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">9</span>
-                                    </span>
-                            </label>
-                        </div>
-                        <div class="center__not_selected">
-                            <span>Не выбраны</span>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">4</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Сальса Чача Классно</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">14</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Василиск Секьюрити</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">4</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">24</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Сальса Чача Классно</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">4</span>
-                                    </span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span>
-                                        <span class="text">Василиск Секьюрити</span>
-                                        <span class="icon">
-                                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                                      fill="white"/>
-                                            </svg>
-                                        </span>
-                                        <span class="raiting__number">42</span>
-                                    </span>
-                            </label>
-                        </div>
-                    </div>
-                    <label class="selected__all_item">
-                        <input type="checkbox" id="center__all_item-js">
-                        <span class="text">Выбрать все</span>
-                    </label>
-                    <a class="raiting__reputation" href="">Что такое Рейтинг Репутации</a>
-                </div>
-                <div class="right">
-                    <p>Другие компании</p>
-                    <div class="right__overflow">
-                        <div class="right__top">
-                            <span>Выбраны</span>
-                        </div>
-                        <div class="right__bottom">
-                            <span>Не выбраны</span>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Сармизегетуза”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">Василиск Секьюрити</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Оракул”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Сармизегетуза”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">Василиск Секьюрити</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Оракул”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Оракул”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Оракул”</span>
-                            </label>
-                            <label class="center__selected-label">
-                                <input class="input" type="checkbox" name="company_in_raiting">
-                                <span class="text">ООО “Оракул”</span>
-                            </label>
-                        </div>
-                    </div>
-                    <label class="selected__all_item">
-                        <input type="checkbox" id="right__all_item-js">
-                        <span class="text">Выбрать все</span>
-                    </label>
-                    <a class="raiting__reputation" href="">Почему этих компаний нет в Рейтинге</a>
-                </div>
-                <div class="reviews__form-top--submit">
-                    <input type="submit" value="смотреть отзывы по выбранным">
-                </div>
-                <span class="close__btn-bottom close-js">Закрыть</span>
             </div>
-        </form>
+        </div>
+        <div class="rating-center__search_item item-two">
+            <div class="rating-center__search_item-title">
+                Найдите отзывы по названию компании
+            </div>
+            <div class="rating-center__search_form select-company">
+                <button class="rating-center__search_form-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 21L16.7501 16.7425L21 21ZM19.1053 11.0526C19.1053 13.1883 18.2569 15.2365 16.7467 16.7467C15.2365 18.2569 13.1883 19.1053 11.0526 19.1053C8.91694 19.1053 6.86872 18.2569 5.35856 16.7467C3.8484 15.2365 3 13.1883 3 11.0526C3 8.91694 3.8484 6.86872 5.35856 5.35856C6.86872 3.8484 8.91694 3 11.0526 3C13.1883 3 15.2365 3.8484 16.7467 5.35856C18.2569 6.86872 19.1053 8.91694 19.1053 11.0526V11.0526Z"
+                              stroke="#93B6FF" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="rating-center__search_form-select">
+                    <input type="text" placeholder="Найти компанию">
+                </div>
+                <div class="searchForm__modal companies-select">
+                    <div class="searchForm__modal_closed">
+                        <img src="/upload/rating/closed-icon.svg" alt="img">
+                    </div>
+                    <div class="searchForm__modal_input">
+                        <input type="text" id="filterCity" placeholder="Поиск по названию">
+                        <button>
+                            <img src="/upload/rating/search-icon.svg" alt="img">
+                        </button>
+                    </div>
+                    <div class="searchForm__modal_wrapper">
+                        <div class="searchForm__modal_topChek active">
+                        </div>
+                        <div class="searchForm__modal_centerChek">
+                        </div>
+                        <div class="searchForm__modal_bottomChek">
+                            <? foreach ($arResult['CITY_COMPANIES'] as $item): ?>
+                                <div class="searchForm__modal_item bottomChekItem">
+                                    <input type="checkbox" class="checkbox">
+                                    <span data-id="<?= $item['ID'] ?>" data-count="<?=count($item['REVIEWS'])?>" class="itemText"><?= $item['NAME'] ?></span>
+                                </div>
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p class="text text-js">Вы смотрите отзывы о всех компаниях в городе <span>Ростов-на-Дону</span></p>
-    <!-- form--top end-->
+    <div class="rating-center__items rating-block">
+        <div class="rating-center__items_top">
+            <div class="rating-center__items_top-left t-c-gray">
 
-    <!-- form--result -->
-    <div class="reviews__form-top--result">
-        <form>
-            <ul class="result__tabs">
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
+            </div>
+            <div class="rating-center__items_top-right-help">
+                <div class="rating-center__items_top-center t-c-gray">
+                    <div class="rating-center__items_top-name rating-check-window">Смотреть в рейтинге у кого купить
+                        охрану для
+                        <span class="icon-open-info-block">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303298 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86156 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90713 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3616 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27993C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25898 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.82941 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
+                                      fill="#93B6FF"/>
+                            </svg>
+                        </span>
+                        <div class="rating-help-window active">
+                            <div class="rating-help-window-close">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
+                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                          fill="#D1DBE3"/>
                                 </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
+
+                            </div>
+                            <div class="rating-help-window-body">
+                                <div class="block-rating-help-item">
+                                    <div class="top-block-rating-help-item" style="color:#000000;">
+                                        <div class="top-block-rating-help-item-title">
+                                            Выберите то, что хотите охранять
+                                        </div>
+                                    </div>
+                                    <div class="content-top-block-rating-help-item">
+                                        При выборе этого фильтра будут показаны компании, услуги которых Вы можете
+                                        заказать на платформе<span
+                                                class="t-c-blue">без наценки и с подарками vincko:</span>
+                                        , а также оформить индивидуальную заявку на рассчет.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="rating-center__items_top-btns">
+                        <? foreach ($arResult['OBJECTS'] as $object): ?>
+                            <div class="rating-center__items_top-btns-item">
+                                <input class="rating-home" type="radio" onclick="clickRadio(this)"
+                                       id="<?= $object['ID'] ?>" name="rating-home">
+                                <label for="<?= $object['ID'] ?>">
+                                    <?= $object['SVG'] ?>
+                                    <?= $object['NAME'] ?>
+                                </label>
+                            </div>
+                        <? endforeach; ?>
+
+                    </div>
+                </div>
+                <div class="rating-center__items_top-right t-c-gray rating-check-window">
+                    <div class="rating-center__items_top-name">Показать компании с оценкой <span
+                                class="icon-open-info-block">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303298 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86156 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90713 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3616 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27993C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25898 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.82941 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
+                                      fill="#93B6FF"/>
+                            </svg>
+                        </span>
+                        <div class="rating-help-window active">
+                            <div class="rating-help-window-close">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
+                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                          fill="#D1DBE3"/>
                                 </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
-                                </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
-                                </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
-                                </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
-                                </svg>
-                            </span>
-                    </p>
-                </li>
-                <li class="result__tab-item">
-                    <input class="input" type="checkbox">
-                    <p>
-                        <span class="text">ООО “Беркут Дефенд Компани”</span>
-                        <span class="icon">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                          fill="white"/>
-                                </svg>
-                            </span>
-                        <span class="raiting__number">4</span>
-                        <span class="result__tab-item--delete delete_btn-js">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
-                                            fill="#005DFF"/>
-                                </svg>
-                            </span>
-                    </p>
-                </li>
-            </ul>
-        </form>
-        <div class="result__tabs--pseudo">
-                <span class="icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="3" cy="8" r="3" fill="#93B6FF"/>
-                        <circle cx="10" cy="8" r="2" fill="#93B6FF"/>
-                        <circle cx="15" cy="8" r="1" fill="#93B6FF"/>
-                    </svg>
-                </span>
-            <a href="">Еще 356</a>
+
+                            </div>
+                            <div class="rating-help-window-body rating-pseudo-help">
+
+                                <div class="top-block-rating-help-item" style="color:#000000;">
+                                    <div class="top-block-rating-help-item-title">
+                                        <span class="t-c-blue">Репутационный рейтинг</span><span>охранных компаний</span>
+                                    </div>
+                                </div>
+                                <div class="content-top-block-rating-help-item border-bottom">
+                                    Оценивание производится по<br/>5-балльной шкале, где:
+                                    <div class="content-top-block-rating-help-item-rating-panel">
+                                        <div class="content-top-block-rating-help-item-rating-panel-left">
+                                            <div class="content-top-block-rating-help-item-rating-panel-left-top">
+                                                <span>5,0</span>
+                                            </div>
+                                            <div class="content-top-block-rating-help-item-rating-panel-left-bottom">
+                                                <svg width="42" height="10" viewBox="0 0 42 10" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M4.25313 9.79202H2.22132L0 3.48146V2.59326H1.1992L3.24343 8.40071L5.31874 2.59326H6.51794V3.3945L4.25313 9.79202Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M9.44242 2.59326H8.01953V9.79202H9.44242V2.59326Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M16.0331 9.79202V5.94109C16.0331 4.86034 15.1011 4.01562 14.0479 4.01562H12.5225V9.79202H11.0996V2.59326H14.0479C15.856 2.59326 17.456 4.0591 17.456 5.94109V9.79202H16.0331Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M24.3865 4.01562H21.9819C20.9007 4.01562 20.0557 4.9473 20.0557 6.00009V7.52494L18.6328 6.00009C18.6328 4.19264 20.0992 2.59326 21.9819 2.59326H24.3865V4.01562Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M24.3865 9.79193H21.9819C20.0992 9.79193 18.6328 8.19255 18.6328 6.38509V6L20.0557 6.38509C20.0557 7.43789 20.9007 8.36957 21.9819 8.36957H24.3865V9.79193Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M30.3026 9.79193L27.8265 6.94721H27.1866V9.79193H25.7637V0H27.1866V5.47826H27.8265L30.315 2.59317H31.2533V3.57453L29.1003 6.21118L31.2533 8.8354V9.79193H30.3026Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M35.6943 10.0002C33.619 10.0002 32.0625 8.31077 32.0625 6.23624C32.0625 4.16171 33.619 2.48779 35.6943 2.48779C37.7696 2.48779 39.3105 4.16171 39.3105 6.23624C39.3105 8.31077 37.7696 10.0002 35.6943 10.0002ZM35.6943 3.92568C34.405 3.92568 33.5009 4.94742 33.5009 6.23624C33.5009 7.52506 34.405 8.56233 35.6943 8.56233C36.9836 8.56233 37.8721 7.52506 37.8721 6.23624C37.8721 4.94742 36.9836 3.92568 35.6943 3.92568Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M9.44242 0H8.01953V1.42236H9.44242V0Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M41.9991 8.56201H40.5762V9.98437H41.9991V8.56201Z"
+                                                              fill="#005DFF"/>
+                                                        <path d="M41.9991 3.33252H40.5762V4.75488H41.9991V3.33252Z"
+                                                              fill="#005DFF"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="42" height="10" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+
+                                            </div>
+                                        </div>
+                                        <div class="content-top-block-rating-help-item-rating-panel-right">
+                                            <div class="content-top-block-rating-help-item-rating-panel-right-block">
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-left">
+                                                    0,0 - 1,7
+                                                </div>
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-right t-c-red">
+                                                    Низкая оценка
+                                                </div>
+                                            </div>
+                                            <div class="content-top-block-rating-help-item-rating-panel-right-block">
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-left">
+                                                    1,8 - 3,3
+                                                </div>
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-right t-c-yellow-d">
+                                                    Средняя оценка
+                                                </div>
+                                            </div>
+                                            <div class="content-top-block-rating-help-item-rating-panel-right-block">
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-left">
+                                                    3,4 - 5,0
+                                                </div>
+                                                <div class="content-top-block-rating-help-item-rating-panel-right-block-right t-c-green">
+                                                    Высокая оценка
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-top-block-rating-help-item">
+                                    Оценки Репутационного рейтинга формируются на основании оценок и отзывов
+                                    клиентов
+                                    охранных компаний
+                                    <a class="link-item" href="#formation">Подробнее о рейтинге</a>
+                                </div>
+
+                                <div class="block-rating-help-item additional-block">
+                                    <div class="top-block-rating-help-item" style="color: #818181;">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.9366 2.05545C18.488 1.96361 19.0075 2.34152 19.09 2.89434L19.5028 5.66178C19.5492 5.97312 19.7395 6.24441 20.0165 6.39405L22.4027 7.68341C22.8715 7.9367 23.0594 8.51308 22.8298 8.99395L21.5986 11.5736C21.4682 11.8467 21.4686 12.1642 21.5995 12.437L22.836 15.0131C23.0676 15.4954 22.8784 16.0746 22.4067 16.3273L19.9984 17.6175C19.7198 17.7668 19.5282 18.0389 19.4816 18.3515L19.0691 21.1171C18.9866 21.6698 18.4673 22.0477 17.9161 21.9561L15.3838 21.5354C15.056 21.4809 14.7225 21.5929 14.4939 21.8342L12.6986 23.7294C12.3027 24.1474 11.6366 24.1456 11.2429 23.7255L9.43739 21.7988C9.20659 21.5525 8.86712 21.4392 8.53468 21.4976L6.04863 21.9343C5.49519 22.0316 4.97032 21.6538 4.88673 21.0982L4.46642 18.3042C4.41967 17.9933 4.22949 17.7226 3.95296 17.5731L1.5886 16.2955C1.1191 16.0418 0.931549 15.4641 1.16249 14.983L2.39958 12.4057C2.53106 12.1318 2.53088 11.813 2.39908 11.5392L1.17249 8.99145C0.941577 8.51181 1.12689 7.93534 1.59405 7.68011L3.98784 6.37224C4.26228 6.2223 4.45077 5.9526 4.49726 5.64334L4.90776 2.91255C4.99127 2.35701 5.51589 1.97925 6.06924 2.0762L8.56509 2.51352C8.89803 2.57186 9.2379 2.45806 9.46858 2.21101L11.273 0.278565C11.6669 -0.143241 12.335 -0.14503 12.7311 0.27466L14.5249 2.17521C14.7536 2.41748 15.0879 2.52997 15.4165 2.47523L17.9366 2.05545Z"
+                                                  fill="#D1DBE3"/>
+                                            <path d="M8.56863 9.2325C8.56691 9.27287 8.57348 9.31316 8.58791 9.3509C8.60235 9.38863 8.62435 9.42302 8.65257 9.45194C8.68079 9.48085 8.71462 9.5037 8.75199 9.51906C8.78936 9.53442 8.82948 9.54197 8.86987 9.54125H9.90113C10.0736 9.54125 10.2111 9.4 10.2336 9.22875C10.3461 8.40875 10.9086 7.81125 11.9111 7.81125C12.7686 7.81125 13.5536 8.24 13.5536 9.27125C13.5536 10.065 13.0861 10.43 12.3474 10.985C11.5061 11.5963 10.8399 12.31 10.8874 13.4688L10.8911 13.74C10.8924 13.822 10.9259 13.9002 10.9844 13.9577C11.0429 14.0153 11.1216 14.0475 11.2036 14.0475H12.2174C12.3003 14.0475 12.3797 14.0146 12.4383 13.956C12.497 13.8974 12.5299 13.8179 12.5299 13.735V13.6038C12.5299 12.7063 12.8711 12.445 13.7924 11.7463C14.5536 11.1675 15.3474 10.525 15.3474 9.17625C15.3474 7.2875 13.7524 6.375 12.0061 6.375C10.4224 6.375 8.68738 7.1125 8.56863 9.2325ZM10.5149 16.4362C10.5149 17.1025 11.0461 17.595 11.7774 17.595C12.5386 17.595 13.0624 17.1025 13.0624 16.4362C13.0624 15.7463 12.5374 15.2613 11.7761 15.2613C11.0461 15.2613 10.5149 15.7463 10.5149 16.4362Z"
+                                                  fill="white"/>
+                                        </svg>
+                                        Компании со статусом <br>
+                                        “Не является партнером vincko:”
+                                    </div>
+                                </div>
+                                <div class="content-top-block-rating-help-item">
+                                    По умолчанию эти компании имеют оценки в Рейтинге 0,0, которые не обязательно
+                                    отражают качество предоставляемых услуг
+                                    <a class="link-item" href="#how__useful">Подробнее о статусах компаний</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-center__items_top-btns">
+                        <div class="pseudo__range">
+                            <p class="text"><span
+                                        class="pseudo__range-text__select"
+                                        style="color: #93B6FF;">Любой</span></p>
+                            <input type="range" id="pseudo__range" min="0" max="10" step="1" value="1"
+                                   class="all">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="reviews__form-top--result__name">
-        <span>Сейчас вы смотрите отзывы о компании:</span>
-        <p><?= $arResult['CURRENT_SECURE_COMPANY']['NAME'] ?></p>
+    <div class="reviews__form-top--result">
+        <ul class="result__tabs">
+
+        </ul>
     </div>
-    <!-- form--result end-->
 
     <div class="reviews__form-send_btn">
         <div class="btn">
             <a href="/review-add/" class="button add_review">
-                    <span class="icon"><svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M18.7183 9.50408C19.6761 8.54631 20.2142 7.24729 20.2142 5.89279C20.2142 4.53829 19.6761 3.23927 18.7183 2.28149C17.7605 1.32372 16.4615 0.785645 15.107 0.785645C13.7525 0.785645 12.4535 1.32372 11.4957 2.28149C10.538 3.23927 9.99988 4.53829 9.99988 5.89279C9.99988 7.24729 10.538 8.54631 11.4957 9.50408C12.4535 10.4619 13.7525 10.9999 15.107 10.9999C16.4615 10.9999 17.7605 10.4619 18.7183 9.50408ZM15.3848 2.47214C15.4585 2.54581 15.4999 2.64574 15.4999 2.74993V5.49993H18.2499C18.3541 5.49993 18.454 5.54132 18.5277 5.615C18.6013 5.68867 18.6427 5.7886 18.6427 5.89279C18.6427 5.99698 18.6013 6.0969 18.5277 6.17058C18.454 6.24425 18.3541 6.28564 18.2499 6.28564H15.4999V9.03564C15.4999 9.13984 15.4585 9.23976 15.3848 9.31344C15.3111 9.38711 15.2112 9.4285 15.107 9.4285C15.0028 9.4285 14.9029 9.38711 14.8292 9.31344C14.7556 9.23976 14.7142 9.13984 14.7142 9.03564V6.28564H11.9642C11.86 6.28564 11.76 6.24425 11.6864 6.17058C11.6127 6.0969 11.5713 5.99698 11.5713 5.89279C11.5713 5.7886 11.6127 5.68867 11.6864 5.615C11.76 5.54132 11.86 5.49993 11.9642 5.49993H14.7142V2.74993C14.7142 2.64574 14.7556 2.54581 14.8292 2.47214C14.9029 2.39846 15.0028 2.35707 15.107 2.35707C15.2112 2.35707 15.3111 2.39846 15.3848 2.47214ZM18.2499 10.8782V13.5536C18.2499 14.0225 18.0636 14.4721 17.7321 14.8037C17.4005 15.1352 16.9509 15.3215 16.482 15.3215H11.433L5.98957 19.2485C5.85915 19.3427 5.67843 19.2492 5.67843 19.0897V15.3215H3.51772C3.04885 15.3215 2.59919 15.1352 2.26765 14.8037C1.93612 14.4721 1.74986 14.0225 1.74986 13.5536V5.30361C1.74986 4.83474 1.93612 4.38508 2.26765 4.05354C2.59919 3.72201 3.04885 3.53575 3.51772 3.53575H9.70443C9.88735 3.11751 10.1183 2.722 10.3927 2.35718H3.51772C2.73628 2.35718 1.98684 2.6676 1.43428 3.22017C0.881715 3.77273 0.571289 4.52216 0.571289 5.30361V13.5536C0.571289 14.335 0.881715 15.0845 1.43428 15.637C1.98684 16.1896 2.73628 16.5 3.51772 16.5H4.49986V19.089C4.49986 20.211 5.76958 20.8607 6.67943 20.2047L11.8141 16.5H16.482C17.2633 16.5 18.0126 16.1897 18.5652 15.6373C19.1177 15.0849 19.4282 14.3357 19.4284 13.5544V9.90003C19.0796 10.2758 18.6834 10.6046 18.2499 10.8782Z"
-                                  fill="white"/>
-                        </svg></span>Оставить свой отзыв</a>
+                <span class="icon">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.7183 9.50408C19.6761 8.54631 20.2142 7.24729 20.2142 5.89279C20.2142 4.53829 19.6761 3.23927 18.7183 2.28149C17.7605 1.32372 16.4615 0.785645 15.107 0.785645C13.7525 0.785645 12.4535 1.32372 11.4957 2.28149C10.538 3.23927 9.99988 4.53829 9.99988 5.89279C9.99988 7.24729 10.538 8.54631 11.4957 9.50408C12.4535 10.4619 13.7525 10.9999 15.107 10.9999C16.4615 10.9999 17.7605 10.4619 18.7183 9.50408ZM15.3848 2.47214C15.4585 2.54581 15.4999 2.64574 15.4999 2.74993V5.49993H18.2499C18.3541 5.49993 18.454 5.54132 18.5277 5.615C18.6013 5.68867 18.6427 5.7886 18.6427 5.89279C18.6427 5.99698 18.6013 6.0969 18.5277 6.17058C18.454 6.24425 18.3541 6.28564 18.2499 6.28564H15.4999V9.03564C15.4999 9.13984 15.4585 9.23976 15.3848 9.31344C15.3111 9.38711 15.2112 9.4285 15.107 9.4285C15.0028 9.4285 14.9029 9.38711 14.8292 9.31344C14.7556 9.23976 14.7142 9.13984 14.7142 9.03564V6.28564H11.9642C11.86 6.28564 11.76 6.24425 11.6864 6.17058C11.6127 6.0969 11.5713 5.99698 11.5713 5.89279C11.5713 5.7886 11.6127 5.68867 11.6864 5.615C11.76 5.54132 11.86 5.49993 11.9642 5.49993H14.7142V2.74993C14.7142 2.64574 14.7556 2.54581 14.8292 2.47214C14.9029 2.39846 15.0028 2.35707 15.107 2.35707C15.2112 2.35707 15.3111 2.39846 15.3848 2.47214ZM18.2499 10.8782V13.5536C18.2499 14.0225 18.0636 14.4721 17.7321 14.8037C17.4005 15.1352 16.9509 15.3215 16.482 15.3215H11.433L5.98957 19.2485C5.85915 19.3427 5.67843 19.2492 5.67843 19.0897V15.3215H3.51772C3.04885 15.3215 2.59919 15.1352 2.26765 14.8037C1.93612 14.4721 1.74986 14.0225 1.74986 13.5536V5.30361C1.74986 4.83474 1.93612 4.38508 2.26765 4.05354C2.59919 3.72201 3.04885 3.53575 3.51772 3.53575H9.70443C9.88735 3.11751 10.1183 2.722 10.3927 2.35718H3.51772C2.73628 2.35718 1.98684 2.6676 1.43428 3.22017C0.881715 3.77273 0.571289 4.52216 0.571289 5.30361V13.5536C0.571289 14.335 0.881715 15.0845 1.43428 15.637C1.98684 16.1896 2.73628 16.5 3.51772 16.5H4.49986V19.089C4.49986 20.211 5.76958 20.8607 6.67943 20.2047L11.8141 16.5H16.482C17.2633 16.5 18.0126 16.1897 18.5652 15.6373C19.1177 15.0849 19.4282 14.3357 19.4284 13.5544V9.90003C19.0796 10.2758 18.6834 10.6046 18.2499 10.8782Z" fill="white"/>
+                    </svg>
+                </span>
+                <span>Оставить свой отзыв</span>
+            </a>
         </div>
-        <? /*<div class="sort__form">
-            <p>Показать отзывы</p>
-            <form>
+        <div class="sort__form">
                 <select data-select-sort class="sort__form-select-js">
-                    <option value="0">Сначала положительные</option>
-                    <option value="1">Сначала отрицательные</option>
-                    <option value="2">От новых к старым</option>
-                    <option value="3">От старых к новым</option>
+                    <option value="0" hidden>Сортировка не выбрана</option>
+                    <option value="1">Сначала положительные</option>
+                    <option value="2">Сначала отрицательные</option>
                 </select>
-            </form>
-        </div>*/ ?>
-    </div>
-
-    <!-- reviews__items -->
-    <ul class="reviews__items">
-        <? foreach ($arResult['rows'] as $row): ?>
-        <?$currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME'];?>
-            <li class="reviews__item <?=$currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
-                <div class="reviews__item-left">
-                    <div class="reviews__item__head">
-                        <div class="reviews__item__head--left">
-                            <div class="person__avatar">
-                                <img src="/upload/reviews/avatar.png" alt="img">
-                            </div>
-                            <div class="person__items">
-                                <? if ($currentSourceName == "Vincko"): ?>
-                                    <span class="name"><?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['NAME'] ?> <?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['LAST_NAME'] ?></span>
-                                <? else: ?>
-                                    <span class="name"><?= $row['UF_USER_NAME'] ?></span>
-                                <? endif; ?>
-                                <span class="town"><?= $arResult['CITIES'][$row['UF_CITY_ID']]['NAME'] ?></span>
-                                <? /*<div class="client"><span class="text">покупатель</span>
-                                <span class="icon">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86156 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90713 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3616 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27993C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25898 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.82941 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                fill="#93B5FF" />
-                                        </svg>
-                                    </span>
-                                <div class="client__icon-pseudo">
-                                    <p>Это отзыв покупателя платформы <a href="">vincko:</a></p>
-                                    <p> Преимущество <a href="">vincko:</a> отзыва перед остальными в том, что он
-                                        оставлен
-                                        <span>реальным пользователем платформы</span> и содержит информацию о
-                                        настоящем
-                                        опыте сотрудничества с компанией.
-                                    </p>
-                                </div>
-                            </div>*/ ?>
-                            </div>
-                        </div>
-                        <div class="reviews__item__head--right">
-                            <p>Личная оценка по критериям <a href="">vincko:</a></p>
-                            <div class="raiting__content">
-                                <ul class="raiting__vincko">
-                                    <? foreach ($arResult['CRITERIA'] as $criteria): ?>
-                                        <? if ($row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']]!=-1): ?>
-                                            <li><span class="icon">
-                                      <img src="<?= $criteria['ICON']['src'] ?>" alt="<?= $criteria['NAME'] ?>">
-                                        </span><span class="text"><?= $row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']] ?></span>
-                                            </li>
-                                        <? endif; ?>
-                                    <? endforeach; ?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reviews__item__body">
-                        <div class="reviews__item__body--top">
-                            <? if (!empty($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'])): ?>
-                                <span>Общее впечатление: </span>
-                                <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
-                            <? endif; ?>
-                        </div>
-                        <div class="reviews__item__body--center">
-                            <? if (!empty($row['UF_CUSTOMER_FOCUS_COMMENT'])): ?>
-                                <span>Клиентоориентированность: </span>
-                                <p><?= $row['UF_CUSTOMER_FOCUS_COMMENT'] ?></p>
-                            <? endif; ?>
-                            <? if (!empty($row['UF_SECURITY_SCORE_COMMENT'])): ?>
-                                <span>Безопасность: </span>
-                                <p><?= $row['UF_SECURITY_SCORE_COMMENT'] ?></p>
-                            <? endif; ?>
-                            <? if (!empty($row['UF_COMFORT_SCORE_COMMENT'])): ?>
-                                <span>Комфорт: </span>
-                                <p><?= $row['UF_COMFORT_SCORE_COMMENT'] ?></p>
-                            <? endif; ?>
-                            <? if (!empty($arResult['ReviewsScores'])): ?>
-                                <? foreach ($arResult['ReviewsScores'] as $reviewsScore): ?>
-                                    <? if ($row['ID'] == $reviewsScore['UF_REVIEW_ID']): ?>
-                                        <span><?= $arResult['CRITERIA_QUESTIONS'][$reviewsScore['UF_QUESTION_ID']]['NAME'] ?></span>
-                                        <p><?= $reviewsScore['UF_REVIEW_SCORE_COMMENT'] ?></p>
-                                    <? endif; ?>
-                                <? endforeach; ?>
-                            <? endif; ?>
-                        </div>
-                        <? /*<div class="reviews__item__body--bottom">
-                        <div class="dignity">
-                            <span>Достоинства</span>
-                            <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
-                            </p>
-                        </div>
-                        <div class="disadvantages">
-                            <span>Недостатки</span>
-                            <p>Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и
-                                перешагнул
-                                в электронный дизайн.</p>
-                        </div>
-                    </div>*/ ?>
-                    </div>
-                    <div class="reviews__item__comments">
-                        <div class="reviews__item__comments-top">
-                            <div class="right">
-                                <span class="add__new_comment-js">Написать комментарий</span>
-                                <span class="comments__close_btn-js">Вернуться к отзыву</span>
-                            </div>
-                            <div class="add__new_comment-form">
-                                <span class="add__new_comment-form--head">Выскажите свое мнение</span>
-                                <form>
-                                    <textarea placeholder="Ваш Комментарий"></textarea>
-                                    <input type="submit" value="Отправить">
-                                </form>
-                            </div>
-                            <div class="left">
-                                <p><span class="text">Комментарии к отзыву</span>
-                                    <span class="icon">
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                    d="M2.99956 9.86879C2.86651 9.9734 2.70026 10.0181 2.5366 9.9933C2.37295 9.96849 2.22496 9.87614 2.12451 9.73612C2.04398 9.62296 2.0003 9.48485 2.00013 9.34278V7.89476H1.6251C0.727546 7.89476 4.0243e-07 7.12875 4.0243e-07 6.18407V1.71069C-0.000624637 0.766009 0.726921 0 1.62448 0H8.3749C9.27245 0 10 0.766009 10 1.71069V6.18407C10 7.12942 9.27245 7.89476 8.3749 7.89476H5.50597L2.99956 9.86879Z"
-                                                    fill="#005DFF"/>
-                                        </svg>
-                                    </span>
-                                    <span class="result">150</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="reviews__item__comments-body">
-                            <ul class="comments__items">
-                                <li class="comments__item">
-                                    <div class="comments__item__head">
-                                        <div class="comments__item__head--left">
-                                            <div class="person__avatar">
-                                                <img src="../img/reviews/avatar.png" alt="img">
-                                                <div class="person__avatar-btn ">
-                                                    <span class="icon ">
-                                                        <svg width="4" height="16" viewBox="0 0 4 16" fill="none"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                    d="M2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z"
-                                                                    fill="#818181"/>
-                                                        </svg>
-                                                    </span>
-                                                    <span class="text ">
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M6.57947 18.9855C6.83153 18.9473 7.06758 18.8352 7.2594 18.6627L11.4048 14.9295H15.6165C16.0609 14.9295 16.5008 14.8395 16.9113 14.6645C17.3218 14.4894 17.6948 14.2329 18.009 13.9096C18.3232 13.5862 18.5724 13.2023 18.7425 12.7798C18.9125 12.3573 19 11.9045 19 11.4472V4.48238C19 3.5588 18.6435 2.67304 18.009 2.01997C17.3745 1.36689 16.5139 1 15.6165 1H4.38346C3.48611 1 2.62551 1.36689 1.99099 2.01997C1.35647 2.67304 1 3.5588 1 4.48238V11.4472C1 11.9045 1.08752 12.3573 1.25755 12.7798C1.42759 13.2023 1.67681 13.5862 1.99099 13.9096C2.62551 14.5626 3.48611 14.9295 4.38346 14.9295H5.06015V17.6347C5.0601 17.8969 5.13344 18.1536 5.27138 18.374C5.40933 18.5945 5.60605 18.7694 5.83803 18.8778C6.07 18.9863 6.32741 19.0236 6.57947 18.9855ZM15.6165 15.9295H11.7887L7.92826 19.406C7.59297 19.7077 7.17702 19.9064 6.72915 19.9742C6.28113 20.042 5.82439 19.9753 5.41457 19.7837C5.00507 19.5923 4.66218 19.2857 4.42366 18.9045C4.18533 18.5236 4.0601 18.0826 4.06015 17.6345V15.9173C3.00738 15.8378 2.01772 15.3721 1.27377 14.6064C0.868154 14.1889 0.547875 13.6949 0.329859 13.1531C0.11186 12.6115 0 12.0319 0 11.4472V4.48238C0 3.30273 0.455032 2.1658 1.27377 1.32312C2.09346 0.479463 3.21144 0 4.38346 0H15.6165C16.7886 0 17.9065 0.479464 18.7262 1.32312C19.545 2.1658 20 3.30273 20 4.48238V11.4472C20 12.0318 19.8881 12.6115 19.6701 13.1531C19.4521 13.6949 19.1318 14.1889 18.7262 14.6064C18.3206 15.024 17.8374 15.3567 17.3035 15.5843C16.7696 15.812 16.1963 15.9295 15.6165 15.9295ZM10.6765 9H9.32353L9 5.69653V3H11V5.69653L10.6765 9ZM9 11H11V13H9V11Z"
-                                                                  fill="#FF5252"/>
-                                                        </svg>
-                                                        <a href="" data-modal-target="#modal__complaint">Оставить жалобу
-                                                            на отзыв</a>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person__items">
-                                                <span class="name">Владимир С.</span>
-                                                <span class="town">Ростов-на-Дону</span>
-                                                <span class="client"><span class="text">покупатель</span>
-                                                    <span class="review__date">20.05.2021</span>
-                                                    <span class="review__time">16:57</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="comments__item__head--rigth">
-                                            <span class="send__to">
-                                                <span class="icon"><svg width="15" height="14" viewBox="0 0 15 14"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                                d="M14.44 14.0001C14.351 14.0013 14.2634 13.9788 14.186 13.9348C14.1087 13.8909 14.0444 13.8271 14 13.7501C13.334 12.6156 12.3849 11.6736 11.2455 11.0162C10.106 10.3589 8.8154 10.0087 7.49997 10.0001V13.0001C7.49948 13.0988 7.46978 13.1951 7.41461 13.277C7.35944 13.3589 7.28128 13.4226 7.18997 13.4601C7.09891 13.4984 6.99856 13.5088 6.90156 13.4901C6.80457 13.4714 6.71528 13.4244 6.64497 13.3551L0.644969 7.35507C0.598105 7.30859 0.560908 7.25329 0.535524 7.19236C0.510139 7.13143 0.49707 7.06608 0.49707 7.00007C0.49707 6.93406 0.510139 6.86871 0.535524 6.80778C0.560908 6.74685 0.598105 6.69155 0.644969 6.64507L6.64497 0.64507C6.71528 0.575691 6.80457 0.528693 6.90156 0.510006C6.99856 0.491319 7.09891 0.50178 7.18997 0.54007C7.28128 0.57758 7.35944 0.641279 7.41461 0.723139C7.46978 0.804999 7.49948 0.901357 7.49997 1.00007V4.05507C9.56857 4.32076 11.47 5.32954 12.8499 6.8934C14.2297 8.45725 14.9939 10.4695 15 12.5551C14.9988 12.8894 14.9771 13.2234 14.935 13.5551C14.9225 13.6591 14.8776 13.7566 14.8068 13.8337C14.7359 13.9109 14.6426 13.9638 14.54 13.9851L14.44 14.0001ZM7.24997 9.00007C8.52517 8.98176 9.78915 9.24052 10.9546 9.75848C12.12 10.2764 13.159 11.0413 14 12.0001C13.8495 10.1863 13.0578 8.48539 11.7667 7.20256C10.4756 5.91973 8.76971 5.13887 6.95497 5.00007C6.83031 4.98881 6.71441 4.93119 6.63016 4.83862C6.54592 4.74604 6.49946 4.62524 6.49997 4.50007V2.20507L1.70497 7.00007L6.49997 11.7951V9.50007C6.49997 9.36746 6.55265 9.24028 6.64642 9.14652C6.74018 9.05275 6.86736 9.00007 6.99997 9.00007H7.26997H7.24997Z"
-                                                                fill="#D1DBE3"/>
-                                                    </svg>
-                                                </span>
-                                                <span class="text">Ответить</span>
-                                            </span>
-                                            <span class="icon source">
-                                                <a href="">
-                                                    <img src="../img/reviews/vincon__icon.svg" alt="img">
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="comments__item__body">
-                                        <div class="comments__item__body-content">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Consequuntur,
-                                                odit?
-                                                Ullam vitae dolore suscipit asperiores corrupti earum dolorum
-                                                repellendus
-                                                veritatis obcaecati. Velit perferendis qui repellendus incidunt sunt
-                                                numquam
-                                                delectus voluptatibus!</p>
-                                        </div>
-                                    </div>
-                                    <div class="comments__item__reply">
-                                        <span class="comments__item__reply-close_btn">Закрыть<span class="icon"><svg
-                                                        width="13" height="12" viewBox="0 0 13 12" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                            d="M7.38173 5.9864L12.3557 1.0257C12.454 0.911231 12.5054 0.76398 12.4996 0.613378C12.4937 0.462776 12.4311 0.319916 12.3243 0.213345C12.2174 0.106774 12.0742 0.0443419 11.9232 0.0385248C11.7722 0.0327077 11.6245 0.0839342 11.5097 0.181967L6.53573 5.14266L1.56173 0.175983C1.44874 0.063303 1.29551 0 1.13573 0C0.975945 0 0.822708 0.063303 0.709726 0.175983C0.596744 0.288663 0.533271 0.44149 0.533271 0.600844C0.533271 0.760197 0.596744 0.913024 0.709726 1.0257L5.68973 5.9864L0.709726 10.9471C0.646917 11.0007 0.595905 11.0668 0.559891 11.141C0.523877 11.2152 0.503639 11.2961 0.500447 11.3785C0.497255 11.4609 0.511179 11.5431 0.541343 11.6199C0.571508 11.6967 0.617263 11.7664 0.675736 11.8247C0.734209 11.8831 0.804137 11.9287 0.881132 11.9588C0.958127 11.9889 1.04053 12.0027 1.12316 11.9996C1.20579 11.9964 1.28687 11.9762 1.36131 11.9403C1.43575 11.9044 1.50194 11.8535 1.55573 11.7908L6.53573 6.83014L11.5097 11.7908C11.6245 11.8889 11.7722 11.9401 11.9232 11.9343C12.0742 11.9285 12.2174 11.866 12.3243 11.7595C12.4311 11.6529 12.4937 11.51 12.4996 11.3594C12.5054 11.2088 12.454 11.0616 12.3557 10.9471L7.38173 5.9864Z"
-                                                            fill="#A0A0A0"/>
-                                                </svg></span></span>
-                                        <form>
-                                            <textarea placeholder="Ваш ответ"></textarea>
-                                            <input type="submit" value="Отправить">
-                                        </form>
-                                    </div>
-                                    <ul class="comments__items sub_items">
-                                        <li class="comments__item">
-                                            <div class="comments__item__head">
-                                                <div class="comments__item__head--left">
-                                                    <div class="person__avatar">
-                                                        <img src="../img/reviews/avatar.png" alt="img">
-                                                        <div class="person__avatar-btn ">
-                                                            <span class="icon ">
-                                                                <svg width="4" height="16" viewBox="0 0 4 16"
-                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                            d="M2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z"
-                                                                            fill="#818181"/>
-                                                                </svg>
-                                                            </span>
-                                                            <span class="text ">
-                                                                <svg width="20" height="20" viewBox="0 0 20 20"
-                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                          d="M6.57947 18.9855C6.83153 18.9473 7.06758 18.8352 7.2594 18.6627L11.4048 14.9295H15.6165C16.0609 14.9295 16.5008 14.8395 16.9113 14.6645C17.3218 14.4894 17.6948 14.2329 18.009 13.9096C18.3232 13.5862 18.5724 13.2023 18.7425 12.7798C18.9125 12.3573 19 11.9045 19 11.4472V4.48238C19 3.5588 18.6435 2.67304 18.009 2.01997C17.3745 1.36689 16.5139 1 15.6165 1H4.38346C3.48611 1 2.62551 1.36689 1.99099 2.01997C1.35647 2.67304 1 3.5588 1 4.48238V11.4472C1 11.9045 1.08752 12.3573 1.25755 12.7798C1.42759 13.2023 1.67681 13.5862 1.99099 13.9096C2.62551 14.5626 3.48611 14.9295 4.38346 14.9295H5.06015V17.6347C5.0601 17.8969 5.13344 18.1536 5.27138 18.374C5.40933 18.5945 5.60605 18.7694 5.83803 18.8778C6.07 18.9863 6.32741 19.0236 6.57947 18.9855ZM15.6165 15.9295H11.7887L7.92826 19.406C7.59297 19.7077 7.17702 19.9064 6.72915 19.9742C6.28113 20.042 5.82439 19.9753 5.41457 19.7837C5.00507 19.5923 4.66218 19.2857 4.42366 18.9045C4.18533 18.5236 4.0601 18.0826 4.06015 17.6345V15.9173C3.00738 15.8378 2.01772 15.3721 1.27377 14.6064C0.868154 14.1889 0.547875 13.6949 0.329859 13.1531C0.11186 12.6115 0 12.0319 0 11.4472V4.48238C0 3.30273 0.455032 2.1658 1.27377 1.32312C2.09346 0.479463 3.21144 0 4.38346 0H15.6165C16.7886 0 17.9065 0.479464 18.7262 1.32312C19.545 2.1658 20 3.30273 20 4.48238V11.4472C20 12.0318 19.8881 12.6115 19.6701 13.1531C19.4521 13.6949 19.1318 14.1889 18.7262 14.6064C18.3206 15.024 17.8374 15.3567 17.3035 15.5843C16.7696 15.812 16.1963 15.9295 15.6165 15.9295ZM10.6765 9H9.32353L9 5.69653V3H11V5.69653L10.6765 9ZM9 11H11V13H9V11Z"
-                                                                          fill="#FF5252"/>
-                                                                </svg>
-                                                                <a href=""
-                                                                   data-modal-target="#modal__complaint">Оставить
-                                                                    жалобу
-                                                                    на отзыв</a>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="person__items">
-                                                        <span class="">
-                                                            <span class="name">Владимир С.</span>
-                                                            <span class="reply__name">Владимир С.</span>
-                                                        </span>
-                                                        <span class="town">Ростов-на-Дону</span>
-                                                        <span class="client"><span class="text">покупатель</span>
-                                                            <span class="review__date">20.05.2021</span>
-                                                            <span class="review__time">16:57</span></span>
-                                                    </div>
-                                                </div>
-                                                <div class="comments__item__head--rigth">
-                                                    <span class="send__to">
-                                                        <span class="icon"><svg width="15" height="14"
-                                                                                viewBox="0 0 15 14" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                        d="M14.44 14.0001C14.351 14.0013 14.2634 13.9788 14.186 13.9348C14.1087 13.8909 14.0444 13.8271 14 13.7501C13.334 12.6156 12.3849 11.6736 11.2455 11.0162C10.106 10.3589 8.8154 10.0087 7.49997 10.0001V13.0001C7.49948 13.0988 7.46978 13.1951 7.41461 13.277C7.35944 13.3589 7.28128 13.4226 7.18997 13.4601C7.09891 13.4984 6.99856 13.5088 6.90156 13.4901C6.80457 13.4714 6.71528 13.4244 6.64497 13.3551L0.644969 7.35507C0.598105 7.30859 0.560908 7.25329 0.535524 7.19236C0.510139 7.13143 0.49707 7.06608 0.49707 7.00007C0.49707 6.93406 0.510139 6.86871 0.535524 6.80778C0.560908 6.74685 0.598105 6.69155 0.644969 6.64507L6.64497 0.64507C6.71528 0.575691 6.80457 0.528693 6.90156 0.510006C6.99856 0.491319 7.09891 0.50178 7.18997 0.54007C7.28128 0.57758 7.35944 0.641279 7.41461 0.723139C7.46978 0.804999 7.49948 0.901357 7.49997 1.00007V4.05507C9.56857 4.32076 11.47 5.32954 12.8499 6.8934C14.2297 8.45725 14.9939 10.4695 15 12.5551C14.9988 12.8894 14.9771 13.2234 14.935 13.5551C14.9225 13.6591 14.8776 13.7566 14.8068 13.8337C14.7359 13.9109 14.6426 13.9638 14.54 13.9851L14.44 14.0001ZM7.24997 9.00007C8.52517 8.98176 9.78915 9.24052 10.9546 9.75848C12.12 10.2764 13.159 11.0413 14 12.0001C13.8495 10.1863 13.0578 8.48539 11.7667 7.20256C10.4756 5.91973 8.76971 5.13887 6.95497 5.00007C6.83031 4.98881 6.71441 4.93119 6.63016 4.83862C6.54592 4.74604 6.49946 4.62524 6.49997 4.50007V2.20507L1.70497 7.00007L6.49997 11.7951V9.50007C6.49997 9.36746 6.55265 9.24028 6.64642 9.14652C6.74018 9.05275 6.86736 9.00007 6.99997 9.00007H7.26997H7.24997Z"
-                                                                        fill="#D1DBE3"/>
-                                                            </svg>
-                                                        </span>
-                                                        <span class="text">Ответить</span>
-                                                    </span>
-                                                    <span class="icon source">
-                                                        <a href="">
-                                                            <img src="../img/reviews/yandex__icon.svg" alt="img">
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="comments__item__body">
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Consequuntur, odit?
-                                                    Ullam vitae dolore suscipit asperiores corrupti earum dolorum
-                                                    repellendus
-                                                    veritatis obcaecati. Velit perferendis qui repellendus incidunt
-                                                    sunt numquam
-                                                    delectus voluptatibus!</p>
-                                            </div>
-                                            <div class="comments__item__reply">
-                                                <span class="comments__item__reply-close_btn">Закрыть<span
-                                                            class="icon"><svg width="13" height="12" viewBox="0 0 13 12"
-                                                                              fill="none"
-                                                                              xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                    d="M7.38173 5.9864L12.3557 1.0257C12.454 0.911231 12.5054 0.76398 12.4996 0.613378C12.4937 0.462776 12.4311 0.319916 12.3243 0.213345C12.2174 0.106774 12.0742 0.0443419 11.9232 0.0385248C11.7722 0.0327077 11.6245 0.0839342 11.5097 0.181967L6.53573 5.14266L1.56173 0.175983C1.44874 0.063303 1.29551 0 1.13573 0C0.975945 0 0.822708 0.063303 0.709726 0.175983C0.596744 0.288663 0.533271 0.44149 0.533271 0.600844C0.533271 0.760197 0.596744 0.913024 0.709726 1.0257L5.68973 5.9864L0.709726 10.9471C0.646917 11.0007 0.595905 11.0668 0.559891 11.141C0.523877 11.2152 0.503639 11.2961 0.500447 11.3785C0.497255 11.4609 0.511179 11.5431 0.541343 11.6199C0.571508 11.6967 0.617263 11.7664 0.675736 11.8247C0.734209 11.8831 0.804137 11.9287 0.881132 11.9588C0.958127 11.9889 1.04053 12.0027 1.12316 11.9996C1.20579 11.9964 1.28687 11.9762 1.36131 11.9403C1.43575 11.9044 1.50194 11.8535 1.55573 11.7908L6.53573 6.83014L11.5097 11.7908C11.6245 11.8889 11.7722 11.9401 11.9232 11.9343C12.0742 11.9285 12.2174 11.866 12.3243 11.7595C12.4311 11.6529 12.4937 11.51 12.4996 11.3594C12.5054 11.2088 12.454 11.0616 12.3557 10.9471L7.38173 5.9864Z"
-                                                                    fill="#A0A0A0"/>
-                                                        </svg></span></span>
-                                                <form>
-                                                    <textarea placeholder="Ваш ответ"></textarea>
-                                                    <input type="submit" value="Отправить">
-                                                </form>
-                                            </div>
-                                            <ul class="comments__items sub_items">
-                                                <li class="comments__item">
-                                                    <div class="comments__item__head">
-                                                        <div class="comments__item__head--left">
-                                                            <div class="person__avatar">
-                                                                <img src="../img/reviews/avatar.png" alt="img">
-                                                                <div class="person__avatar-btn ">
-                                                                    <span class="icon ">
-                                                                        <svg width="4" height="16" viewBox="0 0 4 16"
-                                                                             fill="none"
-                                                                             xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                    d="M2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z"
-                                                                                    fill="#818181"/>
-                                                                        </svg>
-                                                                    </span>
-                                                                    <span class="text ">
-                                                                        <svg width="20" height="20" viewBox="0 0 20 20"
-                                                                             fill="none"
-                                                                             xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd"
-                                                                                  clip-rule="evenodd"
-                                                                                  d="M6.57947 18.9855C6.83153 18.9473 7.06758 18.8352 7.2594 18.6627L11.4048 14.9295H15.6165C16.0609 14.9295 16.5008 14.8395 16.9113 14.6645C17.3218 14.4894 17.6948 14.2329 18.009 13.9096C18.3232 13.5862 18.5724 13.2023 18.7425 12.7798C18.9125 12.3573 19 11.9045 19 11.4472V4.48238C19 3.5588 18.6435 2.67304 18.009 2.01997C17.3745 1.36689 16.5139 1 15.6165 1H4.38346C3.48611 1 2.62551 1.36689 1.99099 2.01997C1.35647 2.67304 1 3.5588 1 4.48238V11.4472C1 11.9045 1.08752 12.3573 1.25755 12.7798C1.42759 13.2023 1.67681 13.5862 1.99099 13.9096C2.62551 14.5626 3.48611 14.9295 4.38346 14.9295H5.06015V17.6347C5.0601 17.8969 5.13344 18.1536 5.27138 18.374C5.40933 18.5945 5.60605 18.7694 5.83803 18.8778C6.07 18.9863 6.32741 19.0236 6.57947 18.9855ZM15.6165 15.9295H11.7887L7.92826 19.406C7.59297 19.7077 7.17702 19.9064 6.72915 19.9742C6.28113 20.042 5.82439 19.9753 5.41457 19.7837C5.00507 19.5923 4.66218 19.2857 4.42366 18.9045C4.18533 18.5236 4.0601 18.0826 4.06015 17.6345V15.9173C3.00738 15.8378 2.01772 15.3721 1.27377 14.6064C0.868154 14.1889 0.547875 13.6949 0.329859 13.1531C0.11186 12.6115 0 12.0319 0 11.4472V4.48238C0 3.30273 0.455032 2.1658 1.27377 1.32312C2.09346 0.479463 3.21144 0 4.38346 0H15.6165C16.7886 0 17.9065 0.479464 18.7262 1.32312C19.545 2.1658 20 3.30273 20 4.48238V11.4472C20 12.0318 19.8881 12.6115 19.6701 13.1531C19.4521 13.6949 19.1318 14.1889 18.7262 14.6064C18.3206 15.024 17.8374 15.3567 17.3035 15.5843C16.7696 15.812 16.1963 15.9295 15.6165 15.9295ZM10.6765 9H9.32353L9 5.69653V3H11V5.69653L10.6765 9ZM9 11H11V13H9V11Z"
-                                                                                  fill="#FF5252"/>
-                                                                        </svg>
-                                                                        <a href=""
-                                                                           data-modal-target="#modal__complaint">Оставить
-                                                                            жалобу
-                                                                            на отзыв</a>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="person__items">
-                                                                <span class="">
-                                                                    <span class="name">Владимир С.</span>
-                                                                    <span class="reply__name">Владимир С.</span>
-                                                                </span>
-                                                                <span class="town">Ростов-на-Дону</span>
-                                                                <span class="client"><span
-                                                                            class="text">покупатель</span>
-                                                                    <span class="review__date">20.05.2021</span>
-                                                                    <span class="review__time">16:57</span></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="comments__item__head--rigth">
-                                                            <span class="send__to">
-                                                                <span class="icon"><svg width="15" height="14"
-                                                                                        viewBox="0 0 15 14" fill="none"
-                                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                                d="M14.44 14.0001C14.351 14.0013 14.2634 13.9788 14.186 13.9348C14.1087 13.8909 14.0444 13.8271 14 13.7501C13.334 12.6156 12.3849 11.6736 11.2455 11.0162C10.106 10.3589 8.8154 10.0087 7.49997 10.0001V13.0001C7.49948 13.0988 7.46978 13.1951 7.41461 13.277C7.35944 13.3589 7.28128 13.4226 7.18997 13.4601C7.09891 13.4984 6.99856 13.5088 6.90156 13.4901C6.80457 13.4714 6.71528 13.4244 6.64497 13.3551L0.644969 7.35507C0.598105 7.30859 0.560908 7.25329 0.535524 7.19236C0.510139 7.13143 0.49707 7.06608 0.49707 7.00007C0.49707 6.93406 0.510139 6.86871 0.535524 6.80778C0.560908 6.74685 0.598105 6.69155 0.644969 6.64507L6.64497 0.64507C6.71528 0.575691 6.80457 0.528693 6.90156 0.510006C6.99856 0.491319 7.09891 0.50178 7.18997 0.54007C7.28128 0.57758 7.35944 0.641279 7.41461 0.723139C7.46978 0.804999 7.49948 0.901357 7.49997 1.00007V4.05507C9.56857 4.32076 11.47 5.32954 12.8499 6.8934C14.2297 8.45725 14.9939 10.4695 15 12.5551C14.9988 12.8894 14.9771 13.2234 14.935 13.5551C14.9225 13.6591 14.8776 13.7566 14.8068 13.8337C14.7359 13.9109 14.6426 13.9638 14.54 13.9851L14.44 14.0001ZM7.24997 9.00007C8.52517 8.98176 9.78915 9.24052 10.9546 9.75848C12.12 10.2764 13.159 11.0413 14 12.0001C13.8495 10.1863 13.0578 8.48539 11.7667 7.20256C10.4756 5.91973 8.76971 5.13887 6.95497 5.00007C6.83031 4.98881 6.71441 4.93119 6.63016 4.83862C6.54592 4.74604 6.49946 4.62524 6.49997 4.50007V2.20507L1.70497 7.00007L6.49997 11.7951V9.50007C6.49997 9.36746 6.55265 9.24028 6.64642 9.14652C6.74018 9.05275 6.86736 9.00007 6.99997 9.00007H7.26997H7.24997Z"
-                                                                                fill="#D1DBE3"/>
-                                                                    </svg>
-                                                                </span>
-                                                                <span class="text">Ответить</span>
-                                                            </span>
-                                                            <span class="icon source">
-                                                                <a href="">
-                                                                    <img src="../img/reviews/google.svg" alt="img">
-                                                                </a>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comments__item__body">
-                                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                            Consequuntur, odit?
-                                                            Ullam vitae dolore suscipit asperiores corrupti earum
-                                                            dolorum
-                                                            repellendus
-                                                            veritatis obcaecati. Velit perferendis qui repellendus
-                                                            incidunt
-                                                            sunt numquam
-                                                            delectus voluptatibus!</p>
-                                                    </div>
-                                                    <div class="comments__item__reply">
-                                                        <span class="comments__item__reply-close_btn">Закрыть<span
-                                                                    class="icon"><svg width="13" height="12"
-                                                                                      viewBox="0 0 13 12" fill="none"
-                                                                                      xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                            d="M7.38173 5.9864L12.3557 1.0257C12.454 0.911231 12.5054 0.76398 12.4996 0.613378C12.4937 0.462776 12.4311 0.319916 12.3243 0.213345C12.2174 0.106774 12.0742 0.0443419 11.9232 0.0385248C11.7722 0.0327077 11.6245 0.0839342 11.5097 0.181967L6.53573 5.14266L1.56173 0.175983C1.44874 0.063303 1.29551 0 1.13573 0C0.975945 0 0.822708 0.063303 0.709726 0.175983C0.596744 0.288663 0.533271 0.44149 0.533271 0.600844C0.533271 0.760197 0.596744 0.913024 0.709726 1.0257L5.68973 5.9864L0.709726 10.9471C0.646917 11.0007 0.595905 11.0668 0.559891 11.141C0.523877 11.2152 0.503639 11.2961 0.500447 11.3785C0.497255 11.4609 0.511179 11.5431 0.541343 11.6199C0.571508 11.6967 0.617263 11.7664 0.675736 11.8247C0.734209 11.8831 0.804137 11.9287 0.881132 11.9588C0.958127 11.9889 1.04053 12.0027 1.12316 11.9996C1.20579 11.9964 1.28687 11.9762 1.36131 11.9403C1.43575 11.9044 1.50194 11.8535 1.55573 11.7908L6.53573 6.83014L11.5097 11.7908C11.6245 11.8889 11.7722 11.9401 11.9232 11.9343C12.0742 11.9285 12.2174 11.866 12.3243 11.7595C12.4311 11.6529 12.4937 11.51 12.4996 11.3594C12.5054 11.2088 12.454 11.0616 12.3557 10.9471L7.38173 5.9864Z"
-                                                                            fill="#A0A0A0"/>
-                                                                </svg></span></span>
-                                                        <form>
-                                                            <textarea placeholder="Ваш ответ"></textarea>
-                                                            <input type="submit" value="Отправить">
-                                                        </form>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="reviews__item__footer">
-                        <? //Временно удалено из верстки?>
-                        <? /*<div class="reviews__item__footer--btn ">
-                            <span class="icon ">
-                                <svg width="4" height="16" viewBox="0 0 4 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z"
-                                        fill="#818181" />
-                                </svg>
-                            </span>
-                        <span class="text ">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M6.57947 18.9855C6.83153 18.9473 7.06758 18.8352 7.2594 18.6627L11.4048 14.9295H15.6165C16.0609 14.9295 16.5008 14.8395 16.9113 14.6645C17.3218 14.4894 17.6948 14.2329 18.009 13.9096C18.3232 13.5862 18.5724 13.2023 18.7425 12.7798C18.9125 12.3573 19 11.9045 19 11.4472V4.48238C19 3.5588 18.6435 2.67304 18.009 2.01997C17.3745 1.36689 16.5139 1 15.6165 1H4.38346C3.48611 1 2.62551 1.36689 1.99099 2.01997C1.35647 2.67304 1 3.5588 1 4.48238V11.4472C1 11.9045 1.08752 12.3573 1.25755 12.7798C1.42759 13.2023 1.67681 13.5862 1.99099 13.9096C2.62551 14.5626 3.48611 14.9295 4.38346 14.9295H5.06015V17.6347C5.0601 17.8969 5.13344 18.1536 5.27138 18.374C5.40933 18.5945 5.60605 18.7694 5.83803 18.8778C6.07 18.9863 6.32741 19.0236 6.57947 18.9855ZM15.6165 15.9295H11.7887L7.92826 19.406C7.59297 19.7077 7.17702 19.9064 6.72915 19.9742C6.28113 20.042 5.82439 19.9753 5.41457 19.7837C5.00507 19.5923 4.66218 19.2857 4.42366 18.9045C4.18533 18.5236 4.0601 18.0826 4.06015 17.6345V15.9173C3.00738 15.8378 2.01772 15.3721 1.27377 14.6064C0.868154 14.1889 0.547875 13.6949 0.329859 13.1531C0.11186 12.6115 0 12.0319 0 11.4472V4.48238C0 3.30273 0.455032 2.1658 1.27377 1.32312C2.09346 0.479463 3.21144 0 4.38346 0H15.6165C16.7886 0 17.9065 0.479464 18.7262 1.32312C19.545 2.1658 20 3.30273 20 4.48238V11.4472C20 12.0318 19.8881 12.6115 19.6701 13.1531C19.4521 13.6949 19.1318 14.1889 18.7262 14.6064C18.3206 15.024 17.8374 15.3567 17.3035 15.5843C16.7696 15.812 16.1963 15.9295 15.6165 15.9295ZM10.6765 9H9.32353L9 5.69653V3H11V5.69653L10.6765 9ZM9 11H11V13H9V11Z"
-                                          fill="#FF5252" />
-                                </svg>
-                                <a href="" data-modal-target="#modal__complaint">Оставить жалобу на отзыв</a>
-                            </span>
-                    </div>
-                    <div class="reviews__item__footer--left">
-                        <p class="comment__btn-js"><span class="text">Комментарии к отзыву</span>
-                            <span class="icon">
-                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M2.99956 9.86879C2.86651 9.9734 2.70026 10.0181 2.5366 9.9933C2.37295 9.96849 2.22496 9.87614 2.12451 9.73612C2.04398 9.62296 2.0003 9.48485 2.00013 9.34278V7.89476H1.6251C0.727546 7.89476 4.0243e-07 7.12875 4.0243e-07 6.18407V1.71069C-0.000624637 0.766009 0.726921 0 1.62448 0H8.3749C9.27245 0 10 0.766009 10 1.71069V6.18407C10 7.12942 9.27245 7.89476 8.3749 7.89476H5.50597L2.99956 9.86879Z"
-                                            fill="#005DFF" />
-                                    </svg>
-                                </span>
-                            <span class="result">150</span>
-                        </p>
-                        <p>
-                            <span class="text">Отзыв был полезен</span>
-                            <span class="icon">
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.40384 2.52159L6.55718 0.94226C6.61784 0.307593 7.21051 -0.123074 7.80918 0.0315931C8.70984 0.264926 9.34251 1.10159 9.34251 2.06093V4.08426C9.34251 4.53426 9.34251 4.75959 9.43984 4.92426C9.49518 5.01826 9.57118 5.09759 9.66184 5.15426C9.82184 5.25493 10.0398 5.25493 10.4752 5.25493H10.7392C11.8745 5.25493 12.4418 5.25493 12.7912 5.51493C13.0532 5.71026 13.2378 5.99626 13.3112 6.32026C13.4085 6.75359 13.1905 7.29559 12.7538 8.37826L12.5365 8.91826C12.4104 9.23101 12.3589 9.5688 12.3858 9.90493C12.5405 11.8209 11.0212 13.4349 9.16384 13.3289L2.21451 12.9296C1.45518 12.8863 1.07584 12.8643 0.733176 12.5609C0.389843 12.2576 0.325176 11.9449 0.196509 11.3203C-0.0773358 9.99133 -0.064836 8.61931 0.233176 7.29559C0.421843 6.46359 1.21651 6.01559 2.03718 6.12226C4.21318 6.40226 6.18584 4.77626 6.40384 2.52226V2.52159Z"
-                                            fill="#005DFF" />
-                                        <path
-                                            d="M3.33335 6.33362L3.24202 6.63828C2.65075 8.60927 2.68265 10.7148 3.33335 12.667"
-                                            fill="white" />
-                                        <path
-                                            d="M3.33335 6.33362L3.24202 6.63828C2.65075 8.60927 2.68265 10.7148 3.33335 12.667"
-                                            stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
-                            <span class="result">150</span>
-                        </p>
-                    </div>*/ ?>
-                        <div class="reviews__item__footer--right">
-                            <p>
-                                <span class="text">источник</span>
-                                <a href=""><span class="icon">
-                                        <img src="<?= $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_LOGO']['src'] ?>"
-                                             alt="<?= $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME'] ?>">
-                                    </span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews__item-right">
-                    <div class="reviews__item-right--top">
-                        <div class="raiting">
-                            <div class="raiting__position">
-                                <span class="icon">
-                                    <svg width="54" height="44" viewBox="0 0 54 44" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                                d="M52 17.0646C52 21.0211 51.0561 24.9209 49.2462 28.4416C47.4363 31.9623 44.8125 35.0029 41.5914 37.3122C38.3704 39.6214 34.6447 41.133 30.7221 41.7221C26.7995 42.3112 22.7927 41.9607 19.0328 40.6998C15.2728 39.4389 11.8677 37.3037 9.09867 34.4706C6.32967 31.6376 4.27634 28.1879 3.10832 24.4068C1.94031 20.6257 1.69115 16.6216 2.38143 12.7254C3.07172 8.82926 4.68163 5.15286 7.07814 2"
-                                                stroke="#005DFF" stroke-width="4"/>
-                                    </svg>
-                                </span>
-                                <span class="raiting__satr-number"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_EL_RATING_SUM_VALUE'] ?></span>
-                            </div>
-                            <p><a href="">vincko:</a></p>
-                        </div>
-                        <div class="raiting__about">
-                            <span class="raiting__about-name"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_CHOP_ID_NAME'] ?></span>
-                            <span class="raiting__about-btn"><a href="/review-add/">Оставить отзыв</a></span>
-                            <span class="raiting__about-chart">
-                                <span class="icon">
-                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M4.75 15.5H5.75C5.94891 15.5 6.13968 15.421 6.28033 15.2803C6.42098 15.1397 6.5 14.9489 6.5 14.75V1.25C6.5 1.05109 6.42098 0.860322 6.28033 0.71967C6.13968 0.579018 5.94891 0.5 5.75 0.5H4.75C4.55109 0.5 4.36032 0.579018 4.21967 0.71967C4.07902 0.860322 4 1.05109 4 1.25V14.75C4 14.9489 4.07902 15.1397 4.21967 15.2803C4.36032 15.421 4.55109 15.5 4.75 15.5ZM12.75 15.5H11.75C11.5511 15.5 11.3603 15.421 11.2197 15.2803C11.079 15.1397 11 14.9489 11 14.75V3.75C11 3.55109 11.079 3.36032 11.2197 3.21967C11.3603 3.07902 11.5511 3 11.75 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V14.75C13.5 14.9489 13.421 15.1397 13.2803 15.2803C13.1397 15.421 12.9489 15.5 12.75 15.5ZM8.25 15.5H9.25C9.44891 15.5 9.63968 15.421 9.78033 15.2803C9.92098 15.1397 10 14.9489 10 14.75V7.25C10 7.05109 9.92098 6.86032 9.78033 6.71967C9.63968 6.57902 9.44891 6.5 9.25 6.5H8.25C8.05109 6.5 7.86032 6.57902 7.71967 6.71967C7.57902 6.86032 7.5 7.05109 7.5 7.25V14.75C7.5 14.9489 7.57902 15.1397 7.71967 15.2803C7.86032 15.421 8.05109 15.5 8.25 15.5ZM1.25 15.5H2.25C2.44891 15.5 2.63968 15.421 2.78033 15.2803C2.92098 15.1397 3 14.9489 3 14.75V10.25C3 10.0511 2.92098 9.86032 2.78033 9.71967C2.63968 9.57902 2.44891 9.5 2.25 9.5H1.25C1.05109 9.5 0.860322 9.57902 0.71967 9.71967C0.579018 9.86032 0.5 10.0511 0.5 10.25V14.75C0.5 14.9489 0.579018 15.1397 0.71967 15.2803C0.860322 15.421 1.05109 15.5 1.25 15.5Z"
-                                              fill="#005DFF"/>
-                                    </svg>
-                                </span>
-                                <span class="number"><?=$arResult['COMPANIES_RATING_POSITIONS'][$row['UF_CHOP_ID']]['POSITION_IN_RATING']?></span>
-                                <a href="">в Рейтинге</a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="reviews__item-right--bottom">
-                        <? /*<p class="text">Прочие оценки:</p>
-                    <ul>
-                        <li><a href="">
-                                    <span class="raiting">
-                                        <span class="icon--pseudo">
-                                            <svg width="30" height="26" viewBox="0 0 30 26" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M28 10.2855C28 12.4616 27.5092 14.6065 26.568 16.5429C25.6269 18.4793 24.2625 20.1516 22.5875 21.4217C20.9126 22.6918 18.9752 23.5232 16.9355 23.8471C14.8958 24.1711 12.8122 23.9784 10.857 23.2849C8.90187 22.5914 7.13118 21.4171 5.69131 19.8589C4.25143 18.3007 3.18369 16.4034 2.57633 14.3237C1.96896 12.2441 1.8394 10.0419 2.19835 7.89899C2.55729 5.75609 3.39445 3.73407 4.64063 2"
-                                                    stroke="#FDE74C" stroke-width="4" />
-                                            </svg>
-                                        </span>
-                                        <span class="text">5</span>
-                                    </span>
-                                <span class="icon">
-                                        <img src="../img/reviews/yandex__icon.svg" alt="img">
-                                    </span>
-                            </a></li>
-                        <li><a href="">
-                                    <span class="raiting">
-                                        <span class="icon--pseudo">
-                                            <svg width="30" height="26" viewBox="0 0 30 26" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M28 10.2855C28 12.4616 27.5092 14.6065 26.568 16.5429C25.6269 18.4793 24.2625 20.1516 22.5875 21.4217C20.9126 22.6918 18.9752 23.5232 16.9355 23.8471C14.8958 24.1711 12.8122 23.9784 10.857 23.2849C8.90187 22.5914 7.13118 21.4171 5.69131 19.8589C4.25143 18.3007 3.18369 16.4034 2.57633 14.3237C1.96896 12.2441 1.8394 10.0419 2.19835 7.89899C2.55729 5.75609 3.39445 3.73407 4.64063 2"
-                                                    stroke="#FDE74C" stroke-width="4" />
-                                            </svg>
-                                        </span>
-                                        <span class="text">5</span>
-                                    </span>
-                                <span class="icon">
-                                        <img src="../img/reviews/google.svg" alt="img">
-                                    </span>
-                            </a></li>
-                        <li><a href="">
-                                    <span class="raiting">
-                                        <span class="icon--pseudo">
-                                            <svg width="30" height="26" viewBox="0 0 30 26" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M28 10.2855C28 12.4616 27.5092 14.6065 26.568 16.5429C25.6269 18.4793 24.2625 20.1516 22.5875 21.4217C20.9126 22.6918 18.9752 23.5232 16.9355 23.8471C14.8958 24.1711 12.8122 23.9784 10.857 23.2849C8.90187 22.5914 7.13118 21.4171 5.69131 19.8589C4.25143 18.3007 3.18369 16.4034 2.57633 14.3237C1.96896 12.2441 1.8394 10.0419 2.19835 7.89899C2.55729 5.75609 3.39445 3.73407 4.64063 2"
-                                                    stroke="#FDE74C" stroke-width="4" />
-                                            </svg>
-                                        </span>
-                                        <span class="text">5</span>
-                                    </span>
-                                <span class="icon">
-                                        <img src="../img/reviews/2gis.svg" alt="img">
-                                    </span>
-                            </a></li>
-                    </ul>*/ ?>
-                        <a href="" class="button blue-color">Перейти к рейтингу
-                            <span class="icon">
-                                    <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M0.499512 5C0.499511 4.81059 0.57852 4.62894 0.719157 4.49501C0.859794 4.36108 1.05054 4.28584 1.24943 4.28584L9.93796 4.28584L6.71782 1.22068C6.64809 1.15428 6.59278 1.07545 6.55505 0.9887C6.51732 0.901945 6.49789 0.808961 6.49789 0.715058C6.49789 0.621155 6.51732 0.528171 6.55505 0.441416C6.59278 0.354662 6.64809 0.275834 6.71782 0.209435C6.78754 0.143036 6.87032 0.0903642 6.96141 0.0544297C7.05251 0.0184943 7.15015 -2.90709e-07 7.24876 -2.95019e-07C7.34736 -2.99329e-07 7.445 0.0184943 7.5361 0.0544297C7.6272 0.0903641 7.70997 0.143036 7.7797 0.209435L12.2792 4.49438C12.349 4.56071 12.4044 4.63952 12.4422 4.72629C12.4801 4.81305 12.4995 4.90606 12.4995 5C12.4995 5.09394 12.4801 5.18695 12.4422 5.27371C12.4044 5.36048 12.349 5.43928 12.2792 5.50562L7.7797 9.79056C7.70997 9.85696 7.6272 9.90963 7.5361 9.94557C7.445 9.9815 7.34736 10 7.24876 10C7.15015 10 7.05251 9.9815 6.96141 9.94557C6.87032 9.90963 6.78754 9.85696 6.71782 9.79056C6.577 9.65646 6.49789 9.47459 6.49789 9.28494C6.49789 9.19104 6.51732 9.09805 6.55505 9.0113C6.59278 8.92454 6.64809 8.84572 6.71782 8.77932L9.93796 5.71416L1.24943 5.71416C1.05054 5.71416 0.859794 5.63892 0.719157 5.50498C0.57852 5.37105 0.499512 5.18941 0.499512 5Z"
-                                              fill="#005DFF"/>
-                                    </svg>
-                                </span>
-                        </a>
-                        <br>
-                        <a href="" class="button">Охранные услуги компании<span class="icon">
-                                <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M0.499512 5C0.499511 4.81059 0.57852 4.62894 0.719157 4.49501C0.859794 4.36108 1.05054 4.28584 1.24943 4.28584L9.93796 4.28584L6.71782 1.22068C6.64809 1.15428 6.59278 1.07545 6.55505 0.9887C6.51732 0.901945 6.49789 0.808961 6.49789 0.715058C6.49789 0.621155 6.51732 0.528171 6.55505 0.441416C6.59278 0.354662 6.64809 0.275834 6.71782 0.209435C6.78754 0.143036 6.87032 0.0903642 6.96141 0.0544297C7.05251 0.0184943 7.15015 -2.90709e-07 7.24876 -2.95019e-07C7.34736 -2.99329e-07 7.445 0.0184943 7.5361 0.0544297C7.6272 0.0903641 7.70997 0.143036 7.7797 0.209435L12.2792 4.49438C12.349 4.56071 12.4044 4.63952 12.4422 4.72629C12.4801 4.81305 12.4995 4.90606 12.4995 5C12.4995 5.09394 12.4801 5.18695 12.4422 5.27371C12.4044 5.36048 12.349 5.43928 12.2792 5.50562L7.7797 9.79056C7.70997 9.85696 7.6272 9.90963 7.5361 9.94557C7.445 9.9815 7.34736 10 7.24876 10C7.15015 10 7.05251 9.9815 6.96141 9.94557C6.87032 9.90963 6.78754 9.85696 6.71782 9.79056C6.577 9.65646 6.49789 9.47459 6.49789 9.28494C6.49789 9.19104 6.51732 9.09805 6.55505 9.0113C6.59278 8.92454 6.64809 8.84572 6.71782 8.77932L9.93796 5.71416L1.24943 5.71416C1.05054 5.71416 0.859794 5.63892 0.719157 5.50498C0.57852 5.37105 0.499512 5.18941 0.499512 5Z"
-                                          fill="black"/>
-                                </svg>
-                            </span></a>
-                    </div>
-                </div>
-            </li>
-        <? endforeach; ?>
-        <? /*<li class="reviews__item not-vinco__raiting">
-            <div class="reviews__item-left">
-                <div class="reviews__item__head">
-                    <div class="reviews__item__head--left">
-                        <div class="person__avatar">
-                            <img src="../img/reviews/avatar.png" alt="img">
-                        </div>
-                        <div class="person__items">
-                            <span class="name">Владимир С.</span>
-                            <span class="town">Ростов-на-Дону</span>
-                            <div class="client"><span class="text">покупатель</span>
-                                <span class="icon">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08075 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86156 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90713 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3616 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27993C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25898 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.82941 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                fill="#93B5FF" />
-                                        </svg>
-                                    </span>
-                                <div class="client__icon-pseudo">
-                                    <p>Это отзыв покупателя платформы <a href="">vincko:</a></p>
-                                    <p> Преимущество <a href="">vincko:</a> отзыва перед остальными в том, что он
-                                        оставлен
-                                        <span>реальным пользователем платформы</span> и содержит информацию о
-                                        настоящем
-                                        опыте сотрудничества с компанией.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reviews__item__head--right">
-                        <p>Личная оценка пользователя</p>
-                        <div class="raiting__content">
-                            <ul class="raiting__stars">
-                                <li>
-                                    <img src="../img/reviews/star__yellow.png" alt="img">
-                                </li>
-                                <li>
-                                    <img src="../img/reviews/star__yellow.png" alt="img">
-                                </li>
-                                <li>
-                                    <img src="../img/reviews/star__yellow.png" alt="img">
-                                </li>
-                                <li>
-                                    <img src="../img/reviews/star__yellow.png" alt="img">
-                                </li>
-                                <li>
-                                    <img src="../img/reviews/star__white.png" alt="img">
-                                </li>
-                            </ul>
-                            <span class="icon social">
-                                    <svg width="46" height="14" viewBox="0 0 46 14" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M5.60798 1.62443H4.72037C3.09182 1.62443 2.23658 2.4891 2.23658 3.76752C2.23658 5.21931 2.82878 5.89385 4.04554 6.75779L5.04883 7.46657L2.1567 12.0121H0L2.59878 7.95026C1.10176 6.82699 0.263046 5.73797 0.263046 3.88844C0.263046 1.57271 1.79036 0 4.70384 0H7.59597V12.0121H5.60798V1.62443Z"
-                                            fill="#FC3F1D" />
-                                        <path
-                                            d="M23.7321 3.31873H18.025V4.06174C18.025 6.18734 17.8935 8.93576 17.2028 10.3876H16.5955V13.9999H18.4051V12.012H22.7929V13.9999H24.6039V10.3876H23.7321V3.31873ZM21.7751 10.3846H19.0118C19.5544 9.07344 19.7004 6.70308 19.7004 5.19957V4.94316H21.7731L21.7751 10.3846Z"
-                                            fill="black" />
-                                        <path
-                                            d="M13.816 6.75772H11.2013V3.31873H9.24365V12.012H11.2013V8.38288H13.816V12.012H15.773V3.31873H13.816V6.75772Z"
-                                            fill="black" />
-                                        <path
-                                            d="M44.1077 4.77053C44.8652 4.77053 45.6047 5.04661 45.9993 5.30594V3.55767C45.5861 3.31583 44.8645 3.14246 43.8942 3.14246C41.3946 3.14246 40.0952 5.02695 40.0952 7.6712C40.0952 10.5748 41.3616 12.1817 43.9762 12.1817C44.881 12.1817 45.5221 12.0091 45.9993 11.6463V9.97091C45.5062 10.3351 44.914 10.5588 44.0919 10.5588C42.6933 10.5588 42.1183 9.41802 42.1183 7.62094C42.1183 5.73645 42.8255 4.76908 44.1077 4.76908"
-                                            fill="black" />
-                                        <path
-                                            d="M39.8331 3.31799H37.8595L35.0962 7.32809V3.31799H33.1392V12.012H35.0962V7.7433L37.9911 12.012H40.2111L37.0697 7.32809L39.8331 3.31799Z"
-                                            fill="black" />
-                                        <path
-                                            d="M28.6007 3.14537C26.2161 3.14537 25.0813 5.0641 25.0813 7.69087C25.0813 10.7161 26.4957 12.1847 28.996 12.1847C30.2458 12.1847 31.1665 11.8394 31.7421 11.4242V9.74873C31.1334 10.1807 30.1143 10.5609 29.1599 10.5609C27.7297 10.5609 27.1864 9.85217 27.1044 8.40038H31.8241V7.30771C31.8241 4.2832 30.5578 3.14246 28.6007 3.14246V3.14537ZM29.8347 6.87574H27.1044C27.154 5.49169 27.6305 4.76762 28.5684 4.76762C29.5386 4.76762 29.8347 5.61407 29.8347 6.7031V6.87574Z"
-                                            fill="black" />
-                                    </svg>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews__item__body">
-                    <div class="reviews__item__body--center">
-                        <span>Комментарий пользователя:</span>
-                        <p>Компания норм
-                        </p>
-                    </div>
-                </div>
-                <div class="reviews__item__comments">
-                    <div class="reviews__item__comments-top">
-                        <div class="right">
-                            <span class="add__new_comment-js">Написать комментарий</span>
-                            <span class="comments__close_btn-js">Вернуться к отзыву</span>
-                        </div>
-                        <div class="add__new_comment-form">
-                            <span class="add__new_comment-form--head">Выскажите свое мнение</span>
-                            <form>
-                                <textarea placeholder="Ваш Комментарий"></textarea>
-                                <input type="submit" value="Отправить">
-                            </form>
-                        </div>
-                        <div class="left">
-                            <p><span class="text">Комментарии к отзыву</span>
-                                <span class="icon">
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M2.99956 9.86879C2.86651 9.9734 2.70026 10.0181 2.5366 9.9933C2.37295 9.96849 2.22496 9.87614 2.12451 9.73612C2.04398 9.62296 2.0003 9.48485 2.00013 9.34278V7.89476H1.6251C0.727546 7.89476 4.0243e-07 7.12875 4.0243e-07 6.18407V1.71069C-0.000624637 0.766009 0.726921 0 1.62448 0H8.3749C9.27245 0 10 0.766009 10 1.71069V6.18407C10 7.12942 9.27245 7.89476 8.3749 7.89476H5.50597L2.99956 9.86879Z"
-                                                fill="#005DFF" />
-                                        </svg>
-                                    </span>
-                                <span class="result">150</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="reviews__item__comments-body">
-                        <ul class="comments__items">
-                            <li class="comments__item">
-                                <div class="comments__item__head">
-                                    <div class="comments__item__head--left">
-                                        <div class="person__avatar">
-                                            <img src="../img/reviews/avatar.png" alt="img">
-                                        </div>
-                                        <div class="person__items">
-                                            <span class="name">Владимир С.</span>
-                                            <span class="town">Ростов-на-Дону</span>
-                                            <span class="client"><span class="text">покупатель</span>
-                                                    <span class="review__date">20.05.2021</span>
-                                                    <span class="review__time">16:57</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="comments__item__head--rigth">
-                                            <span class="send__to">
-                                                <span class="icon"><svg width="15" height="14" viewBox="0 0 15 14"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M14.44 14.0001C14.351 14.0013 14.2634 13.9788 14.186 13.9348C14.1087 13.8909 14.0444 13.8271 14 13.7501C13.334 12.6156 12.3849 11.6736 11.2455 11.0162C10.106 10.3589 8.8154 10.0087 7.49997 10.0001V13.0001C7.49948 13.0988 7.46978 13.1951 7.41461 13.277C7.35944 13.3589 7.28128 13.4226 7.18997 13.4601C7.09891 13.4984 6.99856 13.5088 6.90156 13.4901C6.80457 13.4714 6.71528 13.4244 6.64497 13.3551L0.644969 7.35507C0.598105 7.30859 0.560908 7.25329 0.535524 7.19236C0.510139 7.13143 0.49707 7.06608 0.49707 7.00007C0.49707 6.93406 0.510139 6.86871 0.535524 6.80778C0.560908 6.74685 0.598105 6.69155 0.644969 6.64507L6.64497 0.64507C6.71528 0.575691 6.80457 0.528693 6.90156 0.510006C6.99856 0.491319 7.09891 0.50178 7.18997 0.54007C7.28128 0.57758 7.35944 0.641279 7.41461 0.723139C7.46978 0.804999 7.49948 0.901357 7.49997 1.00007V4.05507C9.56857 4.32076 11.47 5.32954 12.8499 6.8934C14.2297 8.45725 14.9939 10.4695 15 12.5551C14.9988 12.8894 14.9771 13.2234 14.935 13.5551C14.9225 13.6591 14.8776 13.7566 14.8068 13.8337C14.7359 13.9109 14.6426 13.9638 14.54 13.9851L14.44 14.0001ZM7.24997 9.00007C8.52517 8.98176 9.78915 9.24052 10.9546 9.75848C12.12 10.2764 13.159 11.0413 14 12.0001C13.8495 10.1863 13.0578 8.48539 11.7667 7.20256C10.4756 5.91973 8.76971 5.13887 6.95497 5.00007C6.83031 4.98881 6.71441 4.93119 6.63016 4.83862C6.54592 4.74604 6.49946 4.62524 6.49997 4.50007V2.20507L1.70497 7.00007L6.49997 11.7951V9.50007C6.49997 9.36746 6.55265 9.24028 6.64642 9.14652C6.74018 9.05275 6.86736 9.00007 6.99997 9.00007H7.26997H7.24997Z"
-                                                            fill="#D1DBE3" />
-                                                    </svg>
-                                                </span>
-                                                <span class="text">Ответить</span>
-                                            </span>
-                                        <span class="icon source">
-                                                <a href="">
-                                                    <img src="../img/reviews/vincon__icon.svg" alt="img">
-                                                </a>
-                                            </span>
-                                    </div>
-                                </div>
-                                <div class="comments__item__body">
-                                    <div class="comments__item__body-content">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Consequuntur,
-                                            odit?
-                                            Ullam vitae dolore suscipit asperiores corrupti earum dolorum
-                                            repellendus
-                                            veritatis obcaecati. Velit perferendis qui repellendus incidunt sunt
-                                            numquam
-                                            delectus voluptatibus!</p>
-                                    </div>
-                                </div>
-                                <div class="comments__item__reply">
-                                        <span class="comments__item__reply-close_btn">Закрыть<span class="icon"><svg
-                                                    width="13" height="12" viewBox="0 0 13 12" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7.38173 5.9864L12.3557 1.0257C12.454 0.911231 12.5054 0.76398 12.4996 0.613378C12.4937 0.462776 12.4311 0.319916 12.3243 0.213345C12.2174 0.106774 12.0742 0.0443419 11.9232 0.0385248C11.7722 0.0327077 11.6245 0.0839342 11.5097 0.181967L6.53573 5.14266L1.56173 0.175983C1.44874 0.063303 1.29551 0 1.13573 0C0.975945 0 0.822708 0.063303 0.709726 0.175983C0.596744 0.288663 0.533271 0.44149 0.533271 0.600844C0.533271 0.760197 0.596744 0.913024 0.709726 1.0257L5.68973 5.9864L0.709726 10.9471C0.646917 11.0007 0.595905 11.0668 0.559891 11.141C0.523877 11.2152 0.503639 11.2961 0.500447 11.3785C0.497255 11.4609 0.511179 11.5431 0.541343 11.6199C0.571508 11.6967 0.617263 11.7664 0.675736 11.8247C0.734209 11.8831 0.804137 11.9287 0.881132 11.9588C0.958127 11.9889 1.04053 12.0027 1.12316 11.9996C1.20579 11.9964 1.28687 11.9762 1.36131 11.9403C1.43575 11.9044 1.50194 11.8535 1.55573 11.7908L6.53573 6.83014L11.5097 11.7908C11.6245 11.8889 11.7722 11.9401 11.9232 11.9343C12.0742 11.9285 12.2174 11.866 12.3243 11.7595C12.4311 11.6529 12.4937 11.51 12.4996 11.3594C12.5054 11.2088 12.454 11.0616 12.3557 10.9471L7.38173 5.9864Z"
-                                                        fill="#A0A0A0" />
-                                                </svg></span></span>
-                                    <form>
-                                        <textarea placeholder="Ваш ответ"></textarea>
-                                        <input type="submit" value="Отправить">
-                                    </form>
-                                </div>
-                                <ul class="comments__items sub_items">
-                                    <li class="comments__item">
-                                        <div class="comments__item__head">
-                                            <div class="comments__item__head--left">
-                                                <div class="person__avatar">
-                                                    <img src="../img/reviews/avatar.png" alt="img">
-                                                </div>
-                                                <div class="person__items">
-                                                    <span class="name">Владимир С.</span>
-                                                    <span class="town">Ростов-на-Дону</span>
-                                                    <span class="client"><span class="text">покупатель</span>
-                                                            <span class="review__date">20.05.2021</span>
-                                                            <span class="review__time">16:57</span></span>
-                                                </div>
-                                            </div>
-                                            <div class="comments__item__head--rigth">
-                                                    <span class="send__to">
-                                                        <span class="icon"><svg width="15" height="14"
-                                                                                viewBox="0 0 15 14" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M14.44 14.0001C14.351 14.0013 14.2634 13.9788 14.186 13.9348C14.1087 13.8909 14.0444 13.8271 14 13.7501C13.334 12.6156 12.3849 11.6736 11.2455 11.0162C10.106 10.3589 8.8154 10.0087 7.49997 10.0001V13.0001C7.49948 13.0988 7.46978 13.1951 7.41461 13.277C7.35944 13.3589 7.28128 13.4226 7.18997 13.4601C7.09891 13.4984 6.99856 13.5088 6.90156 13.4901C6.80457 13.4714 6.71528 13.4244 6.64497 13.3551L0.644969 7.35507C0.598105 7.30859 0.560908 7.25329 0.535524 7.19236C0.510139 7.13143 0.49707 7.06608 0.49707 7.00007C0.49707 6.93406 0.510139 6.86871 0.535524 6.80778C0.560908 6.74685 0.598105 6.69155 0.644969 6.64507L6.64497 0.64507C6.71528 0.575691 6.80457 0.528693 6.90156 0.510006C6.99856 0.491319 7.09891 0.50178 7.18997 0.54007C7.28128 0.57758 7.35944 0.641279 7.41461 0.723139C7.46978 0.804999 7.49948 0.901357 7.49997 1.00007V4.05507C9.56857 4.32076 11.47 5.32954 12.8499 6.8934C14.2297 8.45725 14.9939 10.4695 15 12.5551C14.9988 12.8894 14.9771 13.2234 14.935 13.5551C14.9225 13.6591 14.8776 13.7566 14.8068 13.8337C14.7359 13.9109 14.6426 13.9638 14.54 13.9851L14.44 14.0001ZM7.24997 9.00007C8.52517 8.98176 9.78915 9.24052 10.9546 9.75848C12.12 10.2764 13.159 11.0413 14 12.0001C13.8495 10.1863 13.0578 8.48539 11.7667 7.20256C10.4756 5.91973 8.76971 5.13887 6.95497 5.00007C6.83031 4.98881 6.71441 4.93119 6.63016 4.83862C6.54592 4.74604 6.49946 4.62524 6.49997 4.50007V2.20507L1.70497 7.00007L6.49997 11.7951V9.50007C6.49997 9.36746 6.55265 9.24028 6.64642 9.14652C6.74018 9.05275 6.86736 9.00007 6.99997 9.00007H7.26997H7.24997Z"
-                                                                    fill="#D1DBE3" />
-                                                            </svg>
-                                                        </span>
-                                                        <span class="text">Ответить</span>
-                                                    </span>
-                                                <span class="icon source">
-                                                        <a href="">
-                                                            <img src="../img/reviews/vincon__icon.svg" alt="img">
-                                                        </a>
-                                                    </span>
-                                            </div>
-                                        </div>
-                                        <div class="comments__item__body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Consequuntur, odit?
-                                                Ullam vitae dolore suscipit asperiores corrupti earum dolorum
-                                                repellendus
-                                                veritatis obcaecati. Velit perferendis qui repellendus incidunt
-                                                sunt numquam
-                                                delectus voluptatibus!</p>
-                                        </div>
-                                        <div class="comments__item__reply">
-                                                <span class="comments__item__reply-close_btn">Закрыть<span
-                                                        class="icon"><svg width="13" height="12" viewBox="0 0 13 12"
-                                                                          fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.38173 5.9864L12.3557 1.0257C12.454 0.911231 12.5054 0.76398 12.4996 0.613378C12.4937 0.462776 12.4311 0.319916 12.3243 0.213345C12.2174 0.106774 12.0742 0.0443419 11.9232 0.0385248C11.7722 0.0327077 11.6245 0.0839342 11.5097 0.181967L6.53573 5.14266L1.56173 0.175983C1.44874 0.063303 1.29551 0 1.13573 0C0.975945 0 0.822708 0.063303 0.709726 0.175983C0.596744 0.288663 0.533271 0.44149 0.533271 0.600844C0.533271 0.760197 0.596744 0.913024 0.709726 1.0257L5.68973 5.9864L0.709726 10.9471C0.646917 11.0007 0.595905 11.0668 0.559891 11.141C0.523877 11.2152 0.503639 11.2961 0.500447 11.3785C0.497255 11.4609 0.511179 11.5431 0.541343 11.6199C0.571508 11.6967 0.617263 11.7664 0.675736 11.8247C0.734209 11.8831 0.804137 11.9287 0.881132 11.9588C0.958127 11.9889 1.04053 12.0027 1.12316 11.9996C1.20579 11.9964 1.28687 11.9762 1.36131 11.9403C1.43575 11.9044 1.50194 11.8535 1.55573 11.7908L6.53573 6.83014L11.5097 11.7908C11.6245 11.8889 11.7722 11.9401 11.9232 11.9343C12.0742 11.9285 12.2174 11.866 12.3243 11.7595C12.4311 11.6529 12.4937 11.51 12.4996 11.3594C12.5054 11.2088 12.454 11.0616 12.3557 10.9471L7.38173 5.9864Z"
-                                                                fill="#A0A0A0" />
-                                                        </svg></span></span>
-                                            <form>
-                                                <textarea placeholder="Ваш ответ"></textarea>
-                                                <input type="submit" value="Отправить">
-                                            </form>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="reviews__item__footer">
-                    <div class="reviews__item__footer--btn ">
-                            <span class="icon ">
-                                <svg width="4" height="16" viewBox="0 0 4 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2 6C0.9 6 0 6.9 0 8C0 9.1 0.9 10 2 10C3.1 10 4 9.1 4 8C4 6.9 3.1 6 2 6ZM2 0C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4C3.1 4 4 3.1 4 2C4 0.9 3.1 0 2 0ZM2 12C0.9 12 0 12.9 0 14C0 15.1 0.9 16 2 16C3.1 16 4 15.1 4 14C4 12.9 3.1 12 2 12Z"
-                                        fill="#818181" />
-                                </svg>
-                            </span>
-                        <span class="text ">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M6.57947 18.9855C6.83153 18.9473 7.06758 18.8352 7.2594 18.6627L11.4048 14.9295H15.6165C16.0609 14.9295 16.5008 14.8395 16.9113 14.6645C17.3218 14.4894 17.6948 14.2329 18.009 13.9096C18.3232 13.5862 18.5724 13.2023 18.7425 12.7798C18.9125 12.3573 19 11.9045 19 11.4472V4.48238C19 3.5588 18.6435 2.67304 18.009 2.01997C17.3745 1.36689 16.5139 1 15.6165 1H4.38346C3.48611 1 2.62551 1.36689 1.99099 2.01997C1.35647 2.67304 1 3.5588 1 4.48238V11.4472C1 11.9045 1.08752 12.3573 1.25755 12.7798C1.42759 13.2023 1.67681 13.5862 1.99099 13.9096C2.62551 14.5626 3.48611 14.9295 4.38346 14.9295H5.06015V17.6347C5.0601 17.8969 5.13344 18.1536 5.27138 18.374C5.40933 18.5945 5.60605 18.7694 5.83803 18.8778C6.07 18.9863 6.32741 19.0236 6.57947 18.9855ZM15.6165 15.9295H11.7887L7.92826 19.406C7.59297 19.7077 7.17702 19.9064 6.72915 19.9742C6.28113 20.042 5.82439 19.9753 5.41457 19.7837C5.00507 19.5923 4.66218 19.2857 4.42366 18.9045C4.18533 18.5236 4.0601 18.0826 4.06015 17.6345V15.9173C3.00738 15.8378 2.01772 15.3721 1.27377 14.6064C0.868154 14.1889 0.547875 13.6949 0.329859 13.1531C0.11186 12.6115 0 12.0319 0 11.4472V4.48238C0 3.30273 0.455032 2.1658 1.27377 1.32312C2.09346 0.479463 3.21144 0 4.38346 0H15.6165C16.7886 0 17.9065 0.479464 18.7262 1.32312C19.545 2.1658 20 3.30273 20 4.48238V11.4472C20 12.0318 19.8881 12.6115 19.6701 13.1531C19.4521 13.6949 19.1318 14.1889 18.7262 14.6064C18.3206 15.024 17.8374 15.3567 17.3035 15.5843C16.7696 15.812 16.1963 15.9295 15.6165 15.9295ZM10.6765 9H9.32353L9 5.69653V3H11V5.69653L10.6765 9ZM9 11H11V13H9V11Z"
-                                          fill="#FF5252" />
-                                </svg>
-                                <a href="" data-modal-target="#modal__complaint">Оставить жалобу на отзыв</a>
-                            </span>
-                    </div>
-                    <div class="reviews__item__footer--left">
-                        <p class="comment__btn-js"><span class="text">Комментарии к отзыву</span>
-                            <span class="icon ">
-                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M2.99956 9.86879C2.86651 9.9734 2.70026 10.0181 2.5366 9.9933C2.37295 9.96849 2.22496 9.87614 2.12451 9.73612C2.04398 9.62296 2.0003 9.48485 2.00013 9.34278V7.89476H1.6251C0.727546 7.89476 4.0243e-07 7.12875 4.0243e-07 6.18407V1.71069C-0.000624637 0.766009 0.726921 0 1.62448 0H8.3749C9.27245 0 10 0.766009 10 1.71069V6.18407C10 7.12942 9.27245 7.89476 8.3749 7.89476H5.50597L2.99956 9.86879Z"
-                                            fill="#005DFF" />
-                                    </svg>
-                                </span>
-                            <span class="result">150</span>
-                        </p>
-                        <p>
-                            <span class="text">Отзыв был полезен</span>
-                            <span class="icon">
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.40384 2.52159L6.55718 0.94226C6.61784 0.307593 7.21051 -0.123074 7.80918 0.0315931C8.70984 0.264926 9.34251 1.10159 9.34251 2.06093V4.08426C9.34251 4.53426 9.34251 4.75959 9.43984 4.92426C9.49518 5.01826 9.57118 5.09759 9.66184 5.15426C9.82184 5.25493 10.0398 5.25493 10.4752 5.25493H10.7392C11.8745 5.25493 12.4418 5.25493 12.7912 5.51493C13.0532 5.71026 13.2378 5.99626 13.3112 6.32026C13.4085 6.75359 13.1905 7.29559 12.7538 8.37826L12.5365 8.91826C12.4104 9.23101 12.3589 9.5688 12.3858 9.90493C12.5405 11.8209 11.0212 13.4349 9.16384 13.3289L2.21451 12.9296C1.45518 12.8863 1.07584 12.8643 0.733176 12.5609C0.389843 12.2576 0.325176 11.9449 0.196509 11.3203C-0.0773358 9.99133 -0.064836 8.61931 0.233176 7.29559C0.421843 6.46359 1.21651 6.01559 2.03718 6.12226C4.21318 6.40226 6.18584 4.77626 6.40384 2.52226V2.52159Z"
-                                            fill="#005DFF" />
-                                        <path
-                                            d="M3.33335 6.33362L3.24202 6.63828C2.65075 8.60927 2.68265 10.7148 3.33335 12.667"
-                                            fill="white" />
-                                        <path
-                                            d="M3.33335 6.33362L3.24202 6.63828C2.65075 8.60927 2.68265 10.7148 3.33335 12.667"
-                                            stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
-                            <span class="result">150</span>
-                        </p>
-                    </div>
-                    <div class="reviews__item__footer--right">
-                        <p>
-                            <span class="text">источник</span>
-                            <a href=""><span class="icon">
-                                        <svg width="46" height="14" viewBox="0 0 46 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M5.60798 1.62443H4.72037C3.09182 1.62443 2.23658 2.4891 2.23658 3.76752C2.23658 5.21931 2.82878 5.89385 4.04554 6.75779L5.04883 7.46657L2.1567 12.0121H0L2.59878 7.95026C1.10176 6.82699 0.263046 5.73797 0.263046 3.88844C0.263046 1.57271 1.79036 0 4.70384 0H7.59597V12.0121H5.60798V1.62443Z"
-                                                fill="#FC3F1D" />
-                                            <path
-                                                d="M23.7321 3.31873H18.025V4.06174C18.025 6.18734 17.8935 8.93576 17.2028 10.3876H16.5955V13.9999H18.4051V12.012H22.7929V13.9999H24.6039V10.3876H23.7321V3.31873ZM21.7751 10.3846H19.0118C19.5544 9.07344 19.7004 6.70308 19.7004 5.19957V4.94316H21.7731L21.7751 10.3846Z"
-                                                fill="black" />
-                                            <path
-                                                d="M13.816 6.75772H11.2013V3.31873H9.24365V12.012H11.2013V8.38288H13.816V12.012H15.773V3.31873H13.816V6.75772Z"
-                                                fill="black" />
-                                            <path
-                                                d="M44.1077 4.77053C44.8652 4.77053 45.6047 5.04661 45.9993 5.30594V3.55767C45.5861 3.31583 44.8645 3.14246 43.8942 3.14246C41.3946 3.14246 40.0952 5.02695 40.0952 7.6712C40.0952 10.5748 41.3616 12.1817 43.9762 12.1817C44.881 12.1817 45.5221 12.0091 45.9993 11.6463V9.97091C45.5062 10.3351 44.914 10.5588 44.0919 10.5588C42.6933 10.5588 42.1183 9.41802 42.1183 7.62094C42.1183 5.73645 42.8255 4.76908 44.1077 4.76908"
-                                                fill="black" />
-                                            <path
-                                                d="M39.8331 3.31799H37.8595L35.0962 7.32809V3.31799H33.1392V12.012H35.0962V7.7433L37.9911 12.012H40.2111L37.0697 7.32809L39.8331 3.31799Z"
-                                                fill="black" />
-                                            <path
-                                                d="M28.6007 3.14537C26.2161 3.14537 25.0813 5.0641 25.0813 7.69087C25.0813 10.7161 26.4957 12.1847 28.996 12.1847C30.2458 12.1847 31.1665 11.8394 31.7421 11.4242V9.74873C31.1334 10.1807 30.1143 10.5609 29.1599 10.5609C27.7297 10.5609 27.1864 9.85217 27.1044 8.40038H31.8241V7.30771C31.8241 4.2832 30.5578 3.14246 28.6007 3.14246V3.14537ZM29.8347 6.87574H27.1044C27.154 5.49169 27.6305 4.76762 28.5684 4.76762C29.5386 4.76762 29.8347 5.61407 29.8347 6.7031V6.87574Z"
-                                                fill="black" />
-                                        </svg>
-                                    </span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="reviews__item-right">
-                <div class="reviews__item-right--top">
-                    <div class="raiting">
-                        <div class="raiting__position">
-                                <span class="icon">
-                                    <svg width="54" height="44" viewBox="0 0 54 44" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M52 17.0646C52 21.0211 51.0561 24.9209 49.2462 28.4416C47.4363 31.9623 44.8125 35.0029 41.5914 37.3122C38.3704 39.6214 34.6447 41.133 30.7221 41.7221C26.7995 42.3112 22.7927 41.9607 19.0328 40.6998C15.2728 39.4389 11.8677 37.3037 9.09867 34.4706C6.32967 31.6376 4.27634 28.1879 3.10832 24.4068C1.94031 20.6257 1.69115 16.6216 2.38143 12.7254C3.07172 8.82926 4.68163 5.15286 7.07814 2"
-                                            stroke="#005DFF" stroke-width="4" />
-                                    </svg>
-                                </span>
-                            <span class="raiting__satr-number">0.0</span>
-                        </div>
-                        <p><a href="">vincko:</a></p>
-                    </div>
-                    <div class="raiting__about">
-                        <span class="raiting__about-name">ООО “Зубр”</span>
-                        <span class="raiting__about-btn"><a href="">Оставить отзыв</a></span>
-                        <span class="raiting__about-сhart">
-                                <a href="" class="question">Почему компании нет в Рейтинге</a>
-                            </span>
-                    </div>
-                </div>
-                <div class="reviews__item-right--bottom">
-                    <p class="text">Прочие оценки:</p>
-                    <ul>
-                        <li><a href="">
-                                    <span class="raiting">
-                                        <span class="icon--pseudo">
-                                            <svg width="30" height="26" viewBox="0 0 30 26" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M28 10.2855C28 12.4616 27.5092 14.6065 26.568 16.5429C25.6269 18.4793 24.2625 20.1516 22.5875 21.4217C20.9126 22.6918 18.9752 23.5232 16.9355 23.8471C14.8958 24.1711 12.8122 23.9784 10.857 23.2849C8.90187 22.5914 7.13118 21.4171 5.69131 19.8589C4.25143 18.3007 3.18369 16.4034 2.57633 14.3237C1.96896 12.2441 1.8394 10.0419 2.19835 7.89899C2.55729 5.75609 3.39445 3.73407 4.64063 2"
-                                                    stroke="#FDE74C" stroke-width="4" />
-                                            </svg>
-                                        </span>
-                                        <span class="text">5</span>
-                                    </span>
-                                <span class="icon">
-                                        <img src="../img/reviews/yandex__icon.svg" alt="img">
-                                    </span>
-                            </a></li>
-
-                    </ul>
-                    <a href="" class="button">Охранные услуги компании<span class="icon">
-                                <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M0.499512 5C0.499511 4.81059 0.57852 4.62894 0.719157 4.49501C0.859794 4.36108 1.05054 4.28584 1.24943 4.28584L9.93796 4.28584L6.71782 1.22068C6.64809 1.15428 6.59278 1.07545 6.55505 0.9887C6.51732 0.901945 6.49789 0.808961 6.49789 0.715058C6.49789 0.621155 6.51732 0.528171 6.55505 0.441416C6.59278 0.354662 6.64809 0.275834 6.71782 0.209435C6.78754 0.143036 6.87032 0.0903642 6.96141 0.0544297C7.05251 0.0184943 7.15015 -2.90709e-07 7.24876 -2.95019e-07C7.34736 -2.99329e-07 7.445 0.0184943 7.5361 0.0544297C7.6272 0.0903641 7.70997 0.143036 7.7797 0.209435L12.2792 4.49438C12.349 4.56071 12.4044 4.63952 12.4422 4.72629C12.4801 4.81305 12.4995 4.90606 12.4995 5C12.4995 5.09394 12.4801 5.18695 12.4422 5.27371C12.4044 5.36048 12.349 5.43928 12.2792 5.50562L7.7797 9.79056C7.70997 9.85696 7.6272 9.90963 7.5361 9.94557C7.445 9.9815 7.34736 10 7.24876 10C7.15015 10 7.05251 9.9815 6.96141 9.94557C6.87032 9.90963 6.78754 9.85696 6.71782 9.79056C6.577 9.65646 6.49789 9.47459 6.49789 9.28494C6.49789 9.19104 6.51732 9.09805 6.55505 9.0113C6.59278 8.92454 6.64809 8.84572 6.71782 8.77932L9.93796 5.71416L1.24943 5.71416C1.05054 5.71416 0.859794 5.63892 0.719157 5.50498C0.57852 5.37105 0.499512 5.18941 0.499512 5Z"
-                                          fill="black" />
-                                </svg>
-                            </span></a>
-                </div>
-            </div>
-        </li>*/ ?>
-    </ul>
-    <!-- reviews__items end-->
-    <?php
-    /*if ($arParams['ROWS_PER_PAGE'] > 0):
-        $APPLICATION->IncludeComponent(
-            'bitrix:system.pagenavigation',
-            '',
-            array(
-                'NAV_OBJECT' => $arResult['nav_object'],
-                'SEF_MODE' => 'N',
-            ),
-            false
-        );
-    endif;*/
-    ?>
-
-    <div class="reviews__form-bottom">
-        <div class="reviews__form-bottom--left"><span class="icon"><svg width="10" height="7" viewBox="0 0 10 7"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M4.9988 1.13553L8.91021 5.05793C9.15916 5.30745 9.15916 5.71199 8.91021 5.96138C8.66149 6.21079 8.25809 6.21079 8.00939 5.96138L4.54839 2.49065L1.08752 5.96128C0.838695 6.21069 0.435335 6.21069 0.186615 5.96128C-0.0622052 5.71187 -0.0622052 5.30734 0.186615 5.05783L4.09809 1.13543C4.22251 1.01072 4.3854 0.948437 4.54837 0.948437C4.71143 0.948437 4.87444 1.01084 4.9988 1.13553Z"
-                                fill="#A0A0A0"/>
-                    </svg></span>
-            <a class="text return_to_filter-js" href="#reviews__form">Подняться к фильтрам</a>
-        </div>
-        <div class="reviews__form-bottom--right">
-            <ul class="pagination">
-                <li><a href="" class="prev">0</a></li>
-                <li><span class="active">1</span></li>
-                <li><a href="">2</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">7</a></li>
-                <li><a href="" class="next">8</a></li>
-            </ul>
         </div>
     </div>
+
+
+    <div class="reviews-item-wrapper-block">
+
+    </div>
+
+
+
 
     <!-- pupup -->
     <div id="modal__complaint" class="modal reviews">

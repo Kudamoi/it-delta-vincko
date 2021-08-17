@@ -17,25 +17,46 @@ function change(num) {
 
     })
 }
+
+function clickRadio(param) {
+    var value = document.querySelectorAll("input[type='radio'][name='" + param.name + "']");
+    for (var i = 0; i < value.length; i++) {
+        if (value[i] != param)
+            value[i].BeforeCheck = false;
+    }
+    if (param.BeforeCheck)
+        param.checked = false;
+    param.BeforeCheck = param.checked;
+}
+
+
 $(document).ready(function () {
-    let targetCity = document.querySelector('.rating-center__search_form.select-city .searchForm__modal');
+    let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+    $.ajax({
+        type: 'post',
+        url: '/ajax/raiting/filter.php',
+        //data: {'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
+        data: {'COMPANY': company},
+        response: 'html',
+        success: function(data) {
+            console.log(company);
+            $('.rating-center__items-wrapper-block').html(data);
+            $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
+        }
+    })
+
+
+    $('input.rating-home').on('click', function(){
+        if($(this).attr("checked") == 'checked') {
+            $(this).removeAttr('checked');
+        } else {
+            $(this).attr('checked', 'checked')
+        }
+    });
+
     const config = {
         attributes: true,
     };
-    const callback = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-            if($('.rating-center__search_form.select-city .searchForm__modal').attr('style') == 'display: none;') {
-                let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
-                let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
-                if (companyID != companyPreID) {
-                    BX.setCookie("selected_city", companyID, {expires: 86400, path: '/'});
-                    BX.reload();
-                }
-            }
-        }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetCity, config);
 
     let targetCompany = document.querySelector('.rating-center__search_form.select-company .searchForm__modal');
         const callbackCompany = function(mutationsList, observer) {
@@ -43,7 +64,6 @@ $(document).ready(function () {
                 if($('.rating-center__search_form.select-company .searchForm__modal').attr('style') == 'display: none;') {
                 let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
                     $('.rating-center__items-wrapper .rating-center__item_wrappers[data-id='+companyID+']').click();
-                    console.log($('.rating-center__items-wrapper .rating-center__item_wrappers[data-id='+companyID+']').offset().top);
                     let offset = $('.rating-center__items-wrapper .itemRating-open[data-id='+companyID+']').offset().top
                     $('html').animate({
                             scrollTop: offset
@@ -56,29 +76,46 @@ $(document).ready(function () {
         observerCompany.observe(targetCompany, config);
 
 
+    $('.rating-center__items_top-right-help #pseudo__range').change(function() {
+        let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+    $.ajax({
+                type: 'post',
+                url: '/ajax/raiting/filter.php',
+                data: {'COMPANY': company,'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
+                response: 'html',
+                success: function(data) {
+                    $('.rating-center__items-wrapper-block').html(data);
+                    $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
+                }
+            })
+    })
     $('.rating-center__items_top-btns-item').on('click','input[type="radio"].rating-home', function() {
+        let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+        let objectID = null;
+        if ($(this).prop('checked')) {
+             objectID= $(this).attr('id');
+        }
         $.ajax({
+            type: 'post',
             url: '/ajax/raiting/filter.php',
-            data: {'test': 'test'},
-            type: 'html',
+            data: {'COMPANY': company,'OBJECT': objectID, 'MARK':  $('.rating-center__items_top-right-help #pseudo__range').val()},
+            response: 'html',
             success: function(data) {
-                $('.rating-center__items-wrapper').html(data);
-
+                $('.rating-center__items-wrapper-block').html(data);
+                $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
             }
         })
 
 
     });
     var params = window.location.search.replace('?','').split('&').reduce(
-        function(p,e){
+        function(p,e) {
             var a = e.split('=');
             p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
             return p;
         },
         {}
     );
-
-    $('.searchForm__modal').closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder', params["city"]);
 
     $(document).click( function(e){
         if (!$('.rating-help-window[style="display: block;"]').is(e.target) &&
@@ -115,21 +152,34 @@ $(document).ready(function () {
         });
     });
     $('.searchForm__modal').on('click', '.bottomChekItem', function() {
-        $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('placeholder',$(this).find('.itemText').html());
+
+        $('.rating-center__search_form.select-company .searchForm__modal_closed').click();
+
         $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
+        let companyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
+        let companyPreID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+        if (companyID != companyPreID) {
+            BX.setCookie("selected_city", companyID, {expires: 86400, path: '/'});
+            $.ajax({
+                url: "/ajax/citymodal.php",
+                type: "POST",
+                data: {
+                    city: companyID
+                },
+                dataType: "json",
+                success: function(d){
+                    location.reload('#rating-center');
+                },
+                error: function(e){
+                    location.reload('#rating-center');
+                }
+            });
+        }
 
 
-        //window.location.href = "?city=" + companyName.attr('placeholder');
-//        $.ajax({
-//            url: '/index.php',
-//            method: 'POST',
-//            data: {'city': companyName.attr('placeholder')},
-//            success: function (data){
-//                console.log(data);
-//            }
-//        });
+
     });
 })
 

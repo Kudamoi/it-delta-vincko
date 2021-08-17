@@ -12,10 +12,14 @@
                     continue;
                 ?>
                 <? if ($arItem["SELECTED"]): ?>
-                <li><a class="active" href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
-            <? else: ?>
-                <li><a href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
-            <? endif ?>
+                    <li><a class="active" href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
+                <? elseif($arItem["PARAMS"]): ?>
+                    <? foreach ($arItem["PARAMS"] as $key => $value): ?>
+                        <li><a <?=$key?>="<?=$value?>" href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
+                    <? endforeach ?>
+                <? else: ?>
+                    <li><a href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
+                <? endif ?>
 
             <? endforeach ?>
         </ul>

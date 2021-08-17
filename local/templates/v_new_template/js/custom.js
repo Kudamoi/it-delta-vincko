@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-	$(".js-bonuce").click(function () {
+	$(".js-bonuce").click(function(e){
+		e.preventDefault();
 		$(".header__popup").removeClass("hidden");
 		return false;
 	});
@@ -214,6 +215,50 @@ $(document).ready(function () {
 			left = 1;
 		}
 	});
+	$(".new-pass-button").on("click", function () {
+		$(".popup").addClass("hidden");
+		$(".popup--new-pass").removeClass("hidden");
+	});
+	$(".to-registration").on("click", function () {
+		$(".popup").addClass("hidden");
+		$(".popup--registration").removeClass("hidden");
+	});
+	$(".to-login").on("click", function () {
+		$(".popup").addClass("hidden");
+		$(".popup--login").removeClass("hidden");
+	});
+	$(".forget-pass").on("click", function () {
+		$(".popup").addClass("hidden");
+		$(".popup--forget").removeClass("hidden");
+	});
+
+	$(".footer_bottom-js").on("click", function(){
+		$("#input_phone").focus();
+	});
+
+	$(".header__top-search .input__control").on("click", function(){
+		$(".searchForm__modal").css({'display': 'block'});
+		$(".searchForm__modal .searchForm__modal_input").focus();
+	});
+
+	// $('form').submit(function(){
+	// 	$.ajax({
+	// 		type: "POST",
+	// 		url: $(this).attr('action'),
+	// 		data: $(this).serialize()+'&ajax_key=Y',
+	// 		dataType: "json",
+	// 		success: function(data)
+	// 		{
+	// 			if (data.type == 'error') {
+	// 				alert(data.message);
+	// 			} else {
+	// 				alert('Вы авторизовались!');
+	// 			}
+	// 		}
+	// 	});
+	//
+	// });
+	/* Article FructCode.com */
 });
 
 //функция оформления заказа
@@ -253,4 +298,5 @@ function sendAjaxForm(result_form, ajax_form, url) {
 
 
 }
+
 

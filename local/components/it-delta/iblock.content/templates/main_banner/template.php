@@ -22,7 +22,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                     <?=$params["PREVIEW_TEXT"]?>
                 </div>
                 <div class="slider__item-left--button">
-                    <a href="<?=$params["PROPERTIES"]["S_LINK"]["VALUE"]?>" class="button"><?=$params["PROPERTIES"]["S_BUTTON_TEXT"]["VALUE"]?></a>
+                    <a href="<?=$params["PROPERTIES"]["S_LINK"]["VALUE"]?>" class="button">Узнать больше</a>
                 </div>
             </div>
 

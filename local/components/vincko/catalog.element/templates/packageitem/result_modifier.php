@@ -66,6 +66,7 @@ $res = CIBlockSection::GetList(
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
+    $arResult['PACKAGE_GROUP']['PICTURE'] = CFile::ResizeImageGet($arFields['PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
 if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
 {
@@ -150,15 +151,34 @@ $arSKU = CCatalogSKU::getOffersList(
     array()
 );
 
+//получим честный договор
+$res = CIBlockElement::GetList(
+    array("SORT" => "ASC"),
+    array("ACTIVE" => "Y", "IBLOCK_CODE" => "contract"),
+    false,
+    false,
+    array("ID","*","PROPERTY_CONTRACT")
+);
+while ($arFields = $res->Fetch()) {
+
+    $arResult['FAIR_CONTRACT'] = $arFields;
+    $arResult['FAIR_CONTRACT']['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_CONTRACT_VALUE']);
+
+}
+
 //получаем все элементы ИБ Компания-Город
 $res = CIBlockElement::GetList(
     array("SORT" => "ASC"),
-    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds)
+    array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
+    false,
+    false,
+    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT","PROPERTY_CHOP_ID.NAME")
 
 );
 while ($arFields = $res->Fetch()) {
 
-     $arResult['ALL_LIST_COMPANY_CITY'][$arFields['ID']] = $arFields;
+    $arResult['ALL_LIST_COMPANY_CITY'][$arFields['ID']] = $arFields;
+    $arResult['ALL_LIST_COMPANY_CITY'][$arFields['ID']]['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_CONTRACT_VALUE']);
 
 }
 

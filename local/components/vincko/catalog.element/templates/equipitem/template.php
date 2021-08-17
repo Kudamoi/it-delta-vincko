@@ -161,13 +161,13 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
     <div class="container up-top-slider-bg">
         <div class="top-slider-bg ">
             <picture>
-                <source srcset="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>">
-                <img src="<?= $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
+                <source srcset="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>">
+                <img src="<?= $arResult['PACKAGE_GROUP']['PICTURE']['src'] ?>" alt="<?= $arResult['NAME'] ?>">
             </picture>
         </div>
     </div>
     <div class="container">
-        
+
         <section class="complect__slider">
             <div class="complect__slider-wrapper">
                 <div class="solutions-card__circles">
@@ -475,7 +475,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <? $i++; ?>
                             <? endforeach; ?>
                         </div>
-                      
+
                     </div>
                     <div class="slider__under-block-2 close" id="tech">
                         <div class="title">Технические характеристики датчика</div>
@@ -568,7 +568,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                name="solutions-card__top-select">
                                                         <div class="select__head">Выбрать другой комплект</div>
                                                         <div class="select__list" style="display: none;">
-                                                           
+
                                                             <div class="select__list-item">
                                                                 <!-- Выбрано -->
                                                                 <div class="select__list-item_title">Выбрано</div>
@@ -602,7 +602,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                 <? endforeach; ?>
 
                                                             </div>
-                                                         
+
                                                         </div>
                                                     </form>
                                                 </div>
@@ -616,42 +616,6 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <div class="solutions-card__subtitle">
                                     Выберите Вариант
-
-                                    <div class="products__info">
-                                        <div class="products__info-sign">
-                                            <picture><img
-                                                        src="<?= SITE_TEMPLATE_PATH ?>/img/insurance/product-info.svg"
-                                                        alt="info"></picture>
-                                        </div>
-                                        <div class="products__text-container">
-                                            <div class="products__info-text">
-                                                <div class="h4"> Принимается на страхование следующее движимое
-                                                    (домашнее) имущество:
-                                                </div>
-
-                                                <p>под домашним имуществом, принимаемым на страхование в рамках
-                                                    настоящего договора, понимается движимое имущество, не имеющие
-                                                    особой (культурной, художественной, исторической и т.п.)
-                                                    ценности: мебель, предметы интерьера, ковры; теле-, аудио- и
-                                                    видеоаппаратура; бытовая и вычислительная техника; осветительные
-                                                    приборы (люстры, светильники и т.п.); посуда; одежда и
-                                                    обувь.</p>
-
-                                                <div class="h4">Не принимается на страхование следующее движимое
-                                                    (домашнее) имущество:
-                                                </div>
-
-                                                <p>изделия из меха и кожи, изделия из драгоценных металлов или из
-                                                    драгоценных камней; книги, коллекции марок, монет, рисунков,
-                                                    картин, скульптур, иные произведения искусства; предметы
-                                                    религиозного культа; технические носители информации; средства
-                                                    мототранспорта, квадрои гидроциклы, снегоходы, мопеды и лодки;
-                                                    малогабаритные строительные, сельскохозяйственные машины;
-                                                    садовый инвентарь, строительные инструменты, а также иное
-                                                    имущество в соответствии с п. 3.5 Правил № 100</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="solutions-card__circles">
                                     <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
@@ -758,7 +722,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     </div>
                                     <div class="solutions-card__top_text">
                                         <div class="h4 solutions-card__top_text-title">
-                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?>
+                                            <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?>
                                         </div>
                                         <div class="itemRating-open__left_deal">
                                             <a href="#guarantee">Безопасная сделка</a>
@@ -791,7 +755,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy-top">
                                                                 <span class="font-weight policy-title">
                                                                     Компания “ <span
-                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'] ?></span> ”
+                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'] ?></span> ”
                                                                 </span>
                                                                     </div>
                                                                 </div>
@@ -956,6 +920,80 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__substrate_bottom-icon">
                                     <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/present-icon.svg" alt="img">
                                 </div>
+                                <? if (!empty($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_HONEST_CONTRACT_VALUE'])): ?>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <div class="info-block-two rating-check-window">
+                                        <div class="info-block-two__right">
+                                            <div class="info-block-two__right_row">
+                                                <img class="icon-open-info-block" src="/upload/rating/icon-info.svg"
+                                                     alt="img">
+                                                Ссылка на договор
+                                            </div>
+                                            <div class="info-block-bottom">
+                                                <div class="links-contract">
+                                                    <? if (!empty($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_HONEST_CONTRACT_VALUE'])): ?>
+                                                        <div>
+                                                            <a class="link-item" target="_blank"
+                                                               href="<?= $arResult['FAIR_CONTRACT']['CONTRACT_LINK'] ?>">vincko:
+                                                                Честный договор</a>
+                                                        </div>
+                                                    <? endif; ?>
+                                                    <div>
+                                                        <a class="link-item t-c-gray" target="_blank"
+                                                           href="<?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['CONTRACT_LINK'] ?>">Договор
+                                                            охранной компании</a>
+                                                    </div>
+                                                </div>
+                                                <div class="text-descrip t-c-gray">Перед покупкой услуг охранной
+                                                    компании - ознакомтесь с текстом договора
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-help-window active" style="display: none;">
+                                            <div class="rating-help-window-close">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.17564 7.98187L15.8076 1.36761C15.9387 1.21497 16.0072 1.01864 15.9994 0.817837C15.9916 0.617035 15.9082 0.426555 15.7657 0.28446C15.6232 0.142366 15.4322 0.0591225 15.2309 0.0513664C15.0295 0.0436103 14.8327 0.111912 14.6796 0.242623L8.04764 6.85688L1.41563 0.234644C1.26499 0.084404 1.06068 0 0.847635 0C0.634593 0 0.430278 0.084404 0.279635 0.234644C0.128992 0.384884 0.0443614 0.588653 0.0443614 0.801125C0.0443614 1.0136 0.128992 1.21737 0.279635 1.36761L6.91964 7.98187L0.279635 14.5961C0.195889 14.6677 0.127873 14.7557 0.0798545 14.8547C0.0318359 14.9536 0.00485175 15.0615 0.000596153 15.1713C-0.00365944 15.2812 0.0149049 15.3908 0.0551246 15.4932C0.0953442 15.5956 0.156351 15.6886 0.234315 15.7663C0.312278 15.8441 0.405516 15.9049 0.508176 15.945C0.610836 15.9851 0.720702 16.0036 0.830878 15.9994C0.941053 15.9952 1.04916 15.9682 1.14841 15.9204C1.24766 15.8725 1.33592 15.8046 1.40763 15.7211L8.04764 9.10685L14.6796 15.7211C14.8327 15.8518 15.0295 15.9201 15.2309 15.9124C15.4322 15.9046 15.6232 15.8214 15.7657 15.6793C15.9082 15.5372 15.9916 15.3467 15.9994 15.1459C16.0072 14.9451 15.9387 14.7488 15.8076 14.5961L9.17564 7.98187Z"
+                                                          fill="#D1DBE3"></path>
+                                                </svg>
+
+                                            </div>
+                                            <div class="rating-help-window-body">
+                                                <div class="block-rating-help-item">
+                                                    <div class="top-block-rating-help-item" style="color:#000000;">
+                                                        <div class="top-block-rating-help-item-title">
+                                                            <span class="t-c-blue">Договор</span> с охранной
+                                                            компанией
+                                                        </div>
+                                                    </div>
+                                                    <div class="content-top-block-rating-help-item t-c-black">
+                                                        <br>
+                                                        <ul>
+                                                            <li>
+                                                                <span>Честный договор составлен и рекомендован vincko: договор сформулирован таким образом, чтобы максимально защитить права и интересы клиентов, заказывающих услуги охранных компаний на платформе vincko:</span>
+                                                                <br><br>
+                                                                <span class="t-c-gray"
+                                                                      style="font-weight: normal"><span
+                                                                            class="t-c-blue t-u-under b">vincko: Честный договор</span> - доступен при покупке услуг данной компании</span>
+                                                                <br>
+                                                                <span class="t-c-gray"
+                                                                      style="font-weight: normal"><span
+                                                                            class="t-u-under g">vincko: Честный договор</span> - <span
+                                                                            class="t-c-red">не</span> доступен при покупке услуг данной компании</span>
+                                                                <br><br>
+                                                            </li>
+                                                            <li>
+                                                                <span>Договор охранной компании: предоставляется индивидуально самой компанией, всю ответственность за условия такого договора несет данная охранная компания.</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <? endif; ?>
                             </div>
                         </div>
                     </div>
@@ -1188,7 +1226,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
 
                             </div>
-                            <div class="solutions-card__substrate_bottom present">
+                            <div class="solutions-card__substrate_bottom <? /*present*/ ?>">
                                 <? foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item): ?>
                                     <? if (!empty($item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['BASE_PRICE'])): ?>
                                         <p class="solutions-card__substrate_bottom-text">
@@ -1201,7 +1239,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                              data-policy-disc-price="<?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?>"
                                              data-policy-id="<?= $currentPolicyIndex ?>"
                                              class="solutions-card__substrate_bottom-price">
-                                            В подарок
+                                            <? /*В подарок*/ ?>
+                                            <span><?= $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> ₽</span>
                                         </div>
                                     <? endif; ?>
                                 <? endforeach; ?>
@@ -1348,8 +1387,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <img src="<?= SITE_TEMPLATE_PATH ?>/img/cartochka/close-modal.svg" alt="close-modal">
                     </picture>
                 </div>
-                
-                
+
+
                 <div class="modal-slider">
                     <? // additional photos
                     if (count($ec["EQUIPMENT_PICTURES"]) > 0):?>
@@ -1360,7 +1399,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
-                   
+
                 </div>
                 <div class="modal-bottom">
                     <? if (count($ec["EQUIPMENT_PICTURES"]) > 0): ?>
@@ -1431,7 +1470,7 @@ $data = [
             'title' => 'Комплект оборудования',
             'name1' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['NAME'],
             'name2' => $arResult['NAME'],
-            'gift' => 'доставка/монтаж в подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $complectPrice,
             'old_sum' => $complectOldPrice,
@@ -1442,9 +1481,9 @@ $data = [
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22 ,23,24)) ? 'а' : 'ев') . ' обслуживания',
-            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['NAME'],
+            'name2' => $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_CHOP_ID_NAME'],
             'months_count' => $currentSubscriptionFeeMonthsCount,
-            'gift' => '1 мес. в подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $subscriptionFeePrice,
             'old_sum' => $subscriptionFeeOldPrice
@@ -1455,7 +1494,7 @@ $data = [
             'name1' => 'при наступлении страхового случая',
             'name2' => $currentPolicyMaxPrice . ' руб',
             'policy_name' => $policy_name,
-            'gift' => 'подарок',
+            'gift' => $arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_P_BONUSES_VALUE'],
             'active' => true,
             'sum' => $policyPrice,
             'old_sum' => $policyOldPrice
