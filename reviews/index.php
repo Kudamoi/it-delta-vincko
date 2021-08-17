@@ -93,4 +93,36 @@ use Bitrix\Main\Entity;
     ); ?>
 
 </main>
+    <? $APPLICATION->IncludeComponent(
+        "it-delta:iblock.content",
+        "rating_open_for_yourself",
+        array(
+            "ACTIVE_DATE" => "N",
+            "ADD_CACHE_STRING" => "",
+            "CACHE_TIME" => "0",
+            "CACHE_TYPE" => "A",
+            "FILTER_NAME" => "arrFilter1",
+            "IBLOCK_ID" => "47",
+            "IBLOCK_TYPE" => "Articles",
+            "PAGE_ELEMENT_COUNT" => "10",
+            "RAND_ELEMENTS" => "N",
+            "SORT_BY1" => "ACTIVE_FROM",
+            "SORT_BY2" => "SORT",
+            "SORT_ORDER1" => "DESC",
+            "SORT_ORDER2" => "ASC"
+        )
+    ); ?>
+
+<br><br>
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/callback.php"
+        )
+    ); ?>
+
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

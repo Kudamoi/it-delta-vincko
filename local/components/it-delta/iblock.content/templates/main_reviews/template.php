@@ -18,7 +18,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
         <div class="you__reviews_head">
             <h2><span>Ваши отзывы</span> влияют<br>
                 на рейтинг охранных компаний</h2>
-            <a href="" class="button">Смотреть все отзывы</a>
+            <a href="reviews/" class="button">Смотреть все отзывы</a>
         </div>
         <div class="you__reviews_items you__reviews_slider-js">
             <!-- vinco__raityng - класс для рейтинга vinco (для него меняються стили и иконки) -->

@@ -986,7 +986,7 @@ jQuery(document).ready(function ($) {
     showMaskOnHover: false
   });
   $('.street-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,:/]+",
+    regex: "[A-ZА-Яa-zа-я1-9-.,:/]+",
     showMaskOnHover: false
   });
   $('.house-field').inputmask({
@@ -994,7 +994,7 @@ jQuery(document).ready(function ($) {
     showMaskOnHover: false
   });
   $('.housing-field').inputmask({
-    regex: "[1-9A-ZА-Яa-zа-я-]+",
+    regex: "[A-ZА-Яa-zа-я1-9-]+",
     showMaskOnHover: false
   });
   $('.flat-field').inputmask({
@@ -1801,13 +1801,13 @@ for (var i = 0; i < btns_modals.length; i++) {
   }
 
   if ($(".profile__c-main--all-orders").find('.profile__c-main-block').length === 0) {
-    $(".profile__c-main--all-orders .profile__empty").addClass("show");
+    $(".profile__c-main--all-orders .empty").addClass("show");
   }
 
   ;
 
   if ($(".profile__c-main--personal-requests").find('.profile__c-main-request').length === 0) {
-    $(".profile__c-main--personal-requests .profile__empty").addClass("show");
+    $(".profile__c-main--personal-requests .empty").addClass("show");
   }
 
   ;
@@ -1827,30 +1827,30 @@ for (var i = 0; i < btns_modals.length; i++) {
   $('.rating-center__items_top-btn').on('click', function () {
     $(this).addClass('act').siblings().removeClass('act');
   });
-  $('.rating-center__item').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.rating-center__item', function () {
     var itemRating = $(this).parent('.rating-center__item-wrapper').find('.itemRating-open');
     $(this).parent().addClass('item-rating-active');
     $(itemRating).addClass('show');
   });
-  $('.itemRating-open__closed').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.itemRating-open__closed', function () {
     $(this).parent().removeClass('show');
     $(this).parents('.rating-center__item-wrapper').removeClass('item-rating-active');
   });
-  $('.closed-card').on('click', function () {
+  $('.rating-center__items-wrapper-block').on('click', '.closed-card', function () {
     $('.itemRating-open').removeClass('show');
     $('.rating-center__item-wrapper').removeClass('item-rating-active');
   });
-  $('.tab-one').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-one', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-one').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
   });
-  $('.tab-two').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-two', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-two').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
   });
-  $('.tab-three').on('click', function (event) {
+  $('.rating-center__items-wrapper-block').on('click', '.tab-three', function (event) {
     event.preventDefault();
     $(this).addClass('tab_active').siblings().removeClass('tab_active');
     $(this).parent().next().find('.content-three').addClass('tabs-content_active').siblings().removeClass('tabs-content_active');
@@ -3133,6 +3133,8 @@ jQuery(document).ready(function ($) {
     $(this).parents('.solutions-card').removeClass('hide');
   });
   $('.select').on('click', '.select__head', function () {
+    console.log("select clicked");
+
     if ($(this).hasClass('open')) {
       $(this).removeClass('open');
       $(this).next().fadeOut();

@@ -4,6 +4,25 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
+.rating-center__search_form.select-city .searchForm__modal_topChek .topChekItem:first-child {
+    display: none!important;
+}
+.rating-center__search .searchForm__modal {
+    width: 100%;
+}
+.rating-center__search .searchForm__modal .searchForm__modal_topChek,
+.rating-center__search .searchForm__modal .searchForm__modal_centerChek,
+.rating-center__search .searchForm__modal .searchForm__modal_input {
+    width: 90%;
+}
+.reviews__form-top--result .result__tabs li {
+    margin-top: 20px!important;
+}
+.searchForm__modal_closed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .test-block {
     display: block;
 }
@@ -208,7 +227,7 @@
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    line-height: 10px;
+    line-height: 16px;
 }
 .rating-block .rating-help-window .block-rating-help-item .content-top-block-rating-help-item ul {
     list-style-type: disc;
@@ -516,4 +535,12 @@ a.item__content-company-not {
 .ready-des2__choice-spec-item {
     margin-top: 24px;
 }
+}
+
+.safe__pay_left-img img {
+    width: auto;
+    height: auto;
+
+    margin: auto;
+    display: block;
 }

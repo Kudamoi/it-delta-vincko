@@ -160,9 +160,11 @@ class GeoCity
             );
             setcookie('selected_city', $GLOBALS["GEOCITY"]['ID'] , time() + 3600 * 24 * 7, '/');
         } else {
+            $city = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 20, "ACTIVE" => "Y"), false, false, array("ID", "NAME"))->fetch();
+
             $GLOBALS["GEOCITY"] = array(
-                "NAME" => "Москва",
-                "ID" => 644
+                "NAME" => $city["NAME"],
+                "ID" => $city["ID"]
             );
             setcookie('selected_city', $GLOBALS["GEOCITY"]['ID'] , time() + 3600 * 24 * 7, '/');
         }

@@ -18,10 +18,10 @@ var HeaderFilter = {
                 },
                 dataType: "json",
                 success: function(d){
-                    location.reload();
+                    location.href = "/raiting/#rating";
                 },
                 error: function(e){
-                    location.reload();
+                    location.href = "/raiting/#rating";
                 }
             });
 

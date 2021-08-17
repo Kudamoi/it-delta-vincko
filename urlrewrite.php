@@ -104,6 +104,14 @@ $arUrlRewrite=array (
     'PATH' => '/personal/order/index.php',
     'SORT' => 100,
   ),
+  20 => 
+  array (
+    'CONDITION' => '#^/documents/#',
+    'RULE' => '',
+    'ID' => '',
+    'PATH' => '/documents/index.php',
+    'SORT' => 100,
+  ),
   10 => 
   array (
     'CONDITION' => '#^/personal/#',

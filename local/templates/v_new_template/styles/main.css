@@ -696,6 +696,7 @@ input[type="checkbox"] {
   position: absolute;
   z-index: -1;
   opacity: 0;
+  display: none;
 }
 
 .grey-border-button {
@@ -724,6 +725,83 @@ input[type="checkbox"] {
 .products__info-sign {
   display: grid;
   place-items: center;
+}
+
+.empty {
+  display: none;
+  padding: 40px 0px;
+  flex-direction: column;
+  place-items: center;
+  color: #818181;
+}
+
+.empty.show {
+  display: flex !important;
+}
+
+.empty > * {
+  text-align: center;
+}
+
+.empty picture {
+  display: grid;
+  place-items: center;
+  margin-bottom: 40px;
+}
+
+.empty-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.empty-text {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.empty-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.empty-btns > * {
+  width: 220px;
+  place-items: center;
+}
+
+.empty-btn {
+  border-radius: 5px;
+  background: transparent !important;
+  padding: 12px 0;
+  border: 1px solid #d1dbe3;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: black !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.empty-error {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
@@ -11258,8 +11336,8 @@ html {
   height: 48px;
   background-color: #005EFF;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   position: absolute;
   top: 47%;
@@ -21904,82 +21982,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   cursor: pointer;
 }
 
-.profile__empty {
-  display: none;
-  padding: 40px 0px;
-  flex-direction: column;
-  place-items: center;
-  color: #818181;
-}
-
-.profile__empty.show {
-  display: flex !important;
-}
-
-.profile__empty > * {
-  text-align: center;
-}
-
-.profile__empty picture {
-  display: grid;
-  margin-bottom: 40px;
-}
-
-.profile__empty-title {
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 29px;
-  letter-spacing: 0em;
-  text-align: center;
-}
-
-.profile__empty-text {
-  margin-bottom: 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: center;
-}
-
-.profile__empty-btns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 40px;
-}
-
-.profile__empty-btns > * {
-  width: 220px;
-  place-items: center;
-}
-
-.profile__empty-btn {
-  border-radius: 5px;
-  background: transparent !important;
-  padding: 12px 0;
-  border: 1px solid #d1dbe3;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  color: black !important;
-  transition: all 0.3s ease-in-out;
-}
-
-.profile__empty-error {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0em;
-  text-align: center;
-}
-
 .profile__tabs-choice {
   display: flex;
   flex-direction: column;
@@ -22500,6 +22502,14 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   letter-spacing: 0em;
   text-align: left;
   color: #818181;
+}
+
+.empty {
+  display: flex;
+}
+
+.empty-text {
+  max-width: 460px;
 }
 
 @media (min-width: 767px) {

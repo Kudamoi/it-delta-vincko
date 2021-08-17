@@ -1,7 +1,19 @@
 <?php
-//echo "<pre>";
-//    print_r($arResult);
-//echo "</pre>";
+
+use Bitrix\Main\Loader;
+
+Loader::includeModule("highloadblock");
+
+use Bitrix\Highloadblock as HL;
+use Bitrix\Main\Entity;
+
+//создаем заготовку под выборку отзывов
+$hlbl = 5; // Указываем ID нашего highloadblock блока к которому будет делать запросы.
+$hlblock = HL\HighloadBlockTable::getById($hlbl)->fetch();
+
+$entity = HL\HighloadBlockTable::compileEntity($hlblock);
+$entity_data_class = $entity->getDataClass();
+
 
 //Получаем всех пользователей
 $order = array('sort' => 'asc');
@@ -12,14 +24,7 @@ while ($user = $rsUsers->GetNext()) {
     $arrUsers[$user['ID']]['ID'] = $user['ID'];
     $arrUsers[$user['ID']]['NAME'] = $user['NAME'];
 }
-//Получаем все отзывы
-$reviews = CIBlockElement::GetList(array('PROPERTY_R_RATING_SUM' => 'DESC'), array("IBLOCK_CODE" => 'otzyvy', "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PROPERTY_R_RATING_SUM", "PROPERTY_R_COMMENT", "PROPERTY_R_USER_NAME", "PROPERTY_R_CHOP", "PROPERTY_R_USER_ID"));
 
-while ($review = $reviews->GetNext()) {
-    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['ID'] = $review["ID"];
-    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['NAME'] = !empty($review['PROPERTY_R_USER_ID_VALUE']) ? $arrUsers[$review['PROPERTY_R_USER_ID_VALUE']]['NAME'] : $review["PROPERTY_R_USER_NAME_VALUE"];
-    $arrReviews[$review["PROPERTY_R_CHOP_VALUE"]][$review["ID"]]['COMMENT'] = $review['~PROPERTY_R_COMMENT_VALUE']['TEXT'];
-}
 //Получаем честный договор и кладем его в массив
 $contract = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'contract', "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PROPERTY_CONTRACT"));
 
@@ -76,6 +81,7 @@ while ($city = $cities->GetNext()) {
 
 //Определяем ГП и записываем его в результирующий массив
 if (!empty($_COOKIE["selected_city"]) && $checkCityArr):
+
     $arResult['CITY_SELECTED']['ID'] = $arrCities[$_COOKIE["selected_city"]]['ID'];
     $arResult['CITY_SELECTED']['NAME'] = $arrCities[$_COOKIE["selected_city"]]['NAME'];
 else:
@@ -88,13 +94,21 @@ else:
     endforeach;
 endif;
 
-$pos = 1;
+//Получаем все отзывы
+$reviews = $entity_data_class::getList(array("select" => array("*"), "order" => array("UF_ALLSCORE_REVIEW_SCORE" => "DESC"), 'filter' => array('UF_CITY_ID' => $arResult['CITY_SELECTED']['ID'])));
+
+while($review = $reviews->fetch()) {
+
+    $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['ID'] = $review["ID"];
+    $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['NAME'] = !empty($review['UF_USER_NAME']) ? $review["UF_USER_NAME"] : $arrUsers[$review['UF_USER_ID']]['NAME'];
+    $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['COMMENT'] = $review['UF_ALLSCORE_REVIEW_SCORE_COMMENT'];
+
+}
+
 foreach ($arResult['ITEMS'] as $item):
-//    if ($arResult['CITY_SELECTED']['ID'] == $item['PROPERTIES']['CITY_ID']['VALUE']):
     $newArrItem[$item['ID']]['CODE'] = $item['CODE'];
     $newArrItem[$item['ID']]['ID'] = $item['ID'];
     $newArrItem[$item['ID']]['NAME'] = $item['NAME'];
-    $newArrItem[$item['ID']]['POSITION'] = $pos++;
     $newArrItem[$item['ID']]['CH_TYPE'] = $item['PROPERTIES']['CH_TYPE']['VALUE'];
     $newArrItem[$item['ID']]['CITY'] = $arrCities[$item['PROPERTIES']['CITY_ID']['VALUE']];
     $newArrItem[$item['ID']]['CH_RATING_SUM'] = $item['PROPERTIES']['CH_RATING_SUM']['VALUE'];
@@ -112,11 +126,11 @@ foreach ($arResult['ITEMS'] as $item):
     $newArrItem[$item['ID']]['SERVICES_APPARTAMENT'] = $item['PROPERTIES']['SERVICES_APPARTAMENT']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['SERVICES_COMMERCE'] = $item['PROPERTIES']['SERVICES_COMMERCE']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['DESCRIPTION_COMMERCE'] = $item['PROPERTIES']['DESCRIPTION_COMMERCE']['~VALUE']['TEXT'];
-    $newArrItem[$item['ID']]['REVIEWS'] = $arrReviews[$item['ID']];
+    $newArrItem[$item['ID']]['POSITION'] = MainService::calculateSecureCompanyRatingPositionsByCityId($newArrItem[$item['ID']]['CITY']['ID'])[$newArrItem[$item['ID']]['CHOP_ID']['ID']]['POSITION_IN_RATING'];
+    $newArrItem[$item['ID']]['REVIEWS'] = $arrReviews[$newArrItem[$item['ID']]['CHOP_ID']['ID']];
     foreach ($item['PROPERTIES']['MANUFACTURERS']['VALUE'] as $manufacture):
         $newArrItem[$item['ID']]['MANUFACTURERS'][$manufacture] = $arrManufactures[$manufacture];
     endforeach;
-//    endif;
 endforeach;
 
 
@@ -135,7 +149,3 @@ $arResult['OBJECTS'] = $arrObj;
 $arResult['CITY_COMPANIES'] = $arrCompany;
 $arResult['CITIES'] = $arrCities;
 $arResult['ITEMS'] = $newArrItem;
-
-//echo "<pre>";
-//    print_r($arResult);
-//echo "</pre>";

@@ -4,7 +4,7 @@ $aMenuLinks = Array(
 		"Покупка за бонусы", 
 		"", 
 		Array(), 
-		Array(), 
+		Array("class"=>"js-bonuce"), 
 		"" 
 	),
 	Array(
@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Гарантии при заказе услуг", 
-		"", 
+		"raiting/#guarantee", 
 		Array(), 
 		Array(), 
 		"" 
