@@ -63,9 +63,9 @@ class Auth
 	{
 		$result = false;
 		$request["SIGNED_DATA"] = \Bitrix\Main\Controller\PhoneAuth::signData(['phoneNumber' => $request['USER_LOGIN']]);
-
+        $smsCode = (!empty($request["SMS_CODE"])? $request["SMS_CODE"] : $request["USER_CHECKWORD"]);
 		if (($params = \Bitrix\Main\Controller\PhoneAuth::extractData($request["SIGNED_DATA"])) !== false) {
-			if (($userId = \CUser::VerifyPhoneCode($params['phoneNumber'], $request["SMS_CODE"]))) {
+			if (($userId = \CUser::VerifyPhoneCode($params['phoneNumber'], $smsCode))) {
 				$result = true;
 			}
 		}
