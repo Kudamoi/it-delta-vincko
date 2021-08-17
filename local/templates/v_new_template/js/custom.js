@@ -236,11 +236,6 @@ $(document).ready(function () {
 		$("#input_phone").focus();
 	});
 
-	$(".header__top-search .input__control").on("click", function(){
-		$(".searchForm__modal").css({'display': 'block'});
-		$(".searchForm__modal .searchForm__modal_input").focus();
-	});
-
 	// $('form').submit(function(){
 	// 	$.ajax({
 	// 		type: "POST",

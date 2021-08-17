@@ -51,8 +51,9 @@ if ($arParams["SHOW_INPUT"] !== "N"):?>
                     </div>
                     <div class="searchForm__modal_centerChek">
                     </div>
-                    <div class="searchForm__modal_bottomChek" id="<? echo $CONTAINER_ID ?>">
-                        
+                    <div class="searchForm__modal_bottomChek">
+                        <div class="searchForm__modal_item bottomChekItem" id="<? echo $CONTAINER_ID ?>">
+                        </div>
                     </div>
                 </div>
             </div>

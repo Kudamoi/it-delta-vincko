@@ -134,30 +134,27 @@ $Asset = Asset::getInstance();
         ); ?>
 
         <? $APPLICATION->IncludeComponent(
-            "bitrix:search.title",
-            "header_search",
+            "it-delta:iblock.content",
+            "header_search_company",
             array(
-                "CATEGORY_0" => array("no"),
-                "CATEGORY_0_TITLE" => "",
-                "CHECK_DATES" => "N",
-                "CONTAINER_ID" => "title-search",
-                "CONVERT_CURRENCY" => "N",
-                "INPUT_ID" => "title-search-input",
-                "NUM_CATEGORIES" => "1",
-                "ORDER" => "date",
-                "PAGE" => "#SITE_DIR#search/index.php",
-                "PREVIEW_HEIGHT" => "75",
-                "PREVIEW_TRUNCATE_LEN" => "",
-                "PREVIEW_WIDTH" => "75",
-                "PRICE_CODE" => array(),
-                "PRICE_VAT_INCLUDE" => "Y",
-                "SHOW_INPUT" => "Y",
-                "SHOW_OTHERS" => "N",
-                "SHOW_PREVIEW" => "Y",
-                "TOP_COUNT" => "5",
-                "USE_LANGUAGE_GUESS" => "Y"
-            )
-        ); ?>
+                "ACTIVE_DATE" => "N",
+                "ADD_CACHE_STRING" => "",
+                "CACHE_TIME" => "0",
+                "CACHE_TYPE" => "A",
+                "FILTER_NAME" => "",
+                "IBLOCK_ID" => "9",
+                "IBLOCK_TYPE" => "chop",
+                "PAGE_ELEMENT_COUNT" => "0",
+                "RAND_ELEMENTS" => "N",
+                "SORT_BY1" => "",
+                "SORT_BY2" => "",
+                "SORT_ORDER1" => "",
+                "SORT_ORDER2" => "",
+                "COMPONENT_TEMPLATE" => "header_search_company"
+            ),
+            false
+        );
+        ?>
 
         <? $APPLICATION->IncludeComponent(
             "vincko:main.auth.form",
