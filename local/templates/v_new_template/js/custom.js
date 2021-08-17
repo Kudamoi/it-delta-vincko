@@ -79,10 +79,8 @@ $(document).ready(function () {
 		$(this).closest('.ready-pack__bottom').find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / $(this).val()) + ' ₽');
 	})
 	$('.solutions__bottom_right').each(function () {
-
 		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
 		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-
 	})
 
 

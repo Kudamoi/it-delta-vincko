@@ -8,8 +8,8 @@ $session = \Bitrix\Main\Application::getInstance()->getSession();
 $orderData = $session->get('orderData');
 
 
-//if(empty($orderItems))
-//    LocalRedirect("/");
+if(!isset($_GET['ORDER_ID']) && empty($orderData))
+    LocalRedirect("/");
 
 
 $orderData = (array)($orderData);
@@ -877,7 +877,7 @@ $curStep = 1;
                 </label>
                 <?foreach ($orderItems as $orderItem):?>
                     <?if($orderItem->active):?>
-                        <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>">
+                        <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
                     <?endif;?>
                 <?endforeach;?>
                 <button id="b-add-order" type="button" class="button yellow-button">Оформить страховой полис</button>
