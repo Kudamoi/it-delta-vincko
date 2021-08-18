@@ -19,11 +19,26 @@ $subscriptionFeeObj = $orderItems[1];
 $policyObj = $orderItems[2];
 $totalObj = $orderData['total'];
 $paymentMethodObj = $orderData['paymentMethod'];
+
 if($_GET['itd']=='y')
 {
     echo '<pre>';
     print_r($orderData);
     echo '</pre>';
+}
+$res = CIblockElement::getList(
+        [],
+        ['=IBLOCK_CODE'=>'documents-in-footer','=ACTIVE'=>'Y'],
+        false, false,
+        ['ID','NAME','PROPERTY_DOCUMENT','XML_ID']
+);
+while($arFields = $res->Fetch())
+{
+    if($arFields['XML_ID']==1565)
+        continue;
+
+    $arFields['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_DOCUMENT_VALUE']);
+    $arResult["CONTRACTS"][] = $arFields;
 }
 
 $arResult["PAYMENT"] = Order::getPaymentSystem();
@@ -877,8 +892,8 @@ $curStep = 1;
                 <p class="installment__rules-text">
                     За достоверность указанных в заказе персональных данных ответственность несете Вы. Нажимая на кнопку
                     “Оформить заказ” Вы подтверждает, что ознакомились и согласны с
-                    <a class="installment__rules-agree" href="">условиями обработки персональных данных</a>
-                    <a class="installment__rules-agree" href="">договором оферты</a>
+                    <a class="installment__rules-agree" target="_blank" href="<?=$arResult["CONTRACTS"][0]['CONTRACT_LINK']?>">условиями обработки персональных данных</a>
+                    <a class="installment__rules-agree" target="_blank" href="<?=$arResult["CONTRACTS"][1]['CONTRACT_LINK']?>">договором оферты</a>
                 </p>
 
                 <input type="checkbox" id="agreement-two" required>
