@@ -72,7 +72,7 @@ $curStep = 1;
         }
 
     </style>
-<? /*
+
 <div id="test" style="cursor:pointer" xmlns="http://www.w3.org/1999/html">Заполнить тестовыми данными</div>
 <script>
     $(document).ready(function () {
@@ -82,7 +82,7 @@ $curStep = 1;
                 var name = $(this).attr("type");
 
                 if(name!== undefined && $(this).attr("type")!="hidden" && $(this).attr("type")!="radio") {
-                    console.log(name.indexOf("text"));
+                    //console.log(name.indexOf("text"));
                     if (name.indexOf("text")!=-1) {
                         $(this).val($(this).attr("placeholder"));
                     } else if (name.indexOf("date")!=-1) {
@@ -94,7 +94,7 @@ $curStep = 1;
                 var name = $(this).attr("name");
 
                 if(name!== undefined && $(this).attr("type")!="hidden" && $(this).attr("type")!="radio") {
-                    console.log(name.indexOf("text"));
+                    //console.log(name.indexOf("text"));
                     if (name.indexOf("text")!=-1) {
                         $(this).val($(this).attr("placeholder"));
                     } else if (name.indexOf("date")!=-1) {
@@ -108,7 +108,7 @@ $curStep = 1;
 
     })
 </script>
-*/?>
+
 
 <?if(isset($_GET['ORDER_ID'])):?>
     <?$APPLICATION->IncludeComponent(
@@ -442,28 +442,28 @@ $curStep = 1;
                                     <label for="female">Женский</label>
                                 </div>
                                 <div class="form__section__content name">
-                                    <input type="text" name="policyContactInfo[surname]" placeholder="Фамилия *" class="js-check-valid-field text-field">
-                                    <input type="text" name="policyContactInfo[name]" placeholder="Имя *" class="js-check-valid-field text-field">
+                                    <input type="text" name="policyContactInfo[surname]" placeholder="Фамилия *" class="js-policy-validate js-check-valid-field text-field">
+                                    <input type="text" name="policyContactInfo[name]" placeholder="Имя *" class="js-policy-validate js-check-valid-field text-field">
                                     <input type="text" name="policyContactInfo[patronomic]" placeholder="Отчество" class="js-check-valid-field text-field">
                                     <input type="text" name="policyContactInfo[date]" placeholder="Дата рождения *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"
-                                           class="date js-check-valid-field">
+                                           class="date js-policy-validate js-check-valid-field">
                                     <input type="text" name="policyContactInfo[place]" placeholder="Место рождения *"
-                                           class="address-field js-check-valid-field"><br>
-                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[email]" placeholder="E-mail *"><br>
-                                    <input class="js-check-valid-field" type="text" name="policyContactInfo[phone]" placeholder="Телефон *" id="phone-field">
+                                           class="address-field js-policy-validate js-check-valid-field"><br>
+                                    <input class="js-check-valid-field js-policy-validate" type="text" name="policyContactInfo[email]" placeholder="E-mail *"><br>
+                                    <input class="js-check-valid-field js-policy-validate" type="text" name="policyContactInfo[phone]" placeholder="Телефон *" id="phone-field">
                                 </div>
                             </div>
                             <div class="form__section">
                                 <div class="h4">Паспортные данные</div>
 
                                 <div class="form__section__content passport">
-                                    <input class="js-check-valid-field" type="text" name="passportData[number]" placeholder="Серия и номер паспорта *"
+                                    <input class="js-check-valid-field js-policy-validate" type="text" name="passportData[number]" placeholder="Серия и номер паспорта *"
                                            id="passport">
-                                    <input class="js-check-valid-field date" type="text" name="passportData[date]" placeholder="Дата выдачи *"
+                                    <input class="js-check-valid-field js-policy-validate date" type="text" name="passportData[date]" placeholder="Дата выдачи *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"><br>
-                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field text-field">
-                                    <input class="js-check-valid-field" type="text" name="passportData[code]" placeholder="Код подразделения *" id="code">
+                                    <input type="text" name="passportData[whom]" placeholder="Кем выдан *" class="js-check-valid-field js-policy-validate text-field">
+                                    <input class="js-check-valid-field js-policy-validate" type="text" name="passportData[code]" placeholder="Код подразделения *" id="code">
                                     <input class="js-check-valid-field" type="text" name="passportData[inn]" placeholder="ИНН" id="inn">
                                 </div>
                             </div>
@@ -471,12 +471,12 @@ $curStep = 1;
                                 <div class="h4">Адрес регистрации</div>
                                 <div class="form__section__content address-registration">
                                     <input type="text" name="addressRegistration[city]" placeholder="Город/населенный пункт *"
-                                           class="address-field js-check-valid-field">
-                                    <input type="text" name="addressRegistration[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
-                                    <input type="text" name="addressRegistration[house]" placeholder="Дом *" class="js-check-valid-field house-field">
+                                           class="js-policy-validate address-field js-check-valid-field">
+                                    <input type="text" name="addressRegistration[street]" placeholder="Улица *" class="js-policy-validate js-check-valid-field street-field"><br>
+                                    <input type="text" name="addressRegistration[house]" placeholder="Дом *" class="js-policy-validate js-check-valid-field house-field">
                                     <input type="text" name="addressRegistration[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                     <input type="text" name="addressRegistration[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
-                                    <input class="js-check-valid-field date" type="text" name="addressRegistration[date]" placeholder="Дата регистрации *"
+                                    <input class="js-policy-validate js-check-valid-field date" type="text" name="addressRegistration[date]" placeholder="Дата регистрации *"
                                            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                                     <input type="text" name="addressRegistration[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                 </div>
@@ -486,12 +486,12 @@ $curStep = 1;
                                     <label for="same">Совпадает с адресом постоянной регистрации</label>
                                     <div class="no-checked address-registration">
                                         <input type="text" name="addressResidense[city]" placeholder="Город/населенный пункт *"
-                                               class="js-check-valid-field address-field">
-                                        <input type="text" name="addressResidense[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
-                                        <input type="text" name="addressResidense[house]" placeholder="Дом *" class="js-check-valid-field house-field">
+                                               class="valid-cond1 js-check-valid-field address-field">
+                                        <input type="text" name="addressResidense[street]" placeholder="Улица *" class="valid-cond1 js-check-valid-field street-field"><br>
+                                        <input type="text" name="addressResidense[house]" placeholder="Дом *" class="valid-cond1 js-check-valid-field house-field">
                                         <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="addressResidense[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
-                                        <input class="js-check-valid-field date" type="text" name="addressResidense[date]" placeholder="Дата регистрации *"
+                                        <input class="valid-cond1 js-check-valid-field date" type="text" name="addressResidense[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                                         <input type="text" name="addressResidense[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>
@@ -513,18 +513,18 @@ $curStep = 1;
                                     </div>
                                     <input type="radio" name="address-installment" value="1" id="other">
                                     <label for="other"></label>
-                                    <label for="other">Указать другой адрес</label>
+                                    <label for="other">Указать другой адрес1</label>
                                     <p>Если адрес объекта страхования не совпадает с адресом регистрации или адресом
                                         фактического
                                         проживания - выберите пункт <span>“Указать другой адрес”</span>. Это важно.</p>
                                     <div class="address-registration address-installment-other">
-                                        <input type="text" name="policyOtherAddress[city]" placeholder="Город/населенный пункт *"
-                                               class="js-check-valid-field address-field">
-                                        <input type="text" name="policyOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
-                                        <input type="text" name="policyOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
+                                        <input id="b-uq" type="text" name="policyOtherAddress[city]" placeholder="Город/населенный пункт *"
+                                               class="valid-cond2 js-check-valid-field address-field">
+                                        <input type="text" name="policyOtherAddress[street]" placeholder="Улица *" class="valid-cond2 js-check-valid-field street-field"><br>
+                                        <input type="text" name="policyOtherAddress[house]" placeholder="Дом *" class="valid-cond2 js-check-valid-field house-field">
                                         <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="policyOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
-                                        <input class="js-check-valid-field date" type="text" name="policyOtherAddress[date]" placeholder="Дата регистрации *"
+                                        <input class="valid-cond2 js-check-valid-field date" type="text" name="policyOtherAddress[date]" placeholder="Дата регистрации *"
                                                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                                         <input type="text" name="policyOtherAddress[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>
@@ -532,7 +532,7 @@ $curStep = 1;
                             </div>
                     </div>
                     <div class="form__bottom">
-                        <button type="button" class="blue-button form__next-button"><span>Далее</span></button>
+                        <button style="opacity: 50%" type="button" class="blue-button form__next-button" disabled="disabled" id="js-policy-validate-btn"><span>Далее</span></button>
                         <div class="form__complete hidden">
                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -575,12 +575,12 @@ $curStep = 1;
                                         <input hidden type="checkbox" name="same-name" id="same-name">
                                     <?endif;?>
                                     <div class="form__contact-person no-checked">
-                                        <input type="text" name="contactData[surname]" placeholder="Фамилия *" class="js-check-valid-field text-field">
-                                        <input type="text" name="contactData[name]" placeholder="Имя *" class="js-check-valid-field text-field">
+                                        <input type="text" name="contactData[surname]" placeholder="Фамилия *" class="valid-cond3 js-check-valid-field text-field">
+                                        <input type="text" name="contactData[name]" placeholder="Имя *" class="valid-cond3 js-check-valid-field text-field">
                                         <input type="text" name="contactData[patronomic]" placeholder="Отчество" class="js-check-valid-field text-field">
                                         <br>
-                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="js-check-valid-field"><br>
-                                        <input type="text" name="contactData[phone]" placeholder="Телефон *" class="js-check-valid-field phone-field">
+                                        <input type="text" name="contactData[email]" placeholder="E-mail *" class="valid-cond3 js-check-valid-field"><br>
+                                        <input type="text" name="contactData[phone]" placeholder="Телефон *" class="valid-cond3 js-check-valid-field phone-field">
                                     </div>
                                 </div>
                             </div>
@@ -615,9 +615,9 @@ $curStep = 1;
                                     </div>
                                     <div class="address-registration address-installment-other">
                                         <input type="text" name="deliveryOtherAddress[city]" placeholder="Город/населенный пункт *"
-                                               class="js-check-valid-field address-field">
-                                        <input type="text" name="deliveryOtherAddress[street]" placeholder="Улица *" class="js-check-valid-field street-field"><br>
-                                        <input type="text" name="deliveryOtherAddress[house]" placeholder="Дом *" class="js-check-valid-field house-field">
+                                               class="valid-cond4 js-check-valid-field address-field">
+                                        <input type="text" name="deliveryOtherAddress[street]" placeholder="Улица *" class="valid-cond4 js-check-valid-field street-field"><br>
+                                        <input type="text" name="deliveryOtherAddress[house]" placeholder="Дом *" class="valid-cond4 js-check-valid-field house-field">
                                         <input type="text" name="deliveryOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="deliveryOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
                                         <input type="text" name="deliveryOtherAddress[index]" placeholder="Индекс" class="js-check-valid-field index-field">
@@ -634,7 +634,7 @@ $curStep = 1;
                             <?endif;?>
                     </div>
                     <div class="form__bottom">
-                        <button type="button" class="blue-button form__next-button"><span>Далее</span></button>
+                        <button style="opacity: 50%" disabled="disabled" id="js-item-validate-btn" type="button" class="blue-button form__next-button"><span>Далее</span></button>
                         <div class="form__complete hidden">
                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -876,7 +876,7 @@ $curStep = 1;
                     За достоверность указанных в заявлении персональных данных страхователя, включая серию и номер
                     паспорта, мобильный телефон, e-mail ответственность несет страхователь.
                 </p>
-                <input type="checkbox" id="agreement" required>
+                <input type="checkbox" id="agreement">
                 <label for="agreement" class="installment__rules-agreement">
                     Я даю согласие и подтверждаю достоверность указанных данных
                 </label>
@@ -896,7 +896,7 @@ $curStep = 1;
                     <a class="installment__rules-agree" target="_blank" href="<?=$arResult["CONTRACTS"][1]['CONTRACT_LINK']?>">договором оферты</a>
                 </p>
 
-                <input type="checkbox" id="agreement-two" required>
+                <input type="checkbox" id="agreement-two">
                 <label for="agreement-two" class="installment__rules-agreement">
                     Я согласен с условиями и договором
                 </label>
@@ -905,7 +905,7 @@ $curStep = 1;
                         <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
                     <?endif;?>
                 <?endforeach;?>
-                <button id="b-add-order" type="button" class="button yellow-button">Оформить страховой полис</button>
+                <button id="b-add-order" style="opacity: 50%;" disabled="disabled" type="button" class="button yellow-button">Оформить страховой полис</button>
             </div>
         </div>
     </form>
@@ -913,6 +913,136 @@ $curStep = 1;
 
 </main>
 <?endif;?>
+<script>
+    $( document ).ready(function() {
 
+        var count = 0;
+        $('#js-policy-validate-btn').on('click', function () {
+            count++;
+        });
+        $('#js-item-validate-btn').on('click', function () {
+            count++;
+        });
+
+        $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+
+        function isValidPolicy(event) {
+            let requiredInputs = $('.js-policy-validate');
+            let emptyField = false;
+            $.each(requiredInputs, function() {
+
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        console.log('1235');
+                        //return false;
+                    }
+            });
+            if(!$('#same').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond1');
+                $.each(requiredInputs, function() {
+
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        console.log('777');
+                        //return false;
+                    }
+                });
+            }
+            if($('#other').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond2');
+                $.each(requiredInputs, function() {
+
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        console.log('55');
+                        //return false;
+                    }
+                });
+            }
+
+            if(!emptyField) {
+                $(event.data.name).attr('disabled', false);
+                $(event.data.name).css('opacity', '100%');
+                console.log(2);
+            }else{
+                $(event.data.name).attr('disabled', true);
+                $(event.data.name).css('opacity', '50%');
+            }
+        }
+
+        $('.js-check-valid-field').on('keyup',{name:'#js-item-validate-btn'}, isValid);
+        $('#same-name').on('change',{name:'#js-item-validate-btn'}, isValid);
+        $('input[type=radio][name=delivery-address-installment]').on('change',{name:'#js-item-validate-btn'}, isValid);
+        function isValid(event) {
+            let emptyField = false;
+            if(!$('#same-name').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond3');
+                $.each(requiredInputs, function() {
+
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        console.log('333');
+                        //return false;
+                    }
+                });
+            }
+            if($('#other-delivery').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond4');
+                $.each(requiredInputs, function() {
+
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        console.log('4444');
+                        //return false;
+                    }
+                });
+            }
+
+            if(!emptyField) {
+                $(event.data.name).attr('disabled', false);
+                $(event.data.name).css('opacity', '100%');
+                console.log(2);
+            }else{
+                $(event.data.name).attr('disabled', true);
+                $(event.data.name).css('opacity', '50%');
+            }
+        }
+
+        $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
+        $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
+        function isValidFinal(event) {
+            console.log('count= '+count);
+            let isDisabledOrderBtn = false;
+            if(!$('#agreement').is(':checked'))
+            {
+                isDisabledOrderBtn = true;
+            }
+            if(!$('#agreement-two').is(':checked'))
+            {
+                isDisabledOrderBtn = true;
+            }
+            if(count!=2)
+            {
+                isDisabledOrderBtn = true;
+            }
+
+            if(!isDisabledOrderBtn) {
+                $(event.data.name).attr('disabled', false);
+                $(event.data.name).css('opacity', '100%');
+                console.log(2);
+            }else{
+                $(event.data.name).attr('disabled', true);
+                $(event.data.name).css('opacity', '50%');
+            }
+        }
+    });
+
+</script>
 
 <?require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
