@@ -164,21 +164,21 @@ if ($request->isPost() && $request->isAjaxRequest()) {
             elseif (!preg_match('/^\+7\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/', $arContactData['phone']))
                 $errorsValidate[] = 'contactData[phone]';
         }
-        //Адрес доставки
-        if(intval($request->getPost('delivery-address-installment'))==1)
-        {
-            $arDeliveryOtherAddress = cleanArr($request->getPost('deliveryOtherAddress'));
+        if(isset($request['delivery-address-installment'])) {
+            //Адрес доставки
+            if (intval($request->getPost('delivery-address-installment')) == 1) {
+                $arDeliveryOtherAddress = cleanArr($request->getPost('deliveryOtherAddress'));
 
-            if(empty($arDeliveryOtherAddress['city']))
-                $errorsValidate[] = 'deliveryOtherAddress[city]';
-            if(empty($arDeliveryOtherAddress['street']))
-                $errorsValidate[] = 'deliveryOtherAddress[street]';
-            if(empty($arDeliveryOtherAddress['house']))
-                $errorsValidate[] = 'deliveryOtherAddress[house]';
-
+                if (empty($arDeliveryOtherAddress['city']))
+                    $errorsValidate[] = 'deliveryOtherAddress[city]';
+                if (empty($arDeliveryOtherAddress['street']))
+                    $errorsValidate[] = 'deliveryOtherAddress[street]';
+                if (empty($arDeliveryOtherAddress['house']))
+                    $errorsValidate[] = 'deliveryOtherAddress[house]';
+            }
             //комментарий к заказу
             $orderComment = clean($request->getPost('orderComment'));
-            //дата установки
+            //дата и время монтажа оборудования
             $dateInstall = clean($request->getPost('date-install'));
         }
     }
@@ -313,11 +313,13 @@ if ($request->isPost() && $request->isAjaxRequest()) {
     $property = getPropertyByCode($propertyCollection, 'PHONE');
     $property->setValue($propertyPhone);
 
+    $property = getPropertyByCode($propertyCollection, 'MONTAZHTIME');
+    $property->setValue($dateInstall);
+
     $orderComment = ' Комментарий к заказу: '.$orderComment;
-    $dateInstall = ' Дата и время монтажа оборудования: '.$dateInstall;
 
     $comment = $passportData .' '. $addressRegistration .' '. $addressResidense .' '. $policyOtherAddress
-        .' '. $deliveryOtherAddress .' '. $orderComment .' '. $dateInstall;
+        .' '. $deliveryOtherAddress .' '. $orderComment;
     $order->setField('USER_DESCRIPTION', $comment); // Устанавливаем поля комментария покупателя
 
     // Сохраняем
