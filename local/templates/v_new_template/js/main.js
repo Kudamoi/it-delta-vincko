@@ -1913,9 +1913,10 @@ for (var i = 0; i < btns_modals.length; i++) {
   }, function () {
     $('.endorsements_modal').fadeOut();
   });
-  $('.itemRating-open__left_deal').hover(function () {
+  $('body').on("mouseenter", '.itemRating-open__left_deal', function () {
     $('.deal_modal').fadeIn();
-  }, function () {
+  });
+  $('body').on("mouseleave", '.itemRating-open__left_deal', function () {
     $('.deal_modal').fadeOut();
   });
   $('.itemRating-open__showRating_title-modal').hover(function () {
@@ -1985,12 +1986,15 @@ for (var i = 0; i < btns_modals.length; i++) {
   $('.searchForm__modal_closed').on('click', function () {
     $(this).closest('.rating-center__search_form').find('.searchForm__modal').fadeOut(100);
   });
-  $('.searchForm__modal_wrapper').on('click', '.bottomChekItem', function () {
+  var $bottomModalItem = $('.bottomChekItem');
+  var $topModalItem = $('.topChekItem');
+  $bottomModalItem.on('click', function () {
     $(this).clone().prependTo('.searchForm__modal_topChek').removeClass('bottomChekItem').addClass('topChekItem');
     $('.searchForm__modal_topChek').addClass('active');
   });
-  $('.searchForm__modal_wrapper').on('click', '.topChekItem', function () {
+  $topModalItem.on('click', function () {
     $(this).prependTo('.searchForm__modal_bottomChek').removeClass('topChekItem').addClass('bottomChekItem');
+    console.log('true');
   });
   var $test = $('.searchForm__modal_topChek').find('.topChekItem');
 
@@ -3116,13 +3120,13 @@ jQuery(document).ready(function ($) {
   $('.contract__item').on('click', function () {
     $(this).removeClass('no-active').addClass('active').siblings().removeClass('active').addClass('no-active');
   });
-  $('.closed-card').on('click', function () {
+  $('body').on('click', '.closed-card', function () {
     $(this).parents('.solutions-card').addClass('hide');
   });
-  $('.solutions-card__icon-plus').on('click', function () {
+  $('body').on('click', '.solutions-card__icon-plus', function () {
     $(this).parents('.solutions-card').removeClass('hide');
   });
-  $('.select').on('click', '.select__head', function () {
+  $('body').on('click', '.select__head', function () {
     console.log("select clicked");
 
     if ($(this).hasClass('open')) {
@@ -3144,19 +3148,23 @@ jQuery(document).ready(function ($) {
       $(div).fadeOut();
     }
   });
-  $('.select').on('click', '.select__item', function () {
-    $('.select__head').removeClass('open');
-    $('.select__list').fadeOut();
-    $(this).parents('.solutions-card__top_text-subtitle').prev().text($(this).find('.select__item_text').text());
-    $(this).parents('.select__list').prev().siblings('.select__input').val($(this).find('.select__item_text').text());
-  });
-  $('.select').on('click', '.select__list-item_policy', function () {
-    $('.select__head').removeClass('open');
-    $('.select__list').fadeOut();
-    $(this).parents('.solutions-card__top_text-subtitle').prev().text($(this).find('.policy-title p').text());
-    $(this).parents('.solutions-card__top_text-subtitle').prev().siblings('p').text($(this).find('.policy').text());
-    $(this).parents('.select__list').prev().siblings('.select__input').val($(this).find('.policy-title').text());
-  });
+  /*
+      $('.select').on('click', '.select__item', function () {
+          $('.select__head').removeClass('open');
+          $('.select__list').fadeOut();
+          $(this).parents('.solutions-card__top_text-subtitle').prev().text($(this).find('.select__item_text').text());
+          $(this).parents('.select__list').prev().siblings('.select__input').val($(this).find('.select__item_text').text());
+      });
+  
+  
+      $('.select').on('click', '.select__list-item_policy', function () {
+          $('.select__head').removeClass('open');
+          $('.select__list').fadeOut();
+          $(this).parents('.solutions-card__top_text-subtitle').prev().text($(this).find('.policy-title p').text());
+          $(this).parents('.solutions-card__top_text-subtitle').prev().siblings('p').text($(this).find('.policy').text());
+          $(this).parents('.select__list').prev().siblings('.select__input').val($(this).find('.policy-title').text());
+      });
+  */
 
   if ($(".card-one .solutions-card__info").children(".solutions-card__info_item").length > 5) {
     var el = $(".card-one .solutions-card__info").children(".solutions-card__info_item").slice(5, 100);
