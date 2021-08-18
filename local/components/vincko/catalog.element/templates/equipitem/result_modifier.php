@@ -60,13 +60,8 @@ while ($arFields = $res->Fetch()) {
     $arResult['COMPLECT_PARENT_PACKAGE']['PICTURE'] = CFile::ResizeImageGet($arFields['PREVIEW_PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
 
-$params = array(
-    'IBLOCK_ID'=>9,
-    'COOKIE'=>$_COOKIE
-);
-
 //найдем все готовые решения в текущем городе
-$packages = MainService::getPackagesIds($params);
+$packages = MainService::getPackagesIds();
 //если текущего готового решения нет в массиве доступных
 if(!in_array($arResult['COMPLECT_PARENT_PACKAGE']['ID'],$packages))
     \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
@@ -116,15 +111,8 @@ while ($arFields = $res->Fetch()) {
 
 }
 
-
-$params = array(
-    'IBLOCK_ID' => $companyCityAndSubscriptionFeeIblockId,
-    'PACKAGE_ID' => $arResult['COMPLECT_PARENT_PACKAGE']['ID'],
-    'COMPANY_CITY_IBLOCK_ID' => $companyCityIblockId,
-    'COOKIE' => $_COOKIE
-);
 //получаем все элементы, которые содержат id абонентской платы в выбранном городе
-$arElements = MainService::getSecureCompanyAndSubscriptionFeeListByPackageId($params);
+$arElements = MainService::getSecureCompanyAndSubscriptionFeeListByPackageId($arResult['COMPLECT_PARENT_PACKAGE']['ID']);
 $secureCompanyIds = array_column($arElements, 'PROPERTY_CPA_CHOP_VALUE');
 $subscriptionFeeIds = array_column($arElements, 'PROPERTY_CPA_ABONPLATA_VALUE');
 //получаем варианты абонплаты
