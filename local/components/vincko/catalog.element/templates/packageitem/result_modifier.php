@@ -44,13 +44,9 @@ if (!function_exists('getPricesInfoByProductId')) {
     }
 }
 
-$params = array(
-    'IBLOCK_ID'=>9,
-    'COOKIE'=>$_COOKIE
-);
 
 //найдем все готовые решения в текущем городе
-$packages = MainService::getPackagesIds($params);
+$packages = MainService::getPackagesIds();
 //если текущего готового решения нет в массиве доступных
 if(!in_array($arResult['ID'],$packages))
     \Bitrix\Iblock\Component\Tools::process404("",true,true,true);
@@ -132,14 +128,8 @@ while ($arFields = $res->Fetch()) {
     );
 }
 
-$params = array(
-    'IBLOCK_ID' => $companyCityAndSubscriptionFeeIblockId,
-    'PACKAGE_ID' => $arResult['ID'],
-    'COMPANY_CITY_IBLOCK_ID' => $companyCityIblockId,
-    'COOKIE' => $_COOKIE
-);
 //получаем все элементы, которые содержат id абонентской платы в выбранном городе
-$arElements = MainService::getSecureCompanyAndSubscriptionFeeListByPackageId($params);
+$arElements = MainService::getSecureCompanyAndSubscriptionFeeListByPackageId($arResult['ID']);
 $secureCompanyIds = array_column($arElements, 'PROPERTY_CPA_CHOP_VALUE');
 $subscriptionFeeIds = array_column($arElements, 'PROPERTY_CPA_ABONPLATA_VALUE');
 //получаем варианты абонплаты

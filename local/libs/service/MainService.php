@@ -3,19 +3,16 @@
 //класс MainService реализует сервисный слой
 class MainService
 {
-    //получает id всех готовых решений по id города и id объекта охраны
-    function getPackagesIds($params)
+    //получает id всех готовых решений по id города
+    function getPackagesIds()
     {
         if (CModule::IncludeModule("iblock")) {
-            $cookie = $params['COOKIE'];
-            if (isset($cookie["selected_city"]) && isset($cookie["selected_estate"])) {
-                $city_id = $cookie['selected_city'];
-                $estate_id = $cookie['selected_estate'];
-            }
+            $city_id = $_COOKIE['selected_city'];
+            $packagesIds = array();
 
             $res = CIBlockElement::GetList(array("SORT" => "ASC"),
-                array('IBLOCK_ID' => $params['IBLOCK_ID'], 'ACTIVE' => 'Y',
-                    "PROPERTY_CITY_ID" => $city_id, "PROPERTY_CH_TYPE" => $estate_id),
+                array('IBLOCK_CODE' => 'chopcity', 'ACTIVE' => 'Y',
+                    "PROPERTY_CITY_ID" => $city_id),
                 false,
                 false,
                 array('ID', 'PROPERTY_CH_PACKETS'));
@@ -25,32 +22,31 @@ class MainService
                 $arElements[$arFields['ID']] = $arFields;
             }
 
-            $packagesIds = array();
-
             foreach ($arElements as $key => $arItem) {
                 $item = $arItem['PROPERTY_CH_PACKETS_VALUE'];
                 if (is_array($item))
                     $packagesIds = array_merge($packagesIds, $item);
             }
-
             return $packagesIds;
         }
+
     }
 
     //получает id всех охранных компаний и абонентских плат по id города и id Готового решения
-    function getSecureCompanyAndSubscriptionFeeListByPackageId($params)
+    function getSecureCompanyAndSubscriptionFeeListByPackageId($packageId)
     {
         if (CModule::IncludeModule("iblock")) {
-            $cookie = $params['COOKIE'];
+            $city_id = $_COOKIE['selected_city'];
+
             $res = CIBlockElement::GetList(array("SORT" => "ASC"),
-                array('IBLOCK_ID' => $params['IBLOCK_ID'], 'ACTIVE' => 'Y',
-                    'PROPERTY_CPA_PACKET' => $params['PACKAGE_ID']),
+                array('IBLOCK_CODE' => 'chop-packet-ap', 'ACTIVE' => 'Y',
+                    'PROPERTY_CPA_PACKET' => $packageId),
                 false,
                 false,
                 array('ID', 'PROPERTY_CPA_CHOP', 'PROPERTY_CPA_CHOP.PROPERTY_CITY_ID', 'PROPERTY_CPA_ABONPLATA'));
 
             while ($arFields = $res->Fetch()) {
-                if ($arFields['PROPERTY_CPA_CHOP_PROPERTY_CITY_ID_VALUE'] == $cookie['selected_city'])
+                if ($arFields['PROPERTY_CPA_CHOP_PROPERTY_CITY_ID_VALUE'] == $city_id)
                     $arElements[$arFields['ID']] = $arFields;
             }
 
