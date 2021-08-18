@@ -172,7 +172,7 @@ $res = CIBlockElement::GetList(
     array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
     false,
     false,
-    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT","PROPERTY_CHOP_ID.NAME")
+    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT","PROPERTY_CHOP_ID.NAME","PROPERTY_CHOP_ID","PROPERTY_INCLUDE_IN_ORDER_PRICE","PROPERTY_EL_RATING_SUM")
 
 );
 while ($arFields = $res->Fetch()) {
@@ -263,11 +263,14 @@ foreach ($arResult['PACKAGE_GROUP']['PACKAGES'] as $package) {
 
     $classId = $package['PROPERTY_CO_CLASS_REF_VALUE'];
     $slug = $package['CODE'];
-    $arResult['PACKAGES_SLUGS'][$classId] = array(
-        "CLASS_ID" => $classId,
-        "SLUG" => $slug
-    );
+    if (!empty($classId) && !empty($slug)) {
+        $arResult['PACKAGES_SLUGS'][$classId] = array(
+            "CLASS_ID" => $classId,
+            "SLUG" => $slug
+        );
+    }
 }
 
-
+//список позиций компаний в рейтинге
+$arResult['COMPANIES_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($_COOKIE['selected_city']);
 

@@ -156,7 +156,7 @@ $res = CIBlockElement::GetList(
     array("ACTIVE" => "Y", "IBLOCK_ID" => $companyCityIblockId, "ID" =>$secureCompanyIds),
     false,
     false,
-    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT", "PROPERTY_CHOP_ID.NAME")
+    array("ID","*","PROPERTY_CONTRACT","PROPERTY_HONEST_CONTRACT", "PROPERTY_CHOP_ID.NAME","PROPERTY_CHOP_ID","PROPERTY_INCLUDE_IN_ORDER_PRICE","PROPERTY_EL_RATING_SUM")
 );
 while ($arFields = $res->Fetch()) {
 
@@ -250,10 +250,14 @@ foreach ($arResult['PACKAGE_GROUP']['PACKAGES'] as $package) {
         $arResult['CURRENT_PACKAGE_CLASS'] = $classId;
         $slug = $arResult['CODE'];
     }
-    $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$classId] = array(
-        "CLASS_ID" => $classId,
-        "SLUG" => $slug
-    );
+    if (!empty($classId) && !empty($slug))
+    {
+        $arResult['FIRST_LIST_COMPLECTS_SLUGS'][$classId] = array(
+            "CLASS_ID" => $classId,
+            "SLUG" => $slug
+        );
+    }
+
 }
 
 /*
@@ -359,3 +363,6 @@ if (isset($arResult["DISPLAY_PROPERTIES"]["CO_CHARACTERISTICS_REF"]["LINK_ELEMEN
 //изображение комплекта
 $arResult['PREVIEW_PICTURE_RESIZED'] = CFile::ResizeImageGet($arResult['PREVIEW_PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 $arResult['PREVIEW_PICTURE_RESIZED_SMALL'] = CFile::ResizeImageGet($arResult['PREVIEW_PICTURE'], array("width" => 110, "height" => 100), BX_RESIZE_IMAGE_PROPORTIONAL, false);
+
+//список позиций компаний в рейтинге
+$arResult['COMPANIES_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($_COOKIE['selected_city']);

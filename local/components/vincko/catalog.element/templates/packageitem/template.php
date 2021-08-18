@@ -263,9 +263,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                             <div class="select__list-item_policy">
                                                                 <div class="select__list-item_policy-top">
                                                                 <span class="font-weight policy-title">
-                                                                    Комплект “ <span
-                                                                            class="font-weight"><?= $arResult['ALL_LIST_COMPLECTS_IN_PACKAGE'][$currentComplectIndex]['NAME'] ?></span> ”
-                                                                </span>
+                                                                    <span class="font-weight"><?= $arResult['ALL_LIST_COMPLECTS_IN_PACKAGE'][$currentComplectIndex]['NAME'] ?></span></span>
                                                                     <span>
                                                                     <?= $arResult['ALL_LIST_COMPLECTS_IN_PACKAGE'][$currentComplectIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб
                                                                 </span>
@@ -285,7 +283,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                     <div class="select__list-item_policy-top">
                                                                             <span data-slug="<?= $arResult['CODE'] ?>"
                                                                                   onclick="BX.setCookie('selected_complect_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
-                                                                                  class="js-refresh-packageitem-data-ajax policy-title">Комплект“<span
+                                                                                  class="js-refresh-packageitem-data-ajax policy-title"><span
                                                                                         class="p"><?= $item['NAME'] ?></span>”</span>
                                                                         <span class="opacity"><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> руб</span>
                                                                     </div>
@@ -308,7 +306,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                             </div>
                             <div class="solutions-card__circles">
                                 <? foreach ($arResult['PACKAGES_CLASSES'] as $key => $class): ?>
-                                    <? if (!empty($arResult['PACKAGES_SLUGS'][$key])): ?>
+                                    <? if (array_key_exists($key,$arResult['PACKAGES_SLUGS'])): ?>
                                         <div data-slug="<?= $arResult['PACKAGES_SLUGS'][$key]['SLUG'] ?>"
                                              class="js-refresh-packageitem-data-ajax solutions-card__circles_item <?= $arResult['CURRENT_PACKAGE_CLASS'] == $key ? 'show' : 'hide' ?>">
                                             <div class="solutions-card__circles_item-icon">
@@ -409,7 +407,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <div class="solutions-card__top_img flex-centr">
                                     <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/solutions-card__top_img2.svg"
                                          alt="img">
-                                    <span>10,0</span>
+                                    <span><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_EL_RATING_SUM_VALUE'] ?></span>
                                 </div>
                                 <div class="solutions-card__top_text">
                                     <div class="h4 solutions-card__top_text-title">
@@ -453,6 +451,10 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                             компании
                                                         </div>
                                                         <? foreach ($arResult['ALL_LIST_COMPANY_CITY'] as $key => $item): ?>
+                                                            <?if($key==$currentSecureCompanyIndex) {
+                                                                continue;
+                                                            }
+                                                            ?>
                                                             <div data-slug="<?= $arResult['CODE'] ?>"
                                                                  id="selected_company"
                                                                  onclick="BX.setCookie('selected_company_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
@@ -460,7 +462,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                                 <div class="select__item_text">
                                                                     <?= $item['PROPERTY_CHOP_ID_NAME'] ?>
                                                                 </div>
-                                                                <div class="select__item_num">4</div>
+                                                                <div class="select__item_num"><?=$arResult['COMPANIES_POSITIONS'][$item['PROPERTY_CHOP_ID_VALUE']]['POSITION_IN_RATING']?></div>
                                                                 <span class="select__item_bg"
                                                                       style="width: 70%;"></span>
                                                             </div>
@@ -582,7 +584,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                     <span><?= $item['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?> ₽</span>
                                                 </div>
                                             </div>
-                                            <div class="contract__item_bottom">
+                                            <?/*<div class="contract__item_bottom">
                                                 <div class="contract__item_bottom-row">
                                                     <span>В подарок:</span>
                                                 </div>
@@ -590,15 +592,16 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                                     <span>Страхование имущества на</span><span class="present">600 000
                                                     руб.</span>
                                                 </div>
-                                            </div>
+                                            </div>*/?>
                                         </div>
                                     <? endforeach; ?>
                                 </div>
                             </div>
                         </div>
                         <div class="solutions-card__substrate_bottom">
+                            <?if($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_INCLUDE_IN_ORDER_PRICE_VALUE']):?>
                             <p class="solutions-card__substrate_bottom-text">
-                                Всего <span>32 000 ₽</span>
+                                Всего <span><?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'][$currentSubcriptionFeeIndex]['PRICES_INFO']['RESULT_PRICE']['BASE_PRICE'] ?> ₽</span>
                             </p>
                             <div id="subscription-fee-price"
                                  data-subscription-fee-price="<?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'][$currentSubcriptionFeeIndex]['PRICES_INFO']['RESULT_PRICE']['BASE_PRICE'] ?>"
@@ -608,6 +611,17 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <?= $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'][$currentSubcriptionFeeIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'] ?>
                                 ₽
                             </div>
+                            <?else:?>
+                                <p style="color: #005dff" class="solutions-card__substrate_bottom-text">
+                                    Оплата услуг производиться охранной компанией при заключении договора
+                                </p>
+                                <div id="subscription-fee-price"
+                                     data-subscription-fee-price="0"
+                                     data-subscription-fee-disc-price="0"
+                                     data-subscription-fee-id="<?= $currentSubcriptionFeeIndex ?>"
+                                     class="solutions-card__substrate_bottom-price">
+                                </div>
+                            <?endif;?>
                             <div class="solutions-card__substrate_bottom-icon">
                                 <img src="<?= SITE_TEMPLATE_PATH ?>/img/solutions/present-icon.svg" alt="img">
                             </div>
@@ -1098,7 +1112,12 @@ foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $item) {
         $policyPrice = $item['ITEMS'][$currentPolicyIndex]['PRICES_INFO']['RESULT_PRICE']['DISCOUNT_PRICE'];
     }
 }
-
+$isChopServicesFree = false;
+if(!$arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['PROPERTY_INCLUDE_IN_ORDER_PRICE_VALUE'])
+{
+    $isChopServicesFree = true;
+    $subscriptionFeePrice = $subscriptionFeeOldPrice = 0;
+}
 $totalPrice = $complectPrice + $subscriptionFeePrice + $policyPrice;
 $totalDiscountPrice = $complectOldPrice + $subscriptionFeeOldPrice + $policyOldPrice;
 
@@ -1122,6 +1141,7 @@ $data = [
             'name2' => $arResult['ALL_LIST_COMPLECTS_IN_PACKAGE'][$currentComplectIndex]['NAME'],
             'gift' => $arResult['PROPERTIES']['P_BONUSES']['VALUE'],
             'active' => true,
+            'isFree'=>false,
             'sum' => $complectPrice,
             'old_sum' => $complectOldPrice,
             'package_info' => ['name' => $arResult['PACKAGE_GROUP']['NAME'], 'picture_src' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src']]
@@ -1135,6 +1155,7 @@ $data = [
             'months_count' => $currentSubscriptionFeeMonthsCount,
             'gift' => $arResult['PROPERTIES']['P_BONUSES']['VALUE'],
             'active' => true,
+            'isFree'=>$isChopServicesFree,
             'sum' => $subscriptionFeePrice,
             'old_sum' => $subscriptionFeeOldPrice
         ],
@@ -1146,6 +1167,7 @@ $data = [
             'policy_name' => $policy_name,
             'gift' => $arResult['PROPERTIES']['P_BONUSES']['VALUE'],
             'active' => true,
+            'isFree'=>false,
             'sum' => $policyPrice,
             'old_sum' => $policyOldPrice
         ],
@@ -1246,6 +1268,10 @@ $data = [
             handleActive(id, true);
             updateBasket(data);
         })
+        $('.solutions__bottom_right').each(function () {
+            let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
+            $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
+        })
     });
     $("#subscribe .blue-button").on("click", function () {
         $(".subscribe").addClass("subscribe-ordered");
@@ -1260,5 +1286,4 @@ $data = [
             scrollTop: $("#solutions__center").offset().top
         }, 300);
     });
-
 </script>

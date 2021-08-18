@@ -60,21 +60,12 @@ if ($request->isPost() && $request->isAjaxRequest()) {
     if(!isset($request['orderItemsIds']))
     {
         return false;
-    } else
-    {
-        if(empty($request['orderItemsIds']))
-        {
-            return false;
-        }
-             else {
-
-                 foreach ($request['orderItemsIds'] as $itemId)
-                 {
-                     $arProductsIds[] = intval($itemId);
-                 }
-        }
-
     }
+    if(empty($request['orderItemsIds']))
+    {
+        return false;
+    }
+
     //Данные страхового полиса
     if(isset($request['policyContactInfo']))
     {
@@ -93,7 +84,7 @@ if ($request->isPost() && $request->isAjaxRequest()) {
             $errorsValidate[] = 'policyContactInfo[place]';
         if(empty($arPolicyContactInfo['email']))
             $errorsValidate[] = 'policyContactInfo[email]';
-        elseif (!preg_match('/^\w{2,}@\w{2,}\.\w{2,4}$/', $arPolicyContactInfo['email']))
+        elseif (!filter_var($arPolicyContactInfo['email'], FILTER_VALIDATE_EMAIL))
             $errorsValidate[] = 'policyContactInfo[email]';
         if(empty($arPolicyContactInfo['phone']))
             $errorsValidate[] = 'policyContactInfo[phone]';
@@ -166,7 +157,7 @@ if ($request->isPost() && $request->isAjaxRequest()) {
                 $errorsValidate[] = 'contactData[name]';
             if(empty($arContactData['email']))
                 $errorsValidate[] = 'contactData[email]';
-            elseif (!preg_match('/^\w{2,}@\w{2,}\.\w{2,4}$/', $arContactData['email']))
+            elseif (!filter_var($arContactData['email'], FILTER_VALIDATE_EMAIL))
                 $errorsValidate[] = 'contactData[email]';
             if(empty($arContactData['phone']))
                 $errorsValidate[] = 'contactData[phone]';
@@ -200,12 +191,12 @@ if ($request->isPost() && $request->isAjaxRequest()) {
         return false;
     }
 
-    if ($_SERVER['REMOTE_ADDR'] == '46.147.123.63' || $_SERVER['REMOTE_ADDR'] == '178.76.225.235') {
-        echo '<pre>';
-        print_r($request);
-        echo '</pre>';
-        //die();
-    }
+//    if ($_SERVER['REMOTE_ADDR'] == '46.147.123.63' || $_SERVER['REMOTE_ADDR'] == '178.76.225.235') {
+//        echo '<pre>';
+//        print_r($request);
+//        echo '</pre>';
+//        die();
+//    }
 
     $siteId = Context::getCurrent()->getSite();
     $currencyCode = CurrencyManager::getBaseCurrency();
@@ -218,11 +209,20 @@ if ($request->isPost() && $request->isAjaxRequest()) {
 
 
     $products = [];
+    $arProductsIds = $request['orderItemsIds'];
     foreach ($arProductsIds as $arProductsId)
     {
-         array_push($products, array('PRODUCT_ID' => $arProductsId, 'CURRENCY' => $currencyCode, 'QUANTITY' => 1, 'LID' => $siteId, 'PRODUCT_PROVIDER_CLASS' => $productProviderClass));
-    }
+         $productData = explode('#',$arProductsId);
+         $arProductId = intval($productData[0]);
+            $isFreeFlag = $productData[1];
+         if($isFreeFlag == '1') {
+             array_push($products, array('PRODUCT_ID' => $arProductId, 'PRICE'=>0, 'CUSTOM_PRICE' => 'Y', 'CURRENCY' => $currencyCode, 'QUANTITY' => 1, 'LID' => $siteId, 'PRODUCT_PROVIDER_CLASS' => $productProviderClass));
+         } else
+         {
+             array_push($products, array('PRODUCT_ID' => $arProductId, 'CURRENCY' => $currencyCode, 'QUANTITY' => 1, 'LID' => $siteId, 'PRODUCT_PROVIDER_CLASS' => $productProviderClass));
+         }
 
+    }
 
     $basket = Basket::create($siteId);
 
@@ -326,8 +326,8 @@ if ($request->isPost() && $request->isAjaxRequest()) {
     $orderId = $order->getId();
     if ($result->isSuccess())
     {
-//        $session = \Bitrix\Main\Application::getInstance()->getSession();
-//        $orderItems = $session->remove('orderItems');
+        $session = \Bitrix\Main\Application::getInstance()->getSession();
+        $orderItems = $session->remove('orderData');
         jsonResponse([
             'url' => '/order/?ORDER_ID=' . $orderId,
             'type' => 'ok'
