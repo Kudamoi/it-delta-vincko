@@ -382,7 +382,7 @@ $curStep = 1;
                             <div class="short-rd__price-old"><?=$totalObj->total_old_sum?> ₽</div>
                             <div class="short-rd__cost"><?=$totalObj->total_sum?> ₽</div>
                         <?else:?>
-                            <div class="short-rd__cost"><?=$totalObj->total_old_sum?> ₽</div>
+                            <div data-old-sum="<?=$totalObj->total_old_sum?>" id="b-data-old-sum" class="short-rd__cost"><?=$totalObj->total_old_sum?> ₽</div>
                         <?endif;?>
                     </div>
                     <div class="short-rd__footer hidden">
@@ -670,7 +670,7 @@ $curStep = 1;
                                         </div>
                                     </div>
                                     <div class="payment-method-right">
-                                        <div class="payment-method__card active">
+                                        <div class="payment-method__card <?=$paymentMethodObj=='installment' ? '' : 'active'?>">
                                             <h4>Всего</h4>
                                             <?if(intval($totalObj->total_sum)!=intval($totalObj->total_old_sum)):?>
                                                 <div class="payment-method__old-price"><?=$totalObj->total_old_sum?> ₽</div>
@@ -680,7 +680,7 @@ $curStep = 1;
                                                 <?endif;?>
 
                                         </div>
-                                        <div class="payment-method__installment">
+                                        <div class="payment-method__installment <?=$paymentMethodObj=='installment' ? 'active' : ''?>">
                                             <div class="payment-method__installment-title">
                                                 <span>Проценты <br> платит <span>vincko:</span></span>
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"

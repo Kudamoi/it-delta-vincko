@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	//order page installment calculate
+	let currentlyPrice = Number($('#b-data-old-sum').attr('data-old-sum'));
+	console.log(currentlyPrice);
+	console.log('123');
+	$('#b-form-order-ajax').find('.payment-method__price-month').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 
 	$(".js-bonuce").click(function(e){
 		e.preventDefault();
@@ -82,6 +87,8 @@ $(document).ready(function () {
 		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
 		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 	})
+
+
 
 
 	function timer(parent) {
