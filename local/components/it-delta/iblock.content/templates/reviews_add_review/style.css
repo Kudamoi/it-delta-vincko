@@ -4,12 +4,12 @@
 }
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item ul li {
-    margin-right: 19px;
+    margin-right: 20px !important;
     margin-left: 10px;
 }
 
 .review.step-3 .review__bottom.step-3 .step-3-item.active .content .content-wrapper .right .list-q .q.active .active-block ul li {
-    margin-right: 19px;
+    margin-right: 20px !important;
     margin-left: 10px;
 }
 
@@ -84,4 +84,15 @@
 .rating-center__search_form-input input:-ms-input-placeholder      {color: #005DFF!important;}/* IE */
 .rating-center__subtitle_text a:last-child {
     text-decoration: none;
+}
+
+.review__bottom-step-1-right .picture {
+    background: none !important;
+}
+
+.rating-center__search .searchForm__modal {
+    z-index: 99999;
+}
+.rating-center__search .searchForm__modal {
+    z-index: 99999;
 }

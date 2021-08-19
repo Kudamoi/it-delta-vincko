@@ -469,7 +469,7 @@ global $USER;
                         <p><?=$arResult["MAIN_SECTION"]["NAME"]?> <br> от сотрудничества с охранной <br> компанией</p>
                         <div class="input-block">
                             <ul>
-                                <li class="active smile">
+                                <li class="smile">
                                     <picture>
                                         <source srcset="/upload/review/smile-1.svg">
                                         <img src="/upload/review/smile-1.svg" alt="good">
@@ -487,7 +487,7 @@ global $USER;
                                         <img src="/upload/review/smile-3.svg" alt="good">
                                     </picture> 
                                 </li>
-                                <li class="smile">
+                                <li class="active smile">
                                     <picture>
                                         <source srcset="/upload/review/smile-4.svg">
                                         <img src="/upload/review/smile-4.svg" alt="good">
@@ -501,7 +501,7 @@ global $USER;
                                 </li>
                             </ul>
                             <div class="pseudo__range-reivew">
-                                <input type="range" id="pseudo__range-review-1" class="smile-input" min="1" max="49999" value="1">
+                                <input type="range" id="pseudo__range-review-1" class="smile-input" min="0" max="49999" value="36160">
                             </div>
                         </div>
                         <p class="text-2"><?=$arResult["MAIN_SECTION"]["~UF_TEXT_BEFORE_FIELD"]?></p>
@@ -511,15 +511,17 @@ global $USER;
                         </div>
                     </div>
                     <div class="review__bottom-step-1-right">
-                        <div class="picture"></div>
+                        <div class="picture">
+                            <img src="/upload/review/img-step-1.png">
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="review__btn step-1">
-                <button class="add-review" disabled>Оставить отзыв</button>
+                <button class="add-review">Оставить отзыв</button>
                 <? if($USER->IsAuthorized()): ?>
-                    <button class="next" disabled>Продолжить</button>
+                    <button class="next">Продолжить</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <span>и получить</span>
@@ -537,24 +539,24 @@ global $USER;
                 <div class="review__bottom-item <?=$i == 1 ? "first" : ""?>">
                     <div class="value-block">
                         <svg height="58" width="58">
-                            <circle cx="28.5" cy="28.5" r="24" />
+                            <circle cx="28.5" cy="28.5" r="24" style="stroke-dashoffset: 29;"/>
                         </svg>
                         <div class="number-wrapper">
-                            <span>?</span>
+                            <span>4</span>
                         </div>
                         <div class="item-name" id="<?=$section["CODE"]?>"><?=$section["NAME"]?></div>
                     </div>
                     <ul>
-                        <li class="review-item-step-2 active">Не могу <br> оценить</li>
+                        <li class="review-item-step-2">Не могу <br> оценить</li>
                         <li class="review-item-step-2">0</li>
                         <li class="review-item-step-2">1</li>
                         <li class="review-item-step-2">2</li>
                         <li class="review-item-step-2">3</li>
-                        <li class="review-item-step-2">4</li>
+                        <li class="review-item-step-2 active">4</li>
                         <li class="review-item-step-2">5</li>
                     </ul>
                     <div class="pseudo__range-reivew">
-                        <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="77999" value="0">
+                        <input type="range" id="pseudo__range-review-2" class="smile-input" min="0" max="77999" value="63931">
                     </div>
                     <p><?=$section["~UF_DESCRIPTION_FOR_REVIEWS"]?></p>
                     <div class="coment-block">
@@ -575,7 +577,7 @@ global $USER;
                     </p>
                 </div>
                 <div class="add-review-block">
-                    <button class="add-review" disabled>Оставить отзыв</button>
+                    <button class="add-review">Оставить отзыв</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <picture>
@@ -586,7 +588,7 @@ global $USER;
                     </div> -->
                 </div>
                 <div class="next-block">
-                    <button class="next" disabled>Продолжить</button>
+                    <button class="next">Продолжить</button>
                     <!-- Временно отключил блок, так как не работает функционал бонусов -->
                     <!-- <div class="bonus-block">
                         <picture>
