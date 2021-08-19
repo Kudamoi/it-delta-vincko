@@ -917,37 +917,34 @@ $curStep = 1;
     $( document ).ready(function() {
 
         var count = 0;
-        $('#js-policy-validate-btn').on('click', function () {
-            count++;
-        });
-        $('#js-item-validate-btn').on('click', function () {
+        var btnsCount = $('.form__next-button').length
+
+        $('.form__next-button').on('click', function () {
             count++;
         });
 
         $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
         $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
         $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-
+        $('.date').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
         function isValidPolicy(event) {
             let requiredInputs = $('.js-policy-validate');
             let emptyField = false;
             $.each(requiredInputs, function() {
-
+                $(this).removeClass('error');
                     if( $(this).val().trim().length == 0 ) {
                         emptyField = true;
-                        console.log('1235');
-                        //return false;
+                        $(this).addClass('error');
                     }
             });
             if(!$('#same').is(':checked'))
             {
                 let requiredInputs = $('.valid-cond1');
                 $.each(requiredInputs, function() {
-
+                    $(this).removeClass('error');
                     if( $(this).val().trim().length == 0 ) {
                         emptyField = true;
-                        console.log('777');
-                        //return false;
+                        $(this).addClass('error');
                     }
                 });
             }
@@ -955,11 +952,10 @@ $curStep = 1;
             {
                 let requiredInputs = $('.valid-cond2');
                 $.each(requiredInputs, function() {
-
+                    $(this).removeClass('error');
                     if( $(this).val().trim().length == 0 ) {
                         emptyField = true;
-                        console.log('55');
-                        //return false;
+                        $(this).addClass('error');
                     }
                 });
             }
@@ -967,7 +963,6 @@ $curStep = 1;
             if(!emptyField) {
                 $(event.data.name).attr('disabled', false);
                 $(event.data.name).css('opacity', '100%');
-                console.log(2);
             }else{
                 $(event.data.name).attr('disabled', true);
                 $(event.data.name).css('opacity', '50%');
@@ -983,11 +978,10 @@ $curStep = 1;
             {
                 let requiredInputs = $('.valid-cond3');
                 $.each(requiredInputs, function() {
-
+                    $(this).removeClass('error');
                     if( $(this).val().trim().length == 0 ) {
                         emptyField = true;
-                        console.log('333');
-                        //return false;
+                        $(this).addClass('error');
                     }
                 });
             }
@@ -995,11 +989,10 @@ $curStep = 1;
             {
                 let requiredInputs = $('.valid-cond4');
                 $.each(requiredInputs, function() {
-
+                    $(this).removeClass('error');
                     if( $(this).val().trim().length == 0 ) {
                         emptyField = true;
-                        console.log('4444');
-                        //return false;
+                        $(this).addClass('error');
                     }
                 });
             }
@@ -1007,7 +1000,6 @@ $curStep = 1;
             if(!emptyField) {
                 $(event.data.name).attr('disabled', false);
                 $(event.data.name).css('opacity', '100%');
-                console.log(2);
             }else{
                 $(event.data.name).attr('disabled', true);
                 $(event.data.name).css('opacity', '50%');
@@ -1017,9 +1009,8 @@ $curStep = 1;
         $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
         $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
         function isValidFinal(event) {
-            console.log('count= '+count);
             let isDisabledOrderBtn = false;
-            if(!$('#agreement').is(':checked'))
+            if($('#agreement').length && !$('#agreement').is(':checked'))
             {
                 isDisabledOrderBtn = true;
             }
@@ -1027,7 +1018,7 @@ $curStep = 1;
             {
                 isDisabledOrderBtn = true;
             }
-            if(count!=2)
+            if(count!=btnsCount)
             {
                 isDisabledOrderBtn = true;
             }
@@ -1035,7 +1026,6 @@ $curStep = 1;
             if(!isDisabledOrderBtn) {
                 $(event.data.name).attr('disabled', false);
                 $(event.data.name).css('opacity', '100%');
-                console.log(2);
             }else{
                 $(event.data.name).attr('disabled', true);
                 $(event.data.name).css('opacity', '50%');
