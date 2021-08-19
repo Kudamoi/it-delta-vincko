@@ -1144,7 +1144,8 @@ $data = [
             'isFree'=>false,
             'sum' => $complectPrice,
             'old_sum' => $complectOldPrice,
-            'package_info' => ['name' => $arResult['PACKAGE_GROUP']['NAME'], 'picture_src' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src']]
+            'package_info' => ['name' => $arResult['PACKAGE_GROUP']['NAME'], 'picture_src' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src']],
+            'parent_package_id'=>$arResult['ID']
         ],
         1 => [
             'id' => $currentSubcriptionFeeIndex,
