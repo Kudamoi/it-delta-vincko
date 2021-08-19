@@ -30,12 +30,13 @@ $res = CIblockElement::getList(
         [],
         ['=IBLOCK_CODE'=>'documents-in-footer','=ACTIVE'=>'Y'],
         false, false,
-        ['ID','NAME','PROPERTY_DOCUMENT','XML_ID']
+        ['ID','NAME','PROPERTY_DOCUMENT','CODE']
 );
 while($arFields = $res->Fetch())
 {
-    if($arFields['CODE']=='polzovatelskoe-soglashenie')
+    if($arFields['CODE']=='polzovatelskoe-soglashenie') {
         continue;
+    }
 
     $arFields['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_DOCUMENT_VALUE']);
     $arResult["CONTRACTS"][] = $arFields;
@@ -44,7 +45,7 @@ $res = CIblockElement::getList(
     [],
     ['=IBLOCK_CODE'=>'strahovka','=ACTIVE'=>'Y'],
     false, false,
-    ['ID','NAME','PROPERTY_DOCUMENTS','XML_ID']
+    ['ID','NAME','PROPERTY_DOCUMENTS']
 );
 while($arFields = $res->Fetch())
 {
