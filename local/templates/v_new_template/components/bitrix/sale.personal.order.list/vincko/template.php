@@ -1,23 +1,19 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-use Bitrix\Main,
-    Bitrix\Main\Localization\Loc,
-    Bitrix\Main\Page\Asset;
+use Bitrix\Main\Localization\Loc;
 
 ?>
 
 <div class="h1">Здравствуйте, Александр</div>
 <div class="profile__content">
     <div class="profile__tabs-choice">
-        <input checked name="profile__tabs-choice" type="radio" value="orders" id="chi-orders">
-        <label for="chi-orders" class="profile__tabs-chitem checked">
+        <a class="profile__tabs-chitem checked">
             Заказы и заявки
-        </label>
+        </a>
 
-        <input name="profile__tabs-choice" type="radio" value="orders" id="chi-info">
-        <label for="chi-info" class="profile__tabs-chitem">
+        <a href="#" class="profile__tabs-chitem">
             Мои данные
-        </label>
+        </a>
 
     </div>
 
@@ -29,13 +25,12 @@ use Bitrix\Main,
                         <input checked id="c-all-orders" type="radio" name="profile__c-tabs">
                         <label for="c-all-orders">Все заказы</label>
 
-
-                        <input id="c-p-requests" type="radio" name="profile__c-tabs">
+                       <input id="c-p-requests" type="radio" name="profile__c-tabs">
                         <label for="c-p-requests">Индивидуальные заявки</label>
 
                     </div>
 
-                    <a class="blue underline" href="">Создать заявку</a>
+                    <a class="blue underline" href="/zayavka/">Создать заявку</a>
                 </div>
             </div>
 
@@ -67,1356 +62,273 @@ use Bitrix\Main,
                     </div>
 
                 </div>
-                <? foreach ($arResult["ORDER"] as $arOrder): ?>
-                    <div class="profile__c-main-block profile__c-main-order profile__c-main-order--paid">
-                        <div class="profile__c-main-order-head">
-                            <div class="profile__c-main-order-title">
-                                <?= Loc::getMessage("SPOL_TPL_ORDER") ?>
-                                <?= Loc::getMessage("SPOL_TPL_NUMBER_SIGN") . $arOrder["ACCOUNT_NUMBER"] ?>
-                                <?= Loc::getMessage("SPOL_TPL_FROM_DATE") ?>
-                                <?= $arOrder["DATE_INSERT_FORMATED"] ?>
-                            </div>
+                <? if (!empty($arResult["ORDER"])): ?>
+                    <? foreach ($arResult["ORDER"] as $arOrder): ?>
+                        <div class="profile__c-main-block profile__c-main-order <?= ($arOrder["PAY"]["STATUS_ID"] == 1 ? "profile__c-main-order--paid" : "profile__c-main-order--not-paid") ?>">
+                            <div class="profile__c-main-order-head">
+                                <div class="profile__c-main-order-title">
+                                    <?= Loc::getMessage("SPOL_TPL_ORDER") ?>
+                                    <?= Loc::getMessage("SPOL_TPL_NUMBER_SIGN") . $arOrder["ACCOUNT_NUMBER"] ?>
+                                    <?= Loc::getMessage("SPOL_TPL_FROM_DATE") ?>
+                                    <?= $arOrder["DATE_INSERT_FORMATED"] ?>
+                                </div>
 
-                            <div class="profile__c-main-order-status">
-                                <? if ($arOrder["CANCELED"] !== "Y"): ?>
-                                    <?= $arResult["STATUS"] ?>
-                                <? else : ?>
-                                    <?= Loc::getMessage('SPOD_ORDER_CANCELED') ?>
-                                <? endif; ?>
-                            </div>
+                                <div class="profile__c-main-order-status">
+                                    <? if ($arOrder["CANCELED"] !== "Y"): ?>
+                                        <?= $arResult["STATUS"] ?>
+                                    <? else : ?>
+                                        <?= Loc::getMessage('SPOD_ORDER_CANCELED') ?>
+                                    <? endif; ?>
+                                </div>
 
-                            <div class="profile__c-main-order-dates">
-                                <? /*<div class="profile__c-main-order-date">
+                                <div class="profile__c-main-order-dates">
+                                    <? /*<div class="profile__c-main-order-date">
                                     Дата получения: <span class="profile__c-main-order-date-value">28 марта 2021</span>
                                 </div>*/ ?>
-                                <? if (!empty($arResult["MONTAZHTIME"])): ?>
-                                    <div class="profile__c-main-order-date">
-                                        Планируемая дата монтажа:
-                                        <span class="profile__c-main-order-date-value"> <?= $arResult["MONTAZHTIME"] ?></span>
+                                    <? if (!empty($arResult["MONTAZHTIME"])): ?>
+                                        <div class="profile__c-main-order-date">
+                                            Планируемая дата монтажа:
+                                            <span class="profile__c-main-order-date-value"> <?= $arResult["MONTAZHTIME"] ?></span>
+                                        </div>
+                                    <? endif; ?>
+                                </div>
+
+
+                            </div>
+                            <div class="profile__c-main-order-price">
+                                <div class="profile__c-main-order-price-value">
+                                    <?= $arOrder["PAY"]["FORMATED_SUM"] ?>
+                                </div>
+                                <div class="profile__c-main-order-price-type">
+                                    <?= $arOrder["PAY"]["NAME"] ?>
+                                </div>
+                                <div class="profile__c-main-order-price-status">
+                                    <div class="<?= ($arOrder["PAY"]["STATUS_ID"] == 1 ? "profile__c-main-order-price-status-paid" : "profile__c-main-order-price-status-not-paid") ?>">
+                                        <?= $arOrder["PAY"]["STATUS"] ?>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="profile__c-main-order-main">
+                                <div class="profile__c-main-order-main-name">
+                                    <?= $arOrder["SOLUTION"]["NAME"] ?>
+                                </div>
+
+                                <div class="profile__c-main-order-main-firms">
+                                    <? foreach ($arOrder["PRODUCT"] as $arProduct): ?>
+                                        <div class="profile__c-main-order-main-firm">
+                                            <div class="profile__c-main-order-main-firm-name">
+                                                <?= $arProduct["NAME"] ?>
+                                            </div>
+                                            <a href="<?= $arProduct["URL"] ?>"
+                                               class="profile__c-main-order-main-firm-more underline">Подробнее</a>
+                                        </div>
+                                    <? endforeach; ?>
+                                </div>
+
+                                <div class="profile__c-main-order-main-infos">
+                                    <div class="profile__c-main-order-main-info">
+
+                                        <div class="products__info products__info--center">
+                                            <div class="products__info-sign">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
+                                                          fill="#818181"></path>
+                                                </svg>
+
+                                            </div>
+                                            <div class="products__text-container products__text-container--snd">
+                                                <div class="products__info-text">
+                                                    <div class="itemRating-open__popup-title">
+                                                        <span class="blue">Договор</span> с охранной компанией
+                                                    </div>
+                                                    <div class="itemRating-open__popup-content">
+                                                        <ul>
+                                                            <li>
+                                                                Честный договор составлен и рекомендован vincko: договор
+                                                                сформулирован таким образом, чтобы максимально защитить
+                                                                права и
+                                                                интересы клиентов, заказывающих услуги охранных компаний
+                                                                на
+                                                                платформе vincko:
+
+                                                                <div class="grey">
+                                                                    <div class="blue underline">vincko: Честный договор
+                                                                    </div>
+                                                                    - доступен при покупке услуг данной компании
+                                                                    <br>
+                                                                    <div class="underline">vincko: Честный договор</div>
+                                                                    -
+                                                                    <div class="red">не</div>
+                                                                    доступен при покупке услуг данной компании
+                                                                </div>
+
+                                                            </li>
+                                                            <li>
+                                                                Договор охранной компании: предоставляется индивидуально
+                                                                самой
+                                                                компанией, всю ответственность за условия такого
+                                                                договора
+                                                                несет
+                                                                данная охранная компания.
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="profile__c-main-order-main-info-content">
+                                            Договор на 3 месяца
+                                            <? if (!empty($arOrder["CONTRACT"]["HONEST"])) : ?>
+                                                <a class="blue underline" href="">vincko: Честный договор</a>
+                                            <? endif; ?>
+                                            <? if (!empty($arOrder["CONTRACT"]["COMPANY"])) : ?>
+                                                <a class="blue underline" href="">Договор охранной компании</a>
+                                            <? endif; ?>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="profile__c-main-order-main-info">
+                                        <div class="products__info products__info--center">
+                                            <div class="products__info-sign">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
+                                                          fill="#818181"></path>
+                                                </svg>
+
+                                            </div>
+                                            <? if (!empty($arOrder["INSURANCE"]["PAY"])): ?>
+                                                <div class="products__text-container products__text-container--snd">
+                                                    <div class="products__info-text">
+                                                        <div class="itemRating-open__popup-title">
+                                                            <span class="blue">Выплаты</span> по пунктам
+                                                        </div>
+                                                        <div class="itemRating-open__popup-content">
+                                                            <ul>
+                                                                <? foreach ($arOrder["INSURANCE"]["PAY"] as $arInsurance): ?>
+                                                                    <li<?= (!empty($arInsurance["PRICE"]) ? " class='blue'" : "") ?>>
+                                                                        <?= $arInsurance["NAME"] ?> <br>
+                                                                        <? if (!empty($arInsurance["PRICE"])): ?>
+                                                                            <span class="blue"><?= $arInsurance["PRICE"] ?></span>
+                                                                        <? else: ?>
+                                                                            нет выплаты
+                                                                        <? endif; ?>
+                                                                    </li>
+                                                                <? endforeach; ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <? endif; ?>
+                                        </div>
+                                        <? if ($arOrder["INSURANCE"]["MAX_PRICE"]): ?>
+                                            <div class="profile__c-main-order-main-info-content">
+                                                Выплата до <?= $arOrder["INSURANCE"]["MAX_PRICE"] ?>
+                                            </div>
+                                        <? endif; ?>
+                                    </div>
+                                </div>
+                                <? if (!empty($arOrder["USER"])): ?>
+                                    <div class="profile__c-main-order-main-getter">
+                                        <p class="grey cmom-title">Получатель</p>
+                                        <? if ($arOrder["USER"]["FIO"]): ?>
+                                            <p class="grey"><? $arOrder["USER"]["FIO"] ?>></p>
+                                        <? endif; ?>
+                                        <? if ($arOrder["USER"]["PHONE"]): ?>
+                                            <p class="grey"><?= $arOrder["USER"]["PHONE"] ?></p>
+                                        <? endif; ?>
+                                    </div>
+                                <? endif; ?>
+                                <? if (!empty($arOrder["DELIVERY"])): ?>
+                                    <div class="profile__c-main-order-main-setter">
+                                        <p class="grey cmom-title">Адрес доставки</p>
+                                        <p class="grey"><?= $arOrder["DELIVERY"] ?></p>
+                                        <p class="grey"><?= $arOrder["COMMENT"] ?></p>
                                     </div>
                                 <? endif; ?>
                             </div>
 
+                            <div class="profile__c-main-order-bottom">
+                                <div class="profile__c-main-order-bottom-wrapper">
+                                    <? if (!empty($arOrder["INSURANCE"]["POLICY"])): ?>
+                                        <a class="profile__c-main-order-bottom-paid">
+                                            <?= $arOrder["INSURANCE"]["POLICY"] ?>
+                                        </a>
+                                    <? endif; ?>
+                                    <? if ($arOrder["PAY"]["STATUS_ID"] != 1): ?>
+                                        <a href="/order/?ORDER_ID=<?= $arOrder["ID"] ?>"
+                                           class="profile__c-main-order-bottom-download">
+                                            Оплатить
+                                        </a>
+                                    <? endif; ?>
 
-                        </div>
-
-                        <div class="profile__c-main-order-price">
-                            <div class="profile__c-main-order-price-value">
-                                <?= arResult["PAY"]["FORMATED_SUM"] ?>
-                            </div>
-                            <div class="profile__c-main-order-price-type">
-                                <?=$arResult["PAY"]["NAME"] ?>
-                            </div>
-                            <div class="profile__c-main-order-price-status">
-                                <div class="<?=$arResult["PAY"]["STATUS_CLASS"]?>">
-                                    <?=$arResult["PAY"]["STATUS"] ?>
                                 </div>
-
-                            </div>
-                        </div>
-
-                        <div class="profile__c-main-order-main">
-                            <div class="profile__c-main-order-main-name">
-                                Готовое решение "Все под контролем"
-                            </div>
-
-                            <div class="profile__c-main-order-main-firms">
-                                <div class="profile__c-main-order-main-firm">
-                                    <div class="profile__c-main-order-main-firm-name">
-                                        AJAX StarterKit Cam Названиекотffff...
+                                <? if ($arOrder["PAY"]["STATUS_ID"] != 1): ?>
+                                    <div class="profile__c-main-order-bottom-text">
+                                        Оплатите, чтобы скачать полис
                                     </div>
-                                    <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                                </div>
-                                <div class="profile__c-main-order-main-firm">
-                                    <div class="profile__c-main-order-main-firm-name">
-                                        AJAX StarterKit Cam Названиекотffff...
-                                    </div>
-                                    <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                                </div>
-
-                                <div class="profile__c-main-order-main-firm">
-                                    <div class="profile__c-main-order-main-firm-name">
-                                        AJAX StarterKit Cam Названиекотffff...
-                                    </div>
-                                    <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                                </div>
-
-                            </div>
-
-                            <div class="profile__c-main-order-main-infos">
-                                <div class="profile__c-main-order-main-info">
-
-                                    <div class="products__info products__info--center">
-                                        <div class="products__info-sign">
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                      fill="#818181"></path>
-                                            </svg>
-
-                                        </div>
-                                        <div class="products__text-container products__text-container--snd">
-                                            <div class="products__info-text">
-                                                <div class="itemRating-open__popup-title">
-                                                    <span class="blue">Договор</span> с охранной компанией
-                                                </div>
-                                                <div class="itemRating-open__popup-content">
-                                                    <ul>
-                                                        <li>
-                                                            Честный договор составлен и рекомендован vincko: договор
-                                                            сформулирован таким образом, чтобы максимально защитить
-                                                            права и
-                                                            интересы клиентов, заказывающих услуги охранных компаний на
-                                                            платформе vincko:
-
-                                                            <div class="grey">
-                                                                <div class="blue underline">vincko: Честный договор
-                                                                </div>
-                                                                - доступен при покупке услуг данной компании
-                                                                <br>
-                                                                <div class="underline">vincko: Честный договор</div>
-                                                                -
-                                                                <div class="red">не</div>
-                                                                доступен при покупке услуг данной компании
-                                                            </div>
-
-                                                        </li>
-                                                        <li>
-                                                            Договор охранной компании: предоставляется индивидуально
-                                                            самой
-                                                            компанией, всю ответственность за условия такого договора
-                                                            несет
-                                                            данная охранная компания.
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="profile__c-main-order-main-info-content">
-                                        Договор на 3 месяца
-
-                                        <a class="blue underline" href="">vincko: Честный договор</a>
-                                        <a class="blue underline" href="">Договор охранной компании</a>
-                                    </div>
-
-                                </div>
-
-                                <div class="profile__c-main-order-main-info">
-                                    <div class="products__info products__info--center">
-                                        <div class="products__info-sign">
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                      fill="#818181"></path>
-                                            </svg>
-
-                                        </div>
-                                        <div class="products__text-container products__text-container--snd">
-                                            <div class="products__info-text">
-                                                <div class="itemRating-open__popup-title">
-                                                    <span class="blue">Выплаты</span> по пунктам
-                                                </div>
-                                                <div class="itemRating-open__popup-content">
-                                                    <ul>
-                                                        <li>
-                                                            по конструктивным элементам квариты: <br>
-                                                            <span class="blue">100 000 руб</span>
-                                                        </li>
-                                                        <li>
-                                                            по отделке и инженерному оборудованию:<br>
-                                                            <span class="blue">500 000 руб </span>
-                                                        </li>
-                                                        <li>
-                                                            по движимому имуществу: <br>
-                                                            <span class="blue">22 000 000 руб</span>
-                                                        </li>
-                                                        <li class="grey">
-                                                            по ответственности перед соседями:<br>
-                                                            нет выплаты
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="profile__c-main-order-main-info-content">
-                                        Выплата до 2 000 000 руб.
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="profile__c-main-order-main-getter">
-                                <p class="grey cmom-title">Получатель</p>
-                                <p class="grey">ФамилияФамилияФамилия ИмяИмяИмяИмяИмяИмяИмяИмяИмяИмя Отчество</p>
-                                <p class="grey">+7 (000) 000 - 00 - 00</p>
-                            </div>
-
-                            <div class="profile__c-main-order-main-setter">
-                                <p class="grey cmom-title">Адрес доставки</p>
-                                <p class="grey">Индекс, г. Город, улица Улица, дом 912, корпус 1, квартира 17</p>
-                                <p class="grey">Некий длинный комментари пользователя который написал все
-                                    чточточточточточто
-                                    чточточточточточто мог в...</p>
-
+                                <? endif; ?>
                             </div>
                         </div>
+                    <? endforeach; ?>
+                <? else : ?>
+                    <div class="empty empty--order">
+                        <picture>
+                            <img src="/local/templates/v_new_template/img/profile/empty-man.png" alt="">
+                        </picture>
 
-                        <div class="profile__c-main-order-bottom">
-                            <div class="profile__c-main-order-bottom-wrapper">
-                                <button class="profile__c-main-order-bottom-paid">
-                                    Скачать полис
-                                </button>
-                                <button class="profile__c-main-order-bottom-download">
-                                    Оплатить
-                                </button>
-                            </div>
-
-                            <div class="profile__c-main-order-bottom-text">
-                                Оплатите, чтобы скачать полис
-                            </div>
+                        <div class="empty-title">Заказов нет</div>
+                        <div class="empty-text">Пока что вы не сделали заказ на платформе vincko:
+                            Пора почувствовать себя в безопасности со страховым полисом или готовым решением, созданным
+                            для
+                            вас
                         </div>
-                    </div>
-                <? endforeach; ?>
+                        <div class="empty-btns">
+                            <a href="/strahovanie/" class="grey-border-button">
+                                Выбрать страховой полис
+                            </a>
 
-                <div class="profile__c-main-block profile__c-main-order profile__c-main-order--not-paid">
-                    <div class="profile__c-main-order-head">
-                        <div class="profile__c-main-order-title">
-                            Заказ №44236 от 12.02.2021
-                        </div>
-
-                        <div class="profile__c-main-order-status">
-                            Принят в работу
+                            <a href="/packages/" class="grey-border-button">
+                                Выбрать готовое решение
+                            </a>
                         </div>
 
-                        <div class="profile__c-main-order-dates">
-                            <div class="profile__c-main-order-date">
-                                Дата получения: <span class="profile__c-main-order-date-value">28 марта 2021</span>
-                            </div>
-
-                            <div class="profile__c-main-order-date">
-                                Планируемая дата монтажа: <span class="profile__c-main-order-date-value">28 марта 2021, 10:00 - 12:00</span>
-                            </div>
-                        </div>
-
+                        <? /*<a href="" class="empty-error grey underline">Сообщить об ошибке</a>*/ ?>
 
                     </div>
+                <? endif; ?>
+                <div class="profile__c-main profile__c-main--personal-requests">
 
-                    <div class="profile__c-main-order-price">
-                        <div class="profile__c-main-order-price-value">
-                            55 000 руб
-                        </div>
-                        <div class="profile__c-main-order-price-type">
-                            Оплата картой
-                        </div>
-                        <div class="profile__c-main-order-price-status">
-                            <div class="profile__c-main-order-price-status-paid">
-                                Оплачено
-                            </div>
-                            <div class="profile__c-main-order-price-status-not-paid">
-                                Ожидает оплату
-                            </div>
+                    <div class="empty empty--requests">
+                        <picture>
+                            <img src="/local/templates/v_new_template/img/profile/empty-man.png" alt="">
+                        </picture>
 
-                        </div>
-                    </div>
+                        <div class="empty-title">Индивидуальных заявок нет</div>
+                        <div class="empty-text">Вы пока не создали ни одной индивидуальной заявки
+                            Создайте заявку для решения своей задачи или подберите готовое решение, созданное для вас</div>
+                        <div class="empty-btns">
+                            <a href="" class="grey-border-button">
+                                Создать заявку
+                            </a>
 
-                    <div class="profile__c-main-order-main">
-                        <div class="profile__c-main-order-main-name">
-                            Готовое решение "Все под контролем"
+                            <a href="" class="grey-border-button">
+                                Выбрать готовое решение
+                            </a>
                         </div>
 
-                        <div class="profile__c-main-order-main-firms">
-                            <div class="profile__c-main-order-main-firm">
-                                <div class="profile__c-main-order-main-firm-name">
-                                    AJAX StarterKit Cam Названиекотffff...
-                                </div>
-                                <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                            </div>
-                            <div class="profile__c-main-order-main-firm">
-                                <div class="profile__c-main-order-main-firm-name">
-                                    AJAX StarterKit Cam Названиекотffff...
-                                </div>
-                                <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                            </div>
-
-                            <div class="profile__c-main-order-main-firm">
-                                <div class="profile__c-main-order-main-firm-name">
-                                    AJAX StarterKit Cam Названиекотffff...
-                                </div>
-                                <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                            </div>
-
-                        </div>
-
-                        <div class="profile__c-main-order-main-infos">
-                            <div class="profile__c-main-order-main-info">
-                                <div class="products__info products__info--center">
-                                    <div class="products__info-sign">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                  fill="#818181"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="products__text-container products__text-container--snd">
-                                        <div class="products__info-text">
-                                            <div class="itemRating-open__popup-title">
-                                                <span class="blue">Договор</span> с охранной компанией
-                                            </div>
-                                            <div class="itemRating-open__popup-content">
-                                                <ul>
-                                                    <li>
-                                                        Честный договор составлен и рекомендован vincko: договор
-                                                        сформулирован таким образом, чтобы максимально защитить права и
-                                                        интересы клиентов, заказывающих услуги охранных компаний на
-                                                        платформе vincko:
-
-                                                        <div class="grey">
-                                                            <div class="blue underline">vincko: Честный договор</div>
-                                                            - доступен при покупке услуг данной компании
-                                                            <br>
-                                                            <div class="underline">vincko: Честный договор</div>
-                                                            -
-                                                            <div class="red">не</div>
-                                                            доступен при покупке услуг данной компании
-                                                        </div>
-
-                                                    </li>
-                                                    <li>
-                                                        Договор охранной компании: предоставляется индивидуально самой
-                                                        компанией, всю ответственность за условия такого договора несет
-                                                        данная охранная компания.
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile__c-main-order-main-info-content">
-                                    Договор на 3 месяца
-
-                                    <a class="blue underline" href="">vincko: Честный договор</a>
-                                    <a class="blue underline" href="">Договор охранной компании</a>
-                                </div>
-
-                            </div>
-
-                            <div class="profile__c-main-order-main-info">
-                                <div class="products__info products__info--center">
-                                    <div class="products__info-sign">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                  fill="#818181"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="products__text-container products__text-container--snd">
-                                        <div class="products__info-text">
-                                            <div class="itemRating-open__popup-title">
-                                                <span class="blue">Выплаты</span> по пунктам
-                                            </div>
-                                            <div class="itemRating-open__popup-content">
-                                                <ul>
-                                                    <li>
-                                                        по конструктивным элементам квариты: <br>
-                                                        <span class="blue">100 000 руб</span>
-                                                    </li>
-                                                    <li>
-                                                        по отделке и инженерному оборудованию:<br>
-                                                        <span class="blue">500 000 руб </span>
-                                                    </li>
-                                                    <li>
-                                                        по движимому имуществу: <br>
-                                                        <span class="blue">22 000 000 руб</span>
-                                                    </li>
-                                                    <li class="grey">
-                                                        по ответственности перед соседями:<br>
-                                                        нет выплаты
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile__c-main-order-main-info-content">
-                                    Выплата до 2 000 000 руб.
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="profile__c-main-order-main-getter">
-                            <p class="grey cmom-title">Получатель</p>
-                            <p class="grey">Фамилия Имя Отчество</p>
-                            <p class="grey">+7 (000) 000 - 00 - 00</p>
-                        </div>
-
-                        <div class="profile__c-main-order-main-setter">
-                            <p class="grey cmom-title">Адрес доставки</p>
-                            <p class="grey">Индекс, г. Город, улица Улица, дом 912, корпус 1, квартира 17</p>
-                            <p class="grey">Некий длинный комментари пользователя который написал все чточточточточточто
-                                чточточточточточто мог в...</p>
-
-                        </div>
-                    </div>
-
-                    <div class="profile__c-main-order-bottom">
-                        <div class="profile__c-main-order-bottom-wrapper">
-                            <button class="profile__c-main-order-bottom-paid">
-                                Скачать полис
-                            </button>
-                            <button class="profile__c-main-order-bottom-download">
-                                Оплатить
-                            </button>
-                        </div>
-
-                        <div class="profile__c-main-order-bottom-text">
-                            Оплатите, чтобы скачать полис
-                        </div>
-                    </div>
-                </div>
-                <div class="profile__c-main-block profile__c-main-order profile__c-main-order--short profile__c-main-order--paid">
-                    <div class="profile__c-main-order-head">
-                        <div class="profile__c-main-order-title">
-                            Заказ №44236 от 12.02.2021
-                        </div>
-
-                        <div class="profile__c-main-order-status">
-                            Принят в работу
-                        </div>
-
+                        <a href="" class="empty-error grey underline">Сообщить об ошибке</a>
 
                     </div>
-
-                    <div class="profile__c-main-order-price">
-                        <div class="profile__c-main-order-price-value">
-                            55 000 руб
-                        </div>
-                        <div class="profile__c-main-order-price-type">
-                            Оплата картой
-                        </div>
-                        <div class="profile__c-main-order-price-status">
-                            <div class="profile__c-main-order-price-status-paid">
-                                Оплачено
-                            </div>
-                            <div class="profile__c-main-order-price-status-not-paid">
-                                Ожидает оплату
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="profile__c-main-order-main">
-                        <div class="profile__c-main-order-main-name">
-                            Готовое решение "Все под контролем"
-                        </div>
-
-                        <div class="profile__c-main-order-main-firms">
-                            <div class="profile__c-main-order-main-firm">
-                                <div class="profile__c-main-order-main-firm-name">
-                                    AJAX StarterKit Cam Названиекотffff...
-                                </div>
-                                <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                            </div>
-
-
-                        </div>
-
-                        <div class="profile__c-main-order-main-infos">
-
-                            <div class="profile__c-main-order-main-info">
-                                <div class="products__info products__info--center">
-                                    <div class="products__info-sign">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                  fill="#818181"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="products__text-container products__text-container--snd">
-                                        <div class="products__info-text">
-                                            <div class="itemRating-open__popup-title">
-                                                <span class="blue">Выплаты</span> по пунктам
-                                            </div>
-                                            <div class="itemRating-open__popup-content">
-                                                <ul>
-                                                    <li>
-                                                        по конструктивным элементам квариты: <br>
-                                                        <span class="blue">100 000 руб</span>
-                                                    </li>
-                                                    <li>
-                                                        по отделке и инженерному оборудованию:<br>
-                                                        <span class="blue">500 000 руб </span>
-                                                    </li>
-                                                    <li>
-                                                        по движимому имуществу: <br>
-                                                        <span class="blue">22 000 000 руб</span>
-                                                    </li>
-                                                    <li class="grey">
-                                                        по ответственности перед соседями:<br>
-                                                        нет выплаты
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile__c-main-order-main-info-content">
-                                    Выплата до 2 000 000 руб.
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="profile__c-main-order-bottom">
-                        <div class="profile__c-main-order-bottom-wrapper">
-                            <button class="profile__c-main-order-bottom-paid">
-                                Скачать полис
-                            </button>
-                            <button class="profile__c-main-order-bottom-download">
-                                Оплатить
-                            </button>
-                        </div>
-
-                        <div class="profile__c-main-order-bottom-text">
-                            Оплатите, чтобы скачать полис
-                        </div>
-                    </div>
-                </div>
-                <div class="profile__c-main-block profile__c-main-order profile__c-main-order--short profile__c-main-order--not-paid">
-                    <div class="profile__c-main-order-head">
-                        <div class="profile__c-main-order-title">
-                            Заказ №44236 от 12.02.2021
-                        </div>
-
-                        <div class="profile__c-main-order-status">
-                            Принят в работу
-                        </div>
-
-
-                    </div>
-
-                    <div class="profile__c-main-order-price">
-                        <div class="profile__c-main-order-price-value">
-                            55 000 руб
-                        </div>
-                        <div class="profile__c-main-order-price-type">
-                            Оплата картой
-                        </div>
-                        <div class="profile__c-main-order-price-status">
-                            <div class="profile__c-main-order-price-status-paid">
-                                Оплачено
-                            </div>
-                            <div class="profile__c-main-order-price-status-not-paid">
-                                Ожидает оплату
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="profile__c-main-order-main">
-                        <div class="profile__c-main-order-main-name">
-                            Готовое решение "Все под контролем"
-                        </div>
-
-                        <div class="profile__c-main-order-main-firms">
-                            <div class="profile__c-main-order-main-firm">
-                                <div class="profile__c-main-order-main-firm-name">
-                                    AJAX StarterKit Cam Названиекотffff...
-                                </div>
-                                <a href="" class="profile__c-main-order-main-firm-more underline">Подробнее</a>
-                            </div>
-
-
-                        </div>
-
-                        <div class="profile__c-main-order-main-infos">
-
-                            <div class="profile__c-main-order-main-info">
-                                <div class="products__info products__info--center">
-                                    <div class="products__info-sign">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 0C5.61553 0 4.26215 0.410543 3.11101 1.17971C1.95987 1.94888 1.06266 3.04213 0.532846 4.32121C0.00303299 5.6003 -0.13559 7.00776 0.134506 8.36563C0.404603 9.7235 1.07129 10.9708 2.05026 11.9497C3.02922 12.9287 4.2765 13.5954 5.63437 13.8655C6.99224 14.1356 8.3997 13.997 9.67879 13.4672C10.9579 12.9373 12.0511 12.0401 12.8203 10.889C13.5895 9.73784 14 8.38447 14 7C14 6.08074 13.8189 5.17049 13.4672 4.32121C13.1154 3.47194 12.5998 2.70026 11.9497 2.05025C11.2997 1.40024 10.5281 0.884626 9.67879 0.532843C8.82951 0.18106 7.91925 0 7 0ZM7 11.2C6.86155 11.2 6.72622 11.1589 6.6111 11.082C6.49599 11.0051 6.40627 10.8958 6.35329 10.7679C6.3003 10.64 6.28644 10.4992 6.31345 10.3634C6.34046 10.2276 6.40713 10.1029 6.50503 10.005C6.60292 9.90712 6.72765 9.84046 6.86344 9.81345C6.99923 9.78644 7.13997 9.8003 7.26788 9.85328C7.39579 9.90626 7.50511 9.99598 7.58203 10.1111C7.65895 10.2262 7.7 10.3615 7.7 10.5C7.7 10.6856 7.62625 10.8637 7.49498 10.995C7.3637 11.1262 7.18565 11.2 7 11.2ZM7.7 7.588V8.4C7.7 8.58565 7.62625 8.7637 7.49498 8.89497C7.3637 9.02625 7.18565 9.1 7 9.1C6.81435 9.1 6.6363 9.02625 6.50503 8.89497C6.37375 8.7637 6.3 8.58565 6.3 8.4V7C6.3 6.81435 6.37375 6.6363 6.50503 6.50502C6.6363 6.37375 6.81435 6.3 7 6.3C7.20767 6.3 7.41068 6.23842 7.58335 6.12304C7.75602 6.00767 7.8906 5.84368 7.97008 5.65182C8.04955 5.45995 8.07034 5.24883 8.02983 5.04515C7.98931 4.84147 7.88931 4.65438 7.74246 4.50754C7.59562 4.36069 7.40853 4.26069 7.20485 4.22017C7.00117 4.17966 6.79005 4.20045 6.59818 4.27992C6.40632 4.3594 6.24233 4.49398 6.12696 4.66665C6.01158 4.83932 5.95 5.04233 5.95 5.25C5.95 5.43565 5.87625 5.6137 5.74498 5.74497C5.6137 5.87625 5.43565 5.95 5.25 5.95C5.06435 5.95 4.8863 5.87625 4.75503 5.74497C4.62375 5.6137 4.55 5.43565 4.55 5.25C4.54817 4.79521 4.67296 4.34889 4.91041 3.961C5.14785 3.57311 5.48858 3.25897 5.89443 3.05375C6.30029 2.84853 6.75526 2.76033 7.2084 2.79901C7.66155 2.8377 8.09498 3.00176 8.46017 3.27281C8.82536 3.54387 9.1079 3.91122 9.27615 4.33375C9.44441 4.75627 9.49173 5.21729 9.41283 5.66518C9.33393 6.11308 9.13191 6.53017 8.8294 6.86977C8.5269 7.20936 8.13583 7.45805 7.7 7.588Z"
-                                                  fill="#818181"></path>
-                                        </svg>
-
-                                    </div>
-                                    <div class="products__text-container products__text-container--snd">
-                                        <div class="products__info-text">
-                                            <div class="itemRating-open__popup-title">
-                                                <span class="blue">Выплаты</span> по пунктам
-                                            </div>
-                                            <div class="itemRating-open__popup-content">
-                                                <ul>
-                                                    <li>
-                                                        по конструктивным элементам квариты: <br>
-                                                        <span class="blue">100 000 руб</span>
-                                                    </li>
-                                                    <li>
-                                                        по отделке и инженерному оборудованию:<br>
-                                                        <span class="blue">500 000 руб </span>
-                                                    </li>
-                                                    <li>
-                                                        по движимому имуществу: <br>
-                                                        <span class="blue">22 000 000 руб</span>
-                                                    </li>
-                                                    <li class="grey">
-                                                        по ответственности перед соседями:<br>
-                                                        нет выплаты
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="profile__c-main-order-main-info-content">
-                                    Выплата до 2 000 000 руб.
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="profile__c-main-order-bottom">
-                        <div class="profile__c-main-order-bottom-wrapper">
-                            <button class="profile__c-main-order-bottom-paid">
-                                Скачать полис
-                            </button>
-                            <button class="profile__c-main-order-bottom-download">
-                                Оплатить
-                            </button>
-                        </div>
-
-                        <div class="profile__c-main-order-bottom-text">
-                            Оплатите, чтобы скачать полис
-                        </div>
-                    </div>
-                </div>
-
-                <div class="empty empty--order">
-                    <picture>
-                        <img src="../img/profile/empty-man.png" alt="">
-                    </picture>
-
-                    <div class="empty-title">Заказов нет</div>
-                    <div class="empty-text">Пока что вы не сделали заказ на платформе vincko:
-                        Пора почувствовать себя в безопасности со страховым полисом или готовым решением, созданным для
-                        вас
-                    </div>
-                    <div class="empty-btns">
-                        <a href="" class="grey-border-button">
-                            Выбрать страховой полис
-                        </a>
-
-                        <a href="" class="grey-border-button">
-                            Выбрать готовое решение
-                        </a>
-                    </div>
-
-                    <a href="" class="empty-error grey underline">Сообщить об ошибке</a>
-
-                </div>
-
-
-            </div>
-            <div class="profile__c-main profile__c-main--personal-requests">
-                <div class="profile__c-main-request">
-                    <div class="profile__c-main-request-title">
-                        Индивидуальная заявка №44236 от 12.02.2021
-                    </div>
-
-                    <div class="profile__c-main-request-infos">
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Город</div>
-                            <div class="profile__c-main-request-info-value">Суздаль</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Тип недвижимости</div>
-                            <div class="profile__c-main-request-info-value">Коммерческая недвижимость</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Тип охраны</div>
-                            <div class="profile__c-main-request-info-value">Мобильная охрана</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Комментарий</div>
-                            <div class="profile__c-main-request-info-value">Необходимо не обходить все вот это стороной
-                                и все здесь где это то самое когда тогда сделать
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile__c-main-request-answers">
-                        <div class="profile__c-main-request-answers-title">
-                            Ответ выбранных охранных компаний
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--wait">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-
-                            </div>
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--wait">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-
-                            </div>
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--submit">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="profile__c-main-request">
-                    <div class="profile__c-main-request-title">
-                        Индивидуальная заявка №44236 от 12.02.2021
-                    </div>
-
-                    <div class="profile__c-main-request-infos">
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Город</div>
-                            <div class="profile__c-main-request-info-value">Суздаль</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Тип недвижимости</div>
-                            <div class="profile__c-main-request-info-value">Коммерческая недвижимость</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Тип охраны</div>
-                            <div class="profile__c-main-request-info-value">Мобильная охрана</div>
-                        </div>
-                        <div class="profile__c-main-request-info">
-                            <div class="profile__c-main-request-info-item">Комментарий</div>
-                            <div class="profile__c-main-request-info-value">Необходимо не обходить все вот это стороной
-                                и все здесь где это то самое когда тогда сделать
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile__c-main-request-answers">
-                        <div class="profile__c-main-request-answers-title">
-                            Ответ выбранных охранных компаний
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--wait">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-
-                            </div>
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--wait">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-
-                            </div>
-                        </div>
-                        <div class="profile__c-main-request-answer profile__c-main-request-answer--done">
-                            <div class="profile__c-main-request-answer-firm">
-                                ООО «ЧОП «ЗУБР» г. КраснодарпоселокфООО «ЧОП «ЗУБР» г. Краснодарпоселок
-                            </div>
-
-                            <div class="profile__c-main-request-answer-value">
-                                <div class="profile__c-main-request-answer-value-wait">Ответ ожидается</div>
-                                <div class="profile__c-main-request-answer-value-submit">Приняла заявку в работу</div>
-                                <div class="profile__c-main-request-answer-value-done">Договор на охрану заключен</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="empty empty--requests">
-                    <picture>
-                        <img src="../img/profile/empty-man.png" alt="">
-                    </picture>
-
-                    <div class="empty-title">Индивидуальных заявок нет</div>
-                    <div class="empty-text">Вы пока не создали ни одной индивидуальной заявки
-                        Создайте заявку для решения своей задачи или подберите готовое решение, созданное для вас
-                    </div>
-                    <div class="empty-btns">
-                        <a href="" class="grey-border-button">
-                            Создать заявку
-                        </a>
-
-                        <a href="" class="grey-border-button">
-                            Выбрать готовое решение
-                        </a>
-                    </div>
-
-                    <a href="" class="empty-error grey underline">Сообщить об ошибке</a>
-
                 </div>
             </div>
+
+
         </div>
-
-
     </div>
 </div>
-
-
-<?php
-
-
-Asset::getInstance()->addJs("/bitrix/components/bitrix/sale.order.payment.change/templates/.default/script.js");
-Asset::getInstance()->addCss("/bitrix/components/bitrix/sale.order.payment.change/templates/.default/style.css");
-$this->addExternalCss("/bitrix/css/main/bootstrap.css");
-CJSCore::Init(array('clipboard', 'fx'));
-
-Loc::loadMessages(__FILE__);
-
-if (!empty($arResult['ERRORS']['FATAL'])) {
-    foreach ($arResult['ERRORS']['FATAL'] as $error) {
-        ShowError($error);
-    }
-    $component = $this->__component;
-    if ($arParams['AUTH_FORM_IN_TEMPLATE'] && isset($arResult['ERRORS']['FATAL'][$component::E_NOT_AUTHORIZED])) {
-        $APPLICATION->AuthForm('', false, false, 'N', false);
-    }
-
-} else {
-    if (!empty($arResult['ERRORS']['NONFATAL'])) {
-        foreach ($arResult['ERRORS']['NONFATAL'] as $error) {
-            ShowError($error);
-        }
-    }
-    if (!count($arResult['ORDERS'])) {
-        if ($_REQUEST["filter_history"] == 'Y') {
-            if ($_REQUEST["show_canceled"] == 'Y') {
-                ?>
-                <h3><?= Loc::getMessage('SPOL_TPL_EMPTY_CANCELED_ORDER') ?></h3>
-                <?
-            } else {
-                ?>
-                <h3><?= Loc::getMessage('SPOL_TPL_EMPTY_HISTORY_ORDER_LIST') ?></h3>
-                <?
-            }
-        } else {
-            ?>
-            <h3><?= Loc::getMessage('SPOL_TPL_EMPTY_ORDER_LIST') ?></h3>
-            <?
-        }
-    }
-    ?>
-    <div class="row col-md-12 col-sm-12">
-        <?
-        $nothing = !isset($_REQUEST["filter_history"]) && !isset($_REQUEST["show_all"]);
-        $clearFromLink = array("filter_history", "filter_status", "show_all", "show_canceled");
-
-        if ($nothing || $_REQUEST["filter_history"] == 'N') {
-            ?>
-            <a class="sale-order-history-link"
-               href="<?= $APPLICATION->GetCurPageParam("filter_history=Y", $clearFromLink, false) ?>">
-                <? echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_HISTORY") ?>
-            </a>
-            <?
-        }
-        if ($_REQUEST["filter_history"] == 'Y') {
-            ?>
-            <a class="sale-order-history-link" href="<?= $APPLICATION->GetCurPageParam("", $clearFromLink, false) ?>">
-                <? echo Loc::getMessage("SPOL_TPL_CUR_ORDERS") ?>
-            </a>
-            <?
-            if ($_REQUEST["show_canceled"] == 'Y') {
-                ?>
-                <a class="sale-order-history-link"
-                   href="<?= $APPLICATION->GetCurPageParam("filter_history=Y", $clearFromLink, false) ?>">
-                    <? echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_HISTORY") ?>
-                </a>
-                <?
-            } else {
-                ?>
-                <a class="sale-order-history-link"
-                   href="<?= $APPLICATION->GetCurPageParam("filter_history=Y&show_canceled=Y", $clearFromLink, false) ?>">
-                    <? echo Loc::getMessage("SPOL_TPL_VIEW_ORDERS_CANCELED") ?>
-                </a>
-                <?
-            }
-        }
-        ?>
-    </div>
-    <?
-    if (!count($arResult['ORDERS'])) {
-        ?>
-        <div class="row col-md-12 col-sm-12">
-            <a href="<?= htmlspecialcharsbx($arParams['PATH_TO_CATALOG']) ?>" class="sale-order-history-link">
-                <?= Loc::getMessage('SPOL_TPL_LINK_TO_CATALOG') ?>
-            </a>
-        </div>
-        <?
-    }
-
-    if ($_REQUEST["filter_history"] !== 'Y') {
-        $paymentChangeData = array();
-        $orderHeaderStatus = null;
-
-        foreach ($arResult['ORDERS'] as $key => $order) {
-            if ($orderHeaderStatus !== $order['ORDER']['STATUS_ID'] && $arResult['SORT_TYPE'] == 'STATUS') {
-                $orderHeaderStatus = $order['ORDER']['STATUS_ID'];
-
-                ?>
-                <h1 class="sale-order-title">
-                    <?= Loc::getMessage('SPOL_TPL_ORDER_IN_STATUSES') ?>
-                    &laquo;<?= htmlspecialcharsbx($arResult['INFO']['STATUS'][$orderHeaderStatus]['NAME']) ?>&raquo;
-                </h1>
-                <?
-            }
-            ?>
-            <div class="col-md-12 col-sm-12 sale-order-list-container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 sale-order-list-title-container">
-                        <h2 class="sale-order-list-title">
-                            <?= Loc::getMessage('SPOL_TPL_ORDER') ?>
-                            <?= Loc::getMessage('SPOL_TPL_NUMBER_SIGN') . $order['ORDER']['ACCOUNT_NUMBER'] ?>
-                            <?= Loc::getMessage('SPOL_TPL_FROM_DATE') ?>
-                            <?= $order['ORDER']['DATE_INSERT_FORMATED'] ?>,
-                            <?= count($order['BASKET_ITEMS']); ?>
-                            <?
-                            $count = count($order['BASKET_ITEMS']) % 10;
-                            if ($count == '1') {
-                                echo Loc::getMessage('SPOL_TPL_GOOD');
-                            } elseif ($count >= '2' && $count <= '4') {
-                                echo Loc::getMessage('SPOL_TPL_TWO_GOODS');
-                            } else {
-                                echo Loc::getMessage('SPOL_TPL_GOODS');
-                            }
-                            ?>
-                            <?= Loc::getMessage('SPOL_TPL_SUMOF') ?>
-                            <?= $order['ORDER']['FORMATED_PRICE'] ?>
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 sale-order-list-inner-container">
-						<span class="sale-order-list-inner-title-line">
-							<span class="sale-order-list-inner-title-line-item"><?= Loc::getMessage('SPOL_TPL_PAYMENT') ?></span>
-							<span class="sale-order-list-inner-title-line-border"></span>
-						</span>
-                        <?
-                        $showDelimeter = false;
-                        foreach ($order['PAYMENT'] as $payment) {
-                            if ($order['ORDER']['LOCK_CHANGE_PAYSYSTEM'] !== 'Y') {
-                                $paymentChangeData[$payment['ACCOUNT_NUMBER']] = array(
-                                    "order" => htmlspecialcharsbx($order['ORDER']['ACCOUNT_NUMBER']),
-                                    "payment" => htmlspecialcharsbx($payment['ACCOUNT_NUMBER']),
-                                    "allow_inner" => $arParams['ALLOW_INNER'],
-                                    "refresh_prices" => $arParams['REFRESH_PRICES'],
-                                    "path_to_payment" => $arParams['PATH_TO_PAYMENT'],
-                                    "only_inner_full" => $arParams['ONLY_INNER_FULL'],
-                                    "return_url" => $arResult['RETURN_URL'],
-                                );
-                            }
-                            ?>
-                            <div class="row sale-order-list-inner-row">
-                                <?
-                                if ($showDelimeter) {
-                                    ?>
-                                    <div class="sale-order-list-top-border"></div>
-                                    <?
-                                } else {
-                                    $showDelimeter = true;
-                                }
-                                ?>
-
-                                <div class="sale-order-list-inner-row-body">
-                                    <div class="col-md-9 col-sm-8 col-xs-12 sale-order-list-payment">
-                                        <div class="sale-order-list-payment-title">
-                                            <?
-                                            $paymentSubTitle = Loc::getMessage('SPOL_TPL_BILL') . " " . Loc::getMessage('SPOL_TPL_NUMBER_SIGN') . htmlspecialcharsbx($payment['ACCOUNT_NUMBER']);
-                                            if (isset($payment['DATE_BILL'])) {
-                                                $paymentSubTitle .= " " . Loc::getMessage('SPOL_TPL_FROM_DATE') . " " . $payment['DATE_BILL_FORMATED'];
-                                            }
-                                            $paymentSubTitle .= ",";
-                                            echo $paymentSubTitle;
-                                            ?>
-                                            <span class="sale-order-list-payment-title-element"><?= $payment['PAY_SYSTEM_NAME'] ?></span>
-                                            <?
-                                            if ($payment['PAID'] === 'Y') {
-                                                ?>
-                                                <span class="sale-order-list-status-success"><?= Loc::getMessage('SPOL_TPL_PAID') ?></span>
-                                                <?
-                                            } elseif ($order['ORDER']['IS_ALLOW_PAY'] == 'N') {
-                                                ?>
-                                                <span class="sale-order-list-status-restricted"><?= Loc::getMessage('SPOL_TPL_RESTRICTED_PAID') ?></span>
-                                                <?
-                                            } else {
-                                                ?>
-                                                <span class="sale-order-list-status-alert"><?= Loc::getMessage('SPOL_TPL_NOTPAID') ?></span>
-                                                <?
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="sale-order-list-payment-price">
-                                            <span class="sale-order-list-payment-element"><?= Loc::getMessage('SPOL_TPL_SUM_TO_PAID') ?>:</span>
-
-                                            <span class="sale-order-list-payment-number"><?= $payment['FORMATED_SUM'] ?></span>
-                                        </div>
-                                        <?
-                                        if (!empty($payment['CHECK_DATA'])) {
-                                            $listCheckLinks = "";
-                                            foreach ($payment['CHECK_DATA'] as $checkInfo) {
-                                                $title = Loc::getMessage('SPOL_CHECK_NUM', array('#CHECK_NUMBER#' => $checkInfo['ID'])) . " - " . htmlspecialcharsbx($checkInfo['TYPE_NAME']);
-                                                if ($checkInfo['LINK'] <> '') {
-                                                    $link = $checkInfo['LINK'];
-                                                    $listCheckLinks .= "<div><a href='$link' target='_blank'>$title</a></div>";
-                                                }
-                                            }
-                                            if ($listCheckLinks <> '') {
-                                                ?>
-                                                <div class="sale-order-list-payment-check">
-                                                    <div class="sale-order-list-payment-check-left"><?= Loc::getMessage('SPOL_CHECK_TITLE') ?>
-                                                        :
-                                                    </div>
-                                                    <div class="sale-order-list-payment-check-left">
-                                                        <?= $listCheckLinks ?>
-                                                    </div>
-                                                </div>
-                                                <?
-                                            }
-                                        }
-                                        if ($payment['PAID'] !== 'Y' && $order['ORDER']['LOCK_CHANGE_PAYSYSTEM'] !== 'Y') {
-                                            ?>
-                                            <a href="#" class="sale-order-list-change-payment"
-                                               id="<?= htmlspecialcharsbx($payment['ACCOUNT_NUMBER']) ?>">
-                                                <?= Loc::getMessage('SPOL_TPL_CHANGE_PAY_TYPE') ?>
-                                            </a>
-                                            <?
-                                        }
-                                        if ($order['ORDER']['IS_ALLOW_PAY'] == 'N' && $payment['PAID'] !== 'Y') {
-                                            ?>
-                                            <div class="sale-order-list-status-restricted-message-block">
-                                                <span class="sale-order-list-status-restricted-message"><?= Loc::getMessage('SOPL_TPL_RESTRICTED_PAID_MESSAGE') ?></span>
-                                            </div>
-                                            <?
-                                        }
-                                        ?>
-
-                                    </div>
-                                    <?
-                                    if ($payment['PAID'] === 'N' && $payment['IS_CASH'] !== 'Y' && $payment['ACTION_FILE'] !== 'cash') {
-                                        if ($order['ORDER']['IS_ALLOW_PAY'] == 'N') {
-                                            ?>
-                                            <div class="col-md-3 col-sm-4 col-xs-12 sale-order-list-button-container">
-                                                <a class="sale-order-list-button inactive-button">
-                                                    <?= Loc::getMessage('SPOL_TPL_PAY') ?>
-                                                </a>
-                                            </div>
-                                            <?
-                                        } elseif ($payment['NEW_WINDOW'] === 'Y') {
-                                            ?>
-                                            <div class="col-md-3 col-sm-4 col-xs-12 sale-order-list-button-container">
-                                                <a class="sale-order-list-button" target="_blank"
-                                                   href="<?= htmlspecialcharsbx($payment['PSA_ACTION_FILE']) ?>">
-                                                    <?= Loc::getMessage('SPOL_TPL_PAY') ?>
-                                                </a>
-                                            </div>
-                                            <?
-                                        } else {
-                                            ?>
-                                            <div class="col-md-3 col-sm-4 col-xs-12 sale-order-list-button-container">
-                                                <a class="sale-order-list-button ajax_reload"
-                                                   href="<?= htmlspecialcharsbx($payment['PSA_ACTION_FILE']) ?>">
-                                                    <?= Loc::getMessage('SPOL_TPL_PAY') ?>
-                                                </a>
-                                            </div>
-                                            <?
-                                        }
-                                    }
-                                    ?>
-
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 sale-order-list-inner-row-template">
-                                    <a class="sale-order-list-cancel-payment">
-                                        <i class="fa fa-long-arrow-left"></i> <?= Loc::getMessage('SPOL_CANCEL_PAYMENT') ?>
-                                    </a>
-                                </div>
-                            </div>
-                            <?
-                        }
-                        if (!empty($order['SHIPMENT'])) {
-                            ?>
-                            <div class="sale-order-list-inner-title-line">
-                                <span class="sale-order-list-inner-title-line-item"><?= Loc::getMessage('SPOL_TPL_DELIVERY') ?></span>
-                                <span class="sale-order-list-inner-title-line-border"></span>
-                            </div>
-                            <?
-                        }
-                        $showDelimeter = false;
-                        foreach ($order['SHIPMENT'] as $shipment) {
-                            if (empty($shipment)) {
-                                continue;
-                            }
-                            ?>
-                            <div class="row sale-order-list-inner-row">
-                                <?
-                                if ($showDelimeter) {
-                                    ?>
-                                    <div class="sale-order-list-top-border"></div>
-                                    <?
-                                } else {
-                                    $showDelimeter = true;
-                                }
-                                ?>
-                                <div class="col-md-9 col-sm-8 col-xs-12 sale-order-list-shipment">
-                                    <div class="sale-order-list-shipment-title">
-									<span class="sale-order-list-shipment-element">
-										<?= Loc::getMessage('SPOL_TPL_LOAD') ?>
-                                        <?
-                                        $shipmentSubTitle = Loc::getMessage('SPOL_TPL_NUMBER_SIGN') . htmlspecialcharsbx($shipment['ACCOUNT_NUMBER']);
-                                        if ($shipment['DATE_DEDUCTED']) {
-                                            $shipmentSubTitle .= " " . Loc::getMessage('SPOL_TPL_FROM_DATE') . " " . $shipment['DATE_DEDUCTED_FORMATED'];
-                                        }
-
-                                        if ($shipment['FORMATED_DELIVERY_PRICE']) {
-                                            $shipmentSubTitle .= ", " . Loc::getMessage('SPOL_TPL_DELIVERY_COST') . " " . $shipment['FORMATED_DELIVERY_PRICE'];
-                                        }
-                                        echo $shipmentSubTitle;
-                                        ?>
-									</span>
-                                        <?
-                                        if ($shipment['DEDUCTED'] == 'Y') {
-                                            ?>
-                                            <span class="sale-order-list-status-success"><?= Loc::getMessage('SPOL_TPL_LOADED'); ?></span>
-                                            <?
-                                        } else {
-                                            ?>
-                                            <span class="sale-order-list-status-alert"><?= Loc::getMessage('SPOL_TPL_NOTLOADED'); ?></span>
-                                            <?
-                                        }
-                                        ?>
-                                    </div>
-
-                                    <div class="sale-order-list-shipment-status">
-                                        <span class="sale-order-list-shipment-status-item"><?= Loc::getMessage('SPOL_ORDER_SHIPMENT_STATUS'); ?>:</span>
-                                        <span class="sale-order-list-shipment-status-block"><?= htmlspecialcharsbx($shipment['DELIVERY_STATUS_NAME']) ?></span>
-                                    </div>
-
-                                    <?
-                                    if (!empty($shipment['DELIVERY_ID'])) {
-                                        ?>
-                                        <div class="sale-order-list-shipment-item">
-                                            <?= Loc::getMessage('SPOL_TPL_DELIVERY_SERVICE') ?>:
-                                            <?= $arResult['INFO']['DELIVERY'][$shipment['DELIVERY_ID']]['NAME'] ?>
-                                        </div>
-                                        <?
-                                    }
-
-                                    if (!empty($shipment['TRACKING_NUMBER'])) {
-                                        ?>
-                                        <div class="sale-order-list-shipment-item">
-                                            <span class="sale-order-list-shipment-id-name"><?= Loc::getMessage('SPOL_TPL_POSTID') ?>:</span>
-                                            <span class="sale-order-list-shipment-id"><?= htmlspecialcharsbx($shipment['TRACKING_NUMBER']) ?></span>
-                                            <span class="sale-order-list-shipment-id-icon"></span>
-                                        </div>
-                                        <?
-                                    }
-                                    ?>
-                                </div>
-                                <?
-                                if ($shipment['TRACKING_URL'] <> '') {
-                                    ?>
-                                    <div class="col-md-2 col-md-offset-1 col-sm-12 sale-order-list-shipment-button-container">
-                                        <a class="sale-order-list-shipment-button" target="_blank"
-                                           href="<?= $shipment['TRACKING_URL'] ?>">
-                                            <?= Loc::getMessage('SPOL_TPL_CHECK_POSTID') ?>
-                                        </a>
-                                    </div>
-                                    <?
-                                }
-                                ?>
-                            </div>
-                            <?
-                        }
-                        ?>
-                        <div class="row sale-order-list-inner-row">
-                            <div class="sale-order-list-top-border"></div>
-                            <div class="col-md-<?= ($order['ORDER']['CAN_CANCEL'] !== 'N') ? 8 : 10 ?>  col-sm-12 sale-order-list-about-container">
-                                <a class="sale-order-list-about-link"
-                                   href="<?= htmlspecialcharsbx($order["ORDER"]["URL_TO_DETAIL"]) ?>"><?= Loc::getMessage('SPOL_TPL_MORE_ON_ORDER') ?></a>
-                            </div>
-                            <div class="col-md-2 col-sm-12 sale-order-list-repeat-container">
-                                <a class="sale-order-list-repeat-link"
-                                   href="<?= htmlspecialcharsbx($order["ORDER"]["URL_TO_COPY"]) ?>"><?= Loc::getMessage('SPOL_TPL_REPEAT_ORDER') ?></a>
-                            </div>
-                            <?
-                            if ($order['ORDER']['CAN_CANCEL'] !== 'N') {
-                                ?>
-                                <div class="col-md-2 col-sm-12 sale-order-list-cancel-container">
-                                    <a class="sale-order-list-cancel-link"
-                                       href="<?= htmlspecialcharsbx($order["ORDER"]["URL_TO_CANCEL"]) ?>"><?= Loc::getMessage('SPOL_TPL_CANCEL_ORDER') ?></a>
-                                </div>
-                                <?
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?
-        }
-    } else {
-        $orderHeaderStatus = null;
-
-        if ($_REQUEST["show_canceled"] === 'Y' && count($arResult['ORDERS'])) {
-            ?>
-            <h1 class="sale-order-title">
-                <?= Loc::getMessage('SPOL_TPL_ORDERS_CANCELED_HEADER') ?>
-            </h1>
-            <?
-        }
-
-        foreach ($arResult['ORDERS'] as $key => $order) {
-            if ($orderHeaderStatus !== $order['ORDER']['STATUS_ID'] && $_REQUEST["show_canceled"] !== 'Y') {
-                $orderHeaderStatus = $order['ORDER']['STATUS_ID'];
-                ?>
-                <h1 class="sale-order-title">
-                    <?= Loc::getMessage('SPOL_TPL_ORDER_IN_STATUSES') ?>
-                    &laquo;<?= htmlspecialcharsbx($arResult['INFO']['STATUS'][$orderHeaderStatus]['NAME']) ?>&raquo;
-                </h1>
-                <?
-            }
-            ?>
-            <div class="col-md-12 col-sm-12 sale-order-list-container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 sale-order-list-accomplished-title-container">
-                        <div class="row">
-                            <div class="col-md-8 col-sm-12 sale-order-list-accomplished-title-container">
-                                <h2 class="sale-order-list-accomplished-title">
-                                    <?= Loc::getMessage('SPOL_TPL_ORDER') ?>
-                                    <?= Loc::getMessage('SPOL_TPL_NUMBER_SIGN') ?>
-                                    <?= htmlspecialcharsbx($order['ORDER']['ACCOUNT_NUMBER']) ?>
-                                    <?= Loc::getMessage('SPOL_TPL_FROM_DATE') ?>
-                                    <?= $order['ORDER']['DATE_INSERT'] ?>,
-                                    <?= count($order['BASKET_ITEMS']); ?>
-                                    <?
-                                    $count = mb_substr(count($order['BASKET_ITEMS']), -1);
-                                    if ($count == '1') {
-                                        echo Loc::getMessage('SPOL_TPL_GOOD');
-                                    } elseif ($count >= '2' || $count <= '4') {
-                                        echo Loc::getMessage('SPOL_TPL_TWO_GOODS');
-                                    } else {
-                                        echo Loc::getMessage('SPOL_TPL_GOODS');
-                                    }
-                                    ?>
-                                    <?= Loc::getMessage('SPOL_TPL_SUMOF') ?>
-                                    <?= $order['ORDER']['FORMATED_PRICE'] ?>
-                                </h2>
-                            </div>
-                            <div class="col-md-4 col-sm-12 sale-order-list-accomplished-date-container">
-                                <?
-                                if ($_REQUEST["show_canceled"] !== 'Y') {
-                                    ?>
-                                    <span class="sale-order-list-accomplished-date">
-										<?= Loc::getMessage('SPOL_TPL_ORDER_FINISHED') ?>
-									</span>
-                                    <?
-                                } else {
-                                    ?>
-                                    <span class="sale-order-list-accomplished-date canceled-order">
-										<?= Loc::getMessage('SPOL_TPL_ORDER_CANCELED') ?>
-									</span>
-                                    <?
-                                }
-                                ?>
-                                <span class="sale-order-list-accomplished-date-number"><?= $order['ORDER']['DATE_STATUS_FORMATED'] ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 sale-order-list-inner-accomplished">
-                        <div class="row sale-order-list-inner-row">
-                            <div class="col-md-3 col-sm-12 sale-order-list-about-accomplished">
-                                <a class="sale-order-list-about-link"
-                                   href="<?= htmlspecialcharsbx($order["ORDER"]["URL_TO_DETAIL"]) ?>">
-                                    <?= Loc::getMessage('SPOL_TPL_MORE_ON_ORDER') ?>
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-md-offset-6 col-sm-12 sale-order-list-repeat-accomplished">
-                                <a class="sale-order-list-repeat-link sale-order-link-accomplished"
-                                   href="<?= htmlspecialcharsbx($order["ORDER"]["URL_TO_COPY"]) ?>">
-                                    <?= Loc::getMessage('SPOL_TPL_REPEAT_ORDER') ?>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?
-        }
-    }
-    ?>
-    <div class="clearfix"></div>
-    <?
-    echo $arResult["NAV_STRING"];
-
-    if ($_REQUEST["filter_history"] !== 'Y') {
-        $javascriptParams = array(
-            "url" => CUtil::JSEscape($this->__component->GetPath() . '/ajax.php'),
-            "templateFolder" => CUtil::JSEscape($templateFolder),
-            "templateName" => $this->__component->GetTemplateName(),
-            "paymentList" => $paymentChangeData,
-            "returnUrl" => CUtil::JSEscape($arResult["RETURN_URL"]),
-        );
-        $javascriptParams = CUtil::PhpToJSObject($javascriptParams);
-        ?>
-        <script>
-			BX.Sale.PersonalOrderComponent.PersonalOrderList.init(<?=$javascriptParams?>);
-        </script>
-        <?
-    }
-}
-?>
-
-
-?>
