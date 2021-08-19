@@ -31,12 +31,13 @@ $(document).ready(function () {
 						if ($domClick.attr('value') > ''){
 							$domClick.parents("form").submit();
 						}else{
-							//document.location.href = $domClick.attr("href");
-							//location.reload();
-							//$domClick.trigger("click");
 							var paymentMethod = $domClick.attr('data-payment')
 							if (typeof paymentMethod !== 'undefined' && paymentMethod !== false) {
 								window.itdBasket.handleBuy(paymentMethod);
+							}else if($domClick.attr("href")>''){
+								document.location.href = $domClick.attr("href");
+							}else{
+								location.reload();
 							}
 						}
 					}else{
