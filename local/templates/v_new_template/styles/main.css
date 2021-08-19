@@ -7017,7 +7017,6 @@ input[type="checkbox"] {
 }
 
 .review.step-2 .review__bottom.step-2 .review__bottom-item .value-block svg {
-  display: none;
   position: absolute;
   top: -4px;
   left: -4px;
