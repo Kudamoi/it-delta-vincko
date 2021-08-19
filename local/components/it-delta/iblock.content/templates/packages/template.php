@@ -239,7 +239,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         <div class="ready-des2__show-header">
             <div class="ready-des2__show-header-left">
                 <picture class="ready-des2__show-photo">
-                    <img src="https://st2.depositphotos.com/1526816/6758/v/600/depositphotos_67585141-stock-illustration-oops.jpg" alt="photo">
+                    <img src="/upload/ready-des2/not-found-packages.png" alt="photo">
                 </picture>
             </div>
             <div class="ready-des2__show-header-right">
