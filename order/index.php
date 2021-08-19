@@ -506,14 +506,14 @@ $curStep = 1;
                                         <label for="permanent"></label>
                                         <label for="permanent">Совпадает с адресом постоянной регистрации</label>
                                     </div>
-                                    <div class="radio-wrapper">
+                                    <div class="radio-wrapper" id="b-actual">
                                         <input type="radio" name="address-installment" value="0" id="actual">
                                         <label for="actual"></label>
                                         <label for="actual">Совпадает с адресом фактического проживания</label>
                                     </div>
                                     <input type="radio" name="address-installment" value="1" id="other">
                                     <label for="other"></label>
-                                    <label for="other">Указать другой адрес1</label>
+                                    <label for="other">Указать другой адрес</label>
                                     <p>Если адрес объекта страхования не совпадает с адресом регистрации или адресом
                                         фактического
                                         проживания - выберите пункт <span>“Указать другой адрес”</span>. Это важно.</p>
@@ -532,7 +532,7 @@ $curStep = 1;
                             </div>
                     </div>
                     <div class="form__bottom">
-                        <button style="opacity: 50%" type="button" class="blue-button form__next-button" disabled="disabled" id="js-policy-validate-btn"><span>Далее</span></button>
+                        <button style="opacity: 50%" type="button" class="blue-button form__next-button" id="js-policy-validate-btn"><span>Далее</span></button>
                         <div class="form__complete hidden">
                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -601,15 +601,16 @@ $curStep = 1;
                                         <label for="permanent-delivery">Совпадает с адресом постоянной
                                             регистрации</label>
                                     </div>
-                                    <div class="radio-wrapper">
+                                    <div class="radio-wrapper" id="b-actual-delivery">
                                         <input type="radio" name="delivery-address-installment" value="0" id="actual-delivery">
                                         <label for="actual-delivery"></label>
                                         <label for="actual-delivery">Совпадает с адресом фактического проживания</label>
                                     </div>
                                     <?endif;?>
-                                    <input <?=$policyObj->active ? '' : 'checked'?> type="radio" name="delivery-address-installment" value="1" id="other-delivery">
-                                    <label for="other-delivery"></label>
-                                    <label for="other-delivery">Указать другой адрес</label>
+                                    <input <?=$policyObj->active ? '' : 'checked style="display:none;"'?> type="radio" name="delivery-address-installment" value="1" id="other-delivery">
+                                    <label <?=$policyObj->active ? '' : 'checked style="display:none;"'?> for="other-delivery"></label>
+                                    <label <?=$policyObj->active ? '' : 'checked style="display:none;"'?> for="other-delivery">Указать другой адрес</label>
+
                                     <div class="input-address">
                                         Россия, Москва, переулок Свободы, дом 21, квартира 12
                                     </div>
@@ -628,7 +629,7 @@ $curStep = 1;
                                     Дата и время монтажа оборудования
                                     <span class="form__delivery-cost">Бесплатно</span>
                                 </div>
-                                <input class="date date-install" type="text" name="date-install"
+                                <input class="js-check-valid-field date date-install" type="text" name="date-install"
                                        placeholder="Дата и время">
                             </div>
                             <?endif;?>
@@ -918,119 +919,180 @@ $curStep = 1;
 
         var count = 0;
         var btnsCount = $('.form__next-button').length
+        $('#js-policy-validate-btn').on('click', function () {
+            //контактные данные совпадают с данными из страховки
+            let fio = $("input[name='policyContactInfo[surname]']").val() +' '+ $("input[name='policyContactInfo[name]']").val()
+            + ' ' + $("input[name='policyContactInfo[patronomic]']").val()
+            let email = $("input[name='policyContactInfo[email]']").val()
+            let phone = $("input[name='policyContactInfo[phone]']").val()
+            $('.contact-person__name').html(fio);
+            $('.contact-person__email').html(email);
+            $('.contact-person__phone').html(phone);
+            setAddressRegistration();
+        });
+        if($('#same').is(':checked'))
+        {
+            $('#b-actual').css('display','none');
+            $('#b-actual-delivery').css('display','none');
+        }
+        $('#same').on('click', function () {
+            if($(this).is(':checked'))
+            {
+                $('#b-actual').css('display','none');
+                $('#b-actual-delivery').css('display','none');
+            }
+            else {
+                $('#b-actual').css('display','block');
+                $('#b-actual-delivery').css('display','block');
+            }
+        });
+        $('#permanent-delivery').on('click', function () {
+            setAddressRegistration();
+        });
+        $('#actual-delivery').on('click', function () {
+            setAddressResidense();
+        });
+        function setAddressRegistration()
+        {
+            //адрес доставки по умолчанию совпадает с адресом страховки
+            let addressRegistration = $("input[name='addressRegistration[city]']").val() +' улица '+ $("input[name='addressRegistration[street]']").val()
+                + ' дом ' + $("input[name='addressRegistration[house]']").val()
+            $('.input-address').html(addressRegistration);
+        }
+        //устанавливает адрес фактического проживания
+        function setAddressResidense()
+        {
+            //адрес доставки по умолчанию совпадает с адресом страховки
+            let addressResidense = $("input[name='addressResidense[city]']").val() +' улица '+ $("input[name='addressResidense[street]']").val()
+                + ' дом ' + $("input[name='addressResidense[house]']").val()
+            $('.input-address').html(addressResidense);
+        }
 
         $('.form__next-button').on('click', function () {
             count++;
         });
+        $('.form__next-button').on('click',{name:'#b-add-order'}, isValidFinal);
 
-        $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        $('.date').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        function isValidPolicy(event) {
-            let requiredInputs = $('.js-policy-validate');
-            let emptyField = false;
-            $.each(requiredInputs, function() {
-                $(this).removeClass('error');
-                    if( $(this).val().trim().length == 0 ) {
-                        emptyField = true;
-                        $(this).addClass('error');
-                    }
-            });
-            if(!$('#same').is(':checked'))
-            {
-                let requiredInputs = $('.valid-cond1');
-                $.each(requiredInputs, function() {
-                    $(this).removeClass('error');
-                    if( $(this).val().trim().length == 0 ) {
-                        emptyField = true;
-                        $(this).addClass('error');
-                    }
-                });
-            }
-            if($('#other').is(':checked'))
-            {
-                let requiredInputs = $('.valid-cond2');
-                $.each(requiredInputs, function() {
-                    $(this).removeClass('error');
-                    if( $(this).val().trim().length == 0 ) {
-                        emptyField = true;
-                        $(this).addClass('error');
-                    }
-                });
-            }
 
-            if(!emptyField) {
-                $(event.data.name).attr('disabled', false);
-                $(event.data.name).css('opacity', '100%');
-            }else{
-                $(event.data.name).attr('disabled', true);
-                $(event.data.name).css('opacity', '50%');
-            }
-        }
-
-        $('.js-check-valid-field').on('keyup',{name:'#js-item-validate-btn'}, isValid);
-        $('#same-name').on('change',{name:'#js-item-validate-btn'}, isValid);
-        $('input[type=radio][name=delivery-address-installment]').on('change',{name:'#js-item-validate-btn'}, isValid);
-        function isValid(event) {
-            let emptyField = false;
-            if(!$('#same-name').is(':checked'))
-            {
-                let requiredInputs = $('.valid-cond3');
-                $.each(requiredInputs, function() {
-                    $(this).removeClass('error');
-                    if( $(this).val().trim().length == 0 ) {
-                        emptyField = true;
-                        $(this).addClass('error');
-                    }
-                });
-            }
-            if($('#other-delivery').is(':checked'))
-            {
-                let requiredInputs = $('.valid-cond4');
-                $.each(requiredInputs, function() {
-                    $(this).removeClass('error');
-                    if( $(this).val().trim().length == 0 ) {
-                        emptyField = true;
-                        $(this).addClass('error');
-                    }
-                });
-            }
-
-            if(!emptyField) {
-                $(event.data.name).attr('disabled', false);
-                $(event.data.name).css('opacity', '100%');
-            }else{
-                $(event.data.name).attr('disabled', true);
-                $(event.data.name).css('opacity', '50%');
-            }
-        }
-
-        $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
-        $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
-        function isValidFinal(event) {
-            let isDisabledOrderBtn = false;
-            if($('#agreement').length && !$('#agreement').is(':checked'))
-            {
-                isDisabledOrderBtn = true;
-            }
-            if(!$('#agreement-two').is(':checked'))
-            {
-                isDisabledOrderBtn = true;
-            }
-            if(count!=btnsCount)
-            {
-                isDisabledOrderBtn = true;
-            }
-
-            if(!isDisabledOrderBtn) {
-                $(event.data.name).attr('disabled', false);
-                $(event.data.name).css('opacity', '100%');
-            }else{
-                $(event.data.name).attr('disabled', true);
-                $(event.data.name).css('opacity', '50%');
-            }
-        }
+        // $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        // $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        // $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        // $('.date').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        // function isValidPolicy(event) {
+        //     let requiredInputs = $('.js-policy-validate');
+        //     let emptyField = false;
+        //     $.each(requiredInputs, function() {
+        //         $(this).removeClass('error');
+        //             if( $(this).val().trim().length == 0 ) {
+        //                 emptyField = true;
+        //                 $(this).addClass('error');
+        //             }
+        //     });
+        //     if(!$('#same').is(':checked'))
+        //     {
+        //         let requiredInputs = $('.valid-cond1');
+        //         $.each(requiredInputs, function() {
+        //             $(this).removeClass('error');
+        //             if( $(this).val().trim().length == 0 ) {
+        //                 emptyField = true;
+        //                 $(this).addClass('error');
+        //             }
+        //         });
+        //     }
+        //     if($('#other').is(':checked'))
+        //     {
+        //         let requiredInputs = $('.valid-cond2');
+        //         $.each(requiredInputs, function() {
+        //             $(this).removeClass('error');
+        //             if( $(this).val().trim().length == 0 ) {
+        //                 emptyField = true;
+        //                 $(this).addClass('error');
+        //             }
+        //         });
+        //     }
+        //
+        //     if(!emptyField) {
+        //         $(event.data.name).attr('disabled', false);
+        //         $(event.data.name).css('opacity', '100%');
+        //     }else{
+        //         $(event.data.name).attr('disabled', true);
+        //         $(event.data.name).css('opacity', '50%');
+        //     }
+        // }
+        //
+        // $('.js-check-valid-field').on('keyup',{name:'#js-item-validate-btn'}, isValid);
+        // $('#same-name').on('change',{name:'#js-item-validate-btn'}, isValid);
+        // $('input[type=radio][name=delivery-address-installment]').on('change',{name:'#js-item-validate-btn'}, isValid);
+        // function isValid(event) {
+        //     let requiredInputs = $('.date-install');
+        //     let emptyField = false;
+        //     $.each(requiredInputs, function() {
+        //         $(this).removeClass('error');
+        //         if( $(this).val().trim().length == 0 ) {
+        //             emptyField = true;
+        //             $(this).addClass('error');
+        //         }
+        //     });
+        //     if(!$('#same-name').is(':checked'))
+        //     {
+        //         let requiredInputs = $('.valid-cond3');
+        //         $.each(requiredInputs, function() {
+        //             $(this).removeClass('error');
+        //             if( $(this).val().trim().length == 0 ) {
+        //                 emptyField = true;
+        //                 $(this).addClass('error');
+        //             }
+        //         });
+        //     }
+        //     if($('#other-delivery').is(':checked'))
+        //     {
+        //         let requiredInputs = $('.valid-cond4');
+        //         $.each(requiredInputs, function() {
+        //             $(this).removeClass('error');
+        //             if( $(this).val().trim().length == 0 ) {
+        //                 emptyField = true;
+        //                 $(this).addClass('error');
+        //             }
+        //         });
+        //     }
+        //
+        //     if(!emptyField) {
+        //         $(event.data.name).attr('disabled', false);
+        //         $(event.data.name).css('opacity', '100%');
+        //     }else{
+        //         $(event.data.name).attr('disabled', true);
+        //         $(event.data.name).css('opacity', '50%');
+        //     }
+        // }
+        //
+        // $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
+        // $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
+        // function isValidFinal(event) {
+        //     let isDisabledOrderBtn = false;
+        //     if($('#agreement').length && !$('#agreement').is(':checked'))
+        //     {
+        //         isDisabledOrderBtn = true;
+        //         console.log("d");
+        //     }
+        //     if(!$('#agreement-two').is(':checked'))
+        //     {
+        //         isDisabledOrderBtn = true;
+        //         console.log("r");
+        //     }
+        //     if(count!=btnsCount)
+        //     {
+        //         isDisabledOrderBtn = true;
+        //         console.log("w");
+        //     }
+        //
+        //     if(!isDisabledOrderBtn) {
+        //         $(event.data.name).attr('disabled', false);
+        //         $(event.data.name).css('opacity', '100%');
+        //     }else{
+        //         $(event.data.name).attr('disabled', true);
+        //         $(event.data.name).css('opacity', '50%');
+        //     }
+        // }
     });
 
 </script>
