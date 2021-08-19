@@ -40,13 +40,29 @@ while($arFields = $res->Fetch())
     $arFields['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_DOCUMENT_VALUE']);
     $arResult["CONTRACTS"][] = $arFields;
 }
+$res = CIblockElement::getList(
+    [],
+    ['=IBLOCK_CODE'=>'strahovka','=ACTIVE'=>'Y'],
+    false, false,
+    ['ID','NAME','PROPERTY_DOCUMENTS','XML_ID']
+);
+while($arFields = $res->Fetch())
+{
+    $arFields['INSURANCE_LINK'] = CFile::GetPath($arFields['PROPERTY_DOCUMENTS_VALUE'][0]);
+    $arResult['INSURANCE_INFO'] = $arFields;
+}
 
-$arResult["PAYMENT"] = Order::getPaymentSystem();
+
+//$arResult["PAYMENT"] = Order::getPaymentSystem();
 $curStep = 1;
 
 ?>
 
     <style>
+        .disabled
+        {
+            opacity: 50%;
+        }
         .error_message {
             display: none
         }
@@ -72,7 +88,7 @@ $curStep = 1;
         }
 
     </style>
-
+<?/*
 <div id="test" style="cursor:pointer" xmlns="http://www.w3.org/1999/html">Заполнить тестовыми данными</div>
 <script>
     $(document).ready(function () {
@@ -108,7 +124,7 @@ $curStep = 1;
 
     })
 </script>
-
+*/?>
 
 <?if(isset($_GET['ORDER_ID'])):?>
     <?$APPLICATION->IncludeComponent(
@@ -420,7 +436,7 @@ $curStep = 1;
             <div class="forms">
                 <div id="b-form-order-ajax-errors"></div>
                 <?if($policyObj->active):?>
-                <div class="form" id="form-1">
+                <div class="form b-step-top" id="form-1">
                     <div class="h4 form__title">
                         <span class="form__title-blue">Страхование</span>
                         <span class="form__title-step">Шаг <?=$curStep++?></span>
@@ -532,7 +548,7 @@ $curStep = 1;
                             </div>
                     </div>
                     <div class="form__bottom">
-                        <button style="opacity: 50%" type="button" class="blue-button form__next-button" id="js-policy-validate-btn"><span>Далее</span></button>
+                        <button type="button" class="disabled blue-button form__next-button" id="js-policy-validate-btn"><span>Далее</span></button>
                         <div class="form__complete hidden">
                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -545,7 +561,7 @@ $curStep = 1;
                 </div>
                 <?endif;?>
                 <?if($complectObj->active || $subscriptionFeeObj->active):?>
-                <div class="form <?=$policyObj->active ? 'def-close' : $curStep=1?>" id="form-2">
+                <div class="form b-step-top <?=$policyObj->active ? 'def-close' : $curStep=1?>" id="form-2">
                     <div class="h4 form__title">
                         <span class="form__title-blue"><?if($complectObj->active):?>Доставка<?;else:?>Контактная информация<?endif;?></span>
                         <span class="form__title-step">Шаг <?=$curStep++;?></span>
@@ -635,7 +651,7 @@ $curStep = 1;
                             <?endif;?>
                     </div>
                     <div class="form__bottom">
-                        <button style="opacity: 50%" disabled="disabled" id="js-item-validate-btn" type="button" class="blue-button form__next-button"><span>Далее</span></button>
+                        <button id="js-item-validate-btn" type="button" class="disabled blue-button form__next-button"><span>Далее</span></button>
                         <div class="form__complete hidden">
                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -873,7 +889,7 @@ $curStep = 1;
                     рекламно-информационных рассылок. Согласие предоставляется с момента подписания настоящего полиса и
                     действует в течение пяти лет после исполнения обязательств. Согласие может быть отозвано путём
                     письменного заявления в САО «ВСК». Подтверждаю ознакомление и согласие
-                    <a class="installment__rules-agree" href="">с правилами страховки</a>
+                    <a class="installment__rules-agree" target="_blank" href="<?=$arResult['INSURANCE_INFO']['INSURANCE_LINK']?>">с правилами страховки</a>
                     За достоверность указанных в заявлении персональных данных страхователя, включая серию и номер
                     паспорта, мобильный телефон, e-mail ответственность несет страхователь.
                 </p>
@@ -907,7 +923,7 @@ $curStep = 1;
                         <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
                     <?endif;?>
                 <?endforeach;?>
-                <button id="b-add-order" style="opacity: 50%;" type="button" class="button yellow-button">Оформить заказ</button>
+                <button id="b-add-order" type="button" class="disabled button yellow-button">Оформить заказ</button>
             </div>
         </div>
     </form>
@@ -921,16 +937,17 @@ $curStep = 1;
         var count = 0;
         var btnsCount = $('.form__next-button').length
         $('#js-policy-validate-btn').on('click', function () {
-            //контактные данные совпадают с данными из страховки
-            let fio = $("input[name='policyContactInfo[surname]']").val() +' '+ $("input[name='policyContactInfo[name]']").val()
-            + ' ' + $("input[name='policyContactInfo[patronomic]']").val()
-            let email = $("input[name='policyContactInfo[email]']").val()
-            let phone = $("input[name='policyContactInfo[phone]']").val()
-            $('.contact-person__name').html(fio);
-            $('.contact-person__email').html(email);
-            $('.contact-person__phone').html(phone);
-            setAddressRegistration();
+                //контактные данные совпадают с данными из страховки
+                let fio = $("input[name='policyContactInfo[surname]']").val() + ' ' + $("input[name='policyContactInfo[name]']").val()
+                    + ' ' + $("input[name='policyContactInfo[patronomic]']").val()
+                let email = $("input[name='policyContactInfo[email]']").val()
+                let phone = $("input[name='policyContactInfo[phone]']").val()
+                $('.contact-person__name').html(fio);
+                $('.contact-person__email').html(email);
+                $('.contact-person__phone').html(phone);
+                setAddressRegistration();
         });
+        $('#js-policy-validate-btn').on('click',{name:'#js-policy-validate-btn'}, isValidPolicy);
         if($('#same').is(':checked'))
         {
             $('#b-actual').css('display','none');
@@ -968,132 +985,131 @@ $curStep = 1;
                 + ' дом ' + $("input[name='addressResidense[house]']").val()
             $('.input-address').html(addressResidense);
         }
+        let $error = $("#b-form-order-ajax").find(".form__required")
+        let top1 = $("#b-form-order-ajax").position().top
 
         $('.form__next-button').on('click', function () {
-            count++;
+            if (!$(this).hasClass('disabled')) {
+                count++;
+                $error.hide();
+            } else {
+                $('html').scrollTop($(this).closest('.b-step-top').position().top);
+                $error.show();
+            }
         });
         $('.form__next-button').on('click',{name:'#b-add-order'}, isValidFinal);
 
 
-        // $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        // $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        // $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        // $('.date').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
-        // function isValidPolicy(event) {
-        //     let requiredInputs = $('.js-policy-validate');
-        //     let emptyField = false;
-        //     $.each(requiredInputs, function() {
-        //         $(this).removeClass('error');
-        //             if( $(this).val().trim().length == 0 ) {
-        //                 emptyField = true;
-        //                 $(this).addClass('error');
-        //             }
-        //     });
-        //     if(!$('#same').is(':checked'))
-        //     {
-        //         let requiredInputs = $('.valid-cond1');
-        //         $.each(requiredInputs, function() {
-        //             $(this).removeClass('error');
-        //             if( $(this).val().trim().length == 0 ) {
-        //                 emptyField = true;
-        //                 $(this).addClass('error');
-        //             }
-        //         });
-        //     }
-        //     if($('#other').is(':checked'))
-        //     {
-        //         let requiredInputs = $('.valid-cond2');
-        //         $.each(requiredInputs, function() {
-        //             $(this).removeClass('error');
-        //             if( $(this).val().trim().length == 0 ) {
-        //                 emptyField = true;
-        //                 $(this).addClass('error');
-        //             }
-        //         });
-        //     }
-        //
-        //     if(!emptyField) {
-        //         $(event.data.name).attr('disabled', false);
-        //         $(event.data.name).css('opacity', '100%');
-        //     }else{
-        //         $(event.data.name).attr('disabled', true);
-        //         $(event.data.name).css('opacity', '50%');
-        //     }
-        // }
-        //
-        // $('.js-check-valid-field').on('keyup',{name:'#js-item-validate-btn'}, isValid);
-        // $('#same-name').on('change',{name:'#js-item-validate-btn'}, isValid);
-        // $('input[type=radio][name=delivery-address-installment]').on('change',{name:'#js-item-validate-btn'}, isValid);
-        // function isValid(event) {
-        //     let requiredInputs = $('.date-install');
-        //     let emptyField = false;
-        //     $.each(requiredInputs, function() {
-        //         $(this).removeClass('error');
-        //         if( $(this).val().trim().length == 0 ) {
-        //             emptyField = true;
-        //             $(this).addClass('error');
-        //         }
-        //     });
-        //     if(!$('#same-name').is(':checked'))
-        //     {
-        //         let requiredInputs = $('.valid-cond3');
-        //         $.each(requiredInputs, function() {
-        //             $(this).removeClass('error');
-        //             if( $(this).val().trim().length == 0 ) {
-        //                 emptyField = true;
-        //                 $(this).addClass('error');
-        //             }
-        //         });
-        //     }
-        //     if($('#other-delivery').is(':checked'))
-        //     {
-        //         let requiredInputs = $('.valid-cond4');
-        //         $.each(requiredInputs, function() {
-        //             $(this).removeClass('error');
-        //             if( $(this).val().trim().length == 0 ) {
-        //                 emptyField = true;
-        //                 $(this).addClass('error');
-        //             }
-        //         });
-        //     }
-        //
-        //     if(!emptyField) {
-        //         $(event.data.name).attr('disabled', false);
-        //         $(event.data.name).css('opacity', '100%');
-        //     }else{
-        //         $(event.data.name).attr('disabled', true);
-        //         $(event.data.name).css('opacity', '50%');
-        //     }
-        // }
-        //
-        // $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
-        // $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
-        // function isValidFinal(event) {
-        //     let isDisabledOrderBtn = false;
-        //     if($('#agreement').length && !$('#agreement').is(':checked'))
-        //     {
-        //         isDisabledOrderBtn = true;
-        //         console.log("d");
-        //     }
-        //     if(!$('#agreement-two').is(':checked'))
-        //     {
-        //         isDisabledOrderBtn = true;
-        //         console.log("r");
-        //     }
-        //     if(count!=btnsCount)
-        //     {
-        //         isDisabledOrderBtn = true;
-        //         console.log("w");
-        //     }
-        //
-        //     if(!isDisabledOrderBtn) {
-        //         $(event.data.name).attr('disabled', false);
-        //         $(event.data.name).css('opacity', '100%');
-        //     }else{
-        //         $(event.data.name).attr('disabled', true);
-        //         $(event.data.name).css('opacity', '50%');
-        //     }
-        // }
+        $('.js-check-valid-field').on('keyup',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        $('#same').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        $('input[type=radio][name=address-installment]').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        $('.date').on('change',{name:'#js-policy-validate-btn'}, isValidPolicy);
+        function isValidPolicy(event) {
+            let requiredInputs = $('.js-policy-validate');
+            let emptyField = false;
+            $.each(requiredInputs, function() {
+                $(this).removeClass('error');
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        $(this).addClass('error');
+                    }
+            });
+            if(!$('#same').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond1');
+                $.each(requiredInputs, function() {
+                    $(this).removeClass('error');
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        $(this).addClass('error');
+                    }
+                });
+            }
+            if($('#other').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond2');
+                $.each(requiredInputs, function() {
+                    $(this).removeClass('error');
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        $(this).addClass('error');
+                    }
+                });
+            }
+
+            if(!emptyField) {
+                $(event.data.name).removeClass('disabled');
+            }else{
+                $(event.data.name).addClass('disabled');
+            }
+        }
+        $('#js-item-validate-btn').on('click',{name:'#js-item-validate-btn'}, isValid);
+        $('.js-check-valid-field').on('keyup',{name:'#js-item-validate-btn'}, isValid);
+        $('#same-name').on('change',{name:'#js-item-validate-btn'}, isValid);
+        $('input[type=radio][name=delivery-address-installment]').on('change',{name:'#js-item-validate-btn'}, isValid);
+        function isValid(event) {
+            let requiredInputs = $('.date-install');
+            let emptyField = false;
+            $.each(requiredInputs, function() {
+                $(this).removeClass('error');
+                if( $(this).val().trim().length == 0 ) {
+                    emptyField = true;
+                    $(this).addClass('error');
+                }
+            });
+            if(!$('#same-name').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond3');
+                $.each(requiredInputs, function() {
+                    $(this).removeClass('error');
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        $(this).addClass('error');
+                    }
+                });
+            }
+            if($('#other-delivery').is(':checked'))
+            {
+                let requiredInputs = $('.valid-cond4');
+                $.each(requiredInputs, function() {
+                    $(this).removeClass('error');
+                    if( $(this).val().trim().length == 0 ) {
+                        emptyField = true;
+                        $(this).addClass('error');
+                    }
+                });
+            }
+
+            if(!emptyField) {
+                $(event.data.name).removeClass('disabled');
+            }else{
+                $(event.data.name).addClass('disabled');
+            }
+        }
+
+        $('#agreement').on('change',{name:'#b-add-order'}, isValidFinal);
+        $('#agreement-two').on('change',{name:'#b-add-order'}, isValidFinal);
+        function isValidFinal(event) {
+            let isDisabledOrderBtn = false;
+            if($('#agreement').length && !$('#agreement').is(':checked'))
+            {
+                isDisabledOrderBtn = true;
+            }
+            if(!$('#agreement-two').is(':checked'))
+            {
+                isDisabledOrderBtn = true;
+            }
+            if(count!=btnsCount)
+            {
+                isDisabledOrderBtn = true;
+            }
+
+            if(!isDisabledOrderBtn) {
+                $(event.data.name).removeClass('disabled');
+            }else{
+                $(event.data.name).addClass('disabled');
+            }
+        }
     });
 
 </script>

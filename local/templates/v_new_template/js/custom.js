@@ -1,8 +1,6 @@
 $(document).ready(function () {
 	//order page installment calculate
 	let currentlyPrice = Number($('#b-data-old-sum').attr('data-old-sum'));
-	console.log(currentlyPrice);
-	console.log('123');
 	$('#b-form-order-ajax').find('.payment-method__price-month').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 
 	$(".js-bonuce").click(function(e){
@@ -14,8 +12,10 @@ $(document).ready(function () {
 
 	$("#b-add-order").click(
 		function () {
-			sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
-			return false;
+			if (!$(this).hasClass('disabled')) {
+				sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
+				return false;
+			}
 		}
 	);
 	$("#b-equipitem-current").on('click', '.js-refresh-equipitem-data-ajax', function () {

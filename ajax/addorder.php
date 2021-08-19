@@ -185,7 +185,7 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
         }
     }
 
-    if(empty($errorsValidate)) {
+    if(!empty($errorsValidate)) {
         jsonResponse([
             'msg' => $errorsValidate,
             'type' => 'error'
