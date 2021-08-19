@@ -9,7 +9,7 @@
 }
 
 .review.step-3 .review__bottom.step-3 .step-3-item.active .content .content-wrapper .right .list-q .q.active .active-block ul li {
-    margin-right: 19px;
+    margin-right: 20px !important;
     margin-left: 10px;
 }
 
