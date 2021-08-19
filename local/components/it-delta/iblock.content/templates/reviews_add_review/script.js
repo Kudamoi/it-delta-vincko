@@ -133,7 +133,7 @@ $(document).ready(function() {
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
         let companyID = $('.rating-center__search_form.select-company .rating-center__search_form-select input').attr('data-id');
         let cityCompanyID = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-id');
-        var city = params["city"] != undefined ? params["city"] : toString(cityCompanyID);
+        var city = params["city"] != undefined ? params["city"] : cityCompanyID;
         location.search = "chop=" + companyID + "&" +"city=" + city;
     });
     
