@@ -292,16 +292,21 @@ $(document).ready(function() {
         inputsStepThree.forEach(function(inputItem){
             inputItem.addEventListener("change", function(){
                 var stepThreeItems = document.querySelectorAll(".step-3-item.active .content-wrapper .list-q .q");
-                var score = 0;
-                
+                score["count"] = stepThreeItems.length;
+                score["score"] = 0;
+
                 stepThreeItems.forEach(function(item){
                     var span = item.querySelector(".q-right span").innerHTML;
-                    score += parseInt(span != "?" ? span : "0");
+                    if(span == "?"){
+                        score["count"] -= 1;
+                        return;
+                    }
+                    score["score"] += parseInt(span);
                 })
-                score /= stepThreeItems.length;
 
+                score["score"] /= score["count"];
     
-                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score.toFixed(1);
+                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score["score"].toFixed(1);
             });
         });
     });
@@ -321,15 +326,21 @@ $(document).ready(function() {
         inputsStepThree.forEach(function(inputItem){
             inputItem.addEventListener("change", function(){
                 var stepThreeItems = document.querySelectorAll(".step-3-item.active .content-wrapper .list-q .q");
-                var score = 0;
+                score["count"] = stepThreeItems.length;
+                score["score"] = 0;
 
                 stepThreeItems.forEach(function(item){
                     var span = item.querySelector(".q-right span").innerHTML;
-                    score += parseInt(span != "?" ? span : "0");
+                    if(span == "?"){
+                        score["count"] -= 1;
+                        return;
+                    }
+                    score["score"] += parseInt(span);
                 })
-                score /= stepThreeItems.length;
+
+                score["score"] /= score["count"];
     
-                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score.toFixed(1);
+                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score["score"].toFixed(1);
             });
         });
     });

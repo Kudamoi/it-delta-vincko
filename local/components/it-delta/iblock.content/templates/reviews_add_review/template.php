@@ -629,21 +629,21 @@ global $USER;
                                                         <h5 data-id="<?=$item["ID"]?>"><?=$item["NAME"]?></h5>
                                                     </div>
                                                     <div class="q-right">
-                                                        <span>?</span>
+                                                        <span>4</span>
                                                     </div>
                                                     <div class="active-block">
                                                         <p><?=$item["~PREVIEW_TEXT"]?></p>
                                                         <ul>
-                                                            <li class="review-item-step-3 active">Не могу <br> оценить</li>
+                                                            <li class="review-item-step-3">Не могу <br> оценить</li>
                                                             <li class="review-item-step-3">0</li>
                                                             <li class="review-item-step-3">1</li>
                                                             <li class="review-item-step-3">2</li>
                                                             <li class="review-item-step-3">3</li>
-                                                            <li class="review-item-step-3">4</li>
+                                                            <li class="review-item-step-3 active">4</li>
                                                             <li class="review-item-step-3">5</li>
                                                         </ul>
                                                         <div class="pseudo__range-reivew">
-                                                            <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="77999" value="0">
+                                                            <input type="range" id="pseudo__range-review-5" class="smile-input step-3" min="0" max="77999" value="63931">
                                                         </div>
                                                         <div class="block-coment">
                                                             <textarea name="coment"  placeholder="Комментарий"></textarea>
