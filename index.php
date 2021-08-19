@@ -152,12 +152,8 @@ $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
     );?>
 
     <?
-    $params = array(
-        'IBLOCK_ID'=> 9,
-        'COOKIE'=> $_COOKIE
-    );
 
-    $packages = MainService::getPackagesIds($params);
+    $packages = MainService::getPackagesIds();
 
     if(!empty($packages))
     {

@@ -1,13 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-
-$params = array(
-  'IBLOCK_ID'=>9,
-  'COOKIE'=>$_COOKIE
-);
-
-$packages = MainService::getPackagesIds($params);
+$packages = MainService::getPackagesIds();
 
 if(!empty($packages))
 {

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+	//order page installment calculate
+	let currentlyPrice = Number($('#b-data-old-sum').attr('data-old-sum'));
+	$('#b-form-order-ajax').find('.payment-method__price-month').html(Math.ceil(currentlyPrice / 12) + ' ₽');
 
 	$(".js-bonuce").click(function(e){
 		e.preventDefault();
@@ -9,8 +12,10 @@ $(document).ready(function () {
 
 	$("#b-add-order").click(
 		function () {
-			sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
-			return false;
+			if (!$(this).hasClass('disabled')) {
+				sendAjaxForm('result_form', 'b-form-order-ajax', '/ajax/addorder.php');
+				return false;
+			}
 		}
 	);
 	$("#b-equipitem-current").on('click', '.js-refresh-equipitem-data-ajax', function () {
@@ -79,11 +84,11 @@ $(document).ready(function () {
 		$(this).closest('.ready-pack__bottom').find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / $(this).val()) + ' ₽');
 	})
 	$('.solutions__bottom_right').each(function () {
-
 		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
 		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-
 	})
+
+
 
 
 	function timer(parent) {
@@ -234,11 +239,6 @@ $(document).ready(function () {
 
 	$(".footer_bottom-js").on("click", function(){
 		$("#input_phone").focus();
-	});
-
-	$(".header__top-search .input__control").on("click", function(){
-		$(".searchForm__modal").css({'display': 'block'});
-		$(".searchForm__modal .searchForm__modal_input").focus();
 	});
 
 	// $('form').submit(function(){

@@ -65,7 +65,7 @@ class FeedbackService
             return false;
         }
         $DB->Commit();
-        return true;
+        return $result->getId();
     }
     //удаляет отзыв
     public static function delete($id) {

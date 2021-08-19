@@ -16,9 +16,7 @@ if(!empty($arResult["CATEGORIES"]) && $arResult['CATEGORIES_ITEMS_EXISTS']):?>
 					<p class="title-search-preview"><?echo $arElement["PREVIEW_TEXT"];?></p>
 				</td>
 			<?elseif(isset($arItem["ICON"])):?>
-				<div class="searchForm__modal_item bottomChekItem">
-					<span class="itemText"><a href="<?echo $arItem["URL"]?>"><?echo $arItem["NAME"]?></a></span>
-				</div>
+				<span class="itemText"><a href="<?echo $arItem["URL"]?>"><?echo $arItem["NAME"]?></a></span>
 			<?else:?>
 				<td class="title-search-more"><a href="<?echo $arItem["URL"]?>"><?echo $arItem["NAME"]?></a></td>
 			<?endif;?>

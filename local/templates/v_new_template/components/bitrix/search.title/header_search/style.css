@@ -115,3 +115,19 @@ div.title-search-result td.title-search-price span {
 .searchForm__modal_item.bottomChekItem {
 	margin-bottom: 10px;
 }
+
+.searchForm__modal {
+	width: 100%;
+    height: auto;
+}
+
+.searchForm__modal_input {
+	width: 100%;
+}
+.searchForm__modal_wrapper {
+	height: auto;
+}
+
+.searchForm__modal_bottomChek {
+	width: 100%;
+}
