@@ -162,17 +162,6 @@ $(document).ready(function() {
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
     });
 
-    let score = {};
-
-    var params = window.location.search.replace("?","").split("&").reduce(
-        function(p,e){
-            var a = e.split('=');
-            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-            return p;
-        },
-        {}
-    );
-
     if(!document.querySelector(".review__top > p > span").textContent){
         document.querySelector(".review__massage").style.display = "none";
     }
