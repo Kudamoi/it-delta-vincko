@@ -146,7 +146,7 @@ foreach ($arResult["ORDERS"] as $arOrder) {
                 break;
             case "strahovka":
                 // если товар - страховка, то добавим информацию о страховке
-                $arBPr["POLICY"] = $arPolicy = Vincko\Policy::formatPolicy($arPolicy[$prId], $arAllPaymentOptions);
+                $arBPr["POLICY"] = Vincko\Policy::formatPolicy($arPolicy[$prId], $arAllPaymentOptions);
                 break;
 
         }
