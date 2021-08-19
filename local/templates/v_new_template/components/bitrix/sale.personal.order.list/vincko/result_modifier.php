@@ -57,7 +57,10 @@ $obProps = CSaleOrderPropsValue::GetList(
         "CODE" => [
             "MONTAZHTIME",
             "SOLUTION_ID",
-            "COMPANY_CITY_ID"
+            "COMPANY_CITY_ID",
+            "FIO",
+            "PHONE",
+            "ADDRESS"
         ]
     ]
 );

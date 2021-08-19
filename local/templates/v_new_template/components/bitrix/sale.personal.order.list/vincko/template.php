@@ -255,22 +255,22 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                     <? endif; ?>
                                     <? endforeach; ?>
                                 </div>
-                                <? if (!empty($arOrder["USER"])): ?>
+                                <? if (!empty($arOrder["PROPS"]["FIO"])): ?>
                                     <div class="profile__c-main-order-main-getter">
                                         <p class="grey cmom-title">Получатель</p>
-                                        <? if ($arOrder["USER"]["FIO"]): ?>
-                                            <p class="grey"><? $arOrder["USER"]["FIO"] ?>></p>
+                                        <? if ($arOrder["PROPS"]["FIO"]): ?>
+                                            <p class="grey"><? $arOrder["PROPS"]["FIO"] ?></p>
                                         <? endif; ?>
-                                        <? if ($arOrder["USER"]["PHONE"]): ?>
-                                            <p class="grey"><?= $arOrder["USER"]["PHONE"] ?></p>
+                                        <? if ($arOrder["PROPS"]["PHONE"]): ?>
+                                            <p class="grey"><?= $arOrder["PROPS"]["PHONE"] ?></p>
                                         <? endif; ?>
                                     </div>
                                 <? endif; ?>
                                 <? if (!empty($arOrder["DELIVERY"])): ?>
                                     <div class="profile__c-main-order-main-setter">
                                         <p class="grey cmom-title">Адрес доставки</p>
-                                        <p class="grey"><?= $arOrder["DELIVERY"] ?></p>
-                                        <p class="grey"><?= $arOrder["COMMENT"] ?></p>
+                                        <p class="grey"><?= $arOrder["PROPS"]["ZIP"].$arOrder["PROPS"]["ADDRESS"] ?></p>
+                                        <p class="grey"><?= $arOrder["PROPS"]["COMMENT"] ?></p>
                                     </div>
                                 <? endif; ?>
                             </div>
