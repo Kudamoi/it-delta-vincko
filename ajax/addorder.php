@@ -50,7 +50,7 @@ function jsonResponse(array $result)
 
 $request = Context::getCurrent()->getRequest();
 
-if ($request->isPost() && $request->isAjaxRequest()) {
+if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAuthorized()) {
 
 
     $errors = [];
@@ -180,6 +180,8 @@ if ($request->isPost() && $request->isAjaxRequest()) {
             $orderComment = clean($request->getPost('orderComment'));
             //дата и время монтажа оборудования
             $dateInstall = clean($request->getPost('date-install'));
+            if (empty($dateInstall))
+                $errorsValidate[] = 'date-install';
         }
     }
 

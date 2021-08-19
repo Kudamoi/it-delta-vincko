@@ -630,7 +630,7 @@ $curStep = 1;
                                     <span class="form__delivery-cost">Бесплатно</span>
                                 </div>
                                 <input class="js-check-valid-field date date-install" type="text" name="date-install"
-                                       placeholder="Дата и время">
+                                       placeholder="Дата и время *">
                             </div>
                             <?endif;?>
                     </div>
@@ -906,7 +906,7 @@ $curStep = 1;
                         <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
                     <?endif;?>
                 <?endforeach;?>
-                <button id="b-add-order" style="opacity: 50%;" disabled="disabled" type="button" class="button yellow-button">Оформить страховой полис</button>
+                <button id="b-add-order" style="opacity: 50%;" type="button" class="button yellow-button">Оформить страховой полис</button>
             </div>
         </div>
     </form>
