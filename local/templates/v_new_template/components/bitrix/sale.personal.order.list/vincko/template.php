@@ -30,7 +30,7 @@ use Bitrix\Main\Localization\Loc;
 
                     </div>
 
-                    <a class="blue underline" href="/zayavka/">Создать заявку</a>
+                    <a class="blue underline" target="_blank" href="/zayavka/">Создать заявку</a>
                 </div>
             </div>
 
@@ -62,8 +62,8 @@ use Bitrix\Main\Localization\Loc;
                     </div>
 
                 </div>
-                <? if (!empty($arResult["ORDER"])): ?>
-                    <? foreach ($arResult["ORDER"] as $arOrder): ?>
+                <? if (!empty($arResult["ORDERS"])): ?>
+                    <? foreach ($arResult["ORDERS"] as $arOrder): ?>
                         <div class="profile__c-main-block profile__c-main-order <?= ($arOrder["PAY"]["STATUS_ID"] == 1 ? "profile__c-main-order--paid" : "profile__c-main-order--not-paid") ?>">
                             <div class="profile__c-main-order-head">
                                 <div class="profile__c-main-order-title">
@@ -75,7 +75,7 @@ use Bitrix\Main\Localization\Loc;
 
                                 <div class="profile__c-main-order-status">
                                     <? if ($arOrder["CANCELED"] !== "Y"): ?>
-                                        <?= $arResult["STATUS"] ?>
+                                        <?= $arOrder["STATUS"] ?>
                                     <? else : ?>
                                         <?= Loc::getMessage('SPOD_ORDER_CANCELED') ?>
                                     <? endif; ?>
@@ -85,10 +85,10 @@ use Bitrix\Main\Localization\Loc;
                                     <? /*<div class="profile__c-main-order-date">
                                     Дата получения: <span class="profile__c-main-order-date-value">28 марта 2021</span>
                                 </div>*/ ?>
-                                    <? if (!empty($arResult["MONTAZHTIME"])): ?>
+                                    <? if (!empty($arOrder["MONTAZHTIME"])): ?>
                                         <div class="profile__c-main-order-date">
                                             Планируемая дата монтажа:
-                                            <span class="profile__c-main-order-date-value"> <?= $arResult["MONTAZHTIME"] ?></span>
+                                            <span class="profile__c-main-order-date-value"> <?= $arOrder["MONTAZHTIME"] ?></span>
                                         </div>
                                     <? endif; ?>
                                 </div>
@@ -112,7 +112,7 @@ use Bitrix\Main\Localization\Loc;
 
                             <div class="profile__c-main-order-main">
                                 <div class="profile__c-main-order-main-name">
-                                    <?= $arOrder["SOLUTION"]["NAME"] ?>
+                                    <?= $arOrder["SOLUTION"] ?>
                                 </div>
 
                                 <div class="profile__c-main-order-main-firms">
@@ -121,8 +121,8 @@ use Bitrix\Main\Localization\Loc;
                                             <div class="profile__c-main-order-main-firm-name">
                                                 <?= $arProduct["NAME"] ?>
                                             </div>
-                                            <a href="<?= $arProduct["URL"] ?>"
-                                               class="profile__c-main-order-main-firm-more underline">Подробнее</a>
+                                            <?/*<a href="<?= $arProduct["URL"] ?>"
+                                               class="profile__c-main-order-main-firm-more underline">Подробнее</a>*/?>
                                         </div>
                                     <? endforeach; ?>
                                 </div>
@@ -181,11 +181,11 @@ use Bitrix\Main\Localization\Loc;
                                         </div>
                                         <div class="profile__c-main-order-main-info-content">
                                             Договор на 3 месяца
-                                            <? if (!empty($arOrder["CONTRACT"]["HONEST"])) : ?>
-                                                <a class="blue underline" href="">vincko: Честный договор</a>
+                                            <? if (!empty($arProduct["COMPANY"]["HONEST"])) : ?>
+                                                <a class="blue underline" href="<?=$arProduct["COMPANY"]["HONEST"]?>">vincko: Честный договор</a>
                                             <? endif; ?>
-                                            <? if (!empty($arOrder["CONTRACT"]["COMPANY"])) : ?>
-                                                <a class="blue underline" href="">Договор охранной компании</a>
+                                            <? if (!empty($arProduct["COMPANY"]["CONTRACT"])) : ?>
+                                                <a class="blue underline" href="<?=$arProduct["COMPANY"]["CONTRACT"]?>">Договор охранной компании</a>
                                             <? endif; ?>
 
                                         </div>
@@ -202,7 +202,7 @@ use Bitrix\Main\Localization\Loc;
                                                 </svg>
 
                                             </div>
-                                            <? if (!empty($arOrder["INSURANCE"]["PAY"])): ?>
+                                            <? if (!empty($arProduct["POLICY"]["PAYMENT_OPTIONS"])): ?>
                                                 <div class="products__text-container products__text-container--snd">
                                                     <div class="products__info-text">
                                                         <div class="itemRating-open__popup-title">
@@ -210,11 +210,11 @@ use Bitrix\Main\Localization\Loc;
                                                         </div>
                                                         <div class="itemRating-open__popup-content">
                                                             <ul>
-                                                                <? foreach ($arOrder["INSURANCE"]["PAY"] as $arInsurance): ?>
-                                                                    <li<?= (!empty($arInsurance["PRICE"]) ? " class='blue'" : "") ?>>
-                                                                        <?= $arInsurance["NAME"] ?> <br>
-                                                                        <? if (!empty($arInsurance["PRICE"])): ?>
-                                                                            <span class="blue"><?= $arInsurance["PRICE"] ?></span>
+                                                                <? foreach ($arProduct["POLICY"]["PAYMENT_OPTIONS"] as $arPay): ?>
+                                                                    <li<?= (!empty($arPay["PRICE"]) ? " class='blue'" : "") ?>>
+                                                                        <?= $arPay["NAME"] ?> <br>
+                                                                        <? if (!empty($arPay["PRICE"])): ?>
+                                                                            <span class="blue"><?= $arPay["PRICE"] ?></span>
                                                                         <? else: ?>
                                                                             нет выплаты
                                                                         <? endif; ?>
@@ -289,11 +289,11 @@ use Bitrix\Main\Localization\Loc;
                             вас
                         </div>
                         <div class="empty-btns">
-                            <a href="/strahovanie/" class="grey-border-button">
+                            <a href="/strahovanie/" target="_blank" class="grey-border-button">
                                 Выбрать страховой полис
                             </a>
 
-                            <a href="/packages/" class="grey-border-button">
+                            <a href="/packages/" target="_blank" class="grey-border-button">
                                 Выбрать готовое решение
                             </a>
                         </div>
@@ -302,7 +302,8 @@ use Bitrix\Main\Localization\Loc;
 
                     </div>
                 <? endif; ?>
-                <div class="profile__c-main profile__c-main--personal-requests">
+            </div>
+            <div class="profile__c-main profile__c-main--personal-requests">
 
                     <div class="empty empty--requests">
                         <picture>
@@ -313,22 +314,19 @@ use Bitrix\Main\Localization\Loc;
                         <div class="empty-text">Вы пока не создали ни одной индивидуальной заявки
                             Создайте заявку для решения своей задачи или подберите готовое решение, созданное для вас</div>
                         <div class="empty-btns">
-                            <a href="" class="grey-border-button">
+                            <a href="/zayavka/" target="_blank" class="grey-border-button">
                                 Создать заявку
                             </a>
 
-                            <a href="" class="grey-border-button">
+                            <a href="/packages/" target="_blank" class="grey-border-button">
                                 Выбрать готовое решение
                             </a>
                         </div>
 
-                        <a href="" class="empty-error grey underline">Сообщить об ошибке</a>
+                        <? /*<a href="#" class="empty-error grey underline">Сообщить об ошибке</a>*/?>
 
                     </div>
                 </div>
-            </div>
-
-
         </div>
     </div>
 </div>

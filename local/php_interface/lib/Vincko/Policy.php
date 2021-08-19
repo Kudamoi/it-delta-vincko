@@ -141,6 +141,7 @@ class Policy
 		);
 
 		while ($arAllPaymentOptionsTmp = $obAllPaymentOptions->GetNext()) {
+
 			$arAllPaymentOptions[$arAllPaymentOptionsTmp["ID"]] = [
 				"NAME" => $arAllPaymentOptionsTmp["NAME"],
 				"ICON" => $arAllPaymentOptionsTmp["~PROPERTY_ICON_VALUE"]["TEXT"],

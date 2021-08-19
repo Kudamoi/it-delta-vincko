@@ -5,7 +5,10 @@ $APPLICATION->SetTitle("Заказы и заявки");
 	"bitrix:sale.order.payment",
 	"",
 Array()
-);?><?$APPLICATION->IncludeComponent(
+);?>
+
+
+<?$APPLICATION->IncludeComponent(
     "bitrix:main.include",
     "",
     Array(
