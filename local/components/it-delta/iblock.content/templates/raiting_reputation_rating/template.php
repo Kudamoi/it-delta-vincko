@@ -296,7 +296,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             </div>
                         </div>
                         <div class="rating-center__items_top-btns">
-                            <? foreach ($arResult['OBJECTS'] as $object):?>
+                            <?foreach ($arResult['OBJECTS'] as $object):?>
                                 <div class="rating-center__items_top-btns-item">
                                     <input class="rating-home" type="radio" onclick="clickRadio(this)" id="<?=$object['ID']?>" name="rating-home">
                                     <label for="<?=$object['ID']?>">
@@ -304,7 +304,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         <?=$object['NAME']?>
                                     </label>
                                 </div>
-                            <? endforeach; ?>
+                            <?endforeach;?>
 
                         </div>
                     </div>
