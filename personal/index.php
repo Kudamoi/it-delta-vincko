@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Персональный раздел");
     <main class="profile">
         <div class="container">
             <? $APPLICATION->IncludeComponent(
-                "bitrix:sale.personal.section",
+                "bitrix:sale.personal.order.list",
                 "vincko",
                 array(
                     "ACCOUNT_PAYMENT_ELIMINATED_PAY_SYSTEMS" => array("0"),
@@ -34,7 +34,7 @@ $APPLICATION->SetTitle("Персональный раздел");
                         "index" => "index.php",
                         "order_cancel" => "cancel/#ID#",
                         "order_detail" => "orders/#ID#",
-                        "orders" => "orders/",
+                        "orders" => "/",
                         "private" => "private/",
                         "profile" => "profiles/",
                         "profile_detail" => "profiles/#ID#",

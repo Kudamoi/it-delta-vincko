@@ -36,6 +36,7 @@ foreach ($arResult["ORDERS"] as $arOrder) {
 
     // что можем собираем здесь
     $order[$orderId] = [
+        "ID" => $orderId,
         "ACCOUNT_NUMBER" => $arOrder["ORDER"]["ACCOUNT_NUMBER"],
         "DATE_INSERT_FORMATED" => $arOrder["ORDER"]["DATE_INSERT_FORMATED"],
         "STATUS" => $arResult["INFO"]["STATUS"][$arOrder["ORDER"]["STATUS_ID"]]["NAME"],
@@ -62,7 +63,7 @@ $obProps = CSaleOrderPropsValue::GetList(
 );
 while ($arProps = $obProps->Fetch()) {
     $arOrderProps[$arProps["ORDER_ID"]][$arProps["CODE"]] = $arProps["VALUE"];
-    if(empty($arProps["VALUE"])){
+    if (empty($arProps["VALUE"])) {
         continue;
     }
     switch ($arProps["CODE"]) {
@@ -101,7 +102,7 @@ $arCompany = Vincko\Company::getCompany($arCompanyIds);
 
 // Получим страховые полисы
 $arPolicy = Vincko\Policy::getList($arPolicyIds);
-if(!empty($arPolicy)){
+if (!empty($arPolicy)) {
     // получим все варианты выплаты по основным пунктам страховки
     $arAllPaymentOptions = Vincko\Policy::getPaymentOptions();
 }
@@ -138,10 +139,11 @@ foreach ($arResult["ORDERS"] as $arOrder) {
             case "abonplata":
                 // если товар - услуги компании, то добавим информацию о компании
                 $arBPr["COMPANY"] = $arCompany[$props["COMPANY_CITY_ID"]];
+
                 break;
             case "strahovka":
                 // если товар - страховка, то добавим информацию о страховке
-                $arBPr["POLICY"] =  $arPolicy = Vincko\Policy::formatPolicy($arPolicy[$prId], $arAllPaymentOptions);
+                $arBPr["POLICY"] = $arPolicy = Vincko\Policy::formatPolicy($arPolicy[$prId], $arAllPaymentOptions);
                 break;
 
         }
@@ -150,43 +152,3 @@ foreach ($arResult["ORDERS"] as $arOrder) {
 }
 $arResult["ORDERS"] = $order;
 ?>
-
-<? php/*
-
-    $arOrder["CONTRACT"]["HONEST"])) : ?>
-    <a class="blue underline" href="">vincko: Честный договор</a>
-<? endif; ?>
-<? if (!empty($arOrder["CONTRACT"]["COMPANY"])) : ?>
-      <? if (!empty($arOrder["INSURANCE"]["PAY"])): ?>
-                                            <div class="products__text-container products__text-container--snd">
-                                                <div class="products__info-text">
-                                                    <div class="itemRating-open__popup-title">
-                                                        <span class="blue">Выплаты</span> по пунктам
-                                                    </div>
-                                                    <div class="itemRating-open__popup-content">
-                                                        <ul>
-                                                            <? foreach ($arOrder["INSURANCE"]["PAY"] as $arInsurance): ?>
-                                                                <li<?= (!empty($arInsurance["PRICE"]) ? " class='blue'" : "") ?>>
-                                                                    <?= $arInsurance["NAME"] ?> <br>
-                                                                    <? if (!empty($arInsurance["PRICE"])): ?>
-                                                                        <span class="blue"><?= $arInsurance["PRICE"] ?></span>
-                                                                    <? else: ?>
-                                                                        нет выплаты
-                                                                    <? endif; ?>
-                                                                </li>
-                                                            <? endforeach; ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <? endif; ?>
-                                    </div>
-                                    <? if ($arOrder["INSURANCE"]["MAX_PRICE"]): ?>
-                                        <div class="profile__c-main-order-main-info-content">
-                                            Выплата до <?= $arOrder["INSURANCE"]["MAX_PRICE"] ?>
-                                        </div>
-                                    <? endif; ?>
-                                </div>
-                            </div>
-
-*/ ?>
