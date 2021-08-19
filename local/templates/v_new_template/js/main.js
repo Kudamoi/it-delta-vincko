@@ -913,12 +913,16 @@ jQuery(document).ready(function ($) {
 
   try {
     btnnsIO[0].addEventListener("click", function () {
-      openNextBlock(formsIO[1], btnnsIO[0], complete[0], required[0]);
+      if (!$(this).hasClass('disabled')) {
+        openNextBlock(formsIO[1], btnnsIO[0], complete[0], required[0]);
+      }
     });
 
     if (formsIO.length >= 3) {
       btnnsIO[1].addEventListener("click", function () {
-        openNextBlock(formsIO[2], btnnsIO[1], complete[1], required[1]);
+        if (!$(this).hasClass('disabled')) {
+          openNextBlock(formsIO[2], btnnsIO[1], complete[1], required[1]);
+        }
       });
     }
 
@@ -1986,15 +1990,12 @@ for (var i = 0; i < btns_modals.length; i++) {
   $('.searchForm__modal_closed').on('click', function () {
     $(this).closest('.rating-center__search_form').find('.searchForm__modal').fadeOut(100);
   });
-  var $bottomModalItem = $('.bottomChekItem');
-  var $topModalItem = $('.topChekItem');
-  $bottomModalItem.on('click', function () {
+  $('.searchForm__modal_wrapper').on('click', '.bottomChekItem', function () {
     $(this).clone().prependTo('.searchForm__modal_topChek').removeClass('bottomChekItem').addClass('topChekItem');
     $('.searchForm__modal_topChek').addClass('active');
   });
-  $topModalItem.on('click', function () {
+  $('.searchForm__modal_wrapper').on('click', '.topChekItem', function () {
     $(this).prependTo('.searchForm__modal_bottomChek').removeClass('topChekItem').addClass('bottomChekItem');
-    console.log('true');
   });
   var $test = $('.searchForm__modal_topChek').find('.topChekItem');
 
