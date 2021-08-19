@@ -96,3 +96,7 @@
 .rating-center__search .searchForm__modal {
     z-index: 99999;
 }
+
+.review__massage {
+    margin-top: 24px;
+}
