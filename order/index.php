@@ -34,7 +34,7 @@ $res = CIblockElement::getList(
 );
 while($arFields = $res->Fetch())
 {
-    if($arFields['XML_ID']==1565)
+    if($arFields['CODE']=='polzovatelskoe-soglashenie')
         continue;
 
     $arFields['CONTRACT_LINK'] = CFile::GetPath($arFields['PROPERTY_DOCUMENT_VALUE']);
