@@ -901,12 +901,13 @@ $curStep = 1;
                 <label for="agreement-two" class="installment__rules-agreement">
                     Я согласен с условиями и договором
                 </label>
+                <input type="hidden" name="parentPackageId" value="<?=$complectObj->parent_package_id?>">
                 <?foreach ($orderItems as $orderItem):?>
                     <?if($orderItem->active):?>
                         <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
                     <?endif;?>
                 <?endforeach;?>
-                <button id="b-add-order" style="opacity: 50%;" type="button" class="button yellow-button">Оформить страховой полис</button>
+                <button id="b-add-order" style="opacity: 50%;" type="button" class="button yellow-button">Оформить заказ</button>
             </div>
         </div>
     </form>

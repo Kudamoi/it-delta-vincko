@@ -65,7 +65,7 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
     {
         return false;
     }
-
+    $parentPackageId = intval($request['parentPackageId']);
     //Данные страхового полиса
     if(isset($request['policyContactInfo']))
     {
@@ -185,7 +185,7 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
         }
     }
 
-    if(!empty($errorsValidate)) {
+    if(empty($errorsValidate)) {
         jsonResponse([
             'msg' => $errorsValidate,
             'type' => 'error'
@@ -317,6 +317,9 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
 
     $property = getPropertyByCode($propertyCollection, 'MONTAZHTIME');
     $property->setValue($dateInstall);
+
+    $property = getPropertyByCode($propertyCollection, 'SOLUTION_ID');
+    $property->setValue($parentPackageId);
 
     $orderComment = ' Комментарий к заказу: '.$orderComment;
 
