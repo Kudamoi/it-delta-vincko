@@ -266,7 +266,7 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                         <? endif; ?>
                                     </div>
                                 <? endif; ?>
-                                <? if (!empty($arOrder["DELIVERY"])): ?>
+                                <? if (!empty($arOrder["PROPS"]["ADDRESS"])): ?>
                                     <div class="profile__c-main-order-main-setter">
                                         <p class="grey cmom-title">Адрес доставки</p>
                                         <p class="grey"><?= $arOrder["PROPS"]["ZIP"].$arOrder["PROPS"]["ADDRESS"] ?></p>
