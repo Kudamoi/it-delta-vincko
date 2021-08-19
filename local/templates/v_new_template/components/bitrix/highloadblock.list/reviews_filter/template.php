@@ -3,7 +3,7 @@
 <ul class="reviews__items">
     <? foreach ($arResult['rows'] as $row): ?>
         <? $currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']; ?>
-        <li class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
+        <li data-id="<?=$row['ID']?>" class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
             <div class="reviews__item-left">
                 <div class="reviews__item__head">
                     <div class="reviews__item__head--left">
