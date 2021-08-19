@@ -85,3 +85,8 @@
 .rating-center__subtitle_text a:last-child {
     text-decoration: none;
 }
+
+.review__massage {
+    margin-top: 24px;
+}
+    

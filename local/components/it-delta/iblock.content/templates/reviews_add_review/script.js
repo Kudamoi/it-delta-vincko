@@ -172,6 +172,10 @@ $(document).ready(function() {
         {}
     );
 
+    if(!document.querySelector(".review__top > p > span").textContent){
+        document.querySelector(".review__massage").style.display = "none";
+    }
+
     var stepOneNext = document.querySelector(".review__btn.step-1 .next");
     var stepTwoNext = document.querySelector(".review__btn.step-2 .next");
     var stepThreeEnd = document.querySelector(".review__btn.step-3 .stop");
@@ -193,13 +197,17 @@ $(document).ready(function() {
     inputStepOne.addEventListener("input", function(){
         if(inputStepOne.value <= 30000){
             if(textareaCommentOne.value == ""){
-                stepOneNext.disabled = true;
+                if(document.querySelector(".review__massage").getAttribute("data-type") == 1){
+                    stepOneNext.disabled = true;
+                }
                 stepOneReview.disabled = true;
 
                 textareaCommentOne.style.border = "1px solid red";
             }
         }else if(inputStepOne.value > 30000 && inputStepOne.value <= 50000){
-            stepOneNext.disabled = false;
+            if(document.querySelector(".review__massage").getAttribute("data-type") == 1){
+                stepOneNext.disabled = false;
+            }
             stepOneReview.disabled = false;
 
             textareaCommentOne.style.border = "1px solid #d1dbe3";
@@ -209,12 +217,16 @@ $(document).ready(function() {
     textareaCommentOne.addEventListener("input", function(){
         if(inputStepOne.value <= 30000){
             if(textareaCommentOne.value != ""){
-                stepOneNext.disabled = false;
+                if(document.querySelector(".review__massage").getAttribute("data-type") == 1){
+                    stepOneNext.disabled = false;
+                }
                 stepOneReview.disabled = false;
 
                 textareaCommentOne.style.border = "1px solid #d1dbe3";
             }else{
-                stepOneNext.disabled = true;
+                if(document.querySelector(".review__massage").getAttribute("data-type") == 1){
+                    stepOneNext.disabled = true;
+                }
                 stepOneReview.disabled = true;
 
                 textareaCommentOne.style.border = "1px solid red";
