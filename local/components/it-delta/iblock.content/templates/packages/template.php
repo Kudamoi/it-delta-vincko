@@ -153,13 +153,13 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                 </div>
                                             </div>
                                         </div>
-                                        <? if (!empty($item['PROPERTY_CO_PRESENTS_REF_VALUE'])): ?>
+                                        <? if (!empty($item['PRESENTS'])): ?>
                                             <div class="predloj__present">
                                                 <div class="present__text">
                                                     <div class="h5">В подарок:</div>
                                                     <ul>
-                                                        <? foreach ($item['PROPERTY_CO_PRESENTS_REF_VALUE'] as $present): ?>
-                                                            <li><span>&#10003;</span> <?= $present ?></li>
+                                                        <? foreach ($item['PRESENTS'] as $present): ?>
+                                                            <li><span>&#10003;</span> <?=$present?></li>
                                                         <? endforeach; ?>
                                                     </ul>
                                                 </div>
@@ -179,7 +179,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             Всего
                                         </div>
 
-                                        <div class="ready-pack__bottom-result">
+                                        <div class="ready-pack__bottom-result" data-total-price="<?=empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']?>">
                                             <?= empty($item['DISCOUNT_PRICE']) ? number_format($item['CATALOG_PRICE_1'], 0, ',', ' ') : number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> ₽
                                             <span class="ready-pack__bottom-or">
                                                     или
@@ -199,7 +199,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                 <select name="solutions__bottom_column-select"
                                                         class="solutions__bottom_column-select">
                                                     <option selected value="12">12 мес.</option>
-                                                    <option value="6">6 мес.</option>
+                                                    <?/*<option value="6">6 мес.</option>*/?>
                                                 </select>
                                                 <p>по</p>
                                                 <div class="solutions__bottom_column-price">

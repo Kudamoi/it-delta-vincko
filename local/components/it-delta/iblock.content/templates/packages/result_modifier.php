@@ -97,7 +97,8 @@ foreach ($arSections as $key => $arSection) {
             foreach ($arItem['PROPERTIES']['P_COMPLECT']['VALUE'] as $complect):
                 $element_code[$complect] = $arItem["CODE"];
                 $arConnect[$complect] = $arrClass[$arItem['PROPERTIES']['CO_CLASS_REF']['VALUE']];
-                $arConnect[$complect]['COMPANY_NAME'] = $arrCompanyInfo['NAME'];
+                $presents[$complect] = $arItem["PROPERTIES"]["P_BONUSES"]["VALUE"];
+                $arConnect[$complect]['COMPANY_NAME'] = $_POST['COMPANY']!='' ? $arrCompanyInfo['NAME'] : 'Вы выбираете компанию, мы предоставляем гарантии';
             endforeach;
         }
     }
@@ -126,7 +127,7 @@ while ($equipmentKitsRes = $dbResEquipmentKits->GetNext()) {
     $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] != null ? $arrComplect[] = $equipmentKitsRes['PROPERTY_CO_CLASS_REF_VALUE'] : '';
     $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE'] != null ? $arCharacteristic = array_merge($arCharacteristic, $equipmentKitsRes['PROPERTY_CO_CHARACTERISTICS_REF_VALUE']) : '';
     $equipmentKitsRes = array_merge($equipmentKitsRes, ["ELEMENT_CODE" => $element_code[$equipmentKitsRes["ID"]]]);
-    
+    $equipmentKitsRes = array_merge($equipmentKitsRes, ["PRESENTS" => $presents[$equipmentKitsRes["ID"]]]);
     $arEquipmentKits[$equipmentKitsRes['ID']] = $equipmentKitsRes;
 }
 
