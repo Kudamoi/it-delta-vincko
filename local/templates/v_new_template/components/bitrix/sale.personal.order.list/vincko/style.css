@@ -27,3 +27,5 @@ div.empty {
 .profile__c-main-order--paid .profile__c-main-order-bottom-download, .profile__c-main-order--paid .profile__c-main-order-price-status-not-paid, .profile__c-main-order--paid .profile__c-main-order-bottom-text{
     display: grid!important;
 }
+.show{display: block}
+.profile__c-main.profile__c-main--all-orders, .profile__c-main.profile__c-main--personal-requests {display: none}
