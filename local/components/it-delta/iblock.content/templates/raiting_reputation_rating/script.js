@@ -125,11 +125,11 @@ $(document).ready(function () {
         }
     });
     
-    $('.icon-open-info-block').on('mouseover', function () {
+    $('.rating-center').on('mouseover', '.icon-open-info-block',function () {
         $(this).closest('.rating-check-window').find('.rating-help-window').fadeIn();
         $(this).closest('.rating-check-window').addClass('svg-active');
     })
-    $('.rating-help-window-close').on('click', function () {
+    $('.rating-center').on('click', '.rating-help-window-close', function () {
         $(this).closest('.rating-check-window').removeClass('svg-active');
         $(this.parentNode).fadeOut();
     })

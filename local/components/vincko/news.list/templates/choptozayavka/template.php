@@ -117,7 +117,7 @@ $this->setFrameMode(true);
 			</div>
 		</form>
 	</div>
-	
+
 	<div class="chop__tozayavka">
 		<div class="chop__tozayavka-flex">
 			<div class="chop__tozayavka-count">Вы выбрали <span id="js-choptozayavka-counter">0</span> охранных организаций</div>
@@ -134,7 +134,7 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</div>
-	
+
 	<?if (!empty($arResult["ITEMS"])){?>
 	<div class="chop__list">
 		<div class="chop__sort">Сортировка: <a class="sort__icon-arrow-bot" href="#">по рейтингу</a></div>
@@ -148,7 +148,7 @@ $this->setFrameMode(true);
 <!--    </pre>-->
 		<div class="chop__item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 			<div class="chop__flex">
-				<div class="chop__rate">
+				<?/*<div class="chop__rate">
 					<div class="chop__rate-flex">
 						<div class="chop__rate-full">
 							<div class="chop__rate-item">
@@ -162,9 +162,9 @@ $this->setFrameMode(true);
 						</div>
 						<div class="chop__rate-how">Как считается рейтинг?</div>
 					</div>
-				</div>
+				</div>*/?>
 				<div class="chop__info">
-					<div class="chop__title"><a title="Выбрать" href="/pakety-okhrannykh-uslug/<?=$arResult["PACKET_CODE"]?>/?op=<?=$arItem["ID"]?><?if ($_REQUEST["eq"]):?>&eq=<?=intval($_REQUEST["eq"])?><?endif;?>"><?echo $arItem["NAME"]?></a></div>
+					<div class="chop__title"><a title="Выбрать" href="#0<?/*/pakety-okhrannykh-uslug/<?=$arResult["PACKET_CODE"]?>/?op=<?=$arItem["ID"]?><?if ($_REQUEST["eq"]):?>&eq=<?=intval($_REQUEST["eq"])?><?endif;?>*/?>"><?echo $arItem["NAME"]?></a></div>
 					<div class="chop__icons">
 						<?if ($arItem["DISPLAY_PROPERTIES"]["CH_RATING_ZABOTA"]["VALUE"]>=8):?>
 						<div class="chop__icon-item" title="Забота о клиенте">
@@ -197,7 +197,7 @@ $this->setFrameMode(true);
 						</div>
 						<?endif;?>
 					</div>
-					<?if (!empty($arItem["DISPLAY_PROPERTIES"]["CH_SERVICES"])):?>
+					<?/*if (!empty($arItem["DISPLAY_PROPERTIES"]["CH_SERVICES"])):?>
 					<div class="chop__service">
 						<?foreach ($arItem["DISPLAY_PROPERTIES"]["CH_SERVICES"]["VALUE"] as $acr):?>
 						<a class="chop__service-item inline-block"><?=$arItem["DISPLAY_PROPERTIES"]["CH_SERVICES"]["LINK_ELEMENT_VALUE"][$acr]["NAME"]?></a>
@@ -207,17 +207,17 @@ $this->setFrameMode(true);
 					<div class="chop__announce">
 						<?echo $arItem["PREVIEW_TEXT"];?>
 					</div>
-					<div class="chop__cities">Присутствует в <a href="#"><?=$arItem["CH_ALL_COUNT"]?> городах</a></div>
+					<div class="chop__cities">Присутствует в <a href="#"><?=$arItem["CH_ALL_COUNT"]?> городах</a></div>*/?>
 				</div>
 				<div class="chop__detail">
-					<div class="chop__detail-item">
+					<?/*<div class="chop__detail-item">
 						<div class="chop__detail-title">Стоимость обслуживания</div>
 						<div class="chop__detail-value"><?=$arItem["DISPLAY_PROPERTIES"]["CH_SERVICES_PRICE"]["VALUE"]?></div>
 					</div>
 					<div class="chop__detail-item">
 						<div class="chop__detail-title">Подключение и монтаж</div>
 						<div class="chop__detail-value"><?=$arItem["DISPLAY_PROPERTIES"]["CH_MONTAZHPODKL"]["VALUE"]?></div>
-					</div>
+					</div>*/?>
 					<div class="chop__detail-button">
 						<a data-id="<?=$arItem['ID']?>" id="js-choptozayavka-check<?=$arItem['ID']?>" class="js-choptozayavka-select chop__detail-link" href="#">Выбрать</a>
 						<a data-id="<?=$arItem['ID']?>" id="js-choptozayavka-uncheck<?=$arItem['ID']?>" style="display: none;" class="js-choptozayavka-unselect chop__tozayavka-select-hidden chop__detail-link" href="#">Выбрано</a>

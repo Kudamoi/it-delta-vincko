@@ -1499,10 +1499,11 @@ $data = [
             'sum' => $complectPrice,
             'old_sum' => $complectOldPrice,
             'package_info' => ['name' => $arResult['PACKAGE_GROUP']['NAME'], 'picture_src' => $arResult['PACKAGES_CLASSES'][$arResult['CURRENT_PACKAGE_CLASS']]['PICTURE']['src']],
-            'parent_package_id'=> $arResult['COMPLECT_PARENT_PACKAGE']['ID']
+            'parent_package_id'=> $arResult['COMPLECT_PARENT_PACKAGE']['ID'],
         ],
         1 => [
             'id' => $currentSubcriptionFeeIndex,
+            'company_city_id'=> $currentSecureCompanyIndex,
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22 ,23,24)) ? 'а' : 'ев') . ' обслуживания',

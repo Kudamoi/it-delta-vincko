@@ -19,7 +19,6 @@ if(!empty($packages))
             "CACHE_TIME" => "0",
             "CACHE_TYPE" => "A",
             "FILTER_NAME" => "packagesFilter",
-            "PACKAGES_IDS" => $packagesGroups,
             "IBLOCK_ID" => "12",
             "IBLOCK_TYPE" => "references",
             "PAGE_ELEMENT_COUNT" => "10",

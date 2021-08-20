@@ -30,17 +30,36 @@ function clickRadio(param) {
 }
 
 $(document).ready(function () {
+    function $_GET(key) {
+        var p = window.location.search;
+        p = p.match(new RegExp(key + '=([^&=]+)'));
+        return p ? p[1] : false;
+    }
+    let compID = null;
+    revID = $_GET('REVIEW');
 
     $.ajax({
-        type: 'post',
-        url: '/ajax/reviews/filter.php',
-        //data: {'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
-        data: {},
+        type: 'get',
+        url: '/ajax/reviews/searchReview.php',
+        data: {'REVIEW' : revID},
         response: 'html',
-        success: function(data) {
-            $('.reviews-item-wrapper-block').html(data);
+        success: function (data) {
+            $.ajax({
+                type: 'get',
+                url: '/ajax/reviews/filter.php',
+                data: {'page': 'page-'+Number(data)},
+                response: 'html',
+                success: function (response) {
+                    $('.reviews-item-wrapper-block').html(response);
+                    if(revID) {
+                        $('html,body').animate({
+                            scrollTop: $('.reviews__items .reviews__item[data-id='+revID+']').offset().top - 10
+                        }, 1000);
+                    }
+                }
+            });
         }
-    })
+    });
 
 
     $(document).click( function(e){

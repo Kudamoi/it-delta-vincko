@@ -194,10 +194,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                         охранной компании</a>
                                                 </div>
                                                 <div class="text-descrip t-c-gray">
-                                                    Lorem Ipsum является стандартной "рыбой" для текстов на
-                                                    латинице
-                                                    с
-                                                    начала XVI века.
+                                                    Перед покупкой услуг охранной компании - ознакомьтесь с текстом
+                                                    договора
                                                 </div>
                                             </div>
                                         </div>
@@ -349,10 +347,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                        class="itemRating-open__left_bottom-btn">
                                         к компании
                                     </a>
-                                    <a href="/packages/?company=<?= $item['ID'] ?>"
-                                       class="itemRating-open__left_bottom-btn">
-                                        Заказать услуги
-                                    </a>
+                                    <? if ($item['STATUS_COMPANY']['ID'] == 1497): ?>
+                                        <a href="/packages/?company=<?= $item['ID'] ?>"
+                                           class="itemRating-open__left_bottom-btn">
+                                            Заказать услуги
+                                        </a>
+                                    <? endif; ?>
                                 </div>
                                 <div class="itemRating-open__left_bottom-text">
                                     Производители, с оборудованием которых работает компания:
@@ -415,10 +415,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                                  alt="img">
                                                         </div>
                                                         <div class="itemRating-open__review_top-text">
-                                                            <span class="name"><?= $review['NAME'] ?></span>
-                                                            <span class="city">Ростов-на-Дону</span>
-                                                            <span class="buyer">покупатель</span>
-                                                            <img src="/upload/rating/icon-info.svg" alt="img">
+                                                            <span class="name"><?= !empty($review['NAME']) ? $review['NAME'] : 'Пользователь скрыл имя настройками приватности'; ?></span>
+                                                            <span class="city"><?= $review['CITY']['NAME'] ?></span>
+                                                            <? if ($review['TYPE'] == 3): ?>
+                                                                <span class="buyer">покупатель</span>
+                                                                <!--<img src="/upload/rating/icon-info.svg" alt="img">-->
+                                                            <? endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="itemRating-open__review_bottom">
@@ -443,9 +445,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         <? endif; ?>
                         <br>
                         <div class="itemRating-open__right_bottom">
-                            <a class="itemRating-open__right_bottom-btn" href="/reviews/?COMPANY=<?= $item['ID'] ?>">Оставить
-                                свой
-                                отзыв</a>
+                            <a class="itemRating-open__right_bottom-btn" href="/review-add/">Оставить свой отзыв</a>
                             <div class="itemRating-open__right_bottom-text">
                                 <span>источник</span>
                                 <img src="/upload/rating/info-block-one__left_icon.svg" alt="img">

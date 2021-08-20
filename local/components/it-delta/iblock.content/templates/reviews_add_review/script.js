@@ -84,7 +84,7 @@ $(document).ready(function() {
 
         score["CHOP_ID"] = params["chop"];
         score["CITY_ID"] = params["city"];
-        score["REVIEW_TYPE_ID"] = document.querySelector(".review__massage").getAttribute("data-type");
+        score["REVIEW_TYPE_ID"] = document.querySelector(".review__massage").getAttribute("data-type") == "0" ? 2 : 3;
     }
 
     var score = {};
@@ -218,6 +218,12 @@ $(document).ready(function() {
         }
     });
 
+    stepOneReview.addEventListener("click", function(){
+        setDataForAjax(1);
+
+        sendAjax();
+    });
+
     stepOneNext.addEventListener("click", function(){
         setDataForAjax(1);
 
@@ -226,38 +232,38 @@ $(document).ready(function() {
         document.querySelector('.review__mid-step-1 .pic').style.display = "none";
     });
 
-    stepOneReview.addEventListener("click", function(){
-        setDataForAjax(1);
-
-        sendAjax();
-    });
-
     var inputsStepTwo = document.querySelectorAll("#pseudo__range-review-2");
     var stepTwoNext = document.querySelector(".review__btn.step-2 .next");
     var stepTwoReview = document.querySelector(".review__btn.step-2 .add-review-block .add-review");
     var textareaCommentTwo = document.querySelectorAll("textarea[name=step-2-coment]");
-    var count = [1, 2, 3];
+    var countTwoValid = Array(inputsStepTwo.length).fill().map((e, i) => i++);
 
     // Валидация "формы" для перехода на 3 уровень оценок
     inputsStepTwo.forEach(function(item, i){
         item.addEventListener("change", function(){
             if(item.value < 18000){
+                if(countTwoValid.length < inputsStepTwo.length && countTwoValid.indexOf(i) == -1){
+                    countTwoValid.push(i);
+                }
+
                 textareaCommentTwo[i].style.border = "1px solid #d1dbe3";
             }
             if (item.value > 18000 && item.value < 58000) {
                 if(textareaCommentTwo[i].value == ""){
-                    count.splice(count.indexOf(i), 1);
-                    textareaCommentTwo[i].style.border = "1px solid red";
+                    if(countTwoValid.length <= inputsStepTwo.length && countTwoValid.indexOf(i) != -1){
+                        countTwoValid.splice(countTwoValid.indexOf(i), 1);
+                        textareaCommentTwo[i].style.border = "1px solid red";
+                    }
                 }
             } else if (item.value > 58000 && item.value < 78000) {
-                if(count.length <= 3 && count.indexOf(i) == -1){
-                    count.push(i);
+                if(countTwoValid.length < inputsStepTwo.length && countTwoValid.indexOf(i) == -1){
+                    countTwoValid.push(i);
                 }
 
                 textareaCommentTwo[i].style.border = "1px solid #d1dbe3";
             }
 
-            if(count.length == 3){
+            if(countTwoValid.length == inputsStepTwo.length){
                 stepTwoNext.disabled = false;
                 stepTwoReview.disabled = false;
             }else{
@@ -269,18 +275,18 @@ $(document).ready(function() {
         textareaCommentTwo[i].addEventListener("change", function(){
             if (item.value > 18000 && item.value < 58000) {
                 if(textareaCommentTwo[i].value != ""){
-                    if(count.length <= 3 && count.indexOf(i) == -1){
-                        count.push(i);
+                    if(countTwoValid.length < textareaCommentTwo.length && countTwoValid.indexOf(i) == -1){
+                        countTwoValid.push(i);
                     }
 
                     textareaCommentTwo[i].style.border = "1px solid #d1dbe3";
                 }else{
-                    count.splice(count.indexOf(i), 1);
+                    countTwoValid.splice(countTwoValid.indexOf(i), 1);
 
                     textareaCommentTwo[i].style.border = "1px solid red";
                 }
 
-                if(count.length == 3){
+                if(countTwoValid.length == textareaCommentTwo.length){
                     stepTwoNext.disabled = false;
                     stepTwoReview.disabled = false;
                 }else{
@@ -300,20 +306,88 @@ $(document).ready(function() {
         document.querySelector('.review__mid-step-3 .bonus').style.display = "none";
 
         var inputsStepThree = document.querySelectorAll(".step-3-item.active .smile-input.step-3");
+        var textareaCommentThree = document.querySelectorAll(".step-3-item.active textarea[name=coment]");
+        var stepThreeNext = document.querySelector(".review__btn.step-3 .next-btn-bottom");
+        var stepThreeNextItem = document.querySelectorAll(".step-3-item.active .block-coment .next-btn");
+        var countThreeValid = Array(inputsStepThree.length).fill().map((e, i) => i++);
 
-        inputsStepThree.forEach(function(inputItem){
+        inputsStepThree.forEach(function(inputItem, i){
             inputItem.addEventListener("change", function(){
                 var stepThreeItems = document.querySelectorAll(".step-3-item.active .content-wrapper .list-q .q");
-                var score = 0;
-                
+                var recalScore = [];
+                recalScore["count"] = stepThreeItems.length;
+                recalScore["score"] = 0;
+
                 stepThreeItems.forEach(function(item){
                     var span = item.querySelector(".q-right span").innerHTML;
-                    score += parseInt(span != "?" ? span : "0");
+                    if(span == "?"){
+                        recalScore["count"] -= 1;
+                        return;
+                    }
+                    recalScore["score"] += parseInt(span);
                 })
-                score /= stepThreeItems.length;
 
+                recalScore["score"] /= recalScore["count"];
+
+                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = recalScore["score"].toFixed(1);
+
+                if(inputItem.value < 18000){
+                    if(countThreeValid.length <= inputsStepThree.length && countThreeValid.indexOf(i) == -1){
+                        countThreeValid.push(i);
+                    }
+
+                    textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                }
+                if (inputItem.value > 18000 && inputItem.value < 58000) {
+                    if(textareaCommentThree[i].value == ""){
+                        if(countThreeValid.length <= inputsStepThree.length && countThreeValid.indexOf(i) != -1){
+                            countThreeValid.splice(countThreeValid.indexOf(i), 1);
+                            textareaCommentThree[i].style.border = "1px solid red";
+                        }
+                    }
+                } else if (inputItem.value > 58000 && inputItem.value < 78000) {
+                    if(countThreeValid.length < inputsStepThree.length && countThreeValid.indexOf(i) == -1){
+                        countThreeValid.push(i);
+                    }
     
-                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score.toFixed(1);
+                    textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                }
+    
+                if(countThreeValid.length == inputsStepThree.length){
+                    stepThreeNext.disabled = false;
+                }else{
+                    stepThreeNext.disabled = true;
+                }
+            });
+    
+            textareaCommentThree[i].addEventListener("change", function(){
+                if (inputItem.value > 18000 && inputItem.value < 58000) {
+                    if(textareaCommentThree[i].value != ""){
+                        if(countThreeValid.length < textareaCommentThree.length && countThreeValid.indexOf(i) == -1){
+                            countThreeValid.push(i);
+                        }
+    
+                        textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                    }else{
+                        countThreeValid.splice(countThreeValid.indexOf(i), 1);
+    
+                        textareaCommentThree[i].style.border = "1px solid red";
+                    }
+    
+                    if(countThreeValid.length == textareaCommentThree.length){
+                        stepThreeNext.disabled = false;
+                    }else{
+                        stepThreeNext.disabled = true;
+                    }
+                }
+            });
+
+            stepThreeNextItem[i].addEventListener("click", function(){
+                if(countThreeValid.length == textareaCommentThree.length){
+                    stepThreeNext.disabled = false;
+                }else{
+                    stepThreeNext.disabled = true;
+                }
             });
         });
     });
@@ -329,19 +403,88 @@ $(document).ready(function() {
 
     stepThreeContinue.addEventListener("click", function(){
         var inputsStepThree = document.querySelectorAll(".step-3-item.active .smile-input.step-3");
+        var textareaCommentThree = document.querySelectorAll(".step-3-item.active textarea[name=coment]");
+        var stepThreeNext = document.querySelector(".review__btn.step-3 .next-btn-bottom");
+        var stepThreeNextItem = document.querySelectorAll(".step-3-item.active .block-coment .next-btn");
+        var countThreeValid = Array(inputsStepThree.length).fill().map((e, i) => i++);
 
-        inputsStepThree.forEach(function(inputItem){
+        inputsStepThree.forEach(function(inputItem, i){
             inputItem.addEventListener("change", function(){
                 var stepThreeItems = document.querySelectorAll(".step-3-item.active .content-wrapper .list-q .q");
-                var score = 0;
+                var recalScore = [];
+                recalScore["count"] = stepThreeItems.length;
+                recalScore["score"] = 0;
 
                 stepThreeItems.forEach(function(item){
                     var span = item.querySelector(".q-right span").innerHTML;
-                    score += parseInt(span != "?" ? span : "0");
+                    if(span == "?"){
+                        recalScore["count"] -= 1;
+                        return;
+                    }
+                    recalScore["score"] += parseInt(span);
                 })
-                score /= stepThreeItems.length;
+
+                recalScore["score"] /= recalScore["count"];
+
+                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = recalScore["score"].toFixed(1);
+
+                if(inputItem.value < 18000){
+                    if(countThreeValid.length <= inputsStepThree.length && countThreeValid.indexOf(i) == -1){
+                        countThreeValid.push(i);
+                    }
+
+                    textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                }
+                if (inputItem.value > 18000 && inputItem.value < 58000) {
+                    if(textareaCommentThree[i].value == ""){
+                        if(countThreeValid.length <= inputsStepThree.length && countThreeValid.indexOf(i) != -1){
+                            countThreeValid.splice(countThreeValid.indexOf(i), 1);
+                            textareaCommentThree[i].style.border = "1px solid red";
+                        }
+                    }
+                } else if (inputItem.value > 58000 && inputItem.value < 78000) {
+                    if(countThreeValid.length < inputsStepThree.length && countThreeValid.indexOf(i) == -1){
+                        countThreeValid.push(i);
+                    }
     
-                document.querySelector(".step-3-item.active .content-wrapper .number-block .number").innerHTML = score.toFixed(1);
+                    textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                }
+    
+                if(countThreeValid.length == inputsStepThree.length){
+                    stepThreeNext.disabled = false;
+                }else{
+                    stepThreeNext.disabled = true;
+                }
+            });
+    
+            textareaCommentThree[i].addEventListener("change", function(){
+                if (inputItem.value > 18000 && inputItem.value < 58000) {
+                    if(textareaCommentThree[i].value != ""){
+                        if(countThreeValid.length < textareaCommentThree.length && countThreeValid.indexOf(i) == -1){
+                            countThreeValid.push(i);
+                        }
+    
+                        textareaCommentThree[i].style.border = "1px solid #d1dbe3";
+                    }else{
+                        countThreeValid.splice(countThreeValid.indexOf(i), 1);
+    
+                        textareaCommentThree[i].style.border = "1px solid red";
+                    }
+    
+                    if(countThreeValid.length == textareaCommentThree.length){
+                        stepThreeNext.disabled = false;
+                    }else{
+                        stepThreeNext.disabled = true;
+                    }
+                }
+            });
+
+            stepThreeNextItem[i].addEventListener("click", function(){
+                if(countThreeValid.length == textareaCommentThree.length){
+                    stepThreeNext.disabled = false;
+                }else{
+                    stepThreeNext.disabled = true;
+                }
             });
         });
     });

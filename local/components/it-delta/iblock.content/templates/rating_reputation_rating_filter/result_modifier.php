@@ -97,13 +97,16 @@ endif;
 //Получаем все отзывы
 $reviews = $entity_data_class::getList(array("select" => array("*"), "order" => array("UF_ALLSCORE_REVIEW_SCORE" => "DESC"), 'filter' => array('UF_CITY_ID' => $arResult['CITY_SELECTED']['ID'])));
 
-while($review = $reviews->fetch()) {
+while ($review = $reviews->fetch()) {
 
     $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['ID'] = $review["ID"];
     $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['NAME'] = !empty($review['UF_USER_NAME']) ? $review["UF_USER_NAME"] : $arrUsers[$review['UF_USER_ID']]['NAME'];
     $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['COMMENT'] = $review['UF_ALLSCORE_REVIEW_SCORE_COMMENT'];
-
+    $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['TYPE'] = $review['UF_REVIEW_TYPE_ID'];
+    $arrReviews[$review["UF_CHOP_ID"]][$review["ID"]]['CITY'] = $arrCities[$review['UF_CITY_ID']];
 }
+
+$arrPositions = MainService::calculateSecureCompanyRatingPositionsByCityId($arResult['CITY_SELECTED']['ID']);
 
 foreach ($arResult['ITEMS'] as $item):
     $newArrItem[$item['ID']]['CODE'] = $item['CODE'];
@@ -126,7 +129,7 @@ foreach ($arResult['ITEMS'] as $item):
     $newArrItem[$item['ID']]['SERVICES_APPARTAMENT'] = $item['PROPERTIES']['SERVICES_APPARTAMENT']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['SERVICES_COMMERCE'] = $item['PROPERTIES']['SERVICES_COMMERCE']['~VALUE']['TEXT'];
     $newArrItem[$item['ID']]['DESCRIPTION_COMMERCE'] = $item['PROPERTIES']['DESCRIPTION_COMMERCE']['~VALUE']['TEXT'];
-    $newArrItem[$item['ID']]['POSITION'] = MainService::calculateSecureCompanyRatingPositionsByCityId($newArrItem[$item['ID']]['CITY']['ID'])[$newArrItem[$item['ID']]['CHOP_ID']['ID']]['POSITION_IN_RATING'];
+    $newArrItem[$item['ID']]['POSITION'] = $arrPositions[$newArrItem[$item['ID']]['CHOP_ID']['ID']]['POSITION_IN_RATING'];
     $newArrItem[$item['ID']]['REVIEWS'] = $arrReviews[$newArrItem[$item['ID']]['CHOP_ID']['ID']];
     foreach ($item['PROPERTIES']['MANUFACTURERS']['VALUE'] as $manufacture):
         $newArrItem[$item['ID']]['MANUFACTURERS'][$manufacture] = $arrManufactures[$manufacture];
