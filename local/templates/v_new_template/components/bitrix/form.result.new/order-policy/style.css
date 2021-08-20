@@ -41,3 +41,5 @@
     background-position-y: 16px;
     background-position-x: 179px;
 }
+
+.radio-disabled{opacity: 0.5}

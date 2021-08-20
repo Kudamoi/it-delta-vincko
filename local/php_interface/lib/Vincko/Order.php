@@ -23,7 +23,8 @@ class Order
             [
                 "PS_DESCRIPTION",
                 "NAME",
-                "LOGOTIP"
+                "LOGOTIP",
+                "CODE"
             ]
         );
         while ($arPaySystemTmp = $obPaySystem->Fetch()) {
@@ -104,7 +105,7 @@ class Order
         $objDateForm = new \Bitrix\Main\Type\DateTime();
         $date_form = $objDateForm->add("15 day");
         $objDateBy = new \Bitrix\Main\Type\DateTime();
-        $date_by = $objDateBy->add("1 years");
+        $date_by = $objDateBy->add("1 years 15 day");
 
         $result = $policyData["ORIGINAL_PROP"];
 
