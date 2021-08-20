@@ -16,6 +16,12 @@
     font-size: 14px;
     line-height: 17px;
 }
+#reviews__form .reviews__form-top--result .result__tab-item {
+    width: unset;
+}
+#reviews__form .reviews__form-top--result .result__tab-item:hover {
+    transform: scale(1) translate(0px, 5px);
+}
 .rating-center__items_top .rating-center__items_top-right-help {
     display: flex;
     justify-content: space-between;
@@ -38,6 +44,11 @@
     z-index: -1;
     opacity: 0;
 }
+#reviews__form div.empty {
+    width: unset;
+    height: unset;
+ }
+
 .rating-center__items_top-btns label {
     cursor: pointer;
     min-height: 48px;

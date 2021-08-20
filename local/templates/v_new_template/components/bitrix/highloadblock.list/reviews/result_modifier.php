@@ -78,7 +78,7 @@ $res = CIBlockElement::GetList(
     array("IBLOCK_CODE" => companyIbCode, "ACTIVE" => "Y", "=PROPERTY_CITY_ID" => $arResult['rows'][0]['UF_CITY_ID'],"=PROPERTY_CHOP_ID" => $arChopIds),
     false,
     false,
-    array("ID", "NAME","PROPERTY_CHOP_ID.ID","PROPERTY_CHOP_ID.NAME","PROPERTY_EL_RATING_SUM")
+    array("ID", "NAME","PROPERTY_CHOP_ID.ID","PROPERTY_CHOP_ID.NAME","PROPERTY_CH_RATING_SUM")
 );
 
 while ($arFields = $res->Fetch()) {
@@ -186,11 +186,12 @@ while($review = $reviews->Fetch()) {
 
 }
 //Собираем компании города
-$companies = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]), false, false, array("ID", "NAME", "PROPERTY_CHOP_ID"));
+$companies = CIBlockElement::GetList(array(), array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "PROPERTY_CITY_ID" => $_COOKIE["selected_city"]), false, false, array("ID", "NAME", "PROPERTY_CHOP_ID", "PROPERTY_CH_RATING_SUM"));
 
 while ($company = $companies->GetNext()) {
     $arrCompany[$arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']]["ID"]] = $arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']];
     $arrCompany[$arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']]["ID"]]['REVIEWS'] = $arrReviews[$company['PROPERTY_CHOP_ID_VALUE']];
+    $arrCompany[$arrCompanies[$company['PROPERTY_CHOP_ID_VALUE']]["ID"]]['RATING'] = $company['PROPERTY_CH_RATING_SUM_VALUE'];
 }
 
 //Собираем данные в результирующий массив

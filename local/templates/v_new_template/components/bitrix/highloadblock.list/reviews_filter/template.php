@@ -1,93 +1,98 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+<? if (!empty($arResult['rows'])): ?>
+    <ul class="reviews__items">
+        <? foreach ($arResult['rows'] as $row): ?>
+            <? $currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']; ?>
+            <li data-id="<?= $row['ID'] ?>"
+                class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
+                <div class="reviews__item-left">
+                    <div class="reviews__item__head">
+                        <div class="reviews__item__head--left">
+                            <div class="person__avatar">
+                                <img src="/upload/reviews/avatar.png" alt="img">
+                            </div>
+                            <div class="person__items">
 
-<ul class="reviews__items">
-    <? foreach ($arResult['rows'] as $row): ?>
-        <? $currentSourceName = $arResult['ReviewsSources'][$row['UF_REVIEW_SOURCE_ID']]['UF_REVIEW_SOURCE_NAME']; ?>
-        <li data-id="<?=$row['ID']?>" class="reviews__item <?= $currentSourceName == "Vincko" ? "" : "not-vinco__raiting" ?>">
-            <div class="reviews__item-left">
-                <div class="reviews__item__head">
-                    <div class="reviews__item__head--left">
-                        <div class="person__avatar">
-                            <img src="/upload/reviews/avatar.png" alt="img">
+                                <? if ($currentSourceName == "Vincko"): ?>
+                                    <span class="name"><?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['NAME'] ?> <?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['LAST_NAME'] ?></span>
+                                <? else: ?>
+                                    <span class="name"><?= !empty(trim($row['UF_USER_NAME'])) && $row['UF_USER_NAME'] != '&nbsp;' ? $row['UF_USER_NAME'] : 'Пользователь скрыл имя настройками приватности' ?></span>
+                                <? endif; ?>
+                                <span class="town"><?= $arResult['CITIES'][$row['UF_CITY_ID']]['NAME'] ?></span>
+                            </div>
                         </div>
-                        <div class="person__items">
-                            <? if ($currentSourceName == "Vincko"): ?>
-                                <span class="name"><?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['NAME'] ?> <?= $arResult['USERS_LIST'][$row['UF_USER_ID']]['LAST_NAME'] ?></span>
-                            <? else: ?>
-                                <span class="name"><?= $row['UF_USER_NAME'] ?></span>
-                            <? endif; ?>
-                            <span class="town"><?= $arResult['CITIES'][$row['UF_CITY_ID']]['NAME'] ?></span>
+                        <div class="reviews__item__head--right">
+                            <p>Личная оценка по критериям <a href="">vincko:</a></p>
+                            <div class="raiting__content">
+                                <ul class="raiting__vincko">
+                                    <? foreach ($arResult['CRITERIA'] as $criteria): ?>
+                                        <? if (!empty((float)$row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']]) && (float)$row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']] != -1): ?>
+                                            <li>
+                                                <span class="icon"><img src="<?= $criteria['ICON']['src'] ?>"
+                                                                        alt="<?= $criteria['NAME'] ?>"></span>
+                                                <span class="text"><?= (float)$row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']] ?></span>
+                                            </li>
+                                        <? endif; ?>
+                                    <? endforeach; ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="reviews__item__head--right">
-                        <p>Личная оценка по критериям <a href="">vincko:</a></p>
-                        <div class="raiting__content">
-                            <ul class="raiting__vincko">
-                                <? foreach ($arResult['CRITERIA'] as $criteria): ?>
-                                    <? if (!empty((float)$row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']])): ?>
-                                        <li>
-                                            <span class="icon"><img src="<?= $criteria['ICON']['src'] ?>" alt="<?= $criteria['NAME'] ?>"></span>
-                                            <span class="text"><?=(float)$row[$criteria['UF_REVIEW_SCORE_PROPERTY_NAME']] ?></span>
-                                        </li>
+                    <div class="reviews__item__body">
+                        <div class="reviews__item__body--top">
+                            <? if ($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] != '&nbsp;'): ?>
+                                <span>Общее впечатление: </span>
+                                <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
+                            <? endif; ?>
+                        </div>
+                        <div class="reviews__item__body--center">
+                            <? if ($row['UF_SECURITY_SCORE_COMMENT'] != '&nbsp;'): ?>
+                                <span>Безопасность: </span>
+                                <p><?= $row['UF_SECURITY_SCORE_COMMENT'] ?></p>
+                            <? endif; ?>
+                            <? if ($row['UF_CUSTOMER_FOCUS_COMMENT'] != '&nbsp;'): ?>
+                                <span>Клиентоориентированность: </span>
+                                <p><?= $row['UF_CUSTOMER_FOCUS_COMMENT'] ?></p>
+                            <? endif; ?>
+
+                            <? if ($row['UF_COMFORT_SCORE_COMMENT'] != '&nbsp;'): ?>
+                                <span>Комфорт: </span>
+                                <p><?= $row['UF_COMFORT_SCORE_COMMENT'] ?></p>
+                            <? endif; ?>
+                            <? if ($arResult['ReviewsScores'] != '&nbsp;'): ?>
+                                <? foreach ($arResult['ReviewsScores'] as $reviewsScore): ?>
+                                    <? if ($row['ID'] == $reviewsScore['UF_REVIEW_ID']): ?>
+                                        <span><?= $arResult['CRITERIA_QUESTIONS'][$reviewsScore['UF_QUESTION_ID']]['NAME'] ?></span>
+                                        <p><?= $reviewsScore['UF_REVIEW_SCORE_COMMENT'] ?></p>
                                     <? endif; ?>
                                 <? endforeach; ?>
-                            </ul>
+                            <? endif; ?>
                         </div>
                     </div>
-                </div>
-                <div class="reviews__item__body">
-                    <div class="reviews__item__body--top">
-                        <? if ($row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] != '&nbsp;'): ?>
-                            <span>Общее впечатление: </span>
-                            <p><?= $row['UF_ALLSCORE_REVIEW_SCORE_COMMENT'] ?></p>
-                        <? endif; ?>
-                    </div>
-                    <div class="reviews__item__body--center">
-                        <? if ($row['UF_CUSTOMER_FOCUS_COMMENT'] != '&nbsp;'): ?>
-                            <span>Клиентоориентированность: </span>
-                            <p><?= $row['UF_CUSTOMER_FOCUS_COMMENT']?></p>
-                        <? endif; ?>
-                        <? if ($row['UF_SECURITY_SCORE_COMMENT'] != '&nbsp;'): ?>
-                            <span>Безопасность: </span>
-                            <p><?= $row['UF_SECURITY_SCORE_COMMENT'] ?></p>
-                        <? endif; ?>
-                        <? if ($row['UF_COMFORT_SCORE_COMMENT'] != '&nbsp;'): ?>
-                            <span>Комфорт: </span>
-                            <p><?= $row['UF_COMFORT_SCORE_COMMENT'] ?></p>
-                        <? endif; ?>
-                        <? if ($arResult['ReviewsScores'] != '&nbsp;'): ?>
-                            <? foreach ($arResult['ReviewsScores'] as $reviewsScore): ?>
-                                <? if ($row['ID'] == $reviewsScore['UF_REVIEW_ID']): ?>
-                                    <span><?= $arResult['CRITERIA_QUESTIONS'][$reviewsScore['UF_QUESTION_ID']]['NAME'] ?></span>
-                                    <p><?= $reviewsScore['UF_REVIEW_SCORE_COMMENT'] ?></p>
-                                <? endif; ?>
-                            <? endforeach; ?>
-                        <? endif; ?>
+                    <div class="reviews__item__footer">
                     </div>
                 </div>
-                <div class="reviews__item__footer">
-                </div>
-            </div>
-            <div class="reviews__item-right">
-                <div class="reviews__item-right--top">
-                    <div class="raiting">
-                        <div class="raiting__position">
+                <div class="reviews__item-right">
+                    <div class="reviews__item-right--top">
+                        <div class="raiting">
+                            <div class="raiting__position">
                                 <span class="icon">
                                     <svg width="54" height="44" viewBox="0 0 54 44" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
-                                            d="M52 17.0646C52 21.0211 51.0561 24.9209 49.2462 28.4416C47.4363 31.9623 44.8125 35.0029 41.5914 37.3122C38.3704 39.6214 34.6447 41.133 30.7221 41.7221C26.7995 42.3112 22.7927 41.9607 19.0328 40.6998C15.2728 39.4389 11.8677 37.3037 9.09867 34.4706C6.32967 31.6376 4.27634 28.1879 3.10832 24.4068C1.94031 20.6257 1.69115 16.6216 2.38143 12.7254C3.07172 8.82926 4.68163 5.15286 7.07814 2"
-                                            stroke="#005DFF" stroke-width="4"/>
+                                                d="M52 17.0646C52 21.0211 51.0561 24.9209 49.2462 28.4416C47.4363 31.9623 44.8125 35.0029 41.5914 37.3122C38.3704 39.6214 34.6447 41.133 30.7221 41.7221C26.7995 42.3112 22.7927 41.9607 19.0328 40.6998C15.2728 39.4389 11.8677 37.3037 9.09867 34.4706C6.32967 31.6376 4.27634 28.1879 3.10832 24.4068C1.94031 20.6257 1.69115 16.6216 2.38143 12.7254C3.07172 8.82926 4.68163 5.15286 7.07814 2"
+                                                stroke="#005DFF" stroke-width="4"/>
                                     </svg>
                                 </span>
-                            <span class="raiting__satr-number"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_EL_RATING_SUM_VALUE'] ?></span>
+                                <span class="raiting__satr-number"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_CH_RATING_SUM_VALUE'] ?></span>
+                            </div>
+                            <p><a href="">vincko:</a></p>
                         </div>
-                        <p><a href="">vincko:</a></p>
-                    </div>
-                    <div class="raiting__about">
-                        <span class="raiting__about-name"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_CHOP_ID_NAME'] ?></span>
-                        <span class="raiting__about-btn"><a href="/review-add/?COMPANY=<?=$row['UF_CHOP_ID']?>">Оставить отзыв</a></span>
-                        <span class="raiting__about-chart">
+                        <div class="raiting__about">
+
+                            <span class="raiting__about-name"><?= $arResult['SECURE_COMPANY_LIST'][$row['UF_CHOP_ID']]['PROPERTY_CHOP_ID_NAME'] ?></span>
+                            <span class="raiting__about-btn"><a href="/review-add/?COMPANY=<?= $row['UF_CHOP_ID'] ?>">Оставить отзыв</a></span>
+                            <span class="raiting__about-chart">
                                 <span class="icon">
                                     <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -99,12 +104,12 @@
                                 <span class="number"><?= $arResult['COMPANIES_RATING_POSITIONS'][$row['UF_CHOP_ID']]['POSITION_IN_RATING'] ?></span>
                                 <a href="">в Рейтинге</a>
                             </span>
+                        </div>
                     </div>
-                </div>
-                <div class="reviews__item-right--bottom">
-
-                    <a href="" class="button blue-color">Перейти к рейтингу
-                        <span class="icon">
+                    <div class="reviews__item-right--bottom">
+                        <a href="/raiting/?COMPANY=<?= $row['UF_CHOP_ID'] ?>" class="button blue-color">Перейти к
+                            рейтингу
+                            <span class="icon">
                                     <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -112,9 +117,10 @@
                                               fill="#005DFF"/>
                                     </svg>
                                 </span>
-                    </a>
-                    <br>
-                    <a href="" class="button">Охранные услуги компании<span class="icon">
+                        </a>
+                        <br>
+                        <a href="/norating/?COMPANY=<?= $row['UF_CHOP_ID'] ?>" class="button">Охранные услуги
+                            компании<span class="icon">
                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -122,38 +128,59 @@
                                           fill="black"/>
                                 </svg>
                             </span></a>
+                    </div>
                 </div>
-            </div>
-        </li>
-    <? endforeach; ?>
+            </li>
+        <? endforeach; ?>
 
-</ul>
-<div class="reviews__form-bottom">
-    <div class="reviews__form-bottom--left"><span class="icon"><svg width="10" height="7" viewBox="0 0 10 7"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+    </ul>
+    <div class="reviews__form-bottom">
+        <div class="reviews__form-bottom--left">
+        <span class="icon">
+            <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                            d="M4.9988 1.13553L8.91021 5.05793C9.15916 5.30745 9.15916 5.71199 8.91021 5.96138C8.66149 6.21079 8.25809 6.21079 8.00939 5.96138L4.54839 2.49065L1.08752 5.96128C0.838695 6.21069 0.435335 6.21069 0.186615 5.96128C-0.0622052 5.71187 -0.0622052 5.30734 0.186615 5.05783L4.09809 1.13543C4.22251 1.01072 4.3854 0.948437 4.54837 0.948437C4.71143 0.948437 4.87444 1.01084 4.9988 1.13553Z"
-                            fill="#A0A0A0"/>
+                        d="M4.9988 1.13553L8.91021 5.05793C9.15916 5.30745 9.15916 5.71199 8.91021 5.96138C8.66149 6.21079 8.25809 6.21079 8.00939 5.96138L4.54839 2.49065L1.08752 5.96128C0.838695 6.21069 0.435335 6.21069 0.186615 5.96128C-0.0622052 5.71187 -0.0622052 5.30734 0.186615 5.05783L4.09809 1.13543C4.22251 1.01072 4.3854 0.948437 4.54837 0.948437C4.71143 0.948437 4.87444 1.01084 4.9988 1.13553Z"
+                        fill="#A0A0A0"/>
                     </svg>
         </span>
-        <a class="text return_to_filter-js" href="#reviews__form">Подняться к фильтрам</a>
-    </div>
-    <div class="reviews__form-bottom--right">
+            <a class="text return_to_filter-js" href="#reviews__form">Подняться к фильтрам</a>
+        </div>
+        <div class="reviews__form-bottom--right">
 
-        <?php
-$APPLICATION->IncludeComponent(
-    'bitrix:main.pagenavigation',
-    'custom',
-    array(
-        'NAV_OBJECT' => $arResult['nav_object'],
-        'SEF_MODE' => 'N',
-    ),
-    false
-);?>
+            <?php
+            $APPLICATION->IncludeComponent(
+                'bitrix:main.pagenavigation',
+                'custom',
+                array(
+                    'NAV_OBJECT' => $arResult['nav_object'],
+                    'SEF_MODE' => 'N',
+                ),
+                false
+            ); ?>
+        </div>
     </div>
-</div>
-<?php
-if ($arParams['ROWS_PER_PAGE'] > 0):
+<? else:
+    ?>
+<main class="404">
+    <div class="empty">
+        <picture>
+            <img src="/upload/404/empty-man.png" alt="">
+        </picture>
 
-endif;
-?>
+        <div class="empty-title">Было же где-то здесь...</div>
+        <div class="empty-text">К сожалению, мы ничего не нашли по Вашему запросу
+            Попробуйте сформулировать иначе или свяжитесь с нами</div>
+    </div>
+
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/callback.php"
+        )
+    );?>
+</main><?php
+    endif; ?>

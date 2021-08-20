@@ -73,7 +73,7 @@
                         <img src="/upload/rating/closed-icon.svg" alt="img">
                     </div>
                     <div class="searchForm__modal_input">
-                        <input type="text" id="filterCity" placeholder="Поиск по названию">
+                        <input type="text" id="filterCompany" placeholder="Поиск по названию">
                         <button>
                             <img src="/upload/rating/search-icon.svg" alt="img">
                         </button>
@@ -294,7 +294,10 @@
 
         </ul>
     </div>
-
+    <div class="reviews__form-top--result__name" style="display: none">
+        <span>Сейчас вы смотрите отзывы о компании:</span>
+        <p>ООО “Максимум Максимилиан Максимович”</p>
+    </div>
     <div class="reviews__form-send_btn">
         <div class="btn">
             <a href="/review-add/" class="button add_review">

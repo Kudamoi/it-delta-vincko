@@ -28,22 +28,38 @@ function clickRadio(param) {
         param.checked = false;
     param.BeforeCheck = param.checked;
 }
-
+function $_GET(key) {
+    var p = window.location.search;
+    p = p.match(new RegExp(key + '=([^&=]+)'));
+    return p ? p[1] : false;
+}
 
 $(document).ready(function () {
-    let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+    let city = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+    let company = $_GET('COMPANY');
+    console.log(company)
     $.ajax({
         type: 'post',
         url: '/ajax/raiting/filter.php',
-        //data: {'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
-        data: {'COMPANY': company},
+        data: {'CITY': city},
         response: 'html',
         success: function(data) {
-            console.log(company);
             $('.rating-center__items-wrapper-block').html(data);
             $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
         }
     })
+    // $.ajax({
+    //     type: 'post',
+    //     url: '/ajax/raiting/filter.php',
+    //     data: {'CITY': city},
+    //     response: 'html',
+    //     success: function(data) {
+    //         $('.rating-center__items-wrapper-block').html(data);
+    //         $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
+    //
+    //     }
+    // })
+
 
 
     $('input.rating-home').on('click', function(){
@@ -77,11 +93,11 @@ $(document).ready(function () {
 
 
     $('.rating-center__items_top-right-help #pseudo__range').change(function() {
-        let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+        let city = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
     $.ajax({
                 type: 'post',
                 url: '/ajax/raiting/filter.php',
-                data: {'COMPANY': company,'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
+                data: {'CITY': city,'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
                 response: 'html',
                 success: function(data) {
                     $('.rating-center__items-wrapper-block').html(data);
@@ -90,7 +106,7 @@ $(document).ready(function () {
             })
     })
     $('.rating-center__items_top-btns-item').on('click','input[type="radio"].rating-home', function() {
-        let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+        let city = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
         let objectID = null;
         if ($(this).prop('checked')) {
              objectID= $(this).attr('id');
@@ -98,7 +114,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'post',
             url: '/ajax/raiting/filter.php',
-            data: {'COMPANY': company,'OBJECT': objectID, 'MARK':  $('.rating-center__items_top-right-help #pseudo__range').val()},
+            data: {'CITY': city,'OBJECT': objectID, 'MARK':  $('.rating-center__items_top-right-help #pseudo__range').val()},
             response: 'html',
             success: function(data) {
                 $('.rating-center__items-wrapper-block').html(data);

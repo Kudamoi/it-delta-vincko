@@ -11,12 +11,12 @@ $(document).ready(function () {
         $(this).attr('href', '#rating-center');
     })
     $('.rating-center__items_bottom-pagin a').on('click', function () {
-        let company = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
+        let city = $('.rating-center__search_form.select-city .rating-center__search_form-input.rating-center__search_form-select input').attr('data-pre-id');
         $.ajax({
             type: 'get',
             url: '/ajax/raiting/filter.php',
             //data: {'OBJECT': $('.rating-center__items_top-btns-item input[type="radio"].rating-home:checked').attr('id'), 'MARK':  $(this).val()},
-            data: {'COMPANY': company, 'PAGEN_1' : $(this).attr('data-href')},
+            data: {'CITY': city, 'PAGEN_1' : $(this).attr('data-href')},
             response: 'html',
             success: function(data) {
                 $('.rating-center__items-wrapper-block').html(data);

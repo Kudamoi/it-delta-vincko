@@ -75,13 +75,14 @@ $arChopIds = array_column($arResult['rows'],'UF_CHOP_ID');
 //получаем список компаний
 $res = CIBlockElement::GetList(
     array(),
-    array("IBLOCK_CODE" => companyIbCode, "ACTIVE" => "Y", "=PROPERTY_CITY_ID" => $arResult['rows'][0]['UF_CITY_ID'],"=PROPERTY_CHOP_ID" => $arChopIds),
+    array("IBLOCK_CODE" => companyIbCode, "=PROPERTY_CITY_ID" => $arResult['rows'][0]['UF_CITY_ID'],"=PROPERTY_CHOP_ID" => $arChopIds),
     false,
     false,
-    array("ID", "NAME","PROPERTY_CHOP_ID.ID","PROPERTY_CHOP_ID.NAME","PROPERTY_EL_RATING_SUM")
+    array("ID", "NAME","PROPERTY_CHOP_ID.ID","PROPERTY_CHOP_ID.NAME","PROPERTY_CH_RATING_SUM")
 );
 
 while ($arFields = $res->Fetch()) {
+    empty($arFields['PROPERTY_CH_RATING_SUM_VALUE']) ? $arFields['PROPERTY_CH_RATING_SUM_VALUE'] = 0: '';
     $arResult['SECURE_COMPANY_LIST'][$arFields['PROPERTY_CHOP_ID_ID']] = $arFields;
 }
 
