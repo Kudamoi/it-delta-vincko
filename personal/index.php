@@ -23,7 +23,7 @@ $APPLICATION->SetTitle("Персональный раздел");
                     "CUSTOM_PAGES" => "",
                     "CUSTOM_SELECT_PROPS" => array(""),
                     "NAV_TEMPLATE" => "",
-                    "ORDER_HISTORIC_STATUSES" => array("F"),
+                    "ORDER_HISTORIC_STATUSES" => array(""),
                     "PATH_TO_PAYMENT" => "/order/",
                     "PER_PAGE" => "20",
                     "SAVE_IN_SESSION" => "Y",
@@ -55,7 +55,8 @@ $APPLICATION->SetTitle("Персональный раздел");
                     "SHOW_SUBSCRIBE_PAGE" => "N",
                     "USER_PROPERTY_PRIVATE" => array(),
                     "USE_AJAX_LOCATIONS_PROFILE" => "N",
-                    "ORDER_RESTRICT_CHANGE_PAYSYSTEM" => "Y"
+                    "ORDER_RESTRICT_CHANGE_PAYSYSTEM" => "Y",
+                    "DEFAULT_SORT"=>"ID"
                 )
             ); ?>
         </div>

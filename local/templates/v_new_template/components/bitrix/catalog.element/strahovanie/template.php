@@ -22,7 +22,7 @@ $this->setFrameMode(true);
 		</div>
 		<? foreach ($arResult["POLICIES"] as $arPolicy) : ?>
 			<div class="products__item">
-
+                <a name="policy<?=$arPolicy["ID"]?>"></a>
 				<? $APPLICATION->IncludeComponent(
 					'bitrix:main.include', '',
 					[

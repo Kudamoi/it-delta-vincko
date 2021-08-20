@@ -47,4 +47,6 @@ $MESS["SPOL_CHECK_TITLE"] = "Список чеков";
 $MESS["SPOL_CHECK_NUM"] = "Чек №#CHECK_NUMBER#";
 $MESS["SPOL_CHECK_NUM"] = "Чек №#CHECK_NUMBER#";
 $MESS["SPOD_ORDER_CANCELED"] = "Заказ отменен";
+$MESS["SPOL_TPL_TITLE_POLICY"] = "Страхование недвижимости";
+$MESS["SPOL_TPL_TITLE_SOLUTION"] = "Готовое решение";
 ?>

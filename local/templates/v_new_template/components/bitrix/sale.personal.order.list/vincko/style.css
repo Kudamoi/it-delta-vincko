@@ -12,3 +12,18 @@
     font-weight: 700;
     line-height: 17px;
 }
+.profile__c-main-order-bottom a.profile__c-main-order-bottom-paid {
+    background: #fee74c;
+    color: black;
+    text-transform: uppercase;
+}
+.profile__c-main-block:last-child{border-bottom: 0!important;}
+div.empty {
+    width: inherit!important;
+    height: inherit!important;
+    overflow: inherit!important;
+}
+.profile__c-main-order--not-paid .profile__c-main-order-bottom-paid, .profile__c-main-order--not-paid .profile__c-main-order-price-status-paid,
+.profile__c-main-order--paid .profile__c-main-order-bottom-download, .profile__c-main-order--paid .profile__c-main-order-price-status-not-paid, .profile__c-main-order--paid .profile__c-main-order-bottom-text{
+    display: grid!important;
+}
