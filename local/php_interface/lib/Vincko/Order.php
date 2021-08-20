@@ -137,7 +137,7 @@ class Order
         $result[] = [
             "NAME" => "Ссылка на страховой полис",
             "CODE" => "LINK",
-            "VALUE" => "/personal/policy/?ORDER_ID=" . $orderID
+            "VALUE" => "/profile/policy/?ORDER_ID=" . $orderID
         ];
 
         // номер
