@@ -1,4 +1,7 @@
 <?php
+global $USER;
+CModule::IncludeModule("sale");
+
 //Собираем компании ВСЕ
 $companies = CIBlockElement::GetList(
     array(),
@@ -71,6 +74,45 @@ while($sectRes = $dbResSect->GetNext()){
 //прикрепляем элементы к разделам
 foreach($arResult["ITEMS"] as $key => $arItem) {
    $arSections[$arItem['IBLOCK_SECTION_ID']]['ITEMS'][] = $arItem;
+}
+
+if($USER->GetId()){
+    $dborders = CSaleOrder::GetList(
+        array(),
+        array("USER_ID" => $USER->GetId()),
+        false,
+        false,
+        array("ID")
+    );
+    
+    $companyId = [];
+    
+    while($order = $dborders->Fetch()){
+        $fullOrder = \Bitrix\Sale\Order::load($order["ID"]);
+        $propertyCollection = $fullOrder->getPropertyCollection();
+    
+        foreach($propertyCollection as $orderProperty) {
+            if($orderProperty->getField('CODE') == 'COMPANY_CITY_ID'){
+                if(empty($orderProperty->getValue())){
+                    continue;
+                }
+                
+                $companyId[] = $orderProperty->getValue();
+            }
+        }
+    }
+    
+    $dbcompanysOrder = CIBlockElement::GetList(
+        array(),
+        array("IBLOCK_ID" => 9, "ACTIVE" => "Y", "ID" => $companyId),
+        false,
+        false,
+        array("PROPERTY_CHOP_ID", "PROPERTY_CITY_ID")
+    );
+    
+    while($company = $dbcompanysOrder->Fetch()){
+        $arResult["ORDERS"][] = ["PROPERTY_CHOP_ID_VALUE" => $company["PROPERTY_CHOP_ID_VALUE"], "PROPERTY_CITY_ID_VALUE" => $company["PROPERTY_CITY_ID_VALUE"]];
+    }
 }
 
 $arResult["COMPANY_NAME"] = $dbCompany["NAME"];
