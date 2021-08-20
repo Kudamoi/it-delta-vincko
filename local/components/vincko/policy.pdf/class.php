@@ -56,7 +56,7 @@ class PolicyPdf extends CBitrixComponent
 		}
 
 		if (empty($this->policyData) || ($this->order->getUserId() !== $GLOBALS["USER"]->GetID() && !$GLOBALS["USER"]->IsAdmin())) {
-			$this->errors = "Заказ не существует";
+			$this->errors = "Возникли ошибки при формировании страховки";
 		}
 
 	}
