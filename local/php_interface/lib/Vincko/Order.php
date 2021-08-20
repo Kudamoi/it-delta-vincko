@@ -136,7 +136,7 @@ class Order
         $result[] = [
             "NAME" => "Ссылка на страховой полис",
             "CODE" => "LINK",
-            "VALUE" => "/lk/orders/policy/?ORDER_ID=" . $orderID
+            "VALUE" => "/profile/policy/?ORDER_ID=" . $orderID
         ];
 
         // номер
@@ -320,9 +320,27 @@ class Order
                 "ID" => $ids
             ]
         );
-        while($arIblock = $obIblock->Fetch()){
+        while ($arIblock = $obIblock->Fetch()) {
             $arPrIblock[$arIblock["ID"]] = $arIblock["CODE"];
         }
         return $arPrIblock;
     }
+
+    // получает свойства товара в заказе
+    public static function getBasketProductProp($ids)
+    {
+
+        $obBasketProductProp = \CSaleBasket::GetPropsList(
+            [],
+            [
+                "BASKET_ID" => $ids
+            ]
+        );
+        while ($arBasketProductProp = $obBasketProductProp->Fetch()) {
+            $prop[$arBasketProductProp["BASKET_ID"]][$arBasketProductProp["CODE"]] = $arBasketProductProp["VALUE"];
+        }
+        return $prop;
+    }
+
+
 }

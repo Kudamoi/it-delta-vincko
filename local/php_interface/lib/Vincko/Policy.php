@@ -74,6 +74,32 @@ class Policy
 		return $result;
 	}
 
+    public static function getListInsurance($ids)
+    {
+        \Bitrix\Main\Loader::includeModule("iblock");
+
+        $obInsurance = CIBlockElement::GetList(
+            [],
+            [
+                "IBLOCK_ID" => static::IBLOCK_POLICY,
+                "ID"        => $ids
+            ],
+            false,
+            [],
+            [
+                "IBLOCK_ID",
+                "ID",
+                "NAME",
+                "PROPERTY_TEMPLATE"
+            ]
+        );
+        while ($arInsurance = $obInsurance->Fetch()) {
+            $result[$arInsurance["ID"]] = $arInsurance;
+        }
+
+        return $result;
+    }
+
 	/**
 	 * @param array $ids
 	 * @return array
