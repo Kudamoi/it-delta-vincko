@@ -45,7 +45,7 @@ while ($class = $arrCharacteristicsFetch->GetNext()) {
 //Подготовка компании в городе для сортировки готовых предложений
 $arrCompanyInfo = CIBlockElement::GetList(
     false,
-    array("IBLOCK_ID" => "9", "ID" => $_POST['COMPANY']),
+    array("IBLOCK_ID" => "9", "ID" => intval($_POST['COMPANY'])),
     false,
     false,
     array("ID", "NAME", "PROPERTY_CH_PACKETS")
@@ -90,7 +90,7 @@ foreach ($arSections as $key => $arSection) {
 
 
     foreach ($arSection['ITEMS'] as $arItem) {
-        if(in_array($arItem['ID'], $arrCompanyInfo['PROPERTY_CH_PACKETS_VALUE'])) {
+        if((!$arrCompanyInfo) || in_array($arItem['ID'], $arrCompanyInfo['PROPERTY_CH_PACKETS_VALUE'])) {
             $item = $arItem['PROPERTIES']['P_COMPLECT']['VALUE'];
             if (is_array($item))
                 $equipmentKitsIds = array_merge($equipmentKitsIds, $item);
