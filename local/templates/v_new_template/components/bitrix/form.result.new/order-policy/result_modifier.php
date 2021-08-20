@@ -109,7 +109,7 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
 				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="checkbox" name="' . $name . '" id="' . $idAnsw . '" value="' . $idAnsw . '">
-				                                					<label for="' . $idAnsw . '">' . $arQuestion["CAPTION"] . '</label>';
+				                                					<label for="' . $idAnsw . '" class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '">' . $arQuestion["CAPTION"] . '</label>';
 				break;
 
 		}

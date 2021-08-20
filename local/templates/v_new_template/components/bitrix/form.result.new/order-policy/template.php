@@ -250,10 +250,15 @@ if (!CModule::IncludeModule("sale")) {
 								<h4><?= Loc::getMessage("FORM_POLICY_PAY") ?></h4>
 								<div class="form__section__content payment-method">
 									<div class="payment-method-left">
+                                        <? $curr = 0;?>
 										<? foreach ($arResult["PAYMENT"] as $arPayment): ?>
-											<div class="radio-wrapper" id="card-radio">
+                                            <? $disabled = ($arPayment["CODE"]=="pokupay" || $arPayment["CODE"]=="bonuce") ;?>
+                                            <? $curr ++;?>
+											<div class="radio-wrapper<?=($disabled?" radio-disabled":"")?>" id="card-radio">
 												<input type="radio" id="<?= $arPayment["ID"] ?>" name="PAYMENT"
-													   value="<?= $arPayment["ID"] ?>"/>
+													value="<?= $arPayment["ID"] ?>"
+                                                    <?=($disabled?"disabled":"")?>
+                                                    <?=($curr==1?"checked":"")?> />
 												<label for="<?= $arPayment["ID"] ?>"></label>
 												<label for="<?= $arPayment["ID"] ?>"><?= $arPayment["NAME"] ?></label>
 											</div>

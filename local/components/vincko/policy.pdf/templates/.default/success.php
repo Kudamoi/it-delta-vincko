@@ -1,7 +1,7 @@
 <?php
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-//header('Content-Type: application/pdf');
+header('Content-Type: application/pdf');
 use setasign\FpdiProtection\FpdiProtection;
 
 define('FPDF_FONTPATH', Bitrix\Main\Application::getDocumentRoot() . $arParams["FPDF_FONTPATH"]);

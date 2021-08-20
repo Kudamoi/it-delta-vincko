@@ -11,7 +11,7 @@ $(document).ready(function () {
 	var value = $('input[name="radio"]:checked').val();
 
 	$(".js-check-form-valid").click(function (e) {
-		$("input[data-field='AGREEMENT']").prop("checked", true);
+		//$("input[data-field='AGREEMENT']").prop("checked", true);
 
 		var $form = $(this).parents("form"),
 			$error = $(this).parents("form").find(".error_message"),
@@ -49,6 +49,7 @@ $(document).ready(function () {
 					$("#form-2").removeClass("def-close").show();
 					$("html").scrollTop($("#form-2").offset().top - 15);
 					$(".installment__rules").addClass("installment__rules--active");
+					$form.find("[name='web_form_apply']").removeAttr("disabled");
 				}
 			},
 			fail: function (e) {
@@ -66,9 +67,9 @@ $(document).ready(function () {
 			other_block.hide();
 		}
 	})
-	$("[name='PAYMENT']").change(function () {
+	/*$("[name='PAYMENT']").change(function () {
 		$(this).parents('section').find("[name='web_form_apply']").removeAttr("disabled");
-	});
+	});*/
 
 $(".to-short-rd").on("click", function () {
 	$("#short-rd").removeClass("hidden");
