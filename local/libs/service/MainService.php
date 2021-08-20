@@ -58,13 +58,13 @@ class MainService
     function calculateSecureCompanyRatingPositionsByCityId($cityId)
     {
         if (CModule::IncludeModule("iblock")) {
-            $arSort = array('PROPERTY_EL_RATING_SUM' => 'DESC', 'PROPERTY_CHOP_ID.NAME' => 'ASC');
+            $arSort = array('PROPERTY_CH_RATING_SUM' => 'DESC', 'PROPERTY_CHOP_ID.NAME' => 'ASC');
             $res = CIBlockElement::GetList(
                 $arSort,
                 array('IBLOCK_CODE' => "chopcity", "PROPERTY_CITY_ID"=>$cityId, 'ACTIVE' => 'Y'),
                 false,
                 false,
-                array("ID", "NAME", "PROPERTY_CHOP_ID.ID", "PROPERTY_CHOP_ID.NAME", "PROPERTY_EL_RATING_SUM"));
+                array("ID", "NAME", "PROPERTY_CHOP_ID.ID", "PROPERTY_CHOP_ID.NAME", "PROPERTY_CH_RATING_SUM"));
 
             $arElements = array();
             while ($arFields = $res->Fetch()) {
@@ -74,7 +74,7 @@ class MainService
 
             $posInRating = 1;
             $arPositions = [];
-            foreach ($arElements as $key => $el)
+            foreach ($arElements as $el)
             {
                 $arPositions[$el['PROPERTY_CHOP_ID_ID']] = array(
                     'CHOP_ID' => $el['PROPERTY_CHOP_ID_ID'],

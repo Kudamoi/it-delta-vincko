@@ -51,11 +51,17 @@ $(document).ready(function () {
                 response: 'html',
                 success: function (response) {
                     $('.reviews-item-wrapper-block').html(response);
-                    if(revID) {
+                    if(revID && data) {
                         $('html,body').animate({
                             scrollTop: $('.reviews__items .reviews__item[data-id='+revID+']').offset().top - 10
                         }, 1000);
+
                     }
+                    const url = new URL(document.location);
+                    const searchParams = url.searchParams;
+                    searchParams.delete("REVIEW");
+                    searchParams.delete("COMPANY");
+                    window.history.pushState({}, '', url.toString());
                 }
             });
         }
@@ -98,6 +104,7 @@ $(document).ready(function () {
     });
 
     $('.searchForm__modal.companies-select').on('click', '.bottomChekItem', function() {
+        $('.searchForm__modal.companies-select').off('click', '.topChekItem');
         if($('#reviews__form .reviews__form-top--result .result__tabs .result__tab-item[data-id='+$(this).find('span').attr('data-id')+']').length < 1) {
             $('#reviews__form .reviews__form-top--result .result__tabs').append('' +
                 '<li data-id=\''+$(this).find('span').attr('data-id')+'\' class="result__tab-item">'+
@@ -114,6 +121,8 @@ $(document).ready(function () {
                 '</p>'+
                 '</li>');
             $('#reviews__form .reviews__form-top--result .result__tabs .result__tab-item[data-id='+$(this).find('span').attr('data-id')+']').click();
+            $(this).closest('#reviews__form').find('.reviews__form-top--result__name').fadeIn();
+            $(this).closest('#reviews__form').find('.reviews__form-top--result__name p').html($(this).find('span').html());
         }
 
         if($(this).closest('.searchForm__modal_wrapper').find('.topChekItem span[data-id='+$(this).find('span').attr('data-id')+']').length > 1) {
@@ -132,13 +141,12 @@ $(document).ready(function () {
             })
         }
 
-
     });
     $('.result__tabs').on('click', '.result__tab-item ', function () {
         $('#reviews__form > .reviews__form-send_btn a').attr('href', '/review-add/?COMPANY='+$(this).attr('data-id'))
+        $(this).closest('#reviews__form').find('.reviews__form-top--result__name p').html($(this).find('p .text').html());
     })
     $('.searchForm__modal.cities-select').on('click', '.bottomChekItem', function() {
-
         $(this).closest('.rating-center__search_form').find('.rating-center__search_form-select input[type=text]').attr('data-id',$(this).find('.itemText').attr('data-id'));
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').addClass('actived');
         $(this).closest('.searchForm__modal').find('.searchForm__modal_topChek').html($(this).clone());
@@ -180,6 +188,8 @@ $(document).ready(function () {
     })
     $('.reviews__form-top--result .result__tabs').on('click','.result__tab-item', function() {
         let company = null;
+        company = $('.reviews__form-top--result .result__tabs .result__tab-item.active').attr('data-id');
+
         if($(this).hasClass('active')) {
             company = $(this).attr('data-id');
         }
@@ -223,5 +233,22 @@ $(document).ready(function () {
                 }
             })
     });
+    $('#reviews__form .reviews__form-top--result .result__tabs').off('click', '.delete_btn-js');
+    $('#reviews__form .reviews__form-top--result .result__tabs').on('click', '.delete_btn-js', function () {
+        $(this).closest('#reviews__form').find('.reviews__form-top--result__name').fadeOut();
+        let company = null;
+        $(this).closest('#reviews__form').find('.rating-center__search.rating-block .topChekItem span[data-id='+$(this).closest('.result__tab-item').attr('data-id')+']').closest('.topChekItem').remove();
+        $(this).closest('.result__tab-item').remove();
+        company = $('.reviews__form-top--result .result__tabs .result__tab-item.active').attr('data-id');
 
+        $.ajax({
+            type: 'post',
+            url: '/ajax/reviews/filter.php',
+            data: {'COMPANY': company, 'MARK':  $('#pseudo__range').val(),'SORT': $('.sort__form .sort__form-select-js').val()},
+            response: 'html',
+            success: function(data) {
+                $('.reviews-item-wrapper-block').html(data);
+            }
+        })
+    })
 });

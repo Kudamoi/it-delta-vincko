@@ -16,10 +16,8 @@ if($mark >= 2 && $mark < 4) {
     $arSelect["<=PROPERTY_CH_RATING_SUM"] = 5;
 }
 
-if(isset($_POST['COMPANY'])) {
-    $arSelect["PROPERTY_CITY_ID"] = $_POST['COMPANY'];
-} elseif (isset($_GET['COMPANY'])) {
-    $arSelect["PROPERTY_CITY_ID"] = $_GET['COMPANY'];
+if(isset($_REQUEST['CITY'])) {
+    $arSelect["PROPERTY_CITY_ID"] = $_REQUEST['CITY'];
 }
 if(isset($_POST['OBJECT'])) {
     $arSelect['PROPERTY_CH_TYPE'] = $_POST['OBJECT'];
@@ -55,7 +53,7 @@ $APPLICATION->IncludeComponent(
         "PAGE_ELEMENT_COUNT" => "10",
         "RAND_ELEMENTS" => "N",
         "SORT_BY1" => "PROPERTY_69",
-        "SORT_BY2" => "NAME",
+        "SORT_BY2" => "PROPERTY_CHOP_ID.NAME",
         "SORT_ORDER1" => "DESC",
         "SORT_ORDER2" => "ASC",
         "COMPONENT_TEMPLATE" => "raiting_reputation_rating"
