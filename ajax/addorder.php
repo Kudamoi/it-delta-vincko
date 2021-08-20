@@ -65,7 +65,11 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
     {
         return false;
     }
+    //id готового решения в которое входит комплект
     $parentPackageId = intval($request['parentPackageId']);
+    //id компании в городе присутсвия
+    $companyCityId = intval($request['companyCityId']);
+
     //Данные страхового полиса
     if(isset($request['policyContactInfo']))
     {
@@ -130,7 +134,8 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
                 $errorsValidate[] = 'addressResidense[date]';
         }
         //Адрес квартиры, для которой вы оформляете страховку "Укажите другой адрес"
-        if(intval($request->getPost('address-installment'))==1)
+        $addressPolicyIndex = intval($request->getPost('address-installment'));
+        if($addressPolicyIndex==3)
         {
             $arPolicyOtherAddress = cleanArr($request->getPost('policyOtherAddress'));
 
@@ -166,7 +171,8 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
         }
         if(isset($request['delivery-address-installment'])) {
             //Адрес доставки
-            if (intval($request->getPost('delivery-address-installment')) == 1) {
+            $addressDeliveryIndex = intval($request->getPost('delivery-address-installment'));
+            if ($addressDeliveryIndex == 3) {
                 $arDeliveryOtherAddress = cleanArr($request->getPost('deliveryOtherAddress'));
 
                 if (empty($arDeliveryOtherAddress['city']))
@@ -283,16 +289,39 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
         $arAddressResidense['house'] . ' Корпус: '. $arAddressResidense['housing']. ' Квартира: '. $arAddressResidense['flat'] . ' Дата регистрации'
         .$arAddressResidense['date'] . ' Индекс' .$arAddressResidense['index'];
 
-    $policyOtherAddress = ' Адрес квартиры(другой адрес): Город/населенный пункт: ' . $arPolicyOtherAddress['city'] . ' Улица: ' . $arPolicyOtherAddress['street'] . ' Дом '.
-        $arPolicyOtherAddress['house'] . ' Корпус: '. $arPolicyOtherAddress['housing']. ' Квартира: '. $arPolicyOtherAddress['flat'] . ' Дата регистрации'
-        .$arPolicyOtherAddress['date'] . ' Индекс' .$arPolicyOtherAddress['index'];
+    //установим адрес фактического проживания страховки
+    if(isset($request['same']))
+    {
+        $addressResidense = $addressRegistration;
+    }
 
-    $deliveryOtherAddress = ' Адрес достаки(другой адрес): Город/населенный пункт: ' . $arDeliveryOtherAddress['city'] . ' Улица: ' . $arDeliveryOtherAddress['street'] . ' Дом '.
-        $arDeliveryOtherAddress['house'] . ' Корпус: '. $arDeliveryOtherAddress['housing']. ' Квартира: '. $arDeliveryOtherAddress['flat'] . ' Дата регистрации'
-        .$arDeliveryOtherAddress['date'] . ' Индекс' .$arDeliveryOtherAddress['index'];
+    //установим адрес квартиры страховки
+    if($addressPolicyIndex==1)
+    {
+        $policyOtherAddress = $addressRegistration;
+    } elseif ($addressPolicyIndex==2) {
+        $policyOtherAddress = $addressResidense;
+    } else {
+        $policyOtherAddress = ' Адрес квартиры(другой адрес): Город/населенный пункт: ' . $arPolicyOtherAddress['city'] . ' Улица: ' . $arPolicyOtherAddress['street'] . ' Дом '.
+            $arPolicyOtherAddress['house'] . ' Корпус: '. $arPolicyOtherAddress['housing']. ' Квартира: '. $arPolicyOtherAddress['flat'] . ' Дата регистрации'
+            .$arPolicyOtherAddress['date'] . ' Индекс' .$arPolicyOtherAddress['index'];
+    }
+
+    //установим адрес доставки
+    if($addressDeliveryIndex==1)
+    {
+        $deliveryAddress = $addressRegistration;
+    } elseif ($addressDeliveryIndex==2) {
+        $deliveryAddress = $addressResidense;
+    } else {
+        $deliveryAddress = ' Адрес достаки(другой адрес): Город/населенный пункт: ' . $arDeliveryOtherAddress['city'] . ' Улица: ' . $arDeliveryOtherAddress['street'] . ' Дом '.
+            $arDeliveryOtherAddress['house'] . ' Корпус: '. $arDeliveryOtherAddress['housing']. ' Квартира: '. $arDeliveryOtherAddress['flat'] . ' Дата регистрации'
+            .$arDeliveryOtherAddress['date'] . ' Индекс' .$arDeliveryOtherAddress['index'];
+    }
+
 
     $property = getPropertyByCode($propertyCollection, 'ADDRESS');
-    $property->setValue($deliveryOtherAddress);
+    $property->setValue($deliveryAddress);
 
     if(!isset($request['same-name'])) {
         $propertyFIO = $arContactData['surname'] . ' ' . $arContactData['name'] . ' ' . $arContactData['patronomic'];
@@ -321,10 +350,19 @@ if ($request->isPost() && $request->isAjaxRequest() && $GLOBALS['USER']->IsAutho
     $property = getPropertyByCode($propertyCollection, 'SOLUTION_ID');
     $property->setValue($parentPackageId);
 
+    $property = getPropertyByCode($propertyCollection, 'COMPANY_CITY_ID');
+    $property->setValue($companyCityId);
+
     $orderComment = ' Комментарий к заказу: '.$orderComment;
 
-    $comment = $passportData .' '. $addressRegistration .' '. $addressResidense .' '. $policyOtherAddress
-        .' '. $deliveryOtherAddress .' '. $orderComment;
+    if (isset($request['policyContactInfo']))
+    {
+        $comment = $policyContactInfo.' '. $passportData .' '. $addressRegistration .' '. $addressResidense .' '. $policyOtherAddress .' '. $orderComment;
+    } else
+    {
+        $comment = $orderComment;
+    }
+
     $order->setField('USER_DESCRIPTION', $comment); // Устанавливаем поля комментария покупателя
 
     // Сохраняем

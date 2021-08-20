@@ -1149,6 +1149,7 @@ $data = [
         ],
         1 => [
             'id' => $currentSubcriptionFeeIndex,
+            'company_city_id'=> $currentSecureCompanyIndex,
             'title' => 'Охранная компания',
             'name1' => $currentSubscriptionFeeMonthsCount .
                 ' месяц' . (in_array($currentSubscriptionFeeMonthsCount, array(2, 3, 4, 22, 23, 24)) ? 'а' : 'ев') . ' обслуживания',

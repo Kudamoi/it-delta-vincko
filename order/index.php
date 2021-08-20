@@ -386,8 +386,8 @@ $curStep = 1;
                                 </ul>
                             </div>
                             <picture>
-                                <source type="image/svg" srcset="/upload/ready-des/pic.svg">
-                                <img src="/upload/ready-des/pic.svg" alt="img" loading="lazy">
+                                <source type="image/svg" srcset="/upload/images/equipment/podarok.svg">
+                                <img src="/upload/images/equipment/podarok.svg" alt="img" loading="lazy">
                             </picture>
                         </div>
                     <?endif;?>
@@ -519,16 +519,16 @@ $curStep = 1;
                                 <div class="h4">Адрес квартиры, для которой вы оформляете страховку</div>
                                 <div class="form__section__content address-installment">
                                     <div class="radio-wrapper">
-                                        <input checked type="radio" name="address-installment" value="0" id="permanent">
+                                        <input checked type="radio" name="address-installment" value="1" id="permanent">
                                         <label for="permanent"></label>
                                         <label for="permanent">Совпадает с адресом постоянной регистрации</label>
                                     </div>
                                     <div class="radio-wrapper" id="b-actual">
-                                        <input type="radio" name="address-installment" value="0" id="actual">
+                                        <input type="radio" name="address-installment" value="2" id="actual">
                                         <label for="actual"></label>
                                         <label for="actual">Совпадает с адресом фактического проживания</label>
                                     </div>
-                                    <input type="radio" name="address-installment" value="1" id="other">
+                                    <input type="radio" name="address-installment" value="3" id="other">
                                     <label for="other"></label>
                                     <label for="other">Указать другой адрес</label>
                                     <p>Если адрес объекта страхования не совпадает с адресом регистрации или адресом
@@ -612,19 +612,19 @@ $curStep = 1;
                                 <div class="form__section__content address-installment">
                                     <?if($policyObj->active):?>
                                     <div class="radio-wrapper">
-                                        <input checked type="radio" name="delivery-address-installment" value="0"
+                                        <input checked type="radio" name="delivery-address-installment" value="1"
                                                id="permanent-delivery">
                                         <label for="permanent-delivery"></label>
                                         <label for="permanent-delivery">Совпадает с адресом постоянной
                                             регистрации</label>
                                     </div>
                                     <div class="radio-wrapper" id="b-actual-delivery">
-                                        <input type="radio" name="delivery-address-installment" value="0" id="actual-delivery">
+                                        <input type="radio" name="delivery-address-installment" value="2" id="actual-delivery">
                                         <label for="actual-delivery"></label>
                                         <label for="actual-delivery">Совпадает с адресом фактического проживания</label>
                                     </div>
                                     <?endif;?>
-                                    <input <?=$policyObj->active ? '' : 'checked style="display:none;"'?> type="radio" name="delivery-address-installment" value="1" id="other-delivery">
+                                    <input <?=$policyObj->active ? '' : 'checked style="display:none;"'?> type="radio" name="delivery-address-installment" value="3" id="other-delivery">
                                     <label <?=$policyObj->active ? '' : 'checked style="display:none;"'?> for="other-delivery"></label>
                                     <label <?=$policyObj->active ? '' : 'checked style="display:none;"'?> for="other-delivery">Указать другой адрес</label>
 
@@ -837,8 +837,8 @@ $curStep = 1;
                                 </ul>
                             </div>
                             <picture>
-                                <source type="image/svg" srcset="/upload/ready-des/pic.svg">
-                                <img src="/upload/ready-des/pic.svg" alt="img" loading="lazy">
+                                <source type="image/svg" srcset="/upload/images/equipment/podarok.svg">
+                                <img src="/upload/images/equipment/podarok.svg" alt="img" loading="lazy">
                             </picture>
                         </div>
                      <?endif;?>
@@ -919,6 +919,7 @@ $curStep = 1;
                     Я согласен с условиями и договором
                 </label>
                 <input type="hidden" name="parentPackageId" value="<?=$complectObj->parent_package_id?>">
+                <input type="hidden" name="companyCityId" value="<?=$subscriptionFeeObj->company_city_id?>">
                 <?foreach ($orderItems as $orderItem):?>
                     <?if($orderItem->active):?>
                         <input type="hidden" name="orderItemsIds[]" value="<?=$orderItem->id?>#<?=$orderItem->isFree?>">
