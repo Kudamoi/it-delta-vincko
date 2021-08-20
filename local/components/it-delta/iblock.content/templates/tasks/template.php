@@ -52,10 +52,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             <p>Услуги компании <a class="item__content-company-not">
                                     <select name="solutions__bottom_column-select" class="solutions__bottom_column-select">
                                         <?if(!isset($_GET['company'])):?>
-                                            <option selected disabled value="">выберите охранную компанию</option>
+                                            <option selected disabled value="-1">выберите охранную компанию</option>
                                         <?endif;?>
                                         <?foreach ($arResult['COMPANIES'] as $company):?>
-                                            <option <?=isset($_GET['company']) && $_GET['company'] == $company['ID'] ? 'selected' : '';?> value="<?=$company['ID']?>"><?=$company['NAME']?></option>
+                                            <option <?=isset($_GET['company']) && $_GET['company'] == $company['ID'] ? 'selected' : '';?> value="<?=$company['ID']?>"><?=$company['PROPERTY_CHOP_ID_NAME']?></option>
                                         <?endforeach;?>
                                     </select>
                                 </a>
