@@ -377,7 +377,15 @@ global $USER;
             </div>
 
         </div>
-        <div class="review__massage <?=$USER->IsAuthorized() ? "" : "bad"?>" data-type="<?=$USER->IsAuthorized() ? "1" : "0"?>">
+        <?
+        $result = 0;
+        foreach($arResult["ORDERS"] as $order):
+            if($order["PROPERTY_CHOP_ID_VALUE"] == $_GET["chop"] && $order["PROPERTY_CITY_ID_VALUE"] == $_GET["city"]){
+                $result = 1;
+            }
+        endforeach; 
+        ?>
+        <div class="review__massage <?=$USER->IsAuthorized() && $result ? "" : "bad"?>" data-type="<?=$USER->IsAuthorized() && $result ? "1" : "0"?>">
             <div class="review__massage-icon">
                 <picture>
                     <source srcset="/upload/review/massage-good.svg">
