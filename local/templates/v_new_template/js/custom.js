@@ -57,6 +57,7 @@ $(document).ready(function () {
 	});
 
 
+
 	$('#back_call .form__control[name=phone]').inputmask("+7 (999) 999-99-99");
 
 	$("#ajax_form_callback_btn").on('click', function () {
@@ -324,7 +325,7 @@ function sendAjaxForm(result_form, ajax_form, url) {
 		}
 	});
 
-
+	$('.reload-page-to-review').off('click');
 }
 
 
