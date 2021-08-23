@@ -15,8 +15,8 @@
 
                 </div>
                 <div class="btn-wrapper">
-                    <button onclick="location.href='/reviews/?COMPANY=<?= $_GET['COMPANY'] ?>'">Отзывы</button>
-                    <button onclick="location.href='/raiting/?COMPANY=<?= $_GET['COMPANY'] ?>'">В рейтинге</button>
+                    <button onclick="location.href='/reviews/?COMPANY=<?= $arResult['ABOUT_COMPANY']['CURRENT_COMPANY'] ?>'">Отзывы</button>
+                    <button onclick="location.href='/raiting/?COMPANY=<?= $arResult['ABOUT_COMPANY']['CURRENT_COMPANY'] ?>'">В рейтинге</button>
                 </div>
             </div>
             <div class="rating-center">
@@ -398,9 +398,9 @@
             <div class="company-info-card__page-title not-main" id="reviews">
                 <h2>Отзывы о компании</h2>
                 <div class="btn-wrapper">
-                    <button onclick="location.href='/review-add/?COMPANY=<?= $arResult['ID'] ?>'">Оставить отзыв
+                    <button onclick="location.href='/review-add/?COMPANY=<?= $arResult['ABOUT_COMPANY']['CURRENT_COMPANY'] ?>'">Оставить отзыв
                     </button>
-                    <button onclick="location.href='/reviews/?COMPANY=<?= $arResult['ID'] ?>'">Прочесть все отзывы
+                    <button onclick="location.href='/reviews/?COMPANY=<?= $arResult['ABOUT_COMPANY']['CURRENT_COMPANY'] ?>'">Прочесть все отзывы
                     </button>
                 </div>
             </div>

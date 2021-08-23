@@ -50,26 +50,25 @@ while ($manufacture = $manufactureCompanies->GetNext()) {
 }
 
 //получаем тороговые предложения
-$paket = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chop-packet-ap',"PROPERTY_CPA_CHOP"=>$arResult['ID'], "ACTIVE" => "Y"), false, false, array("ID", "PROPERTY_CPA_PACKET.DETAIL_PAGE_URL","PROPERTY_CPA_ABONPLATA"))->fetch();
+$paket = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chop-packet-ap', "PROPERTY_CPA_CHOP" => $arResult['ID'], "ACTIVE" => "Y"), false, false, array("ID", "PROPERTY_CPA_PACKET.DETAIL_PAGE_URL", "PROPERTY_CPA_ABONPLATA"))->fetch();
 
-$rsOffersId = CCatalogSKU::getOffersList(array('ID'=>$paket['PROPERTY_CPA_ABONPLATA_VALUE']), false, false, array('ID'));
-foreach ($rsOffersId[$paket['PROPERTY_CPA_ABONPLATA_VALUE']] as $off):
-    $idOffer[] = $off['ID'];
-endforeach;
-
-
-$offers = CIBlockElement::GetList(array(), array("ID"=>$idOffer), false, false, array("ID", 'CATALOG_GROUP_1', 'PROPERTY_APTP_MESYAC'));
+if (!empty($paket['PROPERTY_CPA_ABONPLATA_VALUE'])):
+    $rsOffersId = CCatalogSKU::getOffersList(array('ID' => $paket['PROPERTY_CPA_ABONPLATA_VALUE']), false, false, array('ID'));
+    foreach ($rsOffersId[$paket['PROPERTY_CPA_ABONPLATA_VALUE']] as $off):
+        $idOffer[] = $off['ID'];
+    endforeach;
 
 
-while ($arOffer = $offers->GetNext())
-{
-    $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['ID'] = $arOffer['ID'];
-    $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['MONTH'] = $arOffer['PROPERTY_APTP_MESYAC_VALUE'];
-    $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['PRICE'] = $arOffer['CATALOG_PRICE_1'];
-}
+    $offers = CIBlockElement::GetList(array(), array("ID" => $idOffer), false, false, array("ID", 'CATALOG_GROUP_1', 'PROPERTY_APTP_MESYAC'));
 
-$arResult['OFFERS']['SRC'] = preg_replace('[//]', '/',$paket['PROPERTY_CPA_PACKET_DETAIL_PAGE_URL']);
+    while ($arOffer = $offers->GetNext()) {
+        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['ID'] = $arOffer['ID'];
+        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['MONTH'] = $arOffer['PROPERTY_APTP_MESYAC_VALUE'];
+        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['PRICE'] = $arOffer['CATALOG_PRICE_1'];
+    }
 
+    $arResult['OFFERS']['SRC'] = preg_replace('[//]', '/', $paket['PROPERTY_CPA_PACKET_DETAIL_PAGE_URL']);
+endif;
 //Получаем города в котороых есть эта компания
 $companies = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chopcity', 'PROPERTY_CHOP_ID' => $arResult['PROPERTIES']['CHOP_ID']['VALUE'], "ACTIVE" => "Y"), false, false, array("ID", "PROPERTY_CITY_ID.ID", "PROPERTY_CITY_ID.NAME", "PROPERTY_CHOP_ID.ID", "PROPERTY_CHOP_ID.NAME", "PROPERTY_CHOP_ID.PROPERTY_CH_ABOUT_COMPANY", 'PROPERTY_CHOP_ID.PROPERTY_CH_DATE_FROM', 'PROPERTY_CHOP_ID.PROPERTY_CH_DATE_ACTUAL', 'PROPERTY_MANUFACTURERS'));
 while ($company = $companies->GetNext()) {
@@ -78,12 +77,13 @@ while ($company = $companies->GetNext()) {
     $arrCities[$company['ID']]['CITY_NAME'] = $company['PROPERTY_CITY_ID_NAME'];
     $arrCities[$company['ID']]['COMPANY_ID'] = $company['PROPERTY_CHOP_ID_ID'];
     $arrCities[$company['ID']]['COMPANY_NAME'] = $company['PROPERTY_CHOP_ID_NAME'];
-    if(empty($arResult['ABOUT_COMPANY'])) {
+    if (empty($arResult['ABOUT_COMPANY'])) {
         $arResult['ABOUT_COMPANY']['DESC'] = $company['PROPERTY_CHOP_ID_PROPERTY_CH_ABOUT_COMPANY_VALUE']['TEXT'];
         $arResult['ABOUT_COMPANY']['START'] = $company['PROPERTY_CHOP_ID_PROPERTY_CH_DATE_FROM_VALUE'];
         $arResult['ABOUT_COMPANY']['ACTUAL'] = $company['PROPERTY_CHOP_ID_PROPERTY_CH_DATE_ACTUAL_VALUE'];
     }
-    if($company['PROPERTY_CITY_ID_ID'] == $arResult['PROPERTIES']['CITY_ID']['VALUE']):
+    if ($company['PROPERTY_CITY_ID_ID'] == $arResult['PROPERTIES']['CITY_ID']['VALUE']):
+        $arResult['ABOUT_COMPANY']['CURRENT_COMPANY'] = $company['PROPERTY_CHOP_ID_ID'];
         foreach ($company['PROPERTY_MANUFACTURERS_VALUE'] as $manufacture):
             $arResult['MANUFACTURE'][$manufacture] = $arrManufactures[$manufacture];
         endforeach;
@@ -120,10 +120,10 @@ while ($review = $reviews->fetch()) {
 $arrPositions = MainService::calculateSecureCompanyRatingPositionsByCityId($arResult['PROPERTIES']['CITY_ID']['VALUE']);
 
 $_monthsList = array(
-    "1"=>"Январь","2"=>"Февраль","3"=>"Март",
-    "4"=>"Апрель","5"=>"Май", "6"=>"Июнь",
-    "7"=>"Июль","8"=>"Август","9"=>"Сентябрь",
-    "10"=>"Октябрь","11"=>"Ноябрь","12"=>"Декабрь");
+    "1" => "Январь", "2" => "Февраль", "3" => "Март",
+    "4" => "Апрель", "5" => "Май", "6" => "Июнь",
+    "7" => "Июль", "8" => "Август", "9" => "Сентябрь",
+    "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
 $arResult['CURRENT_MONTH'] = $_monthsList[date("n")];
 
 

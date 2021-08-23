@@ -46,7 +46,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                     <? foreach ($arResult['CITY_COMPANIES'] as $item): ?>
                         <div class="searchForm__modal_item bottomChekItem">
                             <input type="checkbox" class="checkbox">
-                            <span data-id="<?= $item['ID'] ?>" class="itemText"><a href="<?=$item["DETAIL_PAGE_URL"]?>"><?= $item['NAME'] ?></a></span>
+                            <span data-id="<?= $item['ID'] ?>" class="itemText"><a href="/raiting/?COMPANY=<?= $item['ID'] ?>"><?= $item['NAME'] ?></a></span>
                         </div>
                     <? endforeach; ?>
                 </div>
