@@ -112,3 +112,5 @@ bower_components
 
 # кеш автозагрузки классов
 /local/php_interface/lib/__autoload.cache.php
+# компонент vincko_basket
+/local/itdelta_js_components/vincko_basket/public
