@@ -92,7 +92,7 @@ while ($company = $companies->GetNext()) {
 }
 
 //Собираем статусы компаний
-$statusCompany = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'ststus', "ACTIVE" => "Y", 'ID' => ['PROPERTIES']['STATUS_COMPANY']['VALUE']), false, false, array("ID", "NAME", "PREVIEW_PICTURE"));
+$statusCompany = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'ststus', "ACTIVE" => "Y"), false, false, array("ID", "NAME", "PREVIEW_PICTURE"));
 while ($status = $statusCompany->GetNext()) {
     $arrStatus[$status["ID"]]['ID'] = $status["ID"];
     $arrStatus[$status["ID"]]['NAME'] = $status["NAME"];
