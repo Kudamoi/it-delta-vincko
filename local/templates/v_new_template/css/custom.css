@@ -97,16 +97,18 @@
 .t-c-blue {
     color: #005DFF !important;
 }
-
+.t-c-gray span,
 .t-c-gray {
     color: #818181 !important;
 }
 .link-item.t-c-gray:after {
     background-color:#818181!important;
 }
+.t-c-green span,
 .t-c-green {
     color: #35A34A!important;
 }
+.t-c-yellow-d span,
 .t-c-yellow-d {
     color: #E3B201!important;
 }
@@ -410,7 +412,45 @@ a.item__content-company-not {
 }
 
 /*modal city-choice window-end*/
-
+.norating .company-info-card__content-container.block__tab.checked {
+    display: flex;
+    padding-top: 24px;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container-left {
+    width: 240px;
+    border-right: 1px solid #DDE8FF;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container div {
+    padding-left: 12px;
+    position: relative;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container div::before {
+    position: absolute;
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #005DFF;
+    border-radius: 50%;
+    left: 0;
+    top: 8px;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container span {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    display: inline-block;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container-right {
+    padding-left: 15px;
+    border-right: none;
+    flex: 1 1 auto;
+}
+.norating .company-info-card__content-container.block__tab.checked .company-info-card__content-container-right a {
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration-line: underline;
+    color: #005dff;
+}
 /* Временное решение для выпадающего меню на главной странице */
 #form_installment_plan .first__page_ready-des .form__select .choices__list--single {
     min-width: 100% !important;

@@ -795,7 +795,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     <? $currentSubcriptionFeeIndex = isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? $_COOKIE['selected_subscription_fee_id'] : array_key_last($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']); ?>
                                     <div class="solutions-card__contract_wrapper">
                                         <? foreach ($arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE'] as $key => $item): ?>
-                                            <div data-slug="<?= $arResult['CODE'] ?>"
+                                            <div data-id-click="<?= $item['ID'] ?>" data-slug="<?= $arResult['CODE'] ?>"
                                                  onclick="BX.setCookie('selected_subscription_fee_id',<?= $item['ID'] ?>, {expires: 86400, path: '/'});"
                                                  class="js-refresh-equipitem-data-ajax contract__item <?= isset($_COOKIE['selected_subscription_fee_id']) && array_key_exists($_COOKIE['selected_subscription_fee_id'], $arResult['ALL_LIST_COMPANY_CITY'][$currentSecureCompanyIndex]['SUBSCRIPTION_FEE']) ? (intval($item['ID']) === intval($_COOKIE['selected_subscription_fee_id']) ? 'active' : 'no-active') : (intval($item['PROPERTY_APTP_MESYAC_VALUE']) === 12 ? 'active' : 'no-active') ?>">
                                                 <div class="contract__item_top">

@@ -343,12 +343,12 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     </div>
                                 <? endif; ?>
                                 <div class="itemRating-open__left_bottom-btns">
-                                    <a href="/norating/?company=<?= $item['ID'] ?>"
+                                    <a href="/norating/?COMPANY=<?= $item['ID'] ?>"
                                        class="itemRating-open__left_bottom-btn">
                                         к компании
                                     </a>
                                     <? if ($item['STATUS_COMPANY']['ID'] == 1497): ?>
-                                        <a href="/packages/?company=<?= $item['ID'] ?>"
+                                        <a href="/packages/?COMPANY=<?= $item['ID'] ?>"
                                            class="itemRating-open__left_bottom-btn">
                                             Заказать услуги
                                         </a>
