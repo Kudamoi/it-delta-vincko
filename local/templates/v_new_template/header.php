@@ -46,8 +46,9 @@ $Asset = Asset::getInstance();
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/ui-slider/jquery.ui.touch-punch.min.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/site.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/main.js"); ?>
-    <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/custom.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/auth.js"); ?>
+    <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/custom.js"); ?>
+
 
     <?= $APPLICATION->ShowHead(); ?>
 

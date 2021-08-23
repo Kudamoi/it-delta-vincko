@@ -251,7 +251,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                 договор охраны.
                                             </div>
                                             <div class="single-zayavka">
-                                                <a class="single-zayavka-btn" href="#">Заполнить индивидуальную
+                                                <a class="single-zayavka-btn" href="/zayavka/">Заполнить индивидуальную
                                                     заявку</a>
                                             </div>
 
@@ -337,13 +337,13 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                             <div class="itemRating-open__left_bottom">
                                 <? if (count($item['REVIEWS']) > 0): ?>
                                     <div class="itemRating-open__left_bottom-mobilLinks">
-                                        <a href="/reviews/?COMPANY=<?= $item['ID'] ?>">Читать все
+                                        <a href="/reviews/?COMPANY=<?= $item['CHOP_ID']['ID'] ?>">Читать все
                                             <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                                         <span class="closed-card">Закрыть карточку</span>
                                     </div>
                                 <? endif; ?>
                                 <div class="itemRating-open__left_bottom-btns">
-                                    <a href="/norating/?COMPANY=<?= $item['ID'] ?>"
+                                    <a href="/norating/?COMPANY=<?= $item['CHOP_ID']['ID'] ?>"
                                        class="itemRating-open__left_bottom-btn">
                                         к компании
                                     </a>
@@ -377,7 +377,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             vincko:</a> на услуги этой компании.
                                     </div>
                                     <div class="itemRating-open__left_text-mobilLinks">
-                                        <a href="/reviews/?COMPANY=<?= $item['ID'] ?>">Читать все
+                                        <a href="/reviews/?COMPANY=<?= $item['CHOP_ID']['ID'] ?>">Читать все
                                             <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                                         <span class="closed-card">Закрыть карточку</span>
                                     </div>
@@ -399,7 +399,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                     <div class="itemRating-open__right">
                         <? if (count($item['REVIEWS']) > 0): ?>
                             <div class="itemRating-open__right_top">
-                                <a href="/reviews/?COMPANY=<?= $item['ID'] ?>">Читать все
+                                <a href="/reviews/?COMPANY=<?= $item['CHOP_ID']['ID'] ?>">Читать все
                                     <span><?= count($item['REVIEWS']) ?></span> отзыва</a>
                             </div>
                             <div class="itemRating-open__right_wrapper">

@@ -149,7 +149,28 @@
     margin-right: 8px;
     margin-top: 5px;
 }
-
+.rating-center .itemRating-open__left_info .info-block-two {
+    margin-left: 25px;
+}
+.norating .single-zayavka .single-zayavka-btn {
+    margin-top: 20px;
+    background: #FFFFFF;
+    border: 1px solid #D1DBE3;
+    padding: 13px 49px;
+    border-radius: 5px;
+    font-family: Gilroy,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    color: #000000;
+    display: block;
+    text-align: center;
+}
+.rating-center .itemRating-open__left_info .info-block-two__right .text-descrip {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}
 
 .rating-block .rating-block-top {
     display: flex;

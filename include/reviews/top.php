@@ -5,7 +5,7 @@
 		<p>
 			Чтобы Вы могли сформировать наиболее полное представление об опыте взаимодействия с охранными компаниями благодаря отзывам других людей
 		</p>
- <a href="/review-add/" class="button add_review" data-modal-target="#registration"> <span class="icon"></span>Оставить свой отзыв</a>
+ <a href="/review-add/" class="button add_review reload-page-to-review" > <span class="icon"></span>Оставить свой отзыв</a>
 	</div>
 	<div class="item">
  <span> <img alt="img" src="/upload/images/reviews/main.png" loading="lazy"> </span>
