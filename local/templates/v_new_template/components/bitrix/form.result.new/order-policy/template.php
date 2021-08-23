@@ -244,8 +244,7 @@ if (!CModule::IncludeModule("sale")) {
 							<span class="form__title-blue"><?= Loc::getMessage("FORM_POLICY_STEP_PAY") ?></span>
 							<span class="form__title-step"><?= Loc::getMessage("FORM_POLICY_STEP_2") ?></span>
 						</div>
-
-						<div class="form__content">
+						<div class="form__content"<?=(!empty($arResult["FORM_ERRORS"]["AGREEMENT"]) ? " style='display:block'" : "")?>>
 							<div class="form__section">
 								<h4><?= Loc::getMessage("FORM_POLICY_PAY") ?></h4>
 								<div class="form__section__content payment-method">
@@ -382,7 +381,7 @@ if (!CModule::IncludeModule("sale")) {
 
 					<?= $arResult["QUESTIONS"]["AGREEMENT"]["HTML_CODE"] ?>
 					<button type="submit" class="button yellow-button" name="web_form_apply"
-							value="1" disabled><?= $arResult["arForm"]["BUTTON"] ?></button>
+							value="1"><?= $arResult["arForm"]["BUTTON"] ?></button>
 				</div>
 			</div>
 			</form>

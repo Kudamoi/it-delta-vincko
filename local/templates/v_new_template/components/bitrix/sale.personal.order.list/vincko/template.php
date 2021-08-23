@@ -75,7 +75,7 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                     <?= Loc::getMessage("SPOL_TPL_FROM_DATE") ?>
                                     <?= $arOrder["DATE_INSERT_FORMATED"] ?>
                                 </div>
-
+                                <? if (count($arOrder["PRODUCT"]) > 1 || count($arOrder["PRODUCT"]) == 1 && empty($arOrder["POLICY_EXISTS"])): ?>
                                 <div class="profile__c-main-order-status">
                                     <? if ($arOrder["CANCELED"] !== "Y"): ?>
                                         <?= $arOrder["STATUS"] ?>
@@ -83,6 +83,7 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                         <?= Loc::getMessage('SPOD_ORDER_CANCELED') ?>
                                     <? endif; ?>
                                 </div>
+                                <? endif; ?>
 
                                 <div class="profile__c-main-order-dates">
                                     <? /*<div class="profile__c-main-order-date">

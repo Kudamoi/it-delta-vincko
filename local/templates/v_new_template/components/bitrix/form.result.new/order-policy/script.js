@@ -16,12 +16,13 @@ $(document).ready(function () {
 		var $form = $(this).parents("form"),
 			$error = $(this).parents("form").find(".error_message"),
 			top1 = $("#form-1").position().top,
-			data = $form.serialize(),
+			data = $form.serialize()+"&form_checkbox_AGREEMENT[]="+$("[name='form_checkbox_AGREEMENT[]']").val(),
 			class_name = "error";
 
 		$('.js-check-valid-field').removeClass(class_name);
 		$(".form__complete").hide();
 		$(".form__next-button").show();
+		console.log(data);
 		$.ajax({
 			url: '/ajax/form-valid-order-policy.php',
 			method: 'GET',
@@ -37,7 +38,7 @@ $(document).ready(function () {
 					$error.show();
 					$(".form__complete").addClass("hidden");
 					$(".form__next-button").removeClass("hidden");
-					$(".form__payment").hide();
+					$(".form__payment .form__content").hide();
 
 					$.each(res.error, function (i, value) {
 						$('.js-check-valid-field[data-field="' + i + '"').addClass(class_name);
@@ -89,6 +90,10 @@ function closeOpenBlockBtn(btn, block) {
 	}
 }
 
-
-})
-;
+	$(".show-details").on("click", function () {
+		$(this).parents(".short-ins").addClass("js-show");
+	});
+	$(".hide-details").on("click", function () {
+		$(this).parents(".short-ins").removeClass("js-show");
+	});
+});

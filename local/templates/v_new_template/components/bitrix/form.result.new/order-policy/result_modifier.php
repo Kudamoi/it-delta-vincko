@@ -40,9 +40,6 @@ $domClass = [
 	"REGISTRATION_HOUSING"   => "housing-field",
 	"ACTUAL_HOUSING"         => "housing-field",
 	"POLICY_HOUSING"         => "housing-field",
-];
-// сформируем массив с особыми id, необходимыми для верификации на фронте
-$domId = [
 	"PHONE"         => "phone-field",
 	"PASSPORT_CODE" => "code",
 	"INN"           => "inn",
@@ -97,17 +94,16 @@ foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion) {
 				$name = "form_email_" . $idAnsw;
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
 
-				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' id="email-field"  class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" inputmode="email"  placeholder="' . $arQuestion["CAPTION"] . '" value="">';
+				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . '   class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" name="' . $name . '" inputmode="email"  placeholder="' . $arQuestion["CAPTION"] . '" value="">';
 				break;
 			case "text":
 				$name = "form_text_" . $idAnsw;
 				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
-				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' ' . ($domId[$FIELD_SID] ? 'id="' . $domId[$FIELD_SID] . '"' : '') . 'class="js-check-valid-field ' . ($domClass[$FIELD_SID] ?? "text-field") . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" inputmode="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
+				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' class="js-check-valid-field ' . ($domClass[$FIELD_SID] ?? "text-field") . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="text" inputmode="text" name="' . $name . '" placeholder="' . $arQuestion["CAPTION"] . '" value="">';
 				break;
 			case "checkbox":
 				$name = "form_checkbox_" . $FIELD_SID . "[]";
-				$value = ($arResult["arrVALUES"][$name] ? ' value="' . $arResult["arrVALUES"][$name] . '"' : '');
-
+				$value = ($arResult["arrVALUES"]["form_checkbox_" . $FIELD_SID ][0] ? ' checked' : '');
 				$arResult["QUESTIONS"][$FIELD_SID]["HTML_CODE"] = '<input' . $value . ' class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '" type="checkbox" name="' . $name . '" id="' . $idAnsw . '" value="' . $idAnsw . '">
 				                                					<label for="' . $idAnsw . '" class="js-check-valid-field' . (!empty($arResult['FORM_ERRORS'][$FIELD_SID]) ? ' error' : '') . '" data-field="' . $FIELD_SID . '">' . $arQuestion["CAPTION"] . '</label>';
 				break;
