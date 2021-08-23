@@ -12701,7 +12701,7 @@ html {
 }
 
 .polzunok__number {
-  margin-top: 22 px;
+  margin-top: 22 px;
   display: block;
   color: #93b6ff;
   width: 5ch;
@@ -21501,6 +21501,13 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   margin: 10px;
 }
 
+.order .short-ins-mobile .products__head.hidden ~ .products__name > * {
+  max-width: 210px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .order .short-ins-mobile .products__name {
   display: inline-block;
   margin-bottom: 0;
@@ -22063,10 +22070,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
 
 .profile__c-head input:checked + label:after {
   border-bottom: 2px solid #005dff;
-}
-
-.profile__c-main {
-  display: none;
 }
 
 .profile__c-main-block {
@@ -25451,8 +25454,12 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   }
 
   .order .short-ins-mobile {
-    display: flex;
+    display: grid;
     justify-content: center;
+  }
+
+  .order .short-ins-mobile .products__max-payment {
+    padding-top: 10px;
   }
 
   .order .form__section:first-child {
@@ -26384,7 +26391,7 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
 
   .loyality__calculator .content__items {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "left center" "left right";
+    grid-template-areas: "left center" "left right";
   }
 
   .loyality__calculator .content__items-left {
