@@ -57,28 +57,26 @@ $res = CIBlockSection::GetList(
     array("SORT" => "ASC"),
     array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, "=ID" => $parentPackageGroupId),
     false,
-    array("UF_CHARACTERISTICS_REF"),
+    array(),
     array("ID","*","PROPERTY_CO_CLASS_REF","PROPERTY_CO_CHARACTERISTICS_REF")
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;
     $arResult['PACKAGE_GROUP']['PICTURE'] = CFile::ResizeImageGet($arFields['PICTURE'], array("width" => 360, "height" => 290), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 }
-if(!empty($arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF']))
-{
-    //получаем характеристики для группы готовых решений
-    $res = \CIBlockElement::GetList(array(), array("IBLOCK_ID" => $packagesCharacteristicsIblockId ,"ID"=>$arResult['PACKAGE_GROUP']['UF_CHARACTERISTICS_REF'], "ACTIVE" => "Y"), false,
+
+    //получаем характеристики для текущего готового решения
+    $res = \CIBlockElement::GetList(array(), array("IBLOCK_ID" => $packagesCharacteristicsIblockId ,"ID"=>$arResult['PROPERTIES']['CO_CHARACTERISTICS_REF']['VALUE'], "ACTIVE" => "Y"), false,
         false, array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE","PROPERTY_CO_CHARACTERISTICS_REF"));
     while ($arFields = $res->Fetch()) {
         $picEnd = CFile::ResizeImageGet($arFields["PREVIEW_PICTURE"], array("width" => 90, "height" => 110), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
-        $arResult["PACKAGE_GROUP_CHARACTERISTICS"][$arFields["ID"]] = array(
+        $arResult["CURRENT_PACKAGE_CHARACTERISTICS"][$arFields["ID"]] = array(
             "ID" => $arFields["ID"],
             "NAME" => $arFields["NAME"],
             "PREVIEW_TEXT" => $arFields["PREVIEW_TEXT"],
             "PREVIEW_PICTURE" => $picEnd["src"],
         );
     }
-}
 
 //получаем все готовые решения из группы
 $res = CIBlockElement::GetList(

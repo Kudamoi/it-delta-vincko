@@ -168,8 +168,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <h2><?= $arResult['PACKAGE_GROUP']['NAME'] ?></h2>
                     </div>
                     <div class="solutions__top_left-items">
-                        <? if (isset($arResult["PACKAGE_GROUP_CHARACTERISTICS"])): ?>
-                            <? foreach ($arResult['PACKAGE_GROUP_CHARACTERISTICS'] as $ch): ?>
+                        <? if (!empty($arResult["CURRENT_PACKAGE_CHARACTERISTICS"])): ?>
+                            <? foreach ($arResult['CURRENT_PACKAGE_CHARACTERISTICS'] as $ch): ?>
                                 <div class="solutions__top_left-item">
                                     <div class="solutions__top_left-item_icon">
                                         <img src="<?= $ch['PREVIEW_PICTURE'] ?>" alt="<?= $ch['NAME'] ?>">
