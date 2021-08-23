@@ -1,5 +1,17 @@
+function $_GET(key) {
+	var p = window.location.search;
+	p = p.match(new RegExp(key + '=([^&=]+)'));
+	return p ? p[1] : false;
+}
+
 (function(window){
 	'use strict';
+
+	let clickBlock = $_GET('SOLUTIONS');
+	if(clickBlock) {
+		setTimeout($('.js-refresh-packageitem-data-ajax[data-id-click='+clickBlock+']').click(), 1000);
+		document.location.href='#solutions__center';
+	}
 
 	if (window.JCCatalogElement)
 		return;

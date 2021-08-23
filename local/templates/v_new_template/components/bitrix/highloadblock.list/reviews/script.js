@@ -57,6 +57,13 @@ $(document).ready(function () {
                         }, 1000);
 
                     }
+                    if($('.searchForm__modal.companies-select .searchForm__modal_item .itemText[data-id='+$_GET('COMPANY')+']').length > 0 ){
+                        $('.searchForm__modal.companies-select .searchForm__modal_item .itemText[data-id='+$_GET('COMPANY')+']').click()
+
+                        $('html,body').animate({
+                            scrollTop: $('#reviews__form').offset().top - 10
+                        }, 1000);
+                    }
                     const url = new URL(document.location);
                     const searchParams = url.searchParams;
                     searchParams.delete("REVIEW");
