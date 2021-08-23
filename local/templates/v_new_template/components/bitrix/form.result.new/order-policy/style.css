@@ -4,8 +4,8 @@
     float: left;
 }
 .order .short-ins-mobile .products__name{
-    display: block;
-    overflow: hidden;
+    display: block!important;
+    overflow: hidden!important;
 }
 .error_message {
     display: none
@@ -43,3 +43,12 @@
 }
 
 .radio-disabled{opacity: 0.5}
+
+/*
+.order .short-ins-mobile.js-show .short-ins__item{ margin: 0px!important;}*/
+.fix.js-show .short-ins__item.products__item{ height: 1005px!important; overflow: hidden;     margin-top: 468px;}
+.order .short-ins-mobile.fix.js-show{ height: 100%;  padding: 15px 0;}
+
+.order .short-ins-mobile .short-ins__item .ready-pack__details > div{ margin-bottom: 16px!important; }
+
+

@@ -84,7 +84,6 @@ $(document).ready(function () {
 					ajaxError($form, res.MESSAGE, res.FIELD);
 				}else{
 					removeError();
-
 				}
 			},
 			error: function (error) {
