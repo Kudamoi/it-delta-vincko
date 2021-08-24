@@ -177,7 +177,8 @@ $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
                 "SORT_BY2" => "SORT",
                 "SORT_ORDER1" => "ASC",
                 "SORT_ORDER2" => "ASC",
-                "COMPONENT_TEMPLATE" => "main_kits"
+                "COMPONENT_TEMPLATE" => "main_kits",
+                "EQUIPMENT-KITS_IBLOCK_ID" => "11"
             ),
             false
         );
