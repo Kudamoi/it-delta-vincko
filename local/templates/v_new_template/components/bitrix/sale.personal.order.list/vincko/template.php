@@ -16,6 +16,9 @@ $userName = $GLOBALS["USER"]->GetFullName();
             Мои данные
         </a>
 
+        <a href="<?= $APPLICATION->GetCurPageParam("logout=y", array());?>" class="profile__tabs-chitem">
+            Выход
+        </a>
     </div>
 
     <div class="profile__tabs-content">
