@@ -343,7 +343,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                     </div>
                                 <? endif; ?>
                                 <div class="itemRating-open__left_bottom-btns">
-                                    <a href="/norating/?COMPANY=<?= $item['CHOP_ID']['ID'] ?>"
+                                    <a href="/norating/?COMPANY=<?= $item['ID'] ?>"
                                        class="itemRating-open__left_bottom-btn">
                                         к компании
                                     </a>
