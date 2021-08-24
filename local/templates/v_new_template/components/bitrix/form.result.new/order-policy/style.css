@@ -49,4 +49,18 @@
 .fix.js-show .short-ins__item.products__item{ height: 1005px!important; overflow: hidden; }
 .order .short-ins-mobile.fix.js-show{ height: 100%;  padding: 15px 0;}
 .order .short-ins-mobile.fix.js-show{padding-bottom: 9px;}
-.order .short-ins-mobile .short-ins__item .ready-pack__details > div{ margin-bottom: 16px!important; }
+.order .short-ins-mobile .short-ins__item .ready-pack__details > div{
+    margin-bottom: 16px!important;
+    position: initial;
+    border-bottom: 1px solid #dde8ff!important;
+}
+.order .short-ins-mobile:not(.js-show) .short-ins__item {
+    height: 135px;
+}
+.order .short-ins-mobile.fix .show-details > span {
+    display: block!important;
+}
+.ready-pack__details{
+    clear: both;
+}
+.order .short-ins-mobile .price{display: block!important;}
