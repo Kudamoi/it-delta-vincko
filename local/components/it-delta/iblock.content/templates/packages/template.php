@@ -68,7 +68,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
             <div class="ready-des2__show-main">
                 <div class="wrapper">
-                    <div class="ready-pack group__pack r-d-s" id="r-d-s-1">
+                    <div class="ready-pack group__pack r-d-s<?=(count($section['EQUIPMENT-KITS'])<3?" small-slick-clider":"")?>" id="r-d-s-1">
                         <?php foreach ($section['EQUIPMENT-KITS'] as $item): ?>
                             <div class="ready-pack__item-wrapper">
                                 <div class="ready-pack__item ready-pack__item--short">
