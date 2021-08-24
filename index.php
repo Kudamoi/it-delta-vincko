@@ -147,7 +147,8 @@ $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
             "SORT_BY1" => "ACTIVE_FROM",
             "SORT_BY2" => "SORT",
             "SORT_ORDER1" => "DESC",
-            "SORT_ORDER2" => "ASC"
+            "SORT_ORDER2" => "ASC",
+            "DETAIL_URL" => "/packages/"
         )
     );?>
 
