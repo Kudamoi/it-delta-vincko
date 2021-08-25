@@ -197,9 +197,6 @@ closeOpenBlock2('.slider__under-block-1', '.close-btn-3', '.close-btn');
 
   function regShowBtn() {
     var parent = $(".popup--registration");
-    console.log(parent.find(".text-field").inputmask("isComplete"));
-    console.log(regNumber);
-    console.log($("#agree")[0].checked);
     var texts = 1;
     parent.find(".text-field").each(function (index) {
       if (!$(this).inputmask("isComplete")) {
@@ -476,7 +473,6 @@ if ($(window).width() <= '767') {
     //    inner += inner
     //   copies2[i].innerHTML = inner;
     //}
-    // console.log("count slick-slide " + $('.slide-box').length)
     // if ($('.slide-box').length >= 3) {
     //     $('.slick-slider-datchiki').slick({
     //             variableWidth: true,
@@ -591,7 +587,6 @@ if ($(window).width() <= '767') {
         var dataModal = $('.slide-modal.active .modal-slider .slick-current').attr('data-modal-slide');
         $('.slide-modal.active .modal-bottom .item').removeClass('active');
         $('.slide-modal.active .modal-bottom .item').eq(dataModal - 1).addClass('active');
-        console.log($('.slide-modal.active .modal-bottom .item:eq(' + dataModal + ')'));
       });
     });
     $('.close').on('click', function () {
@@ -650,12 +645,9 @@ if ($(window).width() <= '767') {
       });
     });
     $('.slick-slider-datchiki').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-      console.log(slick);
-
       if (!slick.$nextArrow[0].classList.contains("arrow-next-mini")) {
         $('.info').removeClass("vis");
         $('[data-slider-info="' + nextSlide + '"]').addClass('vis');
-        console.log(nextSlide);
       }
     });
     $(".complect .subscribe .blue-button").on("click", function () {
@@ -698,7 +690,6 @@ if ($(window).width() <= '767') {
       var close = parent.find(".ready-pack__close");
       var present = parent.find(".predloj__present");
       open.on("click", function () {
-        console.log("heya");
         el.removeClass("hidden");
         close.css("display", "flex");
         open.css("display", "none");
@@ -913,16 +904,12 @@ jQuery(document).ready(function ($) {
 
   try {
     btnnsIO[0].addEventListener("click", function () {
-      if (!$(this).hasClass('disabled')) {
-        openNextBlock(formsIO[1], btnnsIO[0], complete[0], required[0]);
-      }
+      openNextBlock(formsIO[1], btnnsIO[0], complete[0], required[0]);
     });
 
     if (formsIO.length >= 3) {
       btnnsIO[1].addEventListener("click", function () {
-        if (!$(this).hasClass('disabled')) {
-          openNextBlock(formsIO[2], btnnsIO[1], complete[1], required[1]);
-        }
+        openNextBlock(formsIO[2], btnnsIO[1], complete[1], required[1]);
       });
     }
 
@@ -979,34 +966,30 @@ jQuery(document).ready(function ($) {
         if (!this.value) this.type = 'text';
       };
     }
-  } // TODO проблемы с кирилицей на iphone
-
-
-  if (browser_name() !== "Safari") {
-    $('.text-field').inputmask({
-      regex: "[A-ZА-Яa-zа-я- ]+",
-      showMaskOnHover: false
-    });
-    $('.address-field').inputmask({
-      regex: "[A-ZА-Яa-zа-я-.,: ]+",
-      showMaskOnHover: false
-    });
-    $('.street-field').inputmask({
-      regex: "[A-ZА-Яa-zа-я0-9-.,:/ ]+",
-      showMaskOnHover: false
-    });
-    $('.house-field').inputmask({
-      regex: "[0-9]+[A-ZА-Яa-zа-я-]+",
-      showMaskOnHover: false
-    });
-    $('.housing-field').inputmask({
-      regex: "[A-ZА-Яa-zа-я0-9-]+",
-      showMaskOnHover: false
-    });
   }
 
+  $('.text-field').inputmask({
+    regex: "[A-ZА-Яa-zа-я- ]+",
+    showMaskOnHover: false
+  });
+  $('.address-field').inputmask({
+    regex: "[A-ZА-Яa-zа-я-.,: ]+",
+    showMaskOnHover: false
+  });
+  $('.street-field').inputmask({
+    regex: "[A-ZА-Яa-zа-я1-9-.,:/ ]+",
+    showMaskOnHover: false
+  });
+  $('.house-field').inputmask({
+    regex: "[1-9]+[A-ZА-Яa-zа-я-]+",
+    showMaskOnHover: false
+  });
+  $('.housing-field').inputmask({
+    regex: "[A-ZА-Яa-zа-я1-9-]+",
+    showMaskOnHover: false
+  });
   $('.flat-field').inputmask({
-    regex: "[0-9]+",
+    regex: "[1-9]+",
     showMaskOnHover: false
   });
   $('.birthday-field').inputmask({
@@ -1092,8 +1075,6 @@ jQuery(document).ready(function ($) {
 
   var status = 0;
   $(".documents__switch-open, .documents__head").on("click", function () {
-    console.log(status);
-
     if (status == 0) {
       $(".documents").addClass("documents--opened");
       setTimeout(function () {
@@ -1102,8 +1083,6 @@ jQuery(document).ready(function ($) {
     }
   });
   $(".documents__switch-close, .documents__head").on("click", function () {
-    console.log(status);
-
     if (status == 1) {
       $(".documents").removeClass("documents--opened");
       setTimeout(function () {
@@ -1230,7 +1209,6 @@ jQuery(document).ready(function ($) {
     }
 
     var r = hour.bind(workTime);
-    console.log(r());
     $("#calculator__range-js").on("input", function rangeRes() {
       var $value = $(this).val();
       $(".result-number").html($value);
@@ -1793,38 +1771,32 @@ for (var i = 0; i < btns_modals.length; i++) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
-  // tabsChange();
-  // $(".profile__c-tabs").on("click", function(){
-  //     tabsChange();
-  // })
-  // function tabsChange(){
-  // 	if ($("#c-all-orders").is(':checked')){
-  // 		$(".profile__c-main").removeClass("show");
-  // 		$(".profile__c-main--all-orders").addClass("show");
-  // 	}
-  // 	else if ($("#c-p-requests").is(':checked')){
-  // 		$(".profile__c-main").removeClass("show");
-  // 		$(".profile__c-main--personal-requests").addClass("show");
-  // 	}
-  // }
-  function showEmpty() {
-    if ($(".profile__c-main--all-orders").find('.profile__c-main-block').length === 0) {
-      $(".profile__c-main--all-orders .empty").addClass("show");
+  tabsChange();
+  $(".profile__c-tabs").on("click", function () {
+    tabsChange();
+  });
+
+  function tabsChange() {
+    if ($("#c-all-orders").is(':checked')) {
+      $(".profile__c-main").removeClass("show");
+      $(".profile__c-main--all-orders").addClass("show");
+    } else if ($("#c-p-requests").is(':checked')) {
+      $(".profile__c-main").removeClass("show");
+      $(".profile__c-main--personal-requests").addClass("show");
     }
-
-    ;
-
-    if ($(".profile__c-main--personal-requests").find('.profile__c-main-request').length === 0) {
-      $(".profile__c-main--personal-requests .empty").addClass("show");
-    }
-
-    ;
   }
 
-  showEmpty();
-  $(".profile__c-tabs").on("click", function () {
-    showEmpty();
-  });
+  if ($(".profile__c-main--all-orders").find('.profile__c-main-block').length === 0) {
+    $(".profile__c-main--all-orders .empty").addClass("show");
+  }
+
+  ;
+
+  if ($(".profile__c-main--personal-requests").find('.profile__c-main-request').length === 0) {
+    $(".profile__c-main--personal-requests .empty").addClass("show");
+  }
+
+  ;
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
 
@@ -2502,8 +2474,8 @@ if (document.querySelector('.review') === null) {} else {
       reviewBox.style.background = '#FFECEC';
       var source = reviewIcon.querySelector('source'),
           img = reviewIcon.querySelector('img');
-      source.setAttribute('srcset', '/upload/review/massage-bad.svg');
-      img.setAttribute('src', '/upload/review/massage-bad.svg');
+      source.setAttribute('srcset', '../img/review/massage-bad.svg');
+      img.setAttribute('src', '../img/review/massage-bad.svg');
       reviewText.innerHTML = 'Этот отзыв не влияет на рейтинг, так как вы не являетесь покупателем услуг данной охранной компании в рамках платформы <a href="">vincko:</a>';
     }
   }
@@ -2531,15 +2503,101 @@ if (document.querySelector('.review') === null) {} else {
   }
 
   var stepTwoItems = document.querySelectorAll('.review__bottom-item');
+  stepTwoItems.forEach(function (item) {
+    var input = item.querySelector('.smile-input'),
+        li = item.querySelectorAll('.review-item-step-2'),
+        span = item.querySelector('.number-wrapper > span'),
+        svg = item.querySelector('svg'),
+        circle = item.querySelector('circle'),
+        numberWrapper = item.querySelector('.number-wrapper');
+    input.addEventListener('input', function () {
+      li.forEach(function (el, i) {
+        el.classList.remove('active');
 
-  try {
-    stepTwoItems.forEach(function (item) {
-      var input = item.querySelector('.smile-input'),
-          li = item.querySelectorAll('.review-item-step-2'),
-          span = item.querySelector('.number-wrapper > span'),
-          svg = item.querySelector('svg'),
-          circle = item.querySelector('circle'),
-          numberWrapper = item.querySelector('.number-wrapper');
+        if (input.value < 18000) {
+          li[0].classList.add('active');
+          span.innerHTML = '?';
+          svg.style.display = 'none';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+        } else if (input.value > 18000 && input.value < 28000) {
+          li[1].classList.add('active');
+          span.innerHTML = '0';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          svg.style.display = 'none';
+        } else if (input.value > 28000 && input.value < 38000) {
+          li[2].classList.add('active');
+          span.innerHTML = '1';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '130.5';
+        } else if (input.value > 38000 && input.value < 48000) {
+          li[3].classList.add('active');
+          span.innerHTML = '2';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '116';
+        } else if (input.value > 48000 && input.value < 58000) {
+          li[4].classList.add('active');
+          span.innerHTML = '3';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '101.5';
+        } else if (input.value > 58000 && input.value < 68000) {
+          li[5].classList.add('active');
+          span.innerHTML = '4';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '87';
+        } else if (input.value > 68000 && input.value < 78000) {
+          li[6].classList.add('active');
+          span.innerHTML = '5';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '72.5';
+        } else if (input.value > 78000 && input.value < 88000) {
+          li[7].classList.add('active');
+          span.innerHTML = '6';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '58';
+        } else if (input.value > 88000 && input.value < 98000) {
+          li[8].classList.add('active');
+          span.innerHTML = '7';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '43.5';
+        } else if (input.value > 98000 && input.value < 108000) {
+          li[9].classList.add('active');
+          span.innerHTML = '8';
+          svg.style.display = 'block';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+          circle.style.strokeDashoffset = '29';
+        } else if (input.value > 108000 && input.value < 118000) {
+          li[10].classList.add('active');
+          span.innerHTML = '9';
+          svg.style.display = 'block';
+          circle.style.strokeDashoffset = '14.5';
+          numberWrapper.style.border = '1px solid #D1DBE3';
+        } else if (input.value > 118000) {
+          li[11].classList.add('active');
+          span.innerHTML = '10';
+          svg.style.display = 'none';
+          numberWrapper.style.border = '2px solid #005DFF';
+        }
+      });
+    });
+  });
+  var content = document.querySelectorAll('.content');
+  var stepThreeActiveBlocks = document.querySelectorAll('.content-wrapper .active-block');
+  content.forEach(function (item, n) {
+    var notBefore = 0;
+    var q = item.querySelectorAll('.q');
+    q.forEach(function (elem, i) {
+      var input = elem.querySelector('.smile-input'),
+          li = elem.querySelectorAll('.review-item-step-3'),
+          span = elem.querySelector('span'),
+          btn = elem.querySelector('.next-btn'),
+          h5 = elem.querySelector('h5');
       input.addEventListener('input', function () {
         li.forEach(function (el, i) {
           el.classList.remove('active');
@@ -2547,158 +2605,102 @@ if (document.querySelector('.review') === null) {} else {
           if (input.value < 18000) {
             li[0].classList.add('active');
             span.innerHTML = '?';
-            svg.style.display = 'none';
-            numberWrapper.style.border = '1px solid #D1DBE3';
           } else if (input.value > 18000 && input.value < 28000) {
             li[1].classList.add('active');
             span.innerHTML = '0';
-            numberWrapper.style.border = '1px solid #D1DBE3';
-            svg.style.display = 'none';
           } else if (input.value > 28000 && input.value < 38000) {
             li[2].classList.add('active');
             span.innerHTML = '1';
-            svg.style.display = 'block';
-            numberWrapper.style.border = '1px solid #D1DBE3';
-            circle.style.strokeDashoffset = '116';
           } else if (input.value > 38000 && input.value < 48000) {
             li[3].classList.add('active');
             span.innerHTML = '2';
-            svg.style.display = 'block';
-            numberWrapper.style.border = '1px solid #D1DBE3';
-            circle.style.strokeDashoffset = '87';
           } else if (input.value > 48000 && input.value < 58000) {
             li[4].classList.add('active');
             span.innerHTML = '3';
-            svg.style.display = 'block';
-            numberWrapper.style.border = '1px solid #D1DBE3';
-            circle.style.strokeDashoffset = '58';
           } else if (input.value > 58000 && input.value < 68000) {
             li[5].classList.add('active');
             span.innerHTML = '4';
-            svg.style.display = 'block';
-            numberWrapper.style.border = '1px solid #D1DBE3';
-            circle.style.strokeDashoffset = '29';
           } else if (input.value > 68000 && input.value < 78000) {
             li[6].classList.add('active');
             span.innerHTML = '5';
-            svg.style.display = 'none';
-            numberWrapper.style.border = '2px solid #005DFF';
+          } else if (input.value > 78000 && input.value < 88000) {
+            li[7].classList.add('active');
+            span.innerHTML = '6';
+          } else if (input.value > 88000 && input.value < 98000) {
+            li[8].classList.add('active');
+            span.innerHTML = '7';
+          } else if (input.value > 98000 && input.value < 108000) {
+            li[9].classList.add('active');
+            span.innerHTML = '8';
+          } else if (input.value > 108000 && input.value < 118000) {
+            li[10].classList.add('active');
+            span.innerHTML = '9';
+          } else if (input.value > 118000) {
+            li[11].classList.add('active');
+            span.innerHTML = '10';
           }
         });
       });
-    });
-  } catch (_unused) {}
-
-  ;
-  var content = document.querySelectorAll('.content');
-  var stepThreeActiveBlocks = document.querySelectorAll('.content-wrapper .active-block');
-
-  try {
-    content.forEach(function (item, n) {
-      var notBefore = 0;
-      var q = item.querySelectorAll('.q');
-      q.forEach(function (elem, i) {
-        var input = elem.querySelector('.smile-input'),
-            li = elem.querySelectorAll('.review-item-step-3'),
-            span = elem.querySelector('span'),
-            btn = elem.querySelector('.next-btn'),
-            h5 = elem.querySelector('h5');
-        input.addEventListener('input', function () {
-          li.forEach(function (el, i) {
-            el.classList.remove('active');
-
-            if (input.value < 18000) {
-              li[0].classList.add('active');
-              span.innerHTML = '?';
-            } else if (input.value > 18000 && input.value < 28000) {
-              li[1].classList.add('active');
-              span.innerHTML = '0';
-            } else if (input.value > 28000 && input.value < 38000) {
-              li[2].classList.add('active');
-              span.innerHTML = '1';
-            } else if (input.value > 38000 && input.value < 48000) {
-              li[3].classList.add('active');
-              span.innerHTML = '2';
-            } else if (input.value > 48000 && input.value < 58000) {
-              li[4].classList.add('active');
-              span.innerHTML = '3';
-            } else if (input.value > 58000 && input.value < 68000) {
-              li[5].classList.add('active');
-              span.innerHTML = '4';
-            } else if (input.value > 68000 && input.value < 78000) {
-              li[6].classList.add('active');
-              span.innerHTML = '5';
-            }
-          });
+      elem.setAttribute('q-num', i);
+      h5.addEventListener('click', function () {
+        q.forEach(function (trig) {
+          trig.classList.remove('active');
         });
-        elem.setAttribute('q-num', i);
-        h5.addEventListener('click', function () {
-          q.forEach(function (trig) {
-            trig.classList.remove('active');
-          });
-          elem.classList.add('active');
-        });
-        btn.addEventListener('click', function () {
-          var nextBtn = document.querySelector('.next-btn-bottom');
-          notBefore += 1;
-          elem.classList.remove('active');
+        elem.classList.add('active');
+      });
+      btn.addEventListener('click', function () {
+        var nextBtn = document.querySelector('.next-btn-bottom');
+        notBefore += 1;
+        elem.classList.remove('active');
 
-          if (!q[i + 1]) {} else {
-            q[i + 1].classList.remove('before');
-            q[i + 1].classList.add('active');
-          }
+        if (!q[i + 1]) {} else {
+          q[i + 1].classList.remove('before');
+          q[i + 1].classList.add('active');
+        }
 
-          if (notBefore === q.length) {
-            nextBtn.disabled = false;
-          }
-        });
+        if (notBefore === q.length) {
+          nextBtn.disabled = false;
+        }
       });
     });
-  } catch (_unused2) {}
-
-  ;
+  });
   var stepThreeItems = document.querySelectorAll('.step-3-item');
   var btn = document.querySelector('.next-btn-bottom');
+  stepThreeItems.forEach(function (item, i) {
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
 
-  try {
-    stepThreeItems.forEach(function (item, i) {
-      btn.addEventListener('click', function () {
-        btn.disabled = true;
-
-        if (btn.classList.contains('step-2') && stepThreeItems[i + 1].classList.contains('active')) {
-          btn.classList.remove('step-2');
-          btn.classList.add('step-3');
-          stepThreeItems[i + 1].classList.remove('active');
-          stepThreeItems[i + 1].classList.add('pre-back');
-          stepThreeItems[i + 2].classList.add('active');
-          stepThreeItems[i + 2].classList.remove('pre-next');
-          var btnBlock = document.querySelector('.review__btn.step-3');
-          var next = btnBlock.querySelector('.next-btn-bottom');
-          var stop = btnBlock.querySelector('.stop');
-          var bonusBlock = stop.querySelector('.bonus-block');
-          var pic = bonusBlock.querySelector('picture');
-          var bonSpan = bonusBlock.querySelector('span');
-          next.style.display = 'none';
-          stop.style.display = 'flex';
-          bonusBlock.style.cssText = "\n                display: flex;\n                width: 112px;\n            ";
-          pic.style.cssText = "\n                margin-left: 20px;\n            ";
-          bonSpan.style.color = '#FF6E52';
-        }
-      });
-      btn.addEventListener('click', function () {
-        if (btn.classList.contains('step-1')) {
-          btn.classList.remove('step-1');
-          btn.classList.add('step-2');
-          item.classList.remove('active');
-          item.classList.add('back');
-          stepThreeItems[i + 1].classList.add('active');
-          stepThreeItems[i + 1].classList.remove('next');
-        }
-      });
+      if (btn.classList.contains('step-2') && stepThreeItems[i + 1].classList.contains('active')) {
+        btn.classList.remove('step-2');
+        btn.classList.add('step-3');
+        stepThreeItems[i + 1].classList.remove('active');
+        stepThreeItems[i + 1].classList.add('pre-back');
+        stepThreeItems[i + 2].classList.add('active');
+        stepThreeItems[i + 2].classList.remove('pre-next');
+        var btnBlock = document.querySelector('.review__btn.step-3');
+        var next = btnBlock.querySelector('.next-btn-bottom');
+        var stop = btnBlock.querySelector('.stop');
+        var bonusBlock = stop.querySelector('.bonus-block');
+        var pic = bonusBlock.querySelector('picture');
+        var bonSpan = bonusBlock.querySelector('span');
+        next.style.display = 'none';
+        stop.style.display = 'flex';
+        bonusBlock.style.cssText = "\n                display: flex;\n                width: 112px;\n            ";
+        pic.style.cssText = "\n                margin-left: 20px;\n            ";
+        bonSpan.style.color = '#FF6E52';
+      }
     });
-  } catch (_unused3) {}
-
-  ;
+    btn.addEventListener('click', function () {
+      if (btn.classList.contains('step-1')) {
+        btn.classList.remove('step-1');
+        btn.classList.add('step-2');
+        item.classList.remove('active');
+        item.classList.add('back');
+        stepThreeItems[i + 1].classList.add('active');
+        stepThreeItems[i + 1].classList.remove('next');
+      }
+    });
+  });
 
   if (document.body.clientWidth < 1098) {
     var reviewBlock = document.querySelector('.review');
@@ -2731,39 +2733,31 @@ if (document.querySelector('.review') === null) {} else {
 
     var _stepThreeMid = document.querySelector('.review__mid-step-3');
 
-    try {
-      _stepOneNext.addEventListener('click', function () {
-        _stepOneMid.classList.remove('active');
+    _stepOneNext.addEventListener('click', function () {
+      _stepOneMid.classList.remove('active');
 
-        _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-1-no-active.svg\">\n                <img src=\"/upload/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
+      _stepOneMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"../img/review/step-1-no-active.svg\">\n                <img src=\"../img/review/step-1-no-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>1</span> \u041E\u0431\u0449\u0435\u0435 \u0432\u043F\u0435\u0447\u0430\u0442\u043B\u0435\u043D\u0438\u0435</p>\n        ";
 
-        _stepTwoMid.classList.add('active');
+      _stepTwoMid.classList.add('active');
 
-        _reviewBlock.classList.add('step-2');
+      _reviewBlock.classList.add('step-2');
 
-        _stepTwoMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"/upload/review/step-2-active.svg\">\n                <img src=\"/upload/review/step-2-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n            <picture class=\"icon\">\n                <source srcset=\"/upload/review/step-2-icon.svg\">\n                <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n            </picture>\n            <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
-      });
-    } catch (_unused4) {}
+      _stepTwoMid.innerHTML = "\n            <picture class=\"pic\">\n                <source srcset=\"../img/review/step-2-active.svg\">\n                <img src=\"../img/review/step-2-active.svg\" alt=\"good\">\n            </picture>\n            <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n            <picture class=\"icon\">\n                <source srcset=\"../img/review/step-2-icon.svg\">\n                <img src=\"../img/review/step-2-icon.svg\" alt=\"good\">\n            </picture>\n            <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+    });
 
-    ;
+    _stepTwoNext.addEventListener('click', function () {
+      _stepTwoMid.classList.remove('active');
 
-    try {
-      _stepTwoNext.addEventListener('click', function () {
-        _stepTwoMid.classList.remove('active');
+      _stepTwoMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"../img/review/step-2-no-active.svg\">\n        <img src=\"../img/review/step-2-no-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n        <picture class=\"icon\">\n            <source srcset=\"../img/review/step-2-icon.svg\">\n            <img src=\"../img/review/step-2-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
 
-        _stepTwoMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-2-no-active.svg\">\n        <img src=\"/upload/review/step-2-no-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>2</span> \u0412\u0441\u0435\u0433\u043E 3 \u0432\u043E\u043F\u0440\u043E\u0441\u0430</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-2-icon.svg\">\n            <img src=\"/upload/review/step-2-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+500 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+      _stepThreeMid.classList.add('active');
 
-        _stepThreeMid.classList.add('active');
+      _reviewBlock.classList.remove('step-2');
 
-        _reviewBlock.classList.remove('step-2');
+      _reviewBlock.classList.add('step-3');
 
-        _reviewBlock.classList.add('step-3');
-
-        _stepThreeMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"/upload/review/step-3-active.svg\">\n        <img src=\"/upload/review/step-3-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>3</span> \u041D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</p>\n        <picture class=\"icon\">\n            <source srcset=\"/upload/review/step-3-icon.svg\">\n            <img src=\"/upload/review/step-3-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+600 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
-      });
-    } catch (_unused5) {}
-
-    ;
+      _stepThreeMid.innerHTML = "\n        <picture class=\"pic\">\n        <source srcset=\"../img/review/step-3-active.svg\">\n        <img src=\"../img/review/step-3-active.svg\" alt=\"good\">\n        </picture>\n        <p><span>3</span> \u041D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</p>\n        <picture class=\"icon\">\n            <source srcset=\"../img/review/step-3-icon.svg\">\n            <img src=\"../img/review/step-3-icon.svg\" alt=\"good\">\n        </picture>\n        <p class=\"bonus\">+600 \u0431\u043E\u043D\u0443\u0441\u043E\u0432</p>\n        ";
+    });
   }
 }
 
@@ -3106,7 +3100,7 @@ jQuery(document).ready(function ($) {
   $('.solutions-card__circles_item').on('click', function () {
     $(this).removeClass('hide').addClass('show').siblings().removeClass('show').addClass('hide');
   });
-  $('.contract__item').on('click', function () {
+  $('.solutions-card__substrate').on('click', '.contract__item', function () {
     $(this).removeClass('no-active').addClass('active').siblings().removeClass('active').addClass('no-active');
   });
   $('body').on('click', '.closed-card', function () {
@@ -3116,8 +3110,6 @@ jQuery(document).ready(function ($) {
     $(this).parents('.solutions-card').removeClass('hide');
   });
   $('body').on('click', '.select__head', function () {
-    console.log("select clicked");
-
     if ($(this).hasClass('open')) {
       $(this).removeClass('open');
       $(this).next().fadeOut();

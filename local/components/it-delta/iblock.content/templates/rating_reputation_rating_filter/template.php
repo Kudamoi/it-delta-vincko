@@ -101,7 +101,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                 </div>
                 <div class="itemRating-open__wrapper">
                     <div class="itemRating-open__left">
-                        <? if (count($item['REVIEWS']) > 0): ?>
                             <div class="itemRating-open__left_info">
                                 <div class="info-block-one rating-check-window">
                                     <div class="info-block-one__left">
@@ -260,7 +259,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                                 <? endif; ?>
                             </div>
-                        <? endif; ?>
                         <? if ($item['STATUS_COMPANY']['ID'] == 1498 || $item['STATUS_COMPANY']['ID'] == 1497): ?>
                             <div class="itemRating-open__tab">
                                 <div class="tabs-wrapper links-tab">

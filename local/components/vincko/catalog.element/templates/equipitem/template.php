@@ -398,7 +398,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <span>Черное</span>
                     </p>
                 </div>
-                <div class="h5 complect__slider-datchiki-title">Датчики, входящие в комплект: <span class="red"><span class="num">0</span> шт</span> </div>
+                <div class="h5 complect__slider-datchiki-title">Устройства, входящие в комплект: <span class="red"><span class="num">0</span> шт</span> </div>
                 <div class="slick-slider-datchiki">
                     <? $i = 0; ?>
                     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
@@ -420,8 +420,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                             <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                                                 <div class="image">
                                                     <picture>
-                                                        <source srcset="<?= $PHOTO["src"] ?>">
-                                                        <img src="<?= $PHOTO["src"] ?>" alt="<?= $ec["NAME"] ?>">
+                                                        <source srcset="<?= $PHOTO["IMG_THUMB"]["src"] ?>">
+                                                        <img src="<?= $PHOTO["IMG_THUMB"]["src"] ?>" alt="<?= $ec["NAME"] ?>">
                                                     </picture>
                                                 </div>
                                             <? endforeach ?>
@@ -1410,10 +1410,10 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 <div class="modal-slider">
                     <? // additional photos
                     if (count($ec["EQUIPMENT_PICTURES"]) > 0):?>
-                        <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
+                       <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                             <picture>
-                                <source srcset="<?= $PHOTO["src"] ?>">
-                                <img src="<?= $PHOTO["src"] ?>" alt="modal-slide">
+                                <source srcset="<?= $PHOTO["IMG"]["src"] ?>">
+                                <img src="<?= $PHOTO["IMG"]["src"] ?>" alt="modal-slide">
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
@@ -1424,8 +1424,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                             <div class="item">
                                 <picture>
-                                    <source srcset="<?= $PHOTO["src"] ?>">
-                                    <img src="<?= $PHOTO["src"] ?>" alt="modal-bottom">
+                                    <source srcset="<?= $PHOTO["IMG_THUMB"]["src"] ?>">
+                                    <img src="<?= $PHOTO["IMG_THUMB"]["src"] ?>" alt="modal-bottom">
                                 </picture>
                             </div>
                         <? endforeach ?>
@@ -1531,7 +1531,8 @@ $data = [
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
     'subscribe_sum' => 0,
-    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized()
+    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
+    'credit_sum' => ceil($totalPrice/12),
 ];
 
 ?>
@@ -1561,7 +1562,7 @@ $data = [
                 data.sum -= data.subscribe_sum;
                 data.old_sum -= data.subscribe_sum;
             }
-
+            data.credit_sum = Math.ceil(data.sum / 12);
 
             itd_basket.$set(data);
         }
@@ -1622,7 +1623,7 @@ $data = [
             handleActive(id, true);
             updateBasket(data);
         })
-        $('.solutions__bottom_right').each(function () {
+        $('.complect__slider-wrapper-item-price .solutions__bottom_right').each(function () {
             let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
             $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
         })
