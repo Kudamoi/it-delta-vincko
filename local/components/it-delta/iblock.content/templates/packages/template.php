@@ -11,21 +11,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
-//
-// echo '<pre>';
-// print_r($arResult);
-// echo '</pre>';
 ?>
-<!--<pre>-->
-<!--    --><?//print_r($arResult)?>
-<!--</pre>-->
-<?php foreach ($arResult['SECTIONS'] as $section): ?>
+<?php $i=1; foreach ($arResult['SECTIONS'] as $section): ?>
     <? if (!empty($section['EQUIPMENT-KITS'])): ?>
-        <?
-        // echo '<pre>';
-        // print_r($section);
-        // echo '</pre>';
-        ?>
+
         <?php $checkEquip = 1?>
         <div class="ready-des2__show-item close">
             <div class="ready-des2__show-header">
@@ -68,7 +57,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
             <div class="ready-des2__show-main">
                 <div class="wrapper">
-                    <div class="ready-pack group__pack r-d-s<?=(count($section['EQUIPMENT-KITS'])<3?" small-slick-clider":"")?>" id="r-d-s-1">
+                    <div class="ready-pack group__pack r-d-s<?=(count($section['EQUIPMENT-KITS'])<3?" small-slick-clider":"")?>" id="r-d-s-<?=$i++;?>">
                         <?php foreach ($section['EQUIPMENT-KITS'] as $item): ?>
                             <div class="ready-pack__item-wrapper">
                                 <div class="ready-pack__item ready-pack__item--short">
