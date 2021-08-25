@@ -536,6 +536,143 @@ a.item__content-company-not {
 .rating-center .itemRating-open__tab .content-tab .tabs-content_active {
     height: unset;
 }
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list {
+    position: relative;
+    margin-top: 10px;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select {
+    position: absolute;
+    background: white;
+    z-index: 100;
+    left: -33px;
+    right: -15px;
+    padding: 22px 30px;
+    border-radius: 10px;
+    top: 0;
+    border: 1px solid #8FB0F8;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    display: none;
+    overflow: auto;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package .solution-card__list-select-package-title {
+    font-size: 16px;
+    line-height: 20px;
+    color: #818181;
+    font-weight: 700;
+ }
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package.active .solution-card__list-select-package-title {
+    color: #005DFF;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change input {
+    display: none;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
+    flex: 1 1 auto;
+    color: #818181;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change label:before {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+display: block;
+    content: '';
+    background: #FFFFFF;
+    border: 1px solid #93B6FF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change input:checked ~ label:before {
+    border: 4px solid #005EFF;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change input:checked ~ label {
+    color: #005DFF;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-select-package-change .balance {
+    flex: 1 1 auto;
+    text-align: right;
+    margin: 0 10px;
+    white-space: nowrap;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    margin-top: 10px;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current-open-list {
+    cursor: pointer;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current-text {
+    font-size: 18px;
+    line-height: 22px;
+    color: #005DFF;
+    font-style: normal;
+    font-weight: bold;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current-help {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current-help path {
+    fill: #93B5FF;
+}
+
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-current-help-window {
+    position: absolute;
+    background: white;
+    z-index: 100;
+    left: -30px;
+    right: -12px;
+    padding: 22px 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 17px;
+    top: 0;
+}
+.norating .company-info-card__page .installment__right-column .solutions-card__center .solution-card__list-select .solution-card__list-current-help-window {
+    top: 100%;
+    right: -30px;
+}
+.norating .company-info-card__page .solution-card__list-current-help-window-title {
+    font-weight: bold;
+}
+.solution-card__list-current-help-window-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
 @media (max-width: 1200px) {
     .formation__right {
         margin-left: 10px;
