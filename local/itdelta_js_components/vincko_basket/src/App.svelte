@@ -2,6 +2,7 @@
     export let items;
     export let sum;
     export let old_sum;
+    export let credit_sum;
     export let subscribe_sum;
     export let isAuthorized;
 
@@ -88,7 +89,7 @@
                         </div>
                         <p>по</p>
                         <div class="solutions__bottom_column-price">
-                            1 000 ₽
+                            {credit_sum} ₽
                         </div>
                     </div>
                     {#if isAuthorized}
