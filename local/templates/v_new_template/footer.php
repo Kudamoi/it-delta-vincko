@@ -21,7 +21,7 @@
 	</div>
 </div>
 
-<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override--1488729520 " style="">
+<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override--1488729520 <?=$_COOKIE["siteCookie"] ? "cc-invisible" : ""?>">
     <span id="cookieconsent:desc" class="cc-message">Этот сайт использует cookie для хранения данных. Продолжая использовать сайт, Вы даете свое согласие на работу с этими файлами.</span>
     <div class="cc-compliance">
         <a aria-label="dismiss cookie message" role="button" tabindex="0" class="cc-btn cc-dismiss">Ок</a>

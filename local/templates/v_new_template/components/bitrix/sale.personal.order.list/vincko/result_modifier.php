@@ -3,6 +3,13 @@
 use  Bitrix\Main\Localization\Loc;
 use Vincko\Policy;
 
+$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+
+if ($request->get('logout') === 'y') {
+    $GLOBALS["USER"]->Logout();
+    LocalRedirect('/');
+}
+
 foreach ($arResult["ORDERS"] as $arOrder) {
     $orderId = $arOrder["ORDER"]["ID"];
 

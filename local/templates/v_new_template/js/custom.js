@@ -1,13 +1,4 @@
 $(document).ready(function () {
-	// возвращает куки с указанным name,
-	// или undefined, если ничего не найдено
-	function getCookie(name) {
-		let matches = document.cookie.match(new RegExp(
-		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-		));
-		return matches ? decodeURIComponent(matches[1]) : undefined;
-	}
-
 	//order page installment calculate
 	let currentlyPrice = Number($('#b-data-old-sum').attr('data-old-sum'));
 	$('#b-form-order-ajax').find('.payment-method__price-month').html(Math.ceil(currentlyPrice / 12) + ' ₽');
@@ -252,23 +243,15 @@ $(document).ready(function () {
 		$("#input_phone").focus();
 	});
 
-	let cookieDate = localStorage.getItem('cookieDate');
     let cookieNotification = document.querySelector('.cc-window.cc-banner.cc-type-info.cc-theme-block');
     let cookieBtn = cookieNotification.querySelector('.cc-compliance .cc-btn.cc-dismiss');
 
-	if(getCookie("siteCookie")){
-		cookieNotification.classList.add('cc-invisible');
-	}
-
     // При клике на кнопку, в cookie записывается текущая дата в системе UNIX
     cookieBtn.addEventListener('click', function(){
-		if(!getCookie("siteCookie")){
-			let date = new Date(Date.now() + 31536000000);
-			date = date.toUTCString();
-			document.cookie = "siteCookie=1; expires=" + date;
-
-			cookieNotification.classList.add('cc-invisible');
-		}
+		let date = new Date(Date.now() + 31536000000);
+		date = date.toUTCString();
+		document.cookie = "siteCookie=1; expires=" + date;
+		cookieNotification.classList.add("cc-invisible");
     })
 
 	// $('form').submit(function(){

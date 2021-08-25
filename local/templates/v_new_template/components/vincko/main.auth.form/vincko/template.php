@@ -52,6 +52,6 @@ if ($arResult['AUTHORIZED'])
         </span>
     </div>
     <div class="link">
-        <a href="/profile/" class="js-modal js-modal-auth">Вход</a>
+        <a class="js-modal js-modal-auth">Вход</a>
     </div>
 </div>

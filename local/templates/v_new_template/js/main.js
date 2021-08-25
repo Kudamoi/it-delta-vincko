@@ -979,28 +979,32 @@ jQuery(document).ready(function ($) {
         if (!this.value) this.type = 'text';
       };
     }
+  } // TODO проблемы с кирилицей на iphone
+
+
+  if (browser_name() !== "Safari") {
+    $('.text-field').inputmask({
+      regex: "[A-ZА-Яa-zа-я- ]+",
+      showMaskOnHover: false
+    });
+    $('.address-field').inputmask({
+      regex: "[A-ZА-Яa-zа-я-.,: ]+",
+      showMaskOnHover: false
+    });
+    $('.street-field').inputmask({
+      regex: "[A-ZА-Яa-zа-я0-9-.,:/ ]+",
+      showMaskOnHover: false
+    });
+    $('.house-field').inputmask({
+      regex: "[0-9]+[A-ZА-Яa-zа-я-]+",
+      showMaskOnHover: false
+    });
+    $('.housing-field').inputmask({
+      regex: "[A-ZА-Яa-zа-я0-9-]+",
+      showMaskOnHover: false
+    });
   }
 
-  $('.text-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я- ]+",
-    showMaskOnHover: false
-  });
-  $('.address-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я-.,: ]+",
-    showMaskOnHover: false
-  });
-  $('.street-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я0-9-.,:/ ]+",
-    showMaskOnHover: false
-  });
-  $('.house-field').inputmask({
-    regex: "[0-9]+[A-ZА-Яa-zа-я-]+",
-    showMaskOnHover: false
-  });
-  $('.housing-field').inputmask({
-    regex: "[A-ZА-Яa-zа-я0-9-]+",
-    showMaskOnHover: false
-  });
   $('.flat-field').inputmask({
     regex: "[0-9]+",
     showMaskOnHover: false
