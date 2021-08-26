@@ -65,7 +65,7 @@ class Order
             \Bitrix\Currency\CurrencyManager::getBaseCurrency()
         );
 
-        $order->setPersonTypeId(1);
+        $order->setPersonTypeId(3);
         $order->setBasket($basket);
         $paymentCollection = $order->getPaymentCollection();
         $payment = $paymentCollection->createItem(
@@ -74,6 +74,11 @@ class Order
 
         $payment->setField("SUM", $order->getPrice());
         $payment->setField("CURRENCY", $order->getCurrency());
+
+
+        $propertyCollection = $order->getPropertyCollection();
+        $property = self::getPropertyByCode($propertyCollection, 'PHONE');
+        $property->setValue($arField["POLICY"]["PHONE"]);
 
         $order->save();
         return $order->getId();
@@ -343,5 +348,13 @@ class Order
         return $prop;
     }
 
+    //получает свойство по коду
+    private static function getPropertyByCode($propertyCollection, $code)
+    {
+        foreach ($propertyCollection as $property) {
+            if ($property->getField('CODE') == $code)
+                return $property;
+        }
+    }
 
 }
