@@ -38,7 +38,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
     <ul class="footer__bottom-up footer__bottom-up--to-hide">
         <li><a href="">Готовые решения</a></li>
         <li><a href="">Индивидуальная заявка</a></li>
-        <li><a href="">О компании vincko</a></li>
+        <li><a href="/about/">О компании vincko</a></li>
         <? foreach($arResult["ITEMS"] as $item): ?>
             <? if($item["CODE"] === "publichnaya-oferta"): ?>
                 <li class="footer__file"><a href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Публичная оферта</a></li>
