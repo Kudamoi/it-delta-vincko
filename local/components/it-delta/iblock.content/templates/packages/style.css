@@ -1,3 +1,5 @@
+.small-slick-clider { justify-content: center!important;}
+.small-slick-clider .ready-pack__item-wrapper{ margin: 0 20px;}
 .small-slick-clider .slick-slide{
   opacity: 1!important;
 }
