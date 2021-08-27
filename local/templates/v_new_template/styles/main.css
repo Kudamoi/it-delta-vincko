@@ -26234,12 +26234,14 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
 
 @media screen and (max-width: 440px) {
   .slide-modal.active .modal-box .modal-slider {
-    width: 250px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
   }
 
   .slide-modal.active .modal-box .modal-slider picture img {
-    width: 200px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
   }
 
