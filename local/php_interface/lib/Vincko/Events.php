@@ -43,6 +43,7 @@ class Events
 					$arPolicy = Policy::formatPolicy($arOffer, $arAllPaymentOptions, $arInsurance);
 
 					$arPolicyField["POLICY"]["ID"] = $arField["POLICY_ID"];
+					$arPolicyField["POLICY"]["PHONE"] = $arField["PHONE"];
 
 					// сформируем необходимый мыссив для передачи в заказ
 					$arPolicyField["PROPS"][] = [
