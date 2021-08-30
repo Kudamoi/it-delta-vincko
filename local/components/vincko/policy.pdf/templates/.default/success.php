@@ -27,13 +27,25 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 	foreach ($arResult["PAGE"]["DATA"][$pageNo - 1] as $fieldName => $arField) {
 		if(!empty($arField["COLOR"])){
 			$colorText = $arField["COLOR"];
-			$sizeText = $arField["SIZE"];
 		}
+
 		$pdf->SetTextColor($colorText[0],$colorText[1],$colorText[3]);
+
+		if($arField["SIZE"] > 0 ){
+            $sizeText = $arField["SIZE"];
+        }
+
+
 		$pdf->SetFont('font', '', $sizeText);
 
 		$text = iconv('utf-8', 'windows-1251', trim($arField["TEXT"], " "));
 		//$text = $arField["TEXT"];
+
+        if($arField["SPACING"] > 0){
+            $text = str_replace([" ","."],"",$text);
+            $spacing = str_repeat(" ", $arField["SPACING"]);
+            $text = chunk_split($text, 1, $spacing);
+        }
 
 		if (empty($text)) {
 			$text = "-";
