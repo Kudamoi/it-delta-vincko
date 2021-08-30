@@ -5,10 +5,59 @@ namespace Vincko;
 class Company
 {
     // инфоблок компаний
-    const IBLOCK_COMPANY = "chopcity";
+    const IBLOCK_COMPANY = "chop";
+
+    // инфоблок компаний в городах
+    const IBLOCK_COMPANY_CITY = "chopcity";
 
     // инфоблок честного договора
     const IBLOCK_HONEST = "contract";
+
+    /**
+     * @param $id
+     *
+     * @return array|null
+     * @throws LoaderException
+     */
+    public static function getById($id)
+    {
+        return !is_array($id)
+            ? current(self::getList([$id]))
+            : null;
+    }
+
+    /**
+     * @param array $ids
+     * @return array
+     * @throws LoaderException
+     */
+    public static function getList($ids)
+    {
+        \Bitrix\Main\Loader::includeModule("iblock");
+
+        $obCompany = \CIBlockElement::GetList(
+            [],
+            [
+                "IBLOCK_CODE" => static::IBLOCK_COMPANY,
+                "ID" => $ids,
+            ],
+            false,
+            false,
+            []
+        );
+
+        while ($arCompany = $obCompany->Fetch()) {
+            $company[$arCompany["ID"]] = [
+                "ID" => $arCompany["ID"],
+                "CODE" => $arCompany["CODE"],
+                "NAME" => $arCompany["NAME"],
+            ];
+
+        }
+
+        return $company;
+    }
+
 
     // получение честного договора
     public static function getHonestContract()
@@ -43,7 +92,7 @@ class Company
             [],
             [
                 "ID" => $ids,
-                "IBLOCK_CODE" => static::IBLOCK_COMPANY,
+                "IBLOCK_CODE" => static::IBLOCK_COMPANY_CITY,
                 "ACTIVE" => "Y"
             ],
             false,
@@ -52,12 +101,14 @@ class Company
                 "ID",
                 "PROPERTY_CONTRACT",
                 "PROPERTY_HONEST_CONTRACT",
+                "PROPERTY_CHOP_ID"
             ]
         );
 
         while ($arContractCompany = $obContractCompany->Fetch()) {
             // собираем в нужном виде
             $arCompany[$arContractCompany["ID"]] = [
+                "CHOP_ID" => $arContractCompany["PROPERTY_CHOP_ID_VALUE"],
                 "CONTRACT" => \CFile::GetPath($arContractCompany["PROPERTY_CONTRACT_VALUE"]),
                 "HONEST" => (!empty($arContractCompany["PROPERTY_HONEST_CONTRACT_VALUE"]) ?
                     $honesContract

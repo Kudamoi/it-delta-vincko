@@ -85,10 +85,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                             </span>
                             <span class="text">1</span>
                         </p>
-                        <? $company = CIBlockElement::GetList(array("SORT"=>"ASC"), array("ID" => $item["PROPERTIES"]["R_CHOP"]["VALUE"]), false, false, array("NAME"))->fetch();?>
+                        <? $companyCity = $arResult["COMPANY_CITY"][$item["PROPERTIES"]["R_CHOP"]["VALUE"]]?>
                         <p class="right">
-                            <span class="company_name"><?=$company["NAME"]?></span>
-                            <span class="company_city"><?$_COOKIE['selected_city']?></span>
+                            <span class="company_name"><?=$companyCity["PARENT"]["NAME"]?></span>
+                            <span class="company_city"><?=$_COOKIE['selected_city']?></span>
                         </p>
                     </div>
                 </div>

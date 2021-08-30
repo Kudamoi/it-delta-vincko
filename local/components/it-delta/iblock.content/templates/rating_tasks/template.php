@@ -26,7 +26,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             <div class="tasks__top_subtitle">
                 заказывая на платформе услуги одобренных компаний
             </div>
-            <div class="tasks__top_text">
+            <?/*<div class="tasks__top_text">
                 <div class="tasks__top_text-icon">
                     <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
                 </div>
@@ -40,7 +40,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                         </a>
                         в городе <a style="cursor: text" class="item__content-city"><?= $arResult['CURRENT_CITY']['NAME'] ?></a></p>
                 </div>
-            </div>
+            </div>*/?>
         </div>
         <div class="ready-des2__choice">
             <? foreach ($arResult['ITEMS'] as $item):
