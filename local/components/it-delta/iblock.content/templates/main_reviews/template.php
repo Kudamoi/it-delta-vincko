@@ -88,7 +88,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                         <? $companyCity = $arResult["COMPANY_CITY"][$item["PROPERTIES"]["R_CHOP"]["VALUE"]]?>
                         <p class="right">
                             <span class="company_name"><?=$companyCity["PARENT"]["NAME"]?></span>
-                            <span class="company_city"><?=$_COOKIE['selected_city']?></span>
+                            <?/*<span class="company_city"><?=$_COOKIE['selected_city']?></span>*/?>
                         </p>
                     </div>
                 </div>
