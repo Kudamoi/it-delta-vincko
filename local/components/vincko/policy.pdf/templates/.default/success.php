@@ -14,8 +14,7 @@ $colorText = [0, 0, 0];
 //размер текста по умолчанию
 $sizeText = 8;
 //обрабатываемый шаблон
-// TODO из за симлинка пришлось вставить путь так, при переносе на бой заменить на DOCUMENT_ROOT
-$pageCount = $pdf->setSourceFile("/home/bitrix/ext_www/stage.vincko.market" . $arResult["PAGE"]["FILE"]);
+$pageCount = $pdf->setSourceFile($_SERVER["DOCUMENT_ROOT"] . $arResult["PAGE"]["FILE"]);
 
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 	//добавляем страницу
