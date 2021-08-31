@@ -1414,6 +1414,10 @@ input[type="checkbox"] {
   transform: rotate(-45deg);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .first__page_top {
@@ -11298,8 +11302,7 @@ html {
   margin-left: 21px;
 }
 
-.slick-slider-datchiki .slide .slide-box-about li::before {
-  content: url("../img/cartochka/slider-item-before.svg");
+.slick-slider-datchiki .slide .slide-box-about li img {
   width: 20px;
   height: 20px;
   margin-right: 8px;
@@ -26372,10 +26375,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   .slick-slider-datchiki .slide .slide-box-about li {
     font-size: 8px;
     width: 140px;
-  }
-
-  .slick-slider-datchiki .slide .slide-box-about li::before {
-    margin-top: -2px;
   }
 }
 

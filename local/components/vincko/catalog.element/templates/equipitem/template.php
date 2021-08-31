@@ -432,7 +432,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 <ul class="slide-box-about">
                                     <? foreach ($ec['CHARACTERISTICS'] as $ch): ?>
                                         <li>
-                                            <img src="/local/templates/v_new_template/img/cartochka/slider-item-before.svg" alt="<?= $ec["NAME"] ?>">
+                                            <img src="<?=$arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['PREVIEW_PICTURE']?>" alt="<?= $ec["NAME"] ?>">
                                             <?= $arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['NAME'] ?>
                                         </li>
                                     <? endforeach ?>
