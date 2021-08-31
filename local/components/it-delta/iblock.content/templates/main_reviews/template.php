@@ -85,10 +85,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                             </span>
                                     <span class="text">1</span>
                                 </p>
-                                <? $companyCity = $arResult["COMPANY_CITY"][$item["PROPERTIES"]["R_CHOP"]["VALUE"]] ?>
+                                <? $company = CIBlockElement::GetList(array("SORT"=>"ASC"), array("ID" => $item["PROPERTIES"]["R_CHOP"]["VALUE"]), false, false, array("NAME"))->fetch();?>
                                 <p class="right">
-                                    <span class="company_name"><?= $companyCity["PARENT"]["NAME"] ?></span>
-                                    <span class="company_city"><?= $companyCity["CITY"]["NAME"] ?></span>
+                                    <span class="company_name"><?=$company["NAME"]?></span>
+                                    <span class="company_city"><?$_COOKIE['selected_city']?></span>
                                 </p>
                             </div>
                         </div>
@@ -136,8 +136,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             <? endforeach; ?>
         </div>
         <div class="you__reviews_bottom">
-            <p>На Репутационный рейтинг только отзывы клиентов охранных компаний, в том числе - из сторонних источников,
-                которые мы тщательно
+            <p>На Репутационный рейтинг не влияют только отзывы из сторонних источников, но мы все равно тщательно
                 собрали их для вас, чтобы вы могли принять максимально взвешенное решение.</p>
         </div>
     </div>
