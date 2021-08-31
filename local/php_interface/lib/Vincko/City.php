@@ -29,7 +29,10 @@ class City
     {
         \Bitrix\Main\Loader::includeModule("iblock");
 
-        if(!is_array($ids)){ return false;}
+        $result = [];
+        if(empty($ids)){
+            return $result;
+        }
 
         $ob = \CIBlockElement::GetList(
             [],

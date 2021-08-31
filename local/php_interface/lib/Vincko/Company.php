@@ -35,7 +35,10 @@ class Company
     {
         \Bitrix\Main\Loader::includeModule("iblock");
 
-        if(!is_array($ids)){ return false;}
+        $result = [];
+        if(empty($ids)){
+            return $result;
+        }
 
         $obCompany = \CIBlockElement::GetList(
             [],
@@ -49,7 +52,7 @@ class Company
         );
 
         while ($arCompany = $obCompany->Fetch()) {
-            $company[$arCompany["ID"]] = [
+            $result[$arCompany["ID"]] = [
                 "ID" => $arCompany["ID"],
                 "CODE" => $arCompany["CODE"],
                 "NAME" => $arCompany["NAME"],
@@ -57,7 +60,7 @@ class Company
 
         }
 
-        return $company;
+        return $result;
     }
 
 
