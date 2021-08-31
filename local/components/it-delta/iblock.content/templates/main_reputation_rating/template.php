@@ -99,7 +99,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                             fill="white" />
                     </svg>
                 </span>
-                <span class="text">Одобренные компании</span>
+                <span class="text">Компании-партнеры vincko:</span>
             </p>
             <p class="bottom">
                 При заказе услуг компаний, одобренных <span>vincko:</span> вы получаете
