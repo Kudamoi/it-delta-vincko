@@ -101,7 +101,8 @@ class Company
                 "ID",
                 "PROPERTY_CONTRACT",
                 "PROPERTY_HONEST_CONTRACT",
-                "PROPERTY_CHOP_ID"
+                "PROPERTY_CHOP_ID",
+                "PROPERTY_CITY_ID"
             ]
         );
 
@@ -109,6 +110,7 @@ class Company
             // собираем в нужном виде
             $arCompany[$arContractCompany["ID"]] = [
                 "CHOP_ID" => $arContractCompany["PROPERTY_CHOP_ID_VALUE"],
+                "CITY_ID" => $arContractCompany["PROPERTY_CITY_ID_VALUE"],
                 "CONTRACT" => \CFile::GetPath($arContractCompany["PROPERTY_CONTRACT_VALUE"]),
                 "HONEST" => (!empty($arContractCompany["PROPERTY_HONEST_CONTRACT_VALUE"]) ?
                     $honesContract
