@@ -2943,6 +2943,11 @@ input[type="checkbox"] {
   position: relative;
 }
 
+.must__now_item-bottom .img {
+  width: 168px;
+  height: 206px;
+}
+
 .must__now_item-bottom img {
   max-height: 206px;
 }
