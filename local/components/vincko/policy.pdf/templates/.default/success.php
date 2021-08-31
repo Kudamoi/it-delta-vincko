@@ -14,7 +14,6 @@ $colorText = [0, 0, 0];
 //размер текста по умолчанию
 $sizeText = 8;
 //обрабатываемый шаблон
-// TODO из за симлинка пришлось вставить путь так, при переносе на бой заменить на DOCUMENT_ROOT
 $pageCount = $pdf->setSourceFile($_SERVER["DOCUMENT_ROOT"] . $arResult["PAGE"]["FILE"]);
 
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -27,6 +26,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 	foreach ($arResult["PAGE"]["DATA"][$pageNo - 1] as $fieldName => $arField) {
 		if(!empty($arField["COLOR"])){
 			$colorText = $arField["COLOR"];
+			$sizeText = $arField["SIZE"];
 		}
 
 		$pdf->SetTextColor($colorText[0],$colorText[1],$colorText[3]);
