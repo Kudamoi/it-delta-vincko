@@ -88,7 +88,7 @@
                             12 мес.
                         </div>
                         <p>по</p>
-                        <div class="solutions__bottom_column-price">
+                        <div class="solutions__bottom_column-price nowrap">
                             {credit_sum} ₽
                         </div>
                     </div>

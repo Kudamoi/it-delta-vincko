@@ -1414,6 +1414,10 @@ input[type="checkbox"] {
   transform: rotate(-45deg);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .first__page_top {

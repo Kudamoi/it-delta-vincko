@@ -191,7 +191,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     <?/*<option value="6">6 мес.</option>*/?>
                                                 </select>
                                                 <p>по</p>
-                                                <div class="solutions__bottom_column-price">
+                                                <div class="solutions__bottom_column-price nowrap">
                                                     1 000 ₽
                                                 </div>
                                             </div>

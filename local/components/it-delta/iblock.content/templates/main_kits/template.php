@@ -109,8 +109,8 @@ $cities = CIBlockElement::GetList(
                                 </form>
                             </div>
                             <div class="rigth__price">
-                                <span>по</span>
-                                <p class="result">1 000 ₽</p>
+                                <span>по&nbsp;</span>
+                                <p class="result nowrap">1 000 ₽</p>
                             </div>
                         </div>
                     </div>

@@ -272,7 +272,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         12 мес.
                                     </div>
                                     <p>по</p>
-                                    <div class="solutions__bottom_column-price">
+                                    <div class="solutions__bottom_column-price nowrap">
                                         1 000 ₽
                                     </div>
                                 </div>
