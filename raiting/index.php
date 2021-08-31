@@ -94,6 +94,7 @@ $APPLICATION->IncludeComponent(
         "SORT_ORDER2" => "ASC"
     )
 ); ?>
+<a name="guarantee"></a>
 <? $APPLICATION->IncludeComponent(
     "it-delta:iblock.content",
     "rating_guarantee",
