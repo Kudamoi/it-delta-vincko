@@ -7644,7 +7644,11 @@ input[type="checkbox"] {
   max-width: 295px;
 }
 
-.footer__bottom-btn button {
+.footer__bottom-btn button,
+.footer__bottom-btn a {
+  width: 100%;
+  display: inline-block;
+  outline: none;
   text-transform: uppercase;
   color: black;
   background-color: white;
@@ -7659,7 +7663,8 @@ input[type="checkbox"] {
   transition: all 0.3s ease-in-out;
 }
 
-.footer__bottom-btn button:hover {
+.footer__bottom-btn button:hover,
+.footer__bottom-btn a:hover {
   background-color: rgba(230, 230, 230, 0.301);
 }
 
@@ -24360,7 +24365,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
     text-align: center;
   }
 
-  .footer__bottom-btn button {
+  .footer__bottom-btn button,
+  .footer__bottom-btn a {
     max-width: 292px;
   }
 
