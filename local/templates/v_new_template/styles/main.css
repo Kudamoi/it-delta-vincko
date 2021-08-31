@@ -2935,11 +2935,16 @@ input[type="checkbox"] {
   margin-bottom: 53px;
   font-family: "Gilroy-Bold";
   display: inline-block;
+  height: 38px;
   transition: all 0.3s ease-in-out;
 }
 
 .must__now_item-bottom {
   position: relative;
+}
+
+.must__now_item-bottom img {
+  max-height: 206px;
 }
 
 .must__now_item-container {
