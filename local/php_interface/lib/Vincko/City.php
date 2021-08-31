@@ -25,9 +25,11 @@ class City
      * @return array
      * @throws LoaderException
      */
-    public static function getList($ids)
+    public static function getList($ids = [])
     {
         \Bitrix\Main\Loader::includeModule("iblock");
+
+        if(!is_array($ids)){ return false;}
 
         $ob = \CIBlockElement::GetList(
             [],
