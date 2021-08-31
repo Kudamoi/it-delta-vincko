@@ -122,7 +122,9 @@ class PolicyPdf extends CBitrixComponent
 					"COORDINATES" => $fieldValue->COORDINATES,
 					"LINE"        => $fieldValue->LINE,
 					"VALIGN"      => $fieldValue->VALIGN,
-					"TEXT"        => $this->policyData[$fieldName]
+					"TEXT"        => $this->policyData[$fieldName],
+                    "SPACING"     => $fieldValue->SPACING,
+                    "SIZE"     => $fieldValue->SIZE,
 				];
 			}
 		}
