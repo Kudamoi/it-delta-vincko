@@ -11303,8 +11303,8 @@ html {
 }
 
 .slick-slider-datchiki .slide .slide-box-about li img {
-  width: 20px;
-  height: 20px;
+  max-width: 13px;
+  max-height: 13px;
   margin-right: 8px;
 }
 
