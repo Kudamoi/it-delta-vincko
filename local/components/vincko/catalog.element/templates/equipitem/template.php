@@ -431,7 +431,12 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <ul class="slide-box-about">
                                     <? foreach ($ec['CHARACTERISTICS'] as $ch): ?>
-                                        <li><?= $arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['NAME'] ?></li>
+                                        <li>
+                                            <? if(!empty($arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]["PREVIEW_PICTURE"])): ?>
+                                                <img src="<?=$arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]["PREVIEW_PICTURE"]?>" alt="<?= $ec["NAME"] ?>">
+                                            <? endif; ?>
+                                            <?= $arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['NAME'] ?>
+                                        </li>
                                     <? endforeach ?>
                                 </ul>
                             </div>

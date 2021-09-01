@@ -11302,10 +11302,9 @@ html {
   margin-left: 21px;
 }
 
-.slick-slider-datchiki .slide .slide-box-about li::before {
-  content: url("../img/cartochka/slider-item-before.svg");
-  width: 20px;
-  height: 20px;
+.slick-slider-datchiki .slide .slide-box-about li img {
+  max-width: 13px;
+  max-height: 13px;
   margin-right: 8px;
 }
 
@@ -26376,10 +26375,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   .slick-slider-datchiki .slide .slide-box-about li {
     font-size: 8px;
     width: 140px;
-  }
-
-  .slick-slider-datchiki .slide .slide-box-about li::before {
-    margin-top: -2px;
   }
 }
 
