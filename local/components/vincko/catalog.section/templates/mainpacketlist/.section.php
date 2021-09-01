@@ -1,3 +1,3 @@
 <?
-$sSectionName="mainpacketlist";
+$sSectionName="main"packetlist";
 ?>

@@ -138,4 +138,5 @@ foreach ($arSections as $key => $arSection) {
 
 $arResult["SECTIONS"] = $arSections;
 
-
+// Получим возможные периоды рассрочки
+$arResult["PERIOD_INST"] = Vincko\Order::getPeriodInstallment();

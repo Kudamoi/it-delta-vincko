@@ -245,6 +245,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     Всего
                                 </div>
                                 <? if (intval($arResult["PRICES"]["BASE"]["DISCOUNT_VALUE"]) != intval($arResult["PRICES"]["BASE"]["VALUE"])): ?>
+                                    <? $price = $arResult["PRICES"]["BASE"]["DISCOUNT_VALUE_VAT"];?>
                                     <div class="solutions__bottom_column-oldprice">
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_VALUE"] ?>
                                     </div>
@@ -252,13 +253,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_DISCOUNT_VALUE"] ?>
                                     </div>
                                 <? else: ?>
+                                    <? $price = $arResult["PRICES"]["BASE"]["VALUE_VAT"];?>
                                     <div class="solutions__bottom_column-newprice">
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_VALUE"] ?>
                                     </div>
                                 <? endif; ?>
-
                             </div>
-                            <div class="solutions__bottom_column">
+                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                            <div class="solutions__bottom_column ">
                                 <div class="solutions__bottom_column-title">
                                     Рассрочка без процентов
                                 </div>
@@ -267,17 +269,25 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         за вас платит <span class="blue-vinco">vincko:</span>
                                     </p>
                                 </div>
-                                <div class="solutions__bottom_column-monthprice">
+                                <div class="solutions__bottom_column-monthprice js-installment">
                                     <div class="solutions__bottom_column-select">
-                                        12 мес.
+                                        <select class="installment-period__select js-installment-period" data-price="<?=$price?>">
+                                            <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                            <? endforeach; ?>
+                                        </select>
                                     </div>
                                     <p>по</p>
                                     <div class="solutions__bottom_column-price nowrap">
-                                        1 000 ₽
+                                        <span class="js-installment-price">
+                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                        </span>
+                                        ₽
                                     </div>
                                 </div>
 
                             </div>
+                            <? endif; ?>
                         </div>
                     </div>
                 </div>
@@ -1535,6 +1545,7 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
+    'periods' =>$arResult["PERIOD_INST"],
     'subscribe_sum' => 0,
     'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
     'credit_sum' => ceil($totalPrice/12),
@@ -1628,10 +1639,7 @@ $data = [
             handleActive(id, true);
             updateBasket(data);
         })
-        $('.complect__slider-wrapper-item-price .solutions__bottom_right').each(function () {
-            let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
-            $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-        })
+
     });
 
 
