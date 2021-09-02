@@ -270,7 +270,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     </p>
                                 </div>
                                 <div class="solutions__bottom_column-monthprice js-installment">
-                                    <div class="solutions__bottom_column-select">
+                                    <div class="form__select">
                                         <select class="installment-period__select js-installment-period" data-price="<?=$price?>">
                                             <? foreach ($arResult["PERIOD_INST"] as $period): ?>
                                                 <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
