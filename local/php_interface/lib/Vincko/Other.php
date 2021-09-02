@@ -14,7 +14,7 @@ class Other
         if($price > 0 && $div > 0){
             $result = ceil($price / $div);
         }
-        return number_format($result, 0, ',', '&nbsp;');
+        return number_format($result, 0, ',', ' ');
     }
 
 }

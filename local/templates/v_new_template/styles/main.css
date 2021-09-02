@@ -12262,8 +12262,7 @@ html {
 
 .ready-pack__bottom .choices__list--dropdown .choices__item {
   white-space: nowrap;
-  padding-right: 0;
-  padding-left: 4px;
+  padding: 5px 0 5px 4px;
 }
 
 .ready-pack__bottom .choices__item {

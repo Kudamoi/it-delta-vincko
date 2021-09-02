@@ -1,4 +1,20 @@
 $(document).ready(function () {
+	instalmentPeriod();
+});
+
+function instalmentPeriod(){
+	try {
+		var element = document.querySelectorAll('.installment-period__select');
+
+		if (element) {
+			element.forEach(function (el) {
+				var choices = new Choices(el, {
+					searchEnabled: false,
+					itemSelectText: ''
+				});
+			});
+		}
+	} catch (_unused) {}
 
 	$(".js-installment-period").on("change", (function (event) {
 
@@ -9,9 +25,7 @@ $(document).ready(function () {
 		$(this).parents(".js-installment").find(".js-installment-price").html(instPrice);
 
 	}));
-
-});
-
+};
 
 function formatInstalmentPrice(price, div) {
 	var result = 0;

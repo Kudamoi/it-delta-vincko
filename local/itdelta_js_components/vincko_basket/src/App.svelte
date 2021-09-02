@@ -5,26 +5,22 @@
     export let periods;
     export let period;
     export let credit_sum;
-    export let total_credit_sum = credit_sum;
     export let subscribe_sum;
     export let isAuthorized;
-    let playerStats = [];
+
     export function checked() {
-         const url = '/ajax/recount.php';
+        const url = '/ajax/recount.php';
         var formData = new FormData();
-
-            formData.append('period', period);
-            formData.append('sum', sum);
-
-            fetch(url, {method: 'POST', body: formData})
-                .then(response => {
-                const playerData = response.text();
-                playerData.then((value) => {
-                  total_credit_sum = value;
+        formData.append('period', period);
+        formData.append('sum', sum);
+        fetch(url, {method: 'POST', body: formData})
+            .then(response => {
+                const data = response.text();
+                data.then((value) => {
+                    credit_sum = value;
                 });
-    });
-
-      }
+            });
+     }
     export function handleBuy(paymentMethod) {
 
         const url = '/ajax/addtobasket.php';
@@ -46,10 +42,6 @@
                 console.info(err + " url: " + url);
             });
     }
-function join(period) {
-alert(period);
-		return period+1;
-	}
 </script>
 
 <div class="solutions__bottom">
@@ -107,7 +99,7 @@ alert(period);
                         </p>
                     </div>
                     <div class="solutions__bottom_column-monthprice js-installment">
-                        <div class="solutions__bottom_column-select">
+                        <div>
                             <select class="installment-period__select js-installment-period" bind:value={period} on:change={() => checked()} data-price="{sum}">
                                {#each periods as period}
                                    <option value="{period.UF_MONTHS}">{period.UF_MONTHS} мес.</option>
@@ -117,7 +109,7 @@ alert(period);
                         <p>по</p>
                         <div class="solutions__bottom_column-price nowrap">
                             <span class="js-installment-price">
-                               {join(total_credit_sum)}
+                               {credit_sum}
                             </span>
                              ₽
                         </div>

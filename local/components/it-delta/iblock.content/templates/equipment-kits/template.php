@@ -14,7 +14,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-1111111111111111111111111111111
 <main class="container complect-obor">
     <section class="safe__pay rating-top">
         <div class="safe__pay_left">
@@ -154,30 +153,35 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             <div class="ready-pack__bottom-result">
                                                 <div style="display: flex; flex-direction: column">
                                                     <? if ($item['DISCOUNT_PRICE']!=$item['CATALOG_PRICE_1']): ?>
-                                                    <div class="solutions__bottom_column-oldprice">
-                                                        <span class="solutions__bottom_column-oldprice"><?=number_format($item['CATALOG_PRICE_1'], 0, ',', ' ')?> </span><span>₽</span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="currently-price"><?=number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> </span><span>₽</span>
-                                                        <span class="ready-pack__bottom-or">
-                                    или
-                                </span>
-                                                    </div>
+                                                        <? $price = $item['DISCOUNT_PRICE']?>
+                                                        <? $oldPrice = $item['CATALOG_PRICE_1'];?>
                                                     <? else: ?>
-                                                    <div>
-                                                    <span class="currently-price"><?=number_format($item['CATALOG_PRICE_1'], 0, ',', ' ')?> </span><span>₽</span>
-                                                        <span class="ready-pack__bottom-or">
-                                    или
-                                </span>
-                                                    </div>
+                                                        <? $price = $item['CATALOG_PRICE_1'];?>
+                                                        <? $oldPrice = 0;?>
                                                     <? endif; ?>
-
+                                                    <? if($oldPrice > 0 ): ?>
+                                                        <div class="solutions__bottom_column-oldprice nowrap">
+                                                            <span class="solutions__bottom_column-oldprice">
+                                                                <?=number_format($oldPrice, 0, ',', ' ')?>
+                                                            </span>
+                                                            <span>₽</span>
+                                                        </div>
+                                                    <? endif; ?>
+                                                    <div>
+                                                        <span class="currently-price">
+                                                            <?=number_format($price, 0, ',', ' ') ?>
+                                                        </span>
+                                                        <span>₽</span>
+                                                        <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                                            <span class="ready-pack__bottom-or">или</span>
+                                                        <? endif; ?>
+                                                    </div>
                                                 </div>
 
                                             </div>
                                         </div>
-
-                                        <div class="ready-pack__bottom-right">
+                                        <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                            <div class="ready-pack__bottom-right">
                                             <div class="solutions__bottom_column">
 
                                                 <div class="solutions__bottom_column-interest">
@@ -185,20 +189,25 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                         за вас платит <span class="blue-vinco">vincko:</span>
                                                     </p>
                                                 </div>
-                                                <div class="solutions__bottom_column-monthprice">
-                                                    <select name="solutions__bottom_column-select"
-                                                            class="solutions__bottom_column-select">
-                                                        <option selected value="12">12 мес.</option>
-                                                        <? /*<option value="6">6 мес.</option>*/ ?>
+
+                                                <div class="solutions__bottom_column-monthprice js-installment">
+                                                    <select class="installment-period__select js-installment-period" data-price="<?=$price?>">
+                                                        <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                            <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                                        <? endforeach; ?>
                                                     </select>
                                                     <p>по</p>
-                                                    <div class="solutions__bottom_column-price">
-                                                        1 000 ₽
+                                                    <div class="solutions__bottom_column-price nowrap">
+                                                        <span class="js-installment-price">
+                                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                                        </span>
+                                                        ₽
                                                     </div>
                                                 </div>
 
                                             </div>
                                         </div>
+                                        <? endif; ?>
 
                                         <button onclick="location.href='<?= $item['DETAIL_URL'] ?>/'"
                                                 class="ready-pack__bottom-button button yellow-button">

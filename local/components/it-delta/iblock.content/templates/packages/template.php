@@ -169,35 +169,45 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
 
                                         <div class="ready-pack__bottom-result" data-total-price="<?=empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']?>">
-                                            <?= empty($item['DISCOUNT_PRICE']) ? number_format($item['CATALOG_PRICE_1'], 0, ',', ' ') : number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> ₽
-                                            <span class="ready-pack__bottom-or">
+                                            <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']); ?>
+                                            <?=number_format($price, 0, ',', ' ') ?>
+                                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                                <span class="ready-pack__bottom-or">
                                                     или
                                                 </span>
+                                            <? endif; ?>
                                         </div>
                                     </div>
 
-                                    <div class="ready-pack__bottom-right">
-                                        <div class="solutions__bottom_column">
+                                    <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                        <div class="ready-pack__bottom-right">
+                                            <div class="solutions__bottom_column">
 
-                                            <div class="solutions__bottom_column-interest">
-                                                <p>все проценты<br>
-                                                    за вас платит <span class="blue-vinco">vincko:</span>
-                                                </p>
-                                            </div>
-                                            <div class="solutions__bottom_column-monthprice">
-                                                <select name="solutions__bottom_column-select"
-                                                        class="solutions__bottom_column-select">
-                                                    <option selected value="12">12 мес.</option>
-                                                    <?/*<option value="6">6 мес.</option>*/?>
-                                                </select>
-                                                <p>по</p>
-                                                <div class="solutions__bottom_column-price nowrap">
-                                                    1 000 ₽
+                                                <div class="solutions__bottom_column-interest">
+                                                    <p>все проценты<br>
+                                                        за вас платит <span class="blue-vinco">vincko:</span>
+                                                    </p>
                                                 </div>
-                                            </div>
+                                                <div class="solutions__bottom_column-monthprice js-installment">
+                                                    <select name="solutions__bottom_column-select"
+                                                            data-price="<?=$price?>"
+                                                            class="solutions__bottom_column-select js-installment-period">
+                                                        <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                            <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                                        <? endforeach; ?>
+                                                    </select>
+                                                    <p>по</p>
+                                                    <div class="solutions__bottom_column-price nowrap">
+                                                       <span class="js-installment-price">
+                                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                                        </span>
+                                                        ₽
+                                                    </div>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
+                                    <? endif; ?>
                                     <button class="ready-pack__bottom-button button yellow-button" onclick="location.href='/packages/<?= $item['ELEMENT_CODE'] ?>/'">
                                         ПОДРОБНЕЕ
                                     </button>

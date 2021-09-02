@@ -262,3 +262,5 @@ foreach ($arResult['PACKAGE_GROUP']['PACKAGES'] as $package) {
 //список позиций компаний в рейтинге
 $arResult['COMPANIES_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($_COOKIE['selected_city']);
 
+// Получим возможные периоды рассрочки
+$arResult["PERIOD_INST"] = Vincko\Order::getPeriodInstallment();

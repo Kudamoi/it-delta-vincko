@@ -1578,7 +1578,7 @@ $data = [
                 data.sum -= data.subscribe_sum;
                 data.old_sum -= data.subscribe_sum;
             }
-            data.credit_sum = Math.ceil(data.sum / 12);
+            data.credit_sum = Math.ceil(data.sum / parseInt($(".js-installment-period").val()));
 
             itd_basket.$set(data);
         }
