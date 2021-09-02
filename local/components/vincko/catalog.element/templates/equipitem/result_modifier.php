@@ -358,3 +358,6 @@ $arResult['PREVIEW_PICTURE_RESIZED_SMALL'] = CFile::ResizeImageGet($arResult['PR
 
 //список позиций компаний в рейтинге
 $arResult['COMPANIES_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($_COOKIE['selected_city']);
+
+// Получим возможные периоды рассрочки
+$arResult["PERIOD_INST"] = Vincko\Order::getPeriodInstallment();

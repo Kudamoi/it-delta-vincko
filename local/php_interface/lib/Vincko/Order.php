@@ -2,12 +2,16 @@
 
 namespace Vincko;
 
+
 class Order
 {
 // ИД  инфоблока товаров (страховых компаний)
     const IBLOCK_POLICY = 14;
     // ИД  инфоблока товарных предложений(страховых полисов)
     const IBLOCK_POLICY_OFFER = 24;
+
+    //Код hl блока Период рассрочки
+    const HLBLOCK_PERIOD_NAME = "Period";
 
     // получим варианты оплаты
     public static function getPaymentSystem()
@@ -357,4 +361,27 @@ class Order
         }
     }
 
+    // получает массив с возможными периодами рассрочки
+    public static function getPeriodInstallment()
+    {
+        \Bitrix\Main\Loader::includeModule("highloadblock");
+
+        $periodEntity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity(static::HLBLOCK_PERIOD_NAME);
+        $periodList = $periodEntity->getDataClass()::getList(
+            [
+                "select" => ["*"],
+                "order" => [
+                    "UF_MONTHS" => "DESC"
+                ]
+            ]
+        );
+
+        $periods = [];
+
+        while ($period = $periodList->fetch()) {
+            $periods[] = $period;
+        }
+
+        return $periods;
+    }
 }

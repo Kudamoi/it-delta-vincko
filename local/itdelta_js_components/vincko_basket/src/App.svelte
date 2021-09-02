@@ -2,10 +2,25 @@
     export let items;
     export let sum;
     export let old_sum;
+    export let periods;
+    export let period;
     export let credit_sum;
     export let subscribe_sum;
     export let isAuthorized;
 
+    export function checked() {
+        const url = '/ajax/recount.php';
+        var formData = new FormData();
+        formData.append('period', period);
+        formData.append('sum', sum);
+        fetch(url, {method: 'POST', body: formData})
+            .then(response => {
+                const data = response.text();
+                data.then((value) => {
+                    credit_sum = value;
+                });
+            });
+     }
     export function handleBuy(paymentMethod) {
 
         const url = '/ajax/addtobasket.php';
@@ -27,7 +42,6 @@
                 console.info(err + " url: " + url);
             });
     }
-
 </script>
 
 <div class="solutions__bottom">
@@ -74,6 +88,7 @@
                         </button>
                     {/if}
                 </div>
+                {#if periods}
                 <div class="solutions__bottom_column">
                     <div class="solutions__bottom_column-title">
                         Рассрочка без процентов
@@ -83,13 +98,20 @@
                             за вас платит <span>vincko:</span>
                         </p>
                     </div>
-                    <div class="solutions__bottom_column-monthprice">
-                        <div class="solutions__bottom_column-select">
-                            12 мес.
+                    <div class="solutions__bottom_column-monthprice js-installment">
+                        <div>
+                            <select class="installment-period__select js-installment-period" bind:value={period} on:change={() => checked()} data-price="{sum}">
+                               {#each periods as period}
+                                   <option value="{period.UF_MONTHS}">{period.UF_MONTHS} мес.</option>
+                               {/each}
+                            </select>
                         </div>
                         <p>по</p>
                         <div class="solutions__bottom_column-price nowrap">
-                            {credit_sum} ₽
+                            <span class="js-installment-price">
+                               {credit_sum}
+                            </span>
+                             ₽
                         </div>
                     </div>
                     {#if isAuthorized}
@@ -103,6 +125,7 @@
                         </button>
                     {/if}
                 </div>
+                {/if}
             </div>
         </div>
     </div>

@@ -1176,8 +1176,10 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
+    'periods' =>$arResult["PERIOD_INST"],
     'subscribe_sum' => 0,
-    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized()
+    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
+    'credit_sum' => ceil($totalPrice/12)
 ];
 
 ?>
@@ -1210,6 +1212,7 @@ $data = [
                 data.old_sum -= data.subscribe_sum;
             }
 
+            data.credit_sum = Math.ceil(data.sum / parseInt($(".js-installment-period").val()));
 
             itd_basket.$set(data);
         }
@@ -1270,10 +1273,7 @@ $data = [
             handleActive(id, true);
             updateBasket(data);
         })
-        $('.solutions__bottom_right').each(function () {
-            let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
-            $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-        })
+
     });
     $("#subscribe .blue-button").on("click", function () {
         $(".subscribe").addClass("subscribe-ordered");

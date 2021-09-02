@@ -176,11 +176,7 @@ $(document).ready(function () {
       }
     } catch (_unused) {}
 
-  //packages page installment calculate
-  $('.ready-pack__bottom').each(function () {
-    let currentlyPrice = Number($(this).find('.ready-pack__bottom-result').attr('data-total-price'));
-    $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-
-  })
+  instalmentPeriod();
 
 });
+

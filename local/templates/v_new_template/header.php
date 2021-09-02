@@ -47,6 +47,7 @@ $Asset = Asset::getInstance();
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/site.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/main.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/auth.js"); ?>
+    <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/other.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/custom.js"); ?>
 
 
