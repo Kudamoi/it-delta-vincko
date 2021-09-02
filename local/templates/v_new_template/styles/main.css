@@ -1414,6 +1414,10 @@ input[type="checkbox"] {
   transform: rotate(-45deg);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /*Поставил 2, т.к. такая переменная уже создана выше (с) Александр*/
 
 .first__page_top {
@@ -2935,11 +2939,21 @@ input[type="checkbox"] {
   margin-bottom: 53px;
   font-family: "Gilroy-Bold";
   display: inline-block;
+  height: 38px;
   transition: all 0.3s ease-in-out;
 }
 
 .must__now_item-bottom {
   position: relative;
+}
+
+.must__now_item-bottom .img {
+  width: 168px;
+  height: 206px;
+}
+
+.must__now_item-bottom img {
+  max-height: 206px;
 }
 
 .must__now_item-container {
@@ -7634,7 +7648,11 @@ input[type="checkbox"] {
   max-width: 295px;
 }
 
-.footer__bottom-btn button {
+.footer__bottom-btn button,
+.footer__bottom-btn a {
+  width: 100%;
+  display: inline-block;
+  outline: none;
   text-transform: uppercase;
   color: black;
   background-color: white;
@@ -7649,7 +7667,8 @@ input[type="checkbox"] {
   transition: all 0.3s ease-in-out;
 }
 
-.footer__bottom-btn button:hover {
+.footer__bottom-btn button:hover,
+.footer__bottom-btn a:hover {
   background-color: rgba(230, 230, 230, 0.301);
 }
 
@@ -11283,10 +11302,9 @@ html {
   margin-left: 21px;
 }
 
-.slick-slider-datchiki .slide .slide-box-about li::before {
-  content: url("../img/cartochka/slider-item-before.svg");
-  width: 20px;
-  height: 20px;
+.slick-slider-datchiki .slide .slide-box-about li img {
+  max-width: 13px;
+  max-height: 13px;
   margin-right: 8px;
 }
 
@@ -24350,7 +24368,8 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
     text-align: center;
   }
 
-  .footer__bottom-btn button {
+  .footer__bottom-btn button,
+  .footer__bottom-btn a {
     max-width: 292px;
   }
 
@@ -26356,10 +26375,6 @@ input:checked + .ready-des2__choice-item--subscription .ready-des2__choice-title
   .slick-slider-datchiki .slide .slide-box-about li {
     font-size: 8px;
     width: 140px;
-  }
-
-  .slick-slider-datchiki .slide .slide-box-about li::before {
-    margin-top: -2px;
   }
 }
 
