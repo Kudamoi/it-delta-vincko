@@ -8,6 +8,58 @@
     max-width: unset;
 }
 
+.order .form .payment-method .radio-wrapper label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.order .form .payment-method .radio-wrapper label svg {
+    margin-left: 7px;
+    left: 100%;
+    display: none;
+    position: absolute;
+}
+.order .form .payment-method .radio-wrapper input[type=radio]:checked ~ label svg {
+    display: block;
+}
+.order .form .payment-method .choices__inner {
+    background: none;
+    border: none;
+    min-height: unset;
+    padding: 0 10px 0 0;
+}
+.order .form .payment-method .choices {
+    margin-left: 23px;
+    margin-bottom: -3px;
+}
+.order .form .payment-method .choices__list--dropdown .choices__item--selectable {
+    padding: 5px;
+}
+.order .form .payment-method__price-month {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+    color: #35A34A;
+    display: initial;
+    position: relative;
+}
+.order .form .payment-method__price-month:after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #35A34A;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease-in-out;
+}
+.order .form .payment-method__installment-title {
+    align-items: self-end;
+}
 .rating-center__search_form.select-city .searchForm__modal_topChek .topChekItem:first-child {
     display: none !important;
 }
