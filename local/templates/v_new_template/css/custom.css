@@ -4,6 +4,10 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
+.order .form__section.form__pay-info p {
+    max-width: unset;
+}
+
 .rating-center__search_form.select-city .searchForm__modal_topChek .topChekItem:first-child {
     display: none !important;
 }
