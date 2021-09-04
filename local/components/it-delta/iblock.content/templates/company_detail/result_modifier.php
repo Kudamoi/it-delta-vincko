@@ -49,26 +49,64 @@ while ($manufacture = $manufactureCompanies->GetNext()) {
     $arrManufactures[$manufacture["ID"]]['NAME'] = $manufacture["NAME"];
 }
 
-//получаем тороговые предложения
-$paket = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chop-packet-ap', "PROPERTY_CPA_CHOP" => $arResult['ID'], "ACTIVE" => "Y"), false, false, array("ID", "PROPERTY_CPA_PACKET.DETAIL_PAGE_URL", "PROPERTY_CPA_ABONPLATA"))->fetch();
+//Получаем все готовые решения в гп данной компании
+$classes = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'classes'), false, false, array('ID', 'NAME'));
 
-if (!empty($paket['PROPERTY_CPA_ABONPLATA_VALUE'])):
-    $rsOffersId = CCatalogSKU::getOffersList(array('ID' => $paket['PROPERTY_CPA_ABONPLATA_VALUE']), false, false, array('ID'));
-    foreach ($rsOffersId[$paket['PROPERTY_CPA_ABONPLATA_VALUE']] as $off):
+while ($class = $classes->GetNext()) {
+    $arClasses[$class['ID']] = $class;
+}
+$packs = CIBlockSection::GetList(array(), array("IBLOCK_CODE" => 'packets'), false, array('ID', 'NAME'));
+
+while ($pack = $packs->GetNext()) {
+    $arPackages[$pack['ID']] = $pack;
+}
+$complects = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'complect'), false, false, array('ID', 'NAME'));
+
+while ($complect = $complects->GetNext()) {
+    $arComplect[$complect['ID']] = $complect;
+}
+
+$packages = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chop-packet-ap', "PROPERTY_CPA_CHOP" => $arResult['ID'], "ACTIVE" => "Y"/*, 'ID' => 1537*/), false, false, array('ID', 'NAME', 'PROPERTY_CPA_PACKET.NAME','PROPERTY_CPA_PACKET.PREVIEW_TEXT', 'PROPERTY_CPA_PACKET.IBLOCK_SECTION_ID', 'PROPERTY_CPA_PACKET.ID', 'PROPERTY_CPA_PACKET.PROPERTY_CO_CLASS_REF', 'PROPERTY_CPA_PACKET.DETAIL_PAGE_URL', "PROPERTY_CPA_ABONPLATA","PROPERTY_CPA_PACKET.PROPERTY_P_COMPLECT"));
+while ($package = $packages->GetNext()) {
+    $package['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID'] = $arPackages[$package['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID']];
+    $package['PROPERTY_CPA_PACKET_NAME'] = substr(trim($package['PROPERTY_CPA_PACKET_NAME']), strpos(trim($package['PROPERTY_CPA_PACKET_NAME']), '"'));
+    $package['PROPERTY_CPA_PACKET_DETAIL_PAGE_URL'] = preg_replace('[//]', '/', $package['PROPERTY_CPA_PACKET_DETAIL_PAGE_URL']);
+    $package['PROPERTY_CPA_PACKET_PROPERTY_CO_CLASS_REF_VALUE'] = $arClasses[$package['PROPERTY_CPA_PACKET_PROPERTY_CO_CLASS_REF_VALUE']];
+    $package['PROPERTY_CPA_PACKET_PROPERTY_P_COMPLECT_VALUE'] = $arComplect[$package['PROPERTY_CPA_PACKET_PROPERTY_P_COMPLECT_VALUE']];
+    $idOfferContainer[] = $package['PROPERTY_CPA_ABONPLATA_VALUE'];
+    $arrPackages[$package['ID']] = $package;
+}
+
+$idOfferContainer = array_unique($idOfferContainer);
+
+foreach ($idOfferContainer as $id):
+    $rsOffersId = CCatalogSKU::getOffersList(array('ID' => $id), false, false, array('ID'));
+    foreach ($rsOffersId[$id] as $off):
         $idOffer[] = $off['ID'];
     endforeach;
+    $offersList[$id] = $rsOffersId[$id];
+endforeach;
 
+$offers = CIBlockElement::GetList(array(), array("ID" => $idOffer), false, false, array("ID", 'CATALOG_GROUP_1', 'PROPERTY_APTP_MESYAC'));
 
-    $offers = CIBlockElement::GetList(array(), array("ID" => $idOffer), false, false, array("ID", 'CATALOG_GROUP_1', 'PROPERTY_APTP_MESYAC'));
+while ($arOffer = $offers->GetNext()) {
 
-    while ($arOffer = $offers->GetNext()) {
-        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['ID'] = $arOffer['ID'];
-        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['MONTH'] = $arOffer['PROPERTY_APTP_MESYAC_VALUE'];
-        $arResult['OFFERS']['ITEMS'][$arOffer['ID']]['PRICE'] = $arOffer['CATALOG_PRICE_1'];
-    }
+    $arOffers[$arOffer['ID']]['ID'] = $arOffer['ID'];
+    $arOffers[$arOffer['ID']]['MONTH'] = $arOffer['PROPERTY_APTP_MESYAC_VALUE'];
+    $arOffers[$arOffer['ID']]['PRICE'] = $arOffer['CATALOG_PRICE_1'];
+}
 
-    $arResult['OFFERS']['SRC'] = preg_replace('[//]', '/', $paket['PROPERTY_CPA_PACKET_DETAIL_PAGE_URL']);
-endif;
+foreach ($offersList as &$offer):
+    $keys = array_keys($offer);
+    foreach ($keys as $key):
+        $offer[$key] = $arOffers[$key];
+    endforeach;
+endforeach;
+
+foreach ($arrPackages as &$package):
+    $package['PROPERTY_CPA_ABONPLATA_VALUE'] = array_values($offersList[$package['PROPERTY_CPA_ABONPLATA_VALUE']]);
+endforeach;
+
 //Получаем города в котороых есть эта компания
 $companies = CIBlockElement::GetList(array(), array("IBLOCK_CODE" => 'chopcity', 'PROPERTY_CHOP_ID' => $arResult['PROPERTIES']['CHOP_ID']['VALUE'], "ACTIVE" => "Y"), false, false, array("ID", "PROPERTY_CITY_ID.ID", "PROPERTY_CITY_ID.NAME", "PROPERTY_CHOP_ID.ID", "PROPERTY_CHOP_ID.NAME", "PROPERTY_CHOP_ID.PROPERTY_CH_ABOUT_COMPANY", 'PROPERTY_CHOP_ID.PROPERTY_CH_DATE_FROM', 'PROPERTY_CHOP_ID.PROPERTY_CH_DATE_ACTUAL', 'PROPERTY_MANUFACTURERS'));
 while ($company = $companies->GetNext()) {
@@ -126,6 +164,11 @@ $_monthsList = array(
     "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
 $arResult['CURRENT_MONTH'] = $_monthsList[date("n")];
 
+$arResult['OFFERS'] = $arrPackages;
+foreach ($arResult['OFFERS'] as $offer) {
+    empty($arResult['GROUP_OFFERS'][$offer['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID']['ID']]['NAME']) ? $arResult['GROUP_OFFERS'][$offer['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID']['ID']]['NAME'] = $offer['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID']['NAME'] : '';
+    $arResult['GROUP_OFFERS'][$offer['PROPERTY_CPA_PACKET_IBLOCK_SECTION_ID']['ID']]['ITEMS'][] = $offer['ID'];
+}
 
 $arResult['CHOP_DETAIL'] = $arrCities[$arResult['ID']];
 $arResult['POSITION'] = $arrPositions[$arResult['PROPERTIES']['CHOP_ID']['VALUE']]['POSITION_IN_RATING'];

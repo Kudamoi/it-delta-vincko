@@ -27,7 +27,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                 </div>
                 <div class="must__now_item-bottom">
                     <div class="img">
-                        <img src="<?=CFile::GetPath($item["PROPERTIES"]["PZ_PIC"]["VALUE"][0])?>" alt="img">
+                        <? if(!empty($item["PREVIEW_PICTURE"])) :?>
+                            <img src="<?=$item["PREVIEW_PICTURE"]["SRC"]?>" alt="img">
+                        <? endif; ?>
                     </div>
                 </div>
             </div>

@@ -47,6 +47,7 @@ $Asset = Asset::getInstance();
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/site.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/main.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/auth.js"); ?>
+    <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/other.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/js/custom.js"); ?>
 
 
@@ -55,6 +56,23 @@ $Asset = Asset::getInstance();
 </head>
 
 <body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" data-skip-moving="true">
+	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+		m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	ym(74474422, "init", {
+		clickmap:true,
+		trackLinks:true,
+		accurateTrackBounce:true,
+		webvisor:true,
+		ecommerce:"dataLayer"
+	});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/74474422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <div id="panel"><?= $APPLICATION->ShowPanel(); ?></div>
 <header class="header">
 	<div class="header__popup popup hidden">

@@ -76,22 +76,6 @@ $(document).ready(function () {
 			});
 		}
 	);
-	$('.ready-pack__item').each(function () {
-		let currentlyPrice = Number($(this).find('.ready-pack__bottom .ready-pack__bottom-result .currently-price').html().replace(/\s/g, ''));
-		$(this).find('.ready-pack__bottom .solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-	})
-	$('.solutions__bottom_column-select').on('change', function () {
-		let currentlyPrice = Number($(this).closest('.ready-pack__bottom').find('.currently-price').html().replace(/\s/g, ''));
-		$(this).closest('.ready-pack__bottom').find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / $(this).val()) + ' ₽');
-	})
-	$('.solutions__bottom_right').each(function () {
-		let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
-		$(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-	})
-
-
-
-
 	function timer(parent) {
 		parent.find(".popup__wait-time").css("display", "block");
 		parent.find(".popup__wait").css("display", "block");

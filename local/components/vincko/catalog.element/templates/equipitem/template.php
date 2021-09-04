@@ -245,6 +245,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     Всего
                                 </div>
                                 <? if (intval($arResult["PRICES"]["BASE"]["DISCOUNT_VALUE"]) != intval($arResult["PRICES"]["BASE"]["VALUE"])): ?>
+                                    <? $price = $arResult["PRICES"]["BASE"]["DISCOUNT_VALUE_VAT"];?>
                                     <div class="solutions__bottom_column-oldprice">
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_VALUE"] ?>
                                     </div>
@@ -252,13 +253,14 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_DISCOUNT_VALUE"] ?>
                                     </div>
                                 <? else: ?>
+                                    <? $price = $arResult["PRICES"]["BASE"]["VALUE_VAT"];?>
                                     <div class="solutions__bottom_column-newprice">
                                         <?= $arResult["PRICES"]["BASE"]["PRINT_VALUE"] ?>
                                     </div>
                                 <? endif; ?>
-
                             </div>
-                            <div class="solutions__bottom_column">
+                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                            <div class="solutions__bottom_column ">
                                 <div class="solutions__bottom_column-title">
                                     Рассрочка без процентов
                                 </div>
@@ -267,17 +269,25 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                         за вас платит <span class="blue-vinco">vincko:</span>
                                     </p>
                                 </div>
-                                <div class="solutions__bottom_column-monthprice">
-                                    <div class="solutions__bottom_column-select">
-                                        12 мес.
+                                <div class="solutions__bottom_column-monthprice js-installment">
+                                    <div class="form__select">
+                                        <select class="installment-period__select js-installment-period" data-price="<?=$price?>">
+                                            <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                            <? endforeach; ?>
+                                        </select>
                                     </div>
                                     <p>по</p>
-                                    <div class="solutions__bottom_column-price">
-                                        1 000 ₽
+                                    <div class="solutions__bottom_column-price nowrap">
+                                        <span class="js-installment-price">
+                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                        </span>
+                                        ₽
                                     </div>
                                 </div>
 
                             </div>
+                            <? endif; ?>
                         </div>
                     </div>
                 </div>
@@ -398,7 +408,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <span>Черное</span>
                     </p>
                 </div>
-                <div class="h5 complect__slider-datchiki-title">Датчики, входящие в комплект: <span class="red"><span class="num">0</span> шт</span> </div>
+                <div class="h5 complect__slider-datchiki-title">Устройства, входящие в комплект: <span class="red"><span class="num">0</span> шт</span> </div>
                 <div class="slick-slider-datchiki">
                     <? $i = 0; ?>
                     <? foreach ($arResult["EQUIP_COMPLECT"] as $key => $ec): ?>
@@ -420,8 +430,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                             <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                                                 <div class="image">
                                                     <picture>
-                                                        <source srcset="<?= $PHOTO["src"] ?>">
-                                                        <img src="<?= $PHOTO["src"] ?>" alt="<?= $ec["NAME"] ?>">
+                                                        <source srcset="<?= $PHOTO["IMG_THUMB"]["src"] ?>">
+                                                        <img src="<?= $PHOTO["IMG_THUMB"]["src"] ?>" alt="<?= $ec["NAME"] ?>">
                                                     </picture>
                                                 </div>
                                             <? endforeach ?>
@@ -431,7 +441,12 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                 </div>
                                 <ul class="slide-box-about">
                                     <? foreach ($ec['CHARACTERISTICS'] as $ch): ?>
-                                        <li><?= $arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['NAME'] ?></li>
+                                        <li>
+                                            <? if(!empty($arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]["PREVIEW_PICTURE"])): ?>
+                                                <img src="<?=$arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]["PREVIEW_PICTURE"]?>" alt="<?= $ec["NAME"] ?>">
+                                            <? endif; ?>
+                                            <?= $arResult["EQUIP_ITEM_CHARACTERISTICS"][$ch]['NAME'] ?>
+                                        </li>
                                     <? endforeach ?>
                                 </ul>
                             </div>
@@ -1410,10 +1425,10 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                 <div class="modal-slider">
                     <? // additional photos
                     if (count($ec["EQUIPMENT_PICTURES"]) > 0):?>
-                        <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
+                       <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                             <picture>
-                                <source srcset="<?= $PHOTO["src"] ?>">
-                                <img src="<?= $PHOTO["src"] ?>" alt="modal-slide">
+                                <source srcset="<?= $PHOTO["IMG"]["src"] ?>">
+                                <img src="<?= $PHOTO["IMG"]["src"] ?>" alt="modal-slide">
                             </picture>
                         <? endforeach ?>
                     <? endif ?>
@@ -1424,8 +1439,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                         <? foreach ($ec['EQUIPMENT_PICTURES'] as $PHOTO): ?>
                             <div class="item">
                                 <picture>
-                                    <source srcset="<?= $PHOTO["src"] ?>">
-                                    <img src="<?= $PHOTO["src"] ?>" alt="modal-bottom">
+                                    <source srcset="<?= $PHOTO["IMG_THUMB"]["src"] ?>">
+                                    <img src="<?= $PHOTO["IMG_THUMB"]["src"] ?>" alt="modal-bottom">
                                 </picture>
                             </div>
                         <? endforeach ?>
@@ -1530,8 +1545,10 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
+    'periods' =>$arResult["PERIOD_INST"],
     'subscribe_sum' => 0,
-    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized()
+    'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
+    'credit_sum' => ceil($totalPrice/12),
 ];
 
 ?>
@@ -1561,7 +1578,7 @@ $data = [
                 data.sum -= data.subscribe_sum;
                 data.old_sum -= data.subscribe_sum;
             }
-
+            data.credit_sum = Math.ceil(data.sum / parseInt($(".js-installment-period").val()));
 
             itd_basket.$set(data);
         }
@@ -1622,10 +1639,7 @@ $data = [
             handleActive(id, true);
             updateBasket(data);
         })
-        $('.solutions__bottom_right').each(function () {
-            let currentlyPrice = Number($(this).find('.solutions__bottom_column-newprice').html().replace(/\s/g, '').replace('₽', '').replace('&nbsp;', ''));
-            $(this).find('.solutions__bottom_column-price').html(Math.ceil(currentlyPrice / 12) + ' ₽');
-        })
+
     });
 
 

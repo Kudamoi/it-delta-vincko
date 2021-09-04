@@ -26,7 +26,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             <div class="tasks__top_subtitle">
                 заказывая на платформе услуги одобренных компаний
             </div>
-            <div class="tasks__top_text">
+            <?/*<div class="tasks__top_text">
                 <div class="tasks__top_text-icon">
                     <img src="/upload/rating/endorsements-icon_mini.svg" alt="img">
                 </div>
@@ -40,26 +40,24 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                         </a>
                         в городе <a style="cursor: text" class="item__content-city"><?= $arResult['CURRENT_CITY']['NAME'] ?></a></p>
                 </div>
-            </div>
+            </div>*/?>
         </div>
         <div class="ready-des2__choice">
             <? foreach ($arResult['ITEMS'] as $item):
                 $params = $item['PROPERTIES']['PACKAGES']['VALUE']; ?>
                 <div class="choice-slide">
-                    <input id="<?= $item['ID'] ?>" type="radio" name="goal"'>
-                    <label for="<?= $item['ID'] ?>" class="ready-des2__choice-item" data-id="<?=$item['ID']?>">
+                    <a href="<?=$arParams['DETAIL_URL']."?task=".$item['ID'] ?>" class="ready-des2__choice-item" data-id="<?=$item['ID']?>">
                         <picture><img src="<?= $item['PREVIEW_PICTURE']['SRC'] ?>" alt=""></picture>
                         <span class="ready-des2__choice-title"><?= $item['NAME'] ?></span>
                         <span class="ready-des2__choice-desc"><?= $item['PREVIEW_TEXT'] ?></span>
                         <span class="ready-des2__choice-footer">
                     Смотреть решение
                 </span>
-                    </label>
+                    </a>
                 </div>
             <?php endforeach; ?>
             <div class="choice-slide ready-des2__choice-spec-item">
-                <input id="8c" type="radio" name="goal">
-                <label for="8c" id="allC" class="ready-des2__choice-item ready-des2__choice-item ready-des2__choice-item--all" data-id="allC">
+                <a href="<?=$arParams['DETAIL_URL']?>" class="ready-des2__choice-item ready-des2__choice-item ready-des2__choice-item--all" data-id="allC">
                     <span class="ready-des2__choice-title--all">Смотреть все Решения
                         <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.24742 7.13991L0.451192 1.6585C-0.114569 1.01192 0.344609 0 1.20377 0H10.7962C11.6554 0 12.1146 1.01192 11.5488 1.6585L6.75258 7.13991C6.35417 7.59524 5.64583 7.59524 5.24742 7.13991Z"
@@ -79,7 +77,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
                                   fill="#93B6FF"/>
                         </svg>
                     </span>
-                </label>
+                </a>
 
             </div>
 

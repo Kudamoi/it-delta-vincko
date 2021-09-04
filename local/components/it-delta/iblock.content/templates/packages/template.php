@@ -11,21 +11,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
-//
-// echo '<pre>';
-// print_r($arResult);
-// echo '</pre>';
 ?>
-<!--<pre>-->
-<!--    --><?//print_r($arResult)?>
-<!--</pre>-->
-<?php foreach ($arResult['SECTIONS'] as $section): ?>
+<?php $i=1; foreach ($arResult['SECTIONS'] as $section): ?>
     <? if (!empty($section['EQUIPMENT-KITS'])): ?>
-        <?
-        // echo '<pre>';
-        // print_r($section);
-        // echo '</pre>';
-        ?>
+
         <?php $checkEquip = 1?>
         <div class="ready-des2__show-item close">
             <div class="ready-des2__show-header">
@@ -68,7 +57,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
             <div class="ready-des2__show-main">
                 <div class="wrapper">
-                    <div class="ready-pack group__pack r-d-s" id="r-d-s-1">
+                    <div class="ready-pack group__pack<?=(count($section['EQUIPMENT-KITS'])<3?" small-slick-clider":" r-d-s")?>" id="r-d-s-<?=$i++;?>">
                         <?php foreach ($section['EQUIPMENT-KITS'] as $item): ?>
                             <div class="ready-pack__item-wrapper">
                                 <div class="ready-pack__item ready-pack__item--short">
@@ -180,35 +169,45 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
 
                                         <div class="ready-pack__bottom-result" data-total-price="<?=empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']?>">
-                                            <?= empty($item['DISCOUNT_PRICE']) ? number_format($item['CATALOG_PRICE_1'], 0, ',', ' ') : number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> ₽
-                                            <span class="ready-pack__bottom-or">
+                                            <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']); ?>
+                                            <?=number_format($price, 0, ',', ' ') ?>
+                                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                                <span class="ready-pack__bottom-or">
                                                     или
                                                 </span>
+                                            <? endif; ?>
                                         </div>
                                     </div>
 
-                                    <div class="ready-pack__bottom-right">
-                                        <div class="solutions__bottom_column">
+                                    <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                        <div class="ready-pack__bottom-right">
+                                            <div class="solutions__bottom_column">
 
-                                            <div class="solutions__bottom_column-interest">
-                                                <p>все проценты<br>
-                                                    за вас платит <span class="blue-vinco">vincko:</span>
-                                                </p>
-                                            </div>
-                                            <div class="solutions__bottom_column-monthprice">
-                                                <select name="solutions__bottom_column-select"
-                                                        class="solutions__bottom_column-select">
-                                                    <option selected value="12">12 мес.</option>
-                                                    <?/*<option value="6">6 мес.</option>*/?>
-                                                </select>
-                                                <p>по</p>
-                                                <div class="solutions__bottom_column-price">
-                                                    1 000 ₽
+                                                <div class="solutions__bottom_column-interest">
+                                                    <p>все проценты<br>
+                                                        за вас платит <span class="blue-vinco">vincko:</span>
+                                                    </p>
                                                 </div>
-                                            </div>
+                                                <div class="solutions__bottom_column-monthprice js-installment">
+                                                    <select name="solutions__bottom_column-select"
+                                                            data-price="<?=$price?>"
+                                                            class="solutions__bottom_column-select js-installment-period">
+                                                        <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                            <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                                        <? endforeach; ?>
+                                                    </select>
+                                                    <p>по</p>
+                                                    <div class="solutions__bottom_column-price nowrap">
+                                                       <span class="js-installment-price">
+                                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                                        </span>
+                                                        ₽
+                                                    </div>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
+                                    <? endif; ?>
                                     <button class="ready-pack__bottom-button button yellow-button" onclick="location.href='/packages/<?= $item['ELEMENT_CODE'] ?>/'">
                                         ПОДРОБНЕЕ
                                     </button>

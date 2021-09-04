@@ -26,7 +26,8 @@ if(!empty($packages))
             "SORT_BY1" => "ACTIVE_FROM",
             "SORT_BY2" => "SORT",
             "SORT_ORDER1" => "DESC",
-            "SORT_ORDER2" => "ASC"
+            "SORT_ORDER2" => "ASC",
+            "EQUIPMENT-KITS_IBLOCK_ID" => "11"
         )
     );
 }

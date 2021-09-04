@@ -91,28 +91,41 @@ $cities = CIBlockElement::GetList(
                     <div class="price__main">
                         <div class="main__left">
                             <h3>Всего</h3>
-                            <h2 class="currently-price"><?= empty($item['DISCOUNT_PRICE']) ? number_format($item['CATALOG_PRICE_1'], 0, ',', ' ') : number_format($item['DISCOUNT_PRICE'], 0, ',', ' ') ?> ₽ <span>или</span></h2>
+                            <h2 class="currently-price">
+                                <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE'] ) ?>
+                                <?= number_format($price, 0, ',', '&nbsp;')  ?>&nbsp;₽
+                                <? if(!empty($arResult["PERIOD_INST"])): ?><span>или</span><? endif; ?>
+                            </h2>
                         </div>
-                        <div class="main__rigth">
+                        <? if(!empty($arResult["PERIOD_INST"])): ?>
+                        <div class="main__rigth js-installment">
                             <p class="rigth__title">все проценты <br>
                                 за вас платит <span>vincko:</span></p>
                             <picture>
                                 <source type="image/svg" srcset="<?=SITE_TEMPLATE_PATH?>/img/ready-des/perc.svg">
                                 <img src="<?=SITE_TEMPLATE_PATH?>/img/ready-des/perc.svg" alt="img" loading="lazy">
                             </picture>
-                            <div class="form__select" id="form_installment_plan">
-                                <form>
-                                    <select class="ready__des_select-js">
-                                        <option value="0">12 мес.</option>
-                                        <option value="1">6 мес.</option>
-                                    </select>
-                                </form>
-                            </div>
+
+                                <div class="form__select" id="form_installment_plan">
+                                        <select class="installment-period__select js-installment-period" data-price="<?=$price?>">
+                                           <? foreach ($arResult["PERIOD_INST"] as $period): ?>
+                                                <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                           <? endforeach; ?>
+                                        </select>
+                                    </form>
+                                </div>
+
                             <div class="rigth__price">
-                                <span>по</span>
-                                <p class="result">1 000 ₽</p>
+                                <span>по&nbsp;</span>
+                                <p class="result nowrap">
+                                    <span class="js-installment-price">
+                                        <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                    </span>
+                                    ₽
+                                </p>
                             </div>
                         </div>
+                        <? endif; ?>
                     </div>
                     <div class="price__button">
                         <a href="equipment-kits/<?=$item['DETAIL_URL']?>/">ПОДРОБНЕЕ</a>

@@ -2,12 +2,16 @@
 
 namespace Vincko;
 
+
 class Order
 {
 // ИД  инфоблока товаров (страховых компаний)
     const IBLOCK_POLICY = 14;
     // ИД  инфоблока товарных предложений(страховых полисов)
     const IBLOCK_POLICY_OFFER = 24;
+
+    //Код hl блока Период рассрочки
+    const HLBLOCK_PERIOD_NAME = "Period";
 
     // получим варианты оплаты
     public static function getPaymentSystem()
@@ -65,7 +69,7 @@ class Order
             \Bitrix\Currency\CurrencyManager::getBaseCurrency()
         );
 
-        $order->setPersonTypeId(1);
+        $order->setPersonTypeId(3);
         $order->setBasket($basket);
         $paymentCollection = $order->getPaymentCollection();
         $payment = $paymentCollection->createItem(
@@ -74,6 +78,11 @@ class Order
 
         $payment->setField("SUM", $order->getPrice());
         $payment->setField("CURRENCY", $order->getCurrency());
+
+
+        $propertyCollection = $order->getPropertyCollection();
+        $property = self::getPropertyByCode($propertyCollection, 'PHONE');
+        $property->setValue($arField["POLICY"]["PHONE"]);
 
         $order->save();
         return $order->getId();
@@ -343,5 +352,36 @@ class Order
         return $prop;
     }
 
+    //получает свойство по коду
+    private static function getPropertyByCode($propertyCollection, $code)
+    {
+        foreach ($propertyCollection as $property) {
+            if ($property->getField('CODE') == $code)
+                return $property;
+        }
+    }
 
+    // получает массив с возможными периодами рассрочки
+    public static function getPeriodInstallment()
+    {
+        \Bitrix\Main\Loader::includeModule("highloadblock");
+
+        $periodEntity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity(static::HLBLOCK_PERIOD_NAME);
+        $periodList = $periodEntity->getDataClass()::getList(
+            [
+                "select" => ["*"],
+                "order" => [
+                    "UF_MONTHS" => "DESC"
+                ]
+            ]
+        );
+
+        $periods = [];
+
+        while ($period = $periodList->fetch()) {
+            $periods[] = $period;
+        }
+
+        return $periods;
+    }
 }

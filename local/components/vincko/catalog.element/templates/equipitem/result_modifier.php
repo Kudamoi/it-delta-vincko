@@ -275,10 +275,14 @@ if (!empty($arEquipSet)) {
         $picEnd = CFile::ResizeImageGet($arFields["PREVIEW_PICTURE"], array("width" => 90, "height" => 110), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
 
         $equipmentPictures = array();
-        foreach ($arFields["PROPERTY_EQUIPMENT_PICTURES_VALUE"] as $FILE) {
-            $FILE = CFile::ResizeImageGet($FILE, array("width" => 170, "height" => 150), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
-            if (is_array($FILE))
-                $equipmentPictures[] = $FILE;
+        foreach ($arFields["PROPERTY_EQUIPMENT_PICTURES_VALUE"] as $FILE_ORIGIN) {
+            $FILE = CFile::ResizeImageGet($FILE_ORIGIN, array("width" => 350, "height" => 350), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
+            $FILE_THUMB = CFile::ResizeImageGet($FILE_ORIGIN, array("width" => 150, "height" => 150), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, false);
+            if (is_array($FILE_THUMB))
+                $equipmentPictures[] = [
+                    "IMG" => $FILE,
+                    "IMG_THUMB" => $FILE_THUMB
+                ];
         }
 
         $techCharacteristicsIds = $arFields["PROPERTY_CO_TECH_CHARACTERISTICS_REF_VALUE"];
@@ -354,3 +358,6 @@ $arResult['PREVIEW_PICTURE_RESIZED_SMALL'] = CFile::ResizeImageGet($arResult['PR
 
 //список позиций компаний в рейтинге
 $arResult['COMPANIES_POSITIONS'] = MainService::calculateSecureCompanyRatingPositionsByCityId($_COOKIE['selected_city']);
+
+// Получим возможные периоды рассрочки
+$arResult["PERIOD_INST"] = Vincko\Order::getPeriodInstallment();

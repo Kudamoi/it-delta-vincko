@@ -14,8 +14,7 @@ $colorText = [0, 0, 0];
 //размер текста по умолчанию
 $sizeText = 8;
 //обрабатываемый шаблон
-// TODO из за симлинка пришлось вставить путь так, при переносе на бой заменить на DOCUMENT_ROOT
-$pageCount = $pdf->setSourceFile("/home/bitrix/ext_www/stage.vincko.market" . $arResult["PAGE"]["FILE"]);
+$pageCount = $pdf->setSourceFile($_SERVER["DOCUMENT_ROOT"] . $arResult["PAGE"]["FILE"]);
 
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 	//добавляем страницу
@@ -29,11 +28,24 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 			$colorText = $arField["COLOR"];
 			$sizeText = $arField["SIZE"];
 		}
+
 		$pdf->SetTextColor($colorText[0],$colorText[1],$colorText[3]);
+
+		if($arField["SIZE"] > 0 ){
+            $sizeText = $arField["SIZE"];
+        }
+
+
 		$pdf->SetFont('font', '', $sizeText);
 
 		$text = iconv('utf-8', 'windows-1251', trim($arField["TEXT"], " "));
 		//$text = $arField["TEXT"];
+
+        if($arField["SPACING"] > 0){
+            $text = str_replace([" ","."],"",$text);
+            $spacing = str_repeat(" ", $arField["SPACING"]);
+            $text = chunk_split($text, 1, $spacing);
+        }
 
 		if (empty($text)) {
 			$text = "-";
