@@ -4,6 +4,10 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
+.form .radio-wrapper {
+    width: fit-content;
+    block-size: fit-content;
+}
 .choices[data-type*='select-one'].is-open:after {
     transform: rotate(180deg);
     border-color: #333333 transparent transparent transparent;
