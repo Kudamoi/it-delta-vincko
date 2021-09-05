@@ -4,6 +4,39 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
+
+.footer__bottom-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.footer__bottom-btn .footer__bottom-btn-sber {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.footer__bottom-btn a.footer__bottom-btn-sber-link {
+    margin: 0;
+    text-transform: none;
+    border: none;
+    background: none;
+    padding: 0;
+    width: unset;
+    display: flex;
+    align-items: center;
+}
+.footer__bottom-btn a.footer__bottom-btn-sber-link .text-sber {
+    position: relative;
+    font-size: 12px;
+    line-height: 14px;
+    font-family: Gilroy,sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    color: #818181;
+    margin-left: 12px;
+    text-decoration: underline;
+}
 .order .form__section.form__pay-info p {
     max-width: unset;
 }
