@@ -31,9 +31,33 @@
 .ready-pack__bottom {
     grid-template-columns: 4fr 5fr;
 }
+#b-vincko-basket-component .solutions__bottom_column-price {
+    width: fit-content;
+    justify-self: flex-end;
+}
+#b-vincko-basket-component .solutions__bottom_column-monthprice {
+    display: grid;
+    grid-template-columns: 2fr 1fr 8fr;
+}
+#b-vincko-basket-component .solutions__bottom_column-btn.green-sber {
+    background: radial-gradient(83.89% 124.11% at 12.96% 100.14%, #FFFD54 0%, #62D53F 47.66%, rgba(73, 169, 239, 0.4) 100%), linear-gradient(178.76deg, #0381DF 1.99%, #279632 83.12%);
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#b-vincko-basket-component .solutions__bottom_column-btn.green-sber .sber-svg {
+    margin-right: 8px;
+}
+#b-vincko-basket-component .installment-period__select {
+    font-weight: bold;
+}
 .ready-pack__bottom .choices__list--single,
 .solutions__bottom_column-monthprice p {
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 .first__page_ready-des .pack p {
     color:black;

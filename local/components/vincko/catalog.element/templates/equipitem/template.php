@@ -2,13 +2,6 @@
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/equipitem.js");
 //$this->addExternalJS(SITE_TEMPLATE_PATH . "/js/custom.js");
 $this->addExternalJS(SITE_TEMPLATE_PATH . "/js/basket.js");
-if ($_GET['itd'] == 'y') {
-    echo '<pre>';
-    print_r($_COOKIE);
-    print_r($arResult);
-    echo '</pre>';
-    die();
-}
 
 use \Bitrix\Main\Localization\Loc;
 
@@ -265,8 +258,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     Рассрочка без процентов
                                 </div>
                                 <div class="solutions__bottom_column-interest">
-                                    <p>все проценты<br>
-                                        за вас платит <span class="blue-vinco">vincko:</span>
+                                    <p>все проценты<br>платит vincko:
                                     </p>
                                 </div>
                                 <div class="solutions__bottom_column-monthprice js-installment">
@@ -1452,7 +1444,6 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
     <? endforeach; ?>
 </main>
 
-
 <?
 unset($actualItem, $itemIds, $jsParams);
 
@@ -1599,7 +1590,6 @@ $data = [
         })
         $("#b-del-subscribe-price").on('click', (e) => {
             data.subscribe_sum = $("#b-del-subscribe-price").data("subscribe-price");
-            ;
             updateBasket(data);
         })
 
