@@ -107,6 +107,7 @@ class Order
                 "PROPERTY_CURRENT",
             ]
         )->GetNext();
+
         $objDateForm = new \Bitrix\Main\Type\DateTime();
         $date_form = $objDateForm->add("15 day");
         $objDateBy = new \Bitrix\Main\Type\DateTime();
@@ -124,7 +125,7 @@ class Order
         $result[] = [
             "NAME" => "Дата начала действия полиса",
             "CODE" => "DATE_FROM",
-            "VALUE" => $date_form->format("d.m.Y")
+            "VALUE" => date("d.m.Y")
         ];
         // добавляем дату начала срока действия полиса
         $result[] = [
