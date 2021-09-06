@@ -1,16 +1,8 @@
 $(document).ready(function () {
-	function numThree(n) {
-		n += "";
-		n = new Array(4 - n.length % 3).join("U") + n;
-		return n.replace(/([0-9U]{3})/g, "$1 ").replace(/U/g, "");
-	}
-
 	//order page installment calculate
 	let currentlyPrice = Number($('#b-data-old-sum').attr('data-old-sum'));
-	$('#b-form-order-ajax.order .payment-method__price-month').html(numThree(Math.ceil(currentlyPrice / 12)) + ' ₽/<span style="font-family: Gilroy, sans-serif">мес</span>');
-	$('#b-form-order-ajax.order .form .payment-method .choices .solutions__bottom_column-select.choices__input').on('change', function () {
-		$(this).closest('.payment-method__installment').find('.payment-method__price-month').html(numThree(Math.ceil(currentlyPrice / $(this).val())) + ' ₽/<span style="font-family: Gilroy, sans-serif">мес</span>');
-	})
+	$('#b-form-order-ajax').find('.payment-method__price-month').html(Math.ceil(currentlyPrice / 12) + ' ₽');
+
 	$(".js-bonuce").click(function(e){
 		e.preventDefault();
 		$(".header__popup").removeClass("hidden");
