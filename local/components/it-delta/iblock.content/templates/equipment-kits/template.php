@@ -70,11 +70,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="ready-pack__items">
                             <? foreach ($section['EQUIPMENT-KITS'] as $item): ?>
-                                <!--                            --><? //if($_SERVER['REMOTE_ADDR'] == '46.147.123.63'):?>
-                                <!--                            <pre>-->
-                                <!--                                --><? //print_r($item)?>
-                                <!--                            </pre>-->
-                                <!--                            --><? //endif;?>
                                 <div class="ready-pack__item">
                                     <div class="ready-pack__top">
                                         <picture>
@@ -185,9 +180,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             <div class="solutions__bottom_column">
 
                                                 <div class="solutions__bottom_column-interest">
-                                                    <p>все проценты<br>
-                                                        за вас платит <span class="blue-vinco">vincko:</span>
-                                                    </p>
+                                                    <p>все проценты<br>платит vincko:</p>
                                                 </div>
 
                                                 <div class="solutions__bottom_column-monthprice js-installment">
@@ -197,11 +190,13 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                         <? endforeach; ?>
                                                     </select>
                                                     <p>по</p>
-                                                    <div class="solutions__bottom_column-price nowrap">
-                                                        <span class="js-installment-price">
-                                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
-                                                        </span>
-                                                        ₽
+                                                    <div class="solutions__bottom_column-price-flex-full">
+                                                        <div class="solutions__bottom_column-price nowrap">
+                                                            <span class="js-installment-price">
+                                                                <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                                            </span>
+                                                            ₽
+                                                        </div>
                                                     </div>
                                                 </div>
 
