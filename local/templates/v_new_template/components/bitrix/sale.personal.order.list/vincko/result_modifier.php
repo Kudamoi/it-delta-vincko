@@ -7,6 +7,16 @@ use Vincko\Policy;
 Loader::includeModule('sberbank.pokupay');
 $obSberPokupayOrder = new \Sberbank\Credit\Orders;
 
+// TODO  у статусов сбера нет определенных зафиксированных названий в модуле
+// после обновления модуля  возможна ошибка, если код ответа сбера изменится
+// поэтому в случае неверных статустов в лк смотреть в callback
+// создадим массив код ответа - ключевое слово, чтобы использовать в дальнейшем
+
+$arPaymentStatus["SBER_CREDIT"] = [
+    2 => "success",
+    6 => "fail"
+];
+
 $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
 if ($request->get('logout') === 'y') {
@@ -48,14 +58,14 @@ foreach ($arResult["ORDERS"] as $arOrder) {
     // TODO если будет тормозить написать функцию, которая сможет получать массиву ID
     $arSberPokupayOrder = $obSberPokupayOrder->GetByPaymentID($payment["ID"])->Fetch();
 
-    // TODO  6 - статус оплаты, который возвращает сбер, у статусов нет определенных зафиксированных названий
-    // поэтому после обновления модуля  возможна ошибка, если код ответа сбера изменится
-    if ($arSberPokupayOrder["BANK_ORDER_STATUS"] == 6 && $payment["ACTION_FILE"] == "sberbank_pokupay") {
-        $payStatus = Loc::getMessage("SPOL_TPL_STATUS_POKUPAY_REFUSED");
-    } else {
+    // код статуса обратного ответа
+    $statusSberPokupay = $arPaymentStatus["SBER_CREDIT"][$arSberPokupayOrder["BANK_ORDER_STATUS"]];
+    $arSberPokupayOrder["STATUS_CODE"] = $statusSberPokupay;
+
         if ($arOrder["ORDER"]["PAYED"] === "Y") {
-            // TODO  2 - статус оплаты, который возвращает сбер, у статусов нет определенных зафиксированных названий
-            if ($arSberPokupayOrder["BANK_ORDER_STATUS"] == 2 && $payment["ACTION_FILE"] == "sberbank_pokupay") {
+            // если заявка на кредит одобрена
+
+            if ($statusSberPokupay == "success" && $payment["ACTION_FILE"] == "sberbank_pokupay") {
                 $payStatus = Loc::getMessage("SPOL_TPL_STATUS_POKUPAY_APPROVED");
             } else {
                 $payStatus = Loc::getMessage("SPOL_TPL_PAID");
@@ -63,9 +73,13 @@ foreach ($arResult["ORDERS"] as $arOrder) {
         } elseif ($arOrder["ORDER"]["IS_ALLOW_PAY"] == "N") {
             $payStatus = Loc::getMessage("SPOL_TPL_RESTRICTED_PAID");
         } else {
-            $payStatus = Loc::getMessage("SPOL_TPL_NOTPAID");
+            // если заявка на кредит не одобрена
+            if ($statusSberPokupay == "fail" && $payment["ACTION_FILE"] == "sberbank_pokupay") {
+                $payStatus = Loc::getMessage("SPOL_TPL_STATUS_POKUPAY_REFUSED");
+            } else {
+                $payStatus = Loc::getMessage("SPOL_TPL_NOTPAID");
+            }
         }
-    }
 
     // что можем собираем здесь
     $order[$orderId] = [
@@ -82,6 +96,7 @@ foreach ($arResult["ORDERS"] as $arOrder) {
             "PAYED" => $arOrder["ORDER"]["PAYED"],
             "STATUS" => $payStatus,
             "FORMATED_SUM" => $payment['FORMATED_SUM'],
+            "SUM" => $payment['SUM'],
             //обратный ответ от платежной системы
             "CALLBACK" => [
                 "sberbank_pokupay" => $arSberPokupayOrder
