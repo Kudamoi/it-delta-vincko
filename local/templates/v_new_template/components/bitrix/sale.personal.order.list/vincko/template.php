@@ -307,7 +307,6 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                          data-accountNumber="<?=$arOrder["ACCOUNT_NUMBER"]?>"
                                          data-paymentNumber="<?=$arOrder['PAY']['NUMBER']?>" >
                                     <? if(!empty($arOrder["PAY"]["CALLBACK"]["sberbank_pokupay"])):?>
-
                                             <a href="/order/?ORDER_ID=<?= $arOrder["ACCOUNT_NUMBER"] ?>"
                                                data-pay="<?=$arResult["PAYMENT_SELECT"]["sberbank"]["ID"]?>"
                                                class="profile__c-main-order-bottom-paid js-paid">
@@ -321,7 +320,6 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                                 </svg>
                                                 В рассрочку
                                             </a>
-
                                     <? else: ?>
                                         <a href="/order/?ORDER_ID=<?= $arOrder["ACCOUNT_NUMBER"] ?>" target="_blank"
                                            class="profile__c-main-order-bottom-paid js-paid">
