@@ -16,11 +16,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 <nav class="footer__bottom-navigation">
     <ul class="footer__bottom-up footer__bottom-up--to-hide">
         <li><a href="/">Главная</a></li>
-        <li><a href="/reviews/">Рейтинг охранных компаний</a></li>
-        <li><a href="">Отзывы об охранных компаниях</a></li>
+        <li><a href="/raiting/">Рейтинг охранных компаний</a></li>
+        <li><a href="/reviews/">Отзывы об охранных компаниях</a></li>
         <? foreach($arResult["ITEMS"] as $item): ?>
             <? if($item["CODE"] === "politika-konfidentsialnosti"): ?>
-                <li class="footer__file"><a href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Политика конфиденциальности</a></li>
+                <li class="footer__file"><a target="_blank" href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Политика конфиденциальности</a></li>
             <? endif ?>
         <? endforeach ?>
     </ul>
@@ -30,18 +30,18 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
         <li><a href="">Гарантии при заказе услуг</a></li>
         <? foreach($arResult["ITEMS"] as $item): ?>
             <? if($item["CODE"] === "polzovatelskoe-soglashenie"): ?>
-                <li class="footer__file" ><a href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Пользовательское соглашение</a></li>
+                <li class="footer__file" ><a target="_blank" href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Пользовательское соглашение</a></li>
             <? endif ?>
         <? endforeach ?>
 
     </ul>
     <ul class="footer__bottom-up footer__bottom-up--to-hide">
-        <li><a href="">Готовые решения</a></li>
-        <li><a href="">Индивидуальная заявка</a></li>
+        <li><a href="/packages/">Готовые решения</a></li>
+        <li><a href="/zayavka/">Индивидуальная заявка</a></li>
         <li><a href="/about/">О компании vincko</a></li>
         <? foreach($arResult["ITEMS"] as $item): ?>
             <? if($item["CODE"] === "publichnaya-oferta"): ?>
-                <li class="footer__file"><a href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Публичная оферта</a></li>
+                <li class="footer__file"><a target="_blank" href="<?=$item["PROPERTIES"]["DOCUMENT"]["DOCUMENT_INFO"]["SRC"]?>">Публичная оферта</a></li>
             <? endif ?>
         <? endforeach ?>
 
@@ -127,9 +127,3 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
         <? endforeach ?>
     </div>
 </nav>
-
-<?
-// echo "<pre>";
-// print_r($arResult);
-// echo "</pre>";
-?>

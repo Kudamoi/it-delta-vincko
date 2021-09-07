@@ -12,10 +12,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-<?php $i=1; foreach ($arResult['SECTIONS'] as $section): ?>
+<?php $i = 1;
+foreach ($arResult['SECTIONS'] as $section): ?>
     <? if (!empty($section['EQUIPMENT-KITS'])): ?>
 
-        <?php $checkEquip = 1?>
+        <?php $checkEquip = 1 ?>
         <div class="ready-des2__show-item close">
             <div class="ready-des2__show-header">
                 <div class="ready-des2__show-header-left">
@@ -57,7 +58,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
             <div class="ready-des2__show-main">
                 <div class="wrapper">
-                    <div class="ready-pack group__pack<?=(count($section['EQUIPMENT-KITS'])<3?" small-slick-clider":" r-d-s")?>" id="r-d-s-<?=$i++;?>">
+                    <div class="ready-pack group__pack<?= (count($section['EQUIPMENT-KITS']) < 3 ? " small-slick-clider" : " r-d-s") ?>"
+                         id="r-d-s-<?= $i++; ?>">
                         <?php foreach ($section['EQUIPMENT-KITS'] as $item): ?>
                             <div class="ready-pack__item-wrapper">
                                 <div class="ready-pack__item ready-pack__item--short">
@@ -96,7 +98,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                 </div>
 
                                                 <div class="ready-pack__short-content ready-pack__short-content-h blue">
-                                                    <?=$item['NAME']?>
+                                                    <?= $item['NAME'] ?>
                                                 </div>
                                             </div>
                                             <div class="ready-pack__short-item">
@@ -116,7 +118,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                 </div>
 
                                                 <div class="ready-pack__short-content ready-pack__short-content-h">
-                                                    <?=$item['CLASS_INFO']['COMPANY_NAME']?>
+                                                    <?= $item['CLASS_INFO']['COMPANY_NAME'] ?>
                                                 </div>
                                             </div>
                                             <div class="ready-pack__short-item">
@@ -148,7 +150,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                     <div class="h5">В подарок:</div>
                                                     <ul>
                                                         <? foreach ($item['PRESENTS'] as $present): ?>
-                                                            <li><span>&#10003;</span> <?=$present?></li>
+                                                            <li><span>&#10003;</span> <?= $present ?></li>
                                                         <? endforeach; ?>
                                                     </ul>
                                                 </div>
@@ -168,10 +170,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                             Всего
                                         </div>
 
-                                        <div class="ready-pack__bottom-result" data-total-price="<?=empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']?>">
+                                        <div class="ready-pack__bottom-result"
+                                             data-total-price="<?= empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE'] ?>">
                                             <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']); ?>
-                                            <?=number_format($price, 0, ',', ' ') ?>
-                                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                            <?= number_format($price, 0, ',', ' ') ?>
+                                            <? if (!empty($arResult["PERIOD_INST"])): ?>
                                                 <span class="ready-pack__bottom-or">
                                                     или
                                                 </span>
@@ -179,36 +182,39 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         </div>
                                     </div>
 
-                                    <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                    <? if (!empty($arResult["PERIOD_INST"])): ?>
                                         <div class="ready-pack__bottom-right">
                                             <div class="solutions__bottom_column">
 
                                                 <div class="solutions__bottom_column-interest">
-                                                    <p>все проценты<br>
-                                                        за вас платит <span class="blue-vinco">vincko:</span>
-                                                    </p>
+                                                    <p>все проценты<br>платит vincko:</p>
                                                 </div>
                                                 <div class="solutions__bottom_column-monthprice js-installment">
                                                     <select name="solutions__bottom_column-select"
-                                                            data-price="<?=$price?>"
+                                                            data-price="<?= $price ?>"
                                                             class="solutions__bottom_column-select js-installment-period">
                                                         <? foreach ($arResult["PERIOD_INST"] as $period): ?>
-                                                            <option value="<?=$period["UF_MONTHS"]?>"><?=$period["UF_MONTHS"]?> мес.</option>
+                                                            <option value="<?= $period["UF_MONTHS"] ?>"><?= $period["UF_MONTHS"] ?>
+                                                                мес.
+                                                            </option>
                                                         <? endforeach; ?>
                                                     </select>
                                                     <p>по</p>
-                                                    <div class="solutions__bottom_column-price nowrap">
+                                                    <div class="solutions__bottom_column-price-flex-full">
+                                                        <div class="solutions__bottom_column-price nowrap">
                                                        <span class="js-installment-price">
-                                                            <?=Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"])?>
+                                                            <?= Vincko\Other::formatInstalmentPrice($price, $arResult["PERIOD_INST"][0]["UF_MONTHS"]) ?>
                                                         </span>
-                                                        ₽
+                                                            <span style="font-family: Gilroy, sans-serif">₽</span>
+                                                        </div>
                                                     </div>
                                                 </div>
 
                                             </div>
                                         </div>
                                     <? endif; ?>
-                                    <button class="ready-pack__bottom-button button yellow-button" onclick="location.href='/packages/<?= $item['ELEMENT_CODE'] ?>/'">
+                                    <button class="ready-pack__bottom-button button yellow-button"
+                                            onclick="location.href='/packages/<?= $item['ELEMENT_CODE'] ?>/'">
                                         ПОДРОБНЕЕ
                                     </button>
 
@@ -232,8 +238,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
             </div>
 
         </div>
-<?endif; endforeach; ?>
-<?php if ($checkEquip != 1):?>
+    <? endif; endforeach; ?>
+<?php if ($checkEquip != 1): ?>
     <div class="ready-des2__show-item close">
         <div class="ready-des2__show-header">
             <div class="ready-des2__show-header-left">
@@ -243,12 +249,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
             </div>
             <div class="ready-des2__show-header-right">
                 <div class="ready-des2__show-title">
-                    <div class="ready-des2__show-title-up">Данная компания не предоставляет услуги по поставленной задаче в выбранном городе</div>
+                    <div class="ready-des2__show-title-up">Данная компания не предоставляет услуги по поставленной
+                        задаче в выбранном городе
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<?php endif;?>
+<?php endif; ?>
 <!--<div class="ready-des2__show-item close">-->
 <!--    --><?php //foreach ($section['ITEMS'] as $item): ?>
 <!--        <div class="packages-variants__item">-->
