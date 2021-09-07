@@ -127,8 +127,9 @@ $curStep = 1;
     })
 </script>
 */?>
-
+<main class="container main">
 <?if(isset($_GET['ORDER_ID'])):?>
+
     <?$APPLICATION->IncludeComponent(
         "vincko:sale.order.ajax",
         "vincko",
@@ -259,7 +260,6 @@ $curStep = 1;
         false
     );?>
 <?else:?>
-<main class="container main">
     <section>
     <form method="post" id="b-form-order-ajax" class="installment insurance-policy order">
 
@@ -960,9 +960,8 @@ $curStep = 1;
         </div>
     </form>
     </section>
-
-</main>
 <?endif;?>
+</main>
 <script>
     $( document ).ready(function() {
 

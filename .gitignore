@@ -1,12 +1,14 @@
 #Ignore symlimks
-bitrix
-images
-upload
+/bitrix
+/images
+/upload
 
 /images/
+.htaccess
 
 # Исключаем настройки PHPStorm, мы в нём работаем
 /.idea/
+/.vscode
 
 # Исключаем папку /bitrix кроме некоторых подпапок
 #!/bitrix
