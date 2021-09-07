@@ -30,6 +30,7 @@ $Asset = Asset::getInstance();
     <? $Asset->addCss(SITE_TEMPLATE_PATH . "/styles/main.css"); ?>
     <? $Asset->addCss(SITE_TEMPLATE_PATH . "/css/auth.css"); ?>
     <? $Asset->addCss(SITE_TEMPLATE_PATH . "/css/custom.css"); ?>
+    <? $Asset->addCss(SITE_TEMPLATE_PATH . "/css/datepicker.css"); ?>
 
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/jquery.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/slick/slick.js"); ?>
@@ -37,6 +38,7 @@ $Asset = Asset::getInstance();
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/funcy_box/jquery.fancybox.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/range/ion.rangeSlider.min.js"); ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/swiper/swiper.min.js"); ?>
+    <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/datepicker.js"); ?>
 
     <? // TODO удалить одну из библиотек ?>
     <? $Asset->addJs(SITE_TEMPLATE_PATH . "/libs/jquery_maskedinput/jquery.maskedinput.min.js"); ?>
