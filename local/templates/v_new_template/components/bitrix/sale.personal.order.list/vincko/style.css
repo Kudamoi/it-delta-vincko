@@ -1,31 +1,100 @@
+.profile__c-main-order-bottom {
+    width: 100% !important;
+}
+
 .profile__c-main-order-bottom a.profile__c-main-order-bottom-download {
     background: #005dff;
     color: white;
 }
+
 .profile__c-main-order-bottom a {
-    width: 160px;
+    min-width: 160px;
     height: 40px;
     border-radius: 5px;
-    display: grid;
     place-items: center;
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
 }
+
 .profile__c-main-order-bottom a.profile__c-main-order-bottom-paid {
     background: #fee74c;
     color: black;
     text-transform: uppercase;
 }
-.profile__c-main-block:last-child{border-bottom: 0!important;}
+
+.profile__c-main-block:last-child {
+    border-bottom: 0 !important;
+}
+
 div.empty {
-    width: inherit!important;
-    height: inherit!important;
-    overflow: inherit!important;
+    width: inherit !important;
+    height: inherit !important;
+    overflow: inherit !important;
 }
+
 .profile__c-main-order--not-paid .profile__c-main-order-bottom-paid, .profile__c-main-order--not-paid .profile__c-main-order-price-status-paid,
-.profile__c-main-order--paid .profile__c-main-order-bottom-download, .profile__c-main-order--paid .profile__c-main-order-price-status-not-paid, .profile__c-main-order--paid .profile__c-main-order-bottom-text{
-    display: grid!important;
+.profile__c-main-order--paid .profile__c-main-order-bottom-download, .profile__c-main-order--paid .profile__c-main-order-price-status-not-paid, .profile__c-main-order--paid .profile__c-main-order-bottom-text {
+    display: grid !important;
 }
-.show{display: block}
-.profile__c-main.profile__c-main--all-orders, .profile__c-main.profile__c-main--personal-requests {display: none}
+
+.show {
+    display: block
+}
+
+.profile__c-main.profile__c-main--all-orders, .profile__c-main.profile__c-main--personal-requests {
+    display: none
+}
+
+.profile__c-main-order-bottom-text {
+    width: 130px !important;
+    display: block;
+    overflow: hidden;
+}
+
+.profile__c-main-order-bottom-wrapper {
+    overflow: hidden;
+    float: left;
+    display: block;
+}
+
+.profile__c-main-order-bottom-paid {
+    float: left;
+    margin-right: 15px;
+}
+
+.profile__c-main-order-bottom {
+    width: 100%;
+    display: block !important;
+}
+
+.profile__c-main-order-bottom .sberbank_pokupay__resize,
+.profile__c-main-order-bottom .sberbank__wrapper {
+    display: none !important;
+}
+
+.profile__c-main-order-bottom-answ {
+    clear: both;
+    margin-top: 20px;
+}
+
+.sberbank-pokupay svg {
+    margin-right: 8px;
+}
+
+.sberbank-pokupay {
+    width: 196px;
+    background: radial-gradient(83.89% 124.11% at 12.96% 100.14%, #FFFD54 0%, #62D53F 47.66%, rgba(73, 169, 239, 0.4) 100%), linear-gradient(
+            178.76deg, #0381DF 1.99%, #279632 83.12%);
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.sberbank-pokupay:hover {
+    color: white;
+
+}
