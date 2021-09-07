@@ -509,8 +509,6 @@ $curStep = 1;
                                         <input type="text" name="addressResidense[house]" placeholder="Дом *" class="valid-cond1 js-check-valid-field house-field">
                                         <input type="text" name="addressResidense[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="addressResidense[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
-                                        <input class="valid-cond1 js-check-valid-field date" type="text" name="addressResidense[date]" placeholder="Дата регистрации *"
-                                               onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                                         <input type="text" name="addressResidense[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>
                                     <p>Если адрес фактического проживания не совпадает с адресом регистрации - снимите
@@ -542,8 +540,7 @@ $curStep = 1;
                                         <input type="text" name="policyOtherAddress[house]" placeholder="Дом *" class="valid-cond2 js-check-valid-field house-field">
                                         <input type="text" name="policyOtherAddress[housing]" placeholder="Корпус" class="js-check-valid-field housing-field">
                                         <input type="text" name="policyOtherAddress[flat]" placeholder="Квартира" class="js-check-valid-field flat-field"><br>
-                                        <input class="valid-cond2 js-check-valid-field date" type="text" name="policyOtherAddress[date]" placeholder="Дата регистрации *"
-                                               onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+
                                         <input type="text" name="policyOtherAddress[index]" placeholder="Индекс" class="js-check-valid-field index-field">
                                     </div>
                                 </div>
