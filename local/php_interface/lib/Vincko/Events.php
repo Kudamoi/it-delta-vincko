@@ -127,7 +127,7 @@ class Events
 					$arPolicyField["PROPS"][] = [
 						"NAME"  => "Страховая премия по договору",
 						"CODE"  => "SUM_5",
-						"VALUE" => $arPolicy["MAX_PRICE_ORIGINAL"]
+						"VALUE" => $arPolicy["PRICE"]
 					];
 
 					$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
