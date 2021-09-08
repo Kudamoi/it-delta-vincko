@@ -8,7 +8,7 @@
         <div class="footer__bottom-btn-sber">
             <a class="footer__bottom-btn-sber-link" target="_blank" href="https://pokupay.ru/credit_terms">
                 <img src="/img/mini/subtract.svg" alt="Иконка сбера">
-                <span class="text-sber">Условия и требованиями при кредитовании</span>
+                <span class="text-sber">Условия и требования по рассрочке</span>
             </a>
         </div>
     </div>
