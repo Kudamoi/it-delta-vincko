@@ -13,7 +13,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
-?>
+?>44444444444444444444444444
 <main class="container complect-obor">
     <section class="safe__pay rating-top">
         <div class="safe__pay_left">
@@ -70,6 +70,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                         </div>
                         <div class="ready-pack__items">
                             <? foreach ($section['EQUIPMENT-KITS'] as $item): ?>
+                                <? $isCredit = (!empty($arResult["PERIOD_INST"]) && !empty($item["ALLOW_CREDIT"])); ?>
                                 <div class="ready-pack__item">
                                     <div class="ready-pack__top">
                                         <picture>
@@ -167,7 +168,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                             <?=number_format($price, 0, ',', ' ') ?>
                                                         </span>
                                                         <span>₽</span>
-                                                        <? if(!empty($arResult["PERIOD_INST"])): ?>
+                                                        <? if($isCredit): ?>
                                                             <span class="ready-pack__bottom-or">или</span>
                                                         <? endif; ?>
                                                     </div>
@@ -175,10 +176,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
                                             </div>
                                         </div>
-                                        <? if(!empty($arResult["PERIOD_INST"])): ?>
-                                            <div class="ready-pack__bottom-right">
-                                            <div class="solutions__bottom_column">
 
+                                        <div class="ready-pack__bottom-right">
+                                            <div class="solutions__bottom_column">
+                                                <? if($isCredit): ?>
                                                 <div class="solutions__bottom_column-interest">
                                                     <p>все проценты<br>платит vincko:</p>
                                                 </div>
@@ -199,10 +200,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <? endif; ?>
                                             </div>
                                         </div>
-                                        <? endif; ?>
+
 
                                         <button onclick="location.href='<?= $item['DETAIL_URL'] ?>/'"
                                                 class="ready-pack__bottom-button button yellow-button">

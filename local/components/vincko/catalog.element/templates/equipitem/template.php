@@ -252,7 +252,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
                                     </div>
                                 <? endif; ?>
                             </div>
-                            <? if(!empty($arResult["PERIOD_INST"])): ?>
+                            <? $isCredit = (!empty($arResult["PERIOD_INST"]) && !empty($arResult['COMPLECT_PARENT_PACKAGE']['PROPERTY_ALLOW_CREDIT_VALUE'])); ?>
+                            <? if($isCredit): ?>
                             <div class="solutions__bottom_column ">
                                 <div class="solutions__bottom_column-title">
                                     Рассрочка без процентов
@@ -1536,7 +1537,7 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
-    'periods' =>$arResult["PERIOD_INST"],
+    'periods' =>($isCredit? $arResult["PERIOD_INST"] : ""),
     'subscribe_sum' => 0,
     'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
     'credit_sum' => ceil($totalPrice/12),

@@ -19,6 +19,7 @@ $subscriptionFeeObj = $orderItems[1];
 $policyObj = $orderItems[2];
 $totalObj = $orderData['total'];
 $paymentMethodObj = $orderData['paymentMethod'];
+$isCredit = (!empty($totalObj->is_credit)? true : false);
 
 if($_GET['itd']=='y')
 {
@@ -678,9 +679,13 @@ $curStep = 1;
                                             <label for="card"></label>
                                             <label for="card">Картой онлайн</label>
                                         </div>
-                                        <div class="radio-wrapper" id="installment-radio">
+                                        <div class="radio-wrapper<?=($isCredit?"":" radio-disabled")?>" <?=($isCredit?'id="installment-radio"':'')?>>
                                             <input type="radio" name="payment-method" value="11"
-                                                   id="installment" <?=$paymentMethodObj=='installment' ? 'checked' : ''?>>
+                                                   id="installment"
+                                                   <?=($isCredit?
+                                                      ($paymentMethodObj=="installment" ? "checked" : "")
+                                                        :
+                                                       "disabled")?>>
                                             <label for="installment"></label>
                                             <label for="installment">Покупай со Сбером в рассрочку
                                                 <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
