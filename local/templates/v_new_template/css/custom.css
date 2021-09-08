@@ -4,7 +4,35 @@
 /*    height: 100%!important;*/
 /*    border-radius: 10px;*/
 /*}*/
-
+#b-vincko-basket-component .solutions__bottom_row {
+    margin-right: 10px;
+    justify-content: unset;
+}
+#b-vincko-basket-component .solutions__bottom_row-center {
+    width: unset;
+}
+#b-vincko-basket-component .solutions__bottom_left {
+    max-width: 735px;
+    flex: 1 1 auto;
+    align-items: center;
+    display: flex;
+    width: unset;
+    justify-content: space-between;
+}
+#b-vincko-basket-component .solutions__bottom_right {
+    margin-left: 10px;
+}
+#b-vincko-basket-component .predloj__present {
+    position: relative;
+    bottom: 0;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
+}
+#b-vincko-basket-component .predloj__present picture {
+    position: relative;
+    width: unset;
+}
 .form .radio-wrapper {
     width: fit-content;
     block-size: fit-content;
