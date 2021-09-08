@@ -13,7 +13,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @copyright 2015 - 2016 webgsite.ru
  * @license   GNU General Public License http://www.gnu.org/licenses/gpl-2.0.html
  */
-?>44444444444444444444444444
+?>
 <main class="container complect-obor">
     <section class="safe__pay rating-top">
         <div class="safe__pay_left">
