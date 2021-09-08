@@ -9,8 +9,8 @@ $(document).ready(function () {
 	});
 
 	$(".js-paid").click(function () {
-		var $parent = $(this).parent();
-		url = $parent.attr("data-url"),
+		var $parent = $(this).parent(),
+			url = $parent.attr("data-url"),
 			paySystemId = $(this).attr("data-pay"),
 			accountNumber = $parent.attr("data-accountNumber"),
 			paymentNumber = $parent.attr("data-paymentNumber");
