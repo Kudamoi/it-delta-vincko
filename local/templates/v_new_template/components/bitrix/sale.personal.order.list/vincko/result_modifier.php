@@ -1,7 +1,21 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use  Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Loader;
 use Vincko\Policy;
+
+Loader::includeModule('sberbank.pokupay');
+$obSberPokupayOrder = new \Sberbank\Credit\Orders;
+
+// TODO  у статусов сбера нет определенных зафиксированных названий в модуле
+// после обновления модуля  возможна ошибка, если код ответа сбера изменится
+// поэтому в случае неверных статустов в лк смотреть в callback
+// создадим массив код ответа - ключевое слово, чтобы использовать в дальнейшем
+
+$arPaymentStatus["SBER_CREDIT"] = [
+    2 => "success",
+    6 => "fail"
+];
 
 $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
@@ -34,15 +48,38 @@ foreach ($arResult["ORDERS"] as $arOrder) {
         $arBasketProductIds[$arBasketProducts["ID"]] = $arBasketProducts["ID"];
 
     }
+
     // формируем статусы, чтобы в шаблоне меньше было обработки
     $payment = $arOrder["PAYMENT"][0];
-    if ($arOrder["ORDER"]["PAYED"] === "Y") {
-        $payStatus = Loc::getMessage("SPOL_TPL_PAID");
-    } elseif ($arOrder["ORDER"]["IS_ALLOW_PAY"] == "N") {
-        $payStatus = Loc::getMessage("SPOL_TPL_RESTRICTED_PAID");
-    } else {
-        $payStatus = Loc::getMessage("SPOL_TPL_NOTPAID");
-    }
+
+    // сервис оплаты на странице заказа может меняться, нужна возможность для заказов, которые изначально были
+    // оформлены в кредит изменять тип оплаты, поэтому всегда получаем информацию об оплате из модуля Сбер Покупай
+    // если инф. нет то возможности выбора оплаты не будет
+    // TODO если будет тормозить написать функцию, которая сможет получать массиву ID
+    $arSberPokupayOrder = $obSberPokupayOrder->GetByPaymentID($payment["ID"])->Fetch();
+
+    // код статуса обратного ответа
+    $statusSberPokupay = $arPaymentStatus["SBER_CREDIT"][$arSberPokupayOrder["BANK_ORDER_STATUS"]];
+    $arSberPokupayOrder["STATUS_CODE"] = $statusSberPokupay;
+
+        if ($arOrder["ORDER"]["PAYED"] === "Y") {
+            // если заявка на кредит одобрена
+
+            if ($statusSberPokupay == "success" && $payment["ACTION_FILE"] == "sberbank_pokupay") {
+                $payStatus = Loc::getMessage("SPOL_TPL_STATUS_POKUPAY_APPROVED");
+            } else {
+                $payStatus = Loc::getMessage("SPOL_TPL_PAID");
+            }
+        } elseif ($arOrder["ORDER"]["IS_ALLOW_PAY"] == "N") {
+            $payStatus = Loc::getMessage("SPOL_TPL_RESTRICTED_PAID");
+        } else {
+            // если заявка на кредит не одобрена
+            if ($statusSberPokupay == "fail" && $payment["ACTION_FILE"] == "sberbank_pokupay") {
+                $payStatus = Loc::getMessage("SPOL_TPL_STATUS_POKUPAY_REFUSED");
+            } else {
+                $payStatus = Loc::getMessage("SPOL_TPL_NOTPAID");
+            }
+        }
 
     // что можем собираем здесь
     $order[$orderId] = [
@@ -52,10 +89,18 @@ foreach ($arResult["ORDERS"] as $arOrder) {
         "STATUS" => $arResult["INFO"]["STATUS"][$arOrder["ORDER"]["STATUS_ID"]]["NAME"],
         "CANCELED" => $arOrder["ORDER"]["CANCELED"],
         "PAY" => [
-            "PAYED" => $arOrder["ORDER"]["PAYED"],
+            "ID" => $payment["ID"],
+            "NUMBER" => $payment["ACCOUNT_NUMBER"],
+            "CODE" => $payment["ACTION_FILE"],
             "NAME" => $payment["PAY_SYSTEM_NAME"],
+            "PAYED" => $arOrder["ORDER"]["PAYED"],
             "STATUS" => $payStatus,
             "FORMATED_SUM" => $payment['FORMATED_SUM'],
+            "SUM" => $payment['SUM'],
+            //обратный ответ от платежной системы
+            "CALLBACK" => [
+                "sberbank_pokupay" => $arSberPokupayOrder
+            ]
         ]
     ];
 
@@ -196,4 +241,16 @@ foreach ($arResult["ORDERS"] as $arOrder) {
     }
 }
 $arResult["ORDERS"] = $order;
+
+// если нужен выбор оплаты то оставим 2 варианта
+$arSelectPay = [
+    "sberbank",
+    "pokupay"
+];
+
+foreach ($arResult["INFO"]["PAY_SYSTEM"] as $arPayment){
+    if(in_array($arPayment["CODE"],$arSelectPay)){
+        $arResult["PAYMENT_SELECT"][$arPayment["CODE"]] = $arPayment;
+    }
+}
 ?>

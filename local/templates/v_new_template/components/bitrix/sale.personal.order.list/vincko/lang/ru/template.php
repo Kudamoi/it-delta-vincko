@@ -49,4 +49,7 @@ $MESS["SPOL_CHECK_NUM"] = "Чек №#CHECK_NUMBER#";
 $MESS["SPOD_ORDER_CANCELED"] = "Заказ отменен";
 $MESS["SPOL_TPL_TITLE_POLICY"] = "Страхование недвижимости";
 $MESS["SPOL_TPL_TITLE_SOLUTION"] = "Готовое решение";
+
+$MESS["SPOL_TPL_STATUS_POKUPAY_REFUSED"] = "Рассрочка не одобрена";
+$MESS["SPOL_TPL_STATUS_POKUPAY_APPROVED"] = "Рассрочка одобрена";
 ?>

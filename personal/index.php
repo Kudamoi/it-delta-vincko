@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 ?>
     <main class="profile">
         <div class="container">
-            <? $APPLICATION->IncludeComponent(
+           <? $APPLICATION->IncludeComponent(
                 "bitrix:sale.personal.order.list",
                 "vincko",
                 array(

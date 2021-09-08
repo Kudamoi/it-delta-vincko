@@ -107,7 +107,18 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                     <?= $arOrder["PAY"]["FORMATED_SUM"] ?>
                                 </div>
                                 <div class="profile__c-main-order-price-type">
-                                    <?= $arOrder["PAY"]["NAME"] ?>
+                                    <? if($arOrder["PAY"]["CODE"] == "sberbank_pokupay") : ?>
+                                        <div class="sberbank-pokupay">
+                                            <div class="sberbank-pokupay__text">
+                                                12 мес. по
+                                                <span class="sberbank-pokupay__price nowrap">
+                                                    <?=Vincko\Other::formatInstalmentPrice($arOrder["PAY"]["SUM"], 12)?> ₽
+                                                </span>
+                                            </div>
+                                        </div>
+                                    <? else: ?>
+                                        <?= $arOrder["PAY"]["NAME"] ?>
+                                    <? endif; ?>
                                 </div>
                                 <div class="profile__c-main-order-price-status">
                                     <div class="<?= ($arOrder["PAY"]["PAYED"] == "Y" ? "profile__c-main-order-price-status-paid" : "profile__c-main-order-price-status-not-paid") ?>">
@@ -303,10 +314,30 @@ $userName = $GLOBALS["USER"]->GetFullName();
                                         </a>
                                     <? endif; ?>
                                     <? if ($arOrder["PAY"]["PAYED"] != "Y"): ?>
+                                    <div data-url="<?=CUtil::JSEscape( $templateFolder . "/ajax.php")?>"
+                                         data-accountNumber="<?=$arOrder["ACCOUNT_NUMBER"]?>"
+                                         data-paymentNumber="<?=$arOrder['PAY']['NUMBER']?>" >
+                                    <? if($arOrder["PAY"]["CALLBACK"]["sberbank_pokupay"]["STATUS_CODE"] == "fail"):?>
+                                            <a href="/order/?ORDER_ID=<?= $arOrder["ACCOUNT_NUMBER"] ?>"
+                                               data-pay="<?=$arResult["PAYMENT_SELECT"]["sberbank"]["ID"]?>"
+                                               class="profile__c-main-order-bottom-paid js-paid">
+                                                Оплатить картой
+                                            </a>
+                                            <a href="/order/?ORDER_ID=<?= $arOrder["ACCOUNT_NUMBER"] ?>"
+                                               data-pay="<?=$arResult["PAYMENT_SELECT"]["pokupay"]["ID"]?>"
+                                               class="sberbank-pokupay__btn js-paid">
+                                                <svg class="sber-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.3251 3.66502L16.2759 2.2266C14.5616 0.84729 12.3744 0 9.99016 0V0.0199143C7.41905 0.024905 5.07156 1.00551 3.29912 2.61029L3.29065 2.60097C1.26914 4.42621 0.0100175 7.05293 5.95061e-05 9.9749C2.02687e-05 9.97999 0 9.98507 0 9.99012C0 9.9934 1.58444e-06 9.99668 4.7526e-06 9.99995C1.58457e-06 10.0032 0 10.0065 0 10.0098H1.90953e-05C0.00500391 12.581 0.985653 14.9285 2.5905 16.701L2.58127 16.7094C4.40682 18.7312 7.03412 19.9904 9.95667 19.9999L9.97044 20L9.97723 20L9.99015 20V20C12.5665 19.995 14.9184 19.0104 16.6921 17.3997L16.7094 17.4187C18.7192 15.6059 20 12.9458 20 10.0098C20 9.39899 19.9409 8.80786 19.8424 8.21673L17.6946 9.81278V10.0098C17.6946 12.14 16.8239 14.0612 15.4264 15.4461L15.4089 15.4286C14.0296 16.8473 12.1182 17.6946 9.99015 17.6946H9.9817C9.91537 17.6946 9.85347 17.6945 9.79153 17.6921C9.72801 17.6896 9.66446 17.6846 9.59606 17.6749L9.59556 17.6846C7.62825 17.5846 5.86161 16.7414 4.56368 15.4363L4.57144 15.4285C3.17242 14.0492 2.30542 12.1379 2.30542 10.0098C2.30542 9.94231 2.30631 9.87497 2.30808 9.80782C2.31061 9.74543 2.31553 9.68293 2.32513 9.61574L2.31558 9.61525C2.41628 7.6626 3.25932 5.88279 4.56372 4.58359L4.57145 4.59132C5.95076 3.19231 7.8818 2.32531 9.99018 2.32531C10.1281 2.32531 10.2463 2.32531 10.3843 2.34502L10.3856 2.31976C11.8499 2.40838 13.2037 2.88728 14.3251 3.66502ZM19.1133 5.89161C18.7784 5.18225 18.3843 4.5123 17.9114 3.90146L9.99017 9.71426L6.18721 7.33003V10.2069L10.0099 12.6108L19.1133 5.89161Z" fill="white"></path>
+                                                </svg>
+                                                В рассрочку
+                                            </a>
+                                    <? else: ?>
                                         <a href="/order/?ORDER_ID=<?= $arOrder["ACCOUNT_NUMBER"] ?>" target="_blank"
-                                           class="profile__c-main-order-bottom-paid">
+                                           class="profile__c-main-order-bottom-paid js-paid">
                                             Оплатить
                                         </a>
+                                    <? endif; ?>
+                                    </div>
                                     <? elseif ($arOrder["POLICY_EXISTS"] && !empty($arOrder["DOWNLOAD_POLICY"])) : ?>
                                         <a href="<?= $arOrder["DOWNLOAD_POLICY"] ?>"
                                            target="_blank"
