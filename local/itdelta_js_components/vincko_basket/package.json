@@ -6,7 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "deploy": "rollup -c; curl -k 'sftp://94.228.123.233/home/bitrix/ext_www/dev3.vincko.market/local/templates/v_new_template/js/' --user 'root:uGe2cccL' -T 'public/build/basket.js' --ftp-create-dirs"
+    "deploy": "rollup -c; curl -k 'ftp://localhost/local/templates/v_new_template/js/' --user 'root:' -T '/public/build/basket.js' --ftp-create-dirs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
