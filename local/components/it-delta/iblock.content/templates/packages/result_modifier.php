@@ -158,8 +158,11 @@ foreach ($arSections as $key => $arSection) {
         $item = $arItem['PROPERTIES']['P_COMPLECT']['VALUE'];
         if (is_array($item)) {
             foreach ($item as $value) {
-                if (key_exists($value, $arEquipmentKits))
-                    $arSections[$arSection['ID']]['EQUIPMENT-KITS'][] = $arEquipmentKits[$value];
+                if (key_exists($value, $arEquipmentKits)) {
+                    $arItemEqKits = $arEquipmentKits[$value];
+                    $arItemEqKits["ALLOW_CREDIT"] = $arItem['PROPERTIES']['ALLOW_CREDIT']["VALUE"];
+                    $arSections[$arSection['ID']]['EQUIPMENT-KITS'][] = $arItemEqKits;
+                }
 
             }
         }

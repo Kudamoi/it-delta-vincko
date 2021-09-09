@@ -47,6 +47,8 @@
 }
 .ready-pack__bottom .solutions__bottom_column:last-child {
     width: unset;
+    min-height: 58px;
+    margin-top: 8px;
 }
 .solutions__bottom_column-interest::before {
     right: 0;
@@ -99,6 +101,7 @@
 .first__page_ready-des .main__rigth,
 .first__page_ready-des .main__left {
     width: unset;
+    min-height: 66px;
 }
 .first__page_ready-des .ready-pack__bottom .main__rigth .solutions__bottom_column:last-child {
     width: 100%;
@@ -1412,3 +1415,5 @@ a.item__content-company-not {
     padding-top: 0;
     min-height: 1px;
 }
+
+.radio-disabled{opacity: 0.5}
