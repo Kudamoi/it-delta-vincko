@@ -58,7 +58,7 @@ $res = CIBlockSection::GetList(
     array("ACTIVE" => "Y", "IBLOCK_ID" => $packagesIblockId, "=ID" => $parentPackageGroupId),
     false,
     array(),
-    array("ID","*","PROPERTY_CO_CLASS_REF","PROPERTY_CO_CHARACTERISTICS_REF")
+    array("ID","*","PROPERTY_CO_CLASS_REF","PROPERTY_CO_CHARACTERISTICS_REF","PROPERTY_ALLOW_CREDIT")
 );
 while ($arFields = $res->Fetch()) {
     $arResult['PACKAGE_GROUP'] = $arFields;

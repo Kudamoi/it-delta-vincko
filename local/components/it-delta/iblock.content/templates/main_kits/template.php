@@ -24,6 +24,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         <div class="group__pack group__pack_slider-js">
             <? foreach ($arResult['SECTIONS'] as $section): ?>
                 <? foreach ($section['EQUIPMENT-KITS'] as $item): ?>
+                <? $isCredit = (!empty($arResult["PERIOD_INST"]) && !empty($item["ALLOW_CREDIT"])); ?>
                     <div class="pack">
                         <div class="pack__predloj">
                             <div class="predloj__title">
@@ -93,17 +94,16 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
                                         <h2 class="currently-price">
                                             <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']) ?>
                                             <?= number_format($price, 0, ',', '&nbsp;') ?>&nbsp;₽
-                                            <? if (!empty($arResult["PERIOD_INST"])): ?><span>или</span><? endif; ?>
+                                            <? if ($isCredit): ?><span>или</span><? endif; ?>
                                         </h2>
                                     </div>
-                                    <? if (!empty($arResult["PERIOD_INST"])): ?>
+                                    <? if ($isCredit): ?>
                                         <div class="ready-pack__bottom-right main__rigth js-installment">
                                             <div class="solutions__bottom_column">
 
                                                 <div class="solutions__bottom_column-interest">
                                                     <p>все проценты<br>платит vincko:</p>
                                                 </div>
-
                                                 <div class="solutions__bottom_column-monthprice js-installment">
                                                     <div class="form__select" id="form_installment_plan">
                                                         <select name="solutions__bottom_column-select"

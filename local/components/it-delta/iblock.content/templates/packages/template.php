@@ -61,6 +61,7 @@ foreach ($arResult['SECTIONS'] as $section): ?>
                     <div class="ready-pack group__pack<?= (count($section['EQUIPMENT-KITS']) < 3 ? " small-slick-clider" : " r-d-s") ?>"
                          id="r-d-s-<?= $i++; ?>">
                         <?php foreach ($section['EQUIPMENT-KITS'] as $item): ?>
+                            <? $isCredit = (!empty($arResult["PERIOD_INST"]) && !empty($item["ALLOW_CREDIT"])); ?>
                             <div class="ready-pack__item-wrapper">
                                 <div class="ready-pack__item ready-pack__item--short">
                                     <div class="ready-pack__top">
@@ -174,7 +175,7 @@ foreach ($arResult['SECTIONS'] as $section): ?>
                                              data-total-price="<?= empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE'] ?>">
                                             <? $price = (empty($item['DISCOUNT_PRICE']) ? $item['CATALOG_PRICE_1'] : $item['DISCOUNT_PRICE']); ?>
                                             <?= number_format($price, 0, ',', ' ') ?>
-                                            <? if (!empty($arResult["PERIOD_INST"])): ?>
+                                            <? if ($isCredit): ?>
                                                 <span class="ready-pack__bottom-or">
                                                     или
                                                 </span>
@@ -182,7 +183,7 @@ foreach ($arResult['SECTIONS'] as $section): ?>
                                         </div>
                                     </div>
 
-                                    <? if (!empty($arResult["PERIOD_INST"])): ?>
+                                    <? if ($isCredit): ?>
                                         <div class="ready-pack__bottom-right">
                                             <div class="solutions__bottom_column">
 

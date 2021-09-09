@@ -1132,6 +1132,8 @@ foreach ($arResult['ALL_INSURANCE_LIST'] as $key => $company) {
     }
 
 }
+
+$isCredit = (!empty($arResult["PERIOD_INST"]) && !empty($arResult['PROPERTIES']['ALLOW_CREDIT']['VALUE']));
 $data = [
     'items' => [
         0 => [
@@ -1176,7 +1178,7 @@ $data = [
     ],
     'sum' => $totalPrice,
     'old_sum' => $totalDiscountPrice,
-    'periods' =>$arResult["PERIOD_INST"],
+    'periods' => ($isCredit? $arResult["PERIOD_INST"] : ""),
     'subscribe_sum' => 0,
     'isAuthorized' => $GLOBALS["USER"]->IsAuthorized(),
     'credit_sum' => ceil($totalPrice/12)
