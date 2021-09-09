@@ -29,7 +29,7 @@
         var data = {
             'paymentMethod': paymentMethod,
             'items': items,
-            'total': {'total_sum': sum, 'total_old_sum': old_sum, 'total_subscribe_sum': subscribe_sum}
+            'total': {'total_sum': sum, 'total_old_sum': old_sum, 'total_subscribe_sum': subscribe_sum, 'is_credit': periods}
         };
         formData.append('data', JSON.stringify(data));
 
