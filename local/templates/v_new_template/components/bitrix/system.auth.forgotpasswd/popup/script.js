@@ -37,20 +37,21 @@ $(document).ready(function () {
 			formActionChange = formAction[0] + "?forgot_password=yes";
 		$form.attr("action", formActionChange);
 		$form.find("[name='TYPE']").val("SEND_PWD");
-		$("[name='send_account_info']").submit();
+		$("[name='send_account_info']").trigger("click");
 	});
 
+	$form.submit(function(){
+		return false;
+	})
 
-
-	$form.submit(function () {
-		var $form = $(this),
-			$btn = $(document.activeElement),
+	$(".js-btn").on("click",function () {
+		var $btn = $(this),
 			btnSerialize = $btn.attr("name") + "=" + $btn.val(),
 			action = $form.attr("action");
 		if($btn.attr("name") == "code_check_submit_button"){
 			action = "/ajax/check_code.php";
 		}
-		console.log(action);
+
 		$.ajax({
 			url: action,
 			method: 'POST',
@@ -119,7 +120,6 @@ $(document).ready(function () {
 				console.log(error);
 			}
 		});
-
 
 		return false;
 	});
