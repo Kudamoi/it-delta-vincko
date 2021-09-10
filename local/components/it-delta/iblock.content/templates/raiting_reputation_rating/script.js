@@ -3,7 +3,7 @@ function change(num) {
     $('.rating-block .rating-center__items_top.title-change .rating-center__items_top-title').eq(num).addClass('title-act');
 
     $('.rating-block .rating-center__item-wrapper').each(function () {
-        if (num == 0) {
+        if (num === 0) {
             $(this).find('.rating-center__item .num').html($(this).find('.rating-center__item  .rating-center__item_circle span').html());
             $(this).find('.line-panel-percent').animate({
                 width: Number.parseFloat($(this).find('.rating-center__item  .rating-center__item_circle span').html().replace(/,/, '.')) * 100 / 5 + '%'
@@ -21,7 +21,7 @@ function change(num) {
 function clickRadio(param) {
     var value = document.querySelectorAll("input[type='radio'][name='" + param.name + "']");
     for (var i = 0; i < value.length; i++) {
-        if (value[i] != param)
+        if (value[i] !== param)
             value[i].BeforeCheck = false;
     }
     if (param.BeforeCheck)
@@ -57,21 +57,24 @@ $(document).ready(function () {
                         }, 300
                     );
                 }
-
             }
+            $('.rating-center__items-wrapper .rating-center__item-wrapper').each(function () {
+                $(this).find('.line-panel-percent').animate({
+                    width: Number.parseFloat($(this).find('.rating-center__item > .num').html().replace(/,/, '.')) * 100 / 5 + '%'
+                }, 800);
+            });
+            $('.rating-center__items-wrapper .rating-center__item-wrapper .rating-center__item_circle').each(function () {
+                $(this).find('svg circle').animate({
+                    'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.')) * 15 / 10 + 'em'
+                }, 800);
+            });
+            $('.rating-center__items-wrapper .rating-center__item-wrapper .info-block-one .info-block-one__left').each(function () {
+                $(this).find('svg circle').animate({
+                    'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.')) * 16 / 10 + 'em'
+                }, 800);
+            });
         }
     })
-    // $.ajax({
-    //     type: 'post',
-    //     url: '/ajax/raiting/filter.php',
-    //     data: {'CITY': city},
-    //     response: 'html',
-    //     success: function(data) {
-    //         $('.rating-center__items-wrapper-block').html(data);
-    //         $('.rating-center__items_top .rating-center__items_top-left .rating-center__items_top-btns-item').eq(0).find('label').click();
-    //
-    //     }
-    // })
 
 
     $('input.rating-home').on('click', function () {
@@ -219,21 +222,3 @@ $(document).ready(function () {
     });
 })
 
-$(document).ready(function () {
-    $('.rating-center__items-wrapper .rating-center__item-wrapper').each(function () {
-        $(this).find('.line-panel-percent').animate({
-            width: Number.parseFloat($(this).find('.rating-center__item > .num').html().replace(/,/, '.')) * 100 / 5 + '%'
-        }, 800);
-    });
-    $('.rating-center__items-wrapper .rating-center__item-wrapper .rating-center__item_circle').each(function () {
-        $(this).find('svg circle').animate({
-            'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.')) * 15 / 10 + 'em'
-        }, 800);
-    });
-    $('.rating-center__items-wrapper .rating-center__item-wrapper .info-block-one .info-block-one__left').each(function () {
-        $(this).find('svg circle').animate({
-            'stroke-dashoffset': -8.0 - Number.parseFloat($(this).find('span').html().replace(/,/, '.')) * 16 / 10 + 'em'
-        }, 800);
-    });
-
-})
