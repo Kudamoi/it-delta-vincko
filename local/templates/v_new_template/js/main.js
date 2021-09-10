@@ -1667,6 +1667,27 @@ for (var i = 0; i < btns_modals.length; i++) {
     nextArrow: "<div class=\"arrow-next arrow\">\n\t\t\t\t\t\t<picture>\n\t\t\t\t\t\t\t<img src=\"../img/norating/nextArrow.png\">\n\t\t\t\t\t\t</picture>\n\t\t\t\t\t</div>",
     infinity: true
   });
+
+  if (window.innerWidth <= 760) {
+    $('.open__for-items').slick({
+      slidesToShow: 1,
+      variableWidth: false,
+      arrows: true,
+      prevArrow: "\n\t\t\t\t<div class=\"arrow-prev arrow\">\n\t\t\t\t\t<picture>\n\t\t\t\t\t\t<img src=\"../img/norating/prevArrow.png\">\n\t\t\t\t\t</picture>\n\t\t\t\t</div>",
+      nextArrow: "<div class=\"arrow-next arrow\">\n\t\t\t\t\t\t<picture>\n\t\t\t\t\t\t\t<img src=\"../img/norating/nextArrow2.png\">\n\t\t\t\t\t\t</picture>\n\t\t\t\t\t</div>",
+      infinite: false
+    });
+  } else if (window.innerWidth <= 768) {
+    $('.open__for-items').slick({
+      slidesToShow: 2.15,
+      variableWidth: false,
+      arrows: true,
+      prevArrow: "\n\t\t\t\t<div class=\"arrow-prev arrow\">\n\t\t\t\t\t<picture>\n\t\t\t\t\t\t<img src=\"../img/norating/prevArrow.png\">\n\t\t\t\t\t</picture>\n\t\t\t\t</div>",
+      nextArrow: "<div class=\"arrow-next arrow\">\n\t\t\t\t\t\t<picture>\n\t\t\t\t\t\t\t<img src=\"../img/norating/nextArrow2.png\">\n\t\t\t\t\t\t</picture>\n\t\t\t\t\t</div>",
+      infinite: false
+    });
+  }
+
   $(".range-1").slider({
     min: 1,
     max: 12,
