@@ -109,8 +109,9 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 					</div>
 
 
-					<button class="grey-border-button grey-border-button--unactive send-message-btn"
-							name="send_account_info" data-switcher="phone" disabled
+					<button class="js-btn grey-border-button grey-border-button--unactive send-message-btn"
+							name="send_account_info"
+                            data-switcher="phone" disabled
 							value="1">
 						<?= Loc::getMessage("FORGOT_SMS") ?>
 					</button>
@@ -153,7 +154,7 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 						<?= Loc::getMessage("FORGOT_SUCCESS") ?>
 
 					</div>*/ ?>
-					<button class="popup__send-code blue-button" value="1" name="code_check_submit_button">
+					<button class="js-btn popup__send-code blue-button" value="1" name="code_check_submit_button">
 						<svg width="10" height="9" viewBox="0 0 10 9" fill="none"
 							 xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" clip-rule="evenodd"
@@ -192,7 +193,7 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 						</div>
 					</div>
 
-					<button class="grey-border-button grey-border-button--unactive send-message-btn"
+					<button class="js-btn grey-border-button grey-border-button--unactive send-message-btn"
 							data-switcher="mail" name="send_account_info" disabled
 							value="1">
 						<?= Loc::getMessage("FORGOT_POST") ?>
@@ -279,7 +280,7 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 
 
 			<div class="popup__bottom">
-				<button name="change_pwd" class="blue-button blue-button--unactive js-btn-disabled"
+				<button name="change_pwd" class="js-btn blue-button blue-button--unactive js-btn-disabled"
 						value="1">
 					<?= Loc::getMessage("FORGOT_UPDATE_PASS") ?>
 				</button>
