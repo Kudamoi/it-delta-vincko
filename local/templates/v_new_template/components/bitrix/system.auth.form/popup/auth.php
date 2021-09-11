@@ -66,8 +66,8 @@ use Bitrix\Main\Localization\Loc;
 				</div>
 				<div class="popup__form">
 					<div class="pass-wrapper">
-						<input type="password" name="USER_PASSWORD"  data-field="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>"
-							   data-view="0" class="pass-input" autocomplete="off"/>
+						<input type="password" name="USER_PASSWORD" minlength="8"  data-field="USER_PASSWORD" placeholder="<?= Loc::getMessage("AUTH_PASS") ?>"
+							   data-view="0" class="pass-input-login" autocomplete="off"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
 								 xmlns="http://www.w3.org/2000/svg">

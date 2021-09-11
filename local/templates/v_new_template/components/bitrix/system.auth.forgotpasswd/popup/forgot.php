@@ -218,7 +218,7 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 						<?= Loc::getMessage("CHANGE_NEW") ?>
 					</div>
 					<div class="pass-wrapper">
-						<input type="password" data-view="0" name="USER_PASSWORD" class="pass-input"
+						<input type="password" data-view="0" name="USER_PASSWORD" class="pass-input-pass"
 							   placeholder="<?= Loc::getMessage("CHANGE_PASW") ?>" data-field="USER_PASSWORD"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
@@ -244,11 +244,7 @@ $changePwd = !empty($request->get("USER_LOGIN")) && !empty($request->get("USER_C
 						</div>
 					</div>
 					<div class="pass-wrapper">
-						<input type="password" name="USER_CONFIRM_PASSWORD"
-							   value=""
-							   data-view="0"
-							   class="pass-input"
-							   data-field="USER_CONFIRM_PASSWORD"
+						<input type="password" name="USER_CONFIRM_PASSWORD" value="" data-view="0" class="pass-input-pass" data-field="USER_CONFIRM_PASSWORD"
 							   placeholder="<?= Loc::getMessage("CHANGE_PASW_CONFIRM") ?>"/>
 						<div class="pass__eye">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none"
