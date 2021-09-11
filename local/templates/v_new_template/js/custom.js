@@ -243,7 +243,7 @@ $(document).ready(function () {
     cookieBtn.addEventListener('click', function(){
 		let date = new Date(Date.now() + 31536000000);
 		date = date.toUTCString();
-		document.cookie = "siteCookie=1; expires=" + date;
+		document.cookie = "siteCookie=1; path=/; expires=" + date;
 		cookieNotification.classList.add("cc-invisible");
     })
 
